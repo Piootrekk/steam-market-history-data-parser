@@ -1,0 +1,20 @@
+{
+  "name": "steam-personal-data-parser",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "ts-node src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js"
+  },
+  "author": "Jakiś debil",
+  "license": "MIT",
+  "description": "",
+  "dependencies": {
+    "@types/node": "^22.10.2",
+    "axios": "^1.7.9",
+    "dotenv": "^16.4.7",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.2"
+  }
+}
