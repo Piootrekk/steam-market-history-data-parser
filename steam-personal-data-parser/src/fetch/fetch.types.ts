@@ -3,16 +3,16 @@ type TMarketHistoryResponse = {
   pagesize: number;
   total_count: number;
   start: number;
-  asstets: TRecordGameId;
+  assets: TRecordGameId;
   events: TEvent[];
   purchases: TRecordPurchases;
   listings: TRecordListings;
 };
 
 type TRecordGameId = Record<string, TVersionApi>;
-type TVersionApi = Record<string, TItemId>;
-type TItemId = Record<string, TId>;
-type TId = {
+type TVersionApi = Record<string, TAssetId>;
+type TAssetId = Record<string, TItemId>;
+type TItemId = {
   currency: number;
   appid: number;
   contextid: string;
@@ -21,19 +21,21 @@ type TId = {
   instanceid: string;
   amount: string;
   status: number;
-  original_amopunt: string;
-  unowned_contextid: string;
+  original_amount: string;
+  unowned_contextid?: string;
   background_color: string;
+  unowned_id?: "40901219093";
   icon_url: string;
+  icon_url_large?: string;
   descriptions: TDescription[];
   tradable: number;
-  actions: any;
+  actions: TAction[];
   name: string;
   name_color: string;
   type: string;
   market_name: string;
   market_hash_name: string;
-  market_actions: any;
+  market_actions: never;
   commodity: number;
   market_tradable_restriction: number;
   market_marketable_restriction: number;
@@ -41,10 +43,16 @@ type TId = {
   app_icon: string;
   owner: number;
 };
-type TDescription = {
-  type: string;
-  value: string;
+
+type TAction = {
+  link: string;
   name: string;
+};
+
+type TDescription = {
+  type?: string;
+  value?: string;
+  name?: string;
 };
 type TEvent = {
   listingid: string;
@@ -116,3 +124,13 @@ type TListings = {
 };
 
 export default TMarketHistoryResponse;
+export {
+  TAction,
+  TDescription,
+  TEvent,
+  TVersionApi,
+  TIdPurchase,
+  TItemId,
+  TListings,
+  TAssetId,
+};
