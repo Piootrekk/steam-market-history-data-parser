@@ -56,17 +56,15 @@ type TDescription = {
 };
 type TEvent = {
   listingid: string;
-  purchaseid: string;
-  event_type: number;
+  purchaseid?: string;
+  event_type: 1 | 2 | 3 | 4;
   time_event: number;
   time_event_fraction: number;
   steamid_actor: string;
   date_event: string;
 };
 
-type TRecordPurchases = Record<string, TPurchase>;
-
-type TPurchase = Record<string, TIdPurchase>;
+type TRecordPurchases = Record<string, TIdPurchase>;
 
 type TIdPurchase = {
   listingid: string;
@@ -133,4 +131,6 @@ export {
   TItemId,
   TListings,
   TAssetId,
+  TRecordPurchases,
+  TRecordListings,
 };
