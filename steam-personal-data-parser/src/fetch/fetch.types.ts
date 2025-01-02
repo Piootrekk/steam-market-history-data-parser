@@ -24,7 +24,7 @@ type TItemId = {
   original_amount: string;
   unowned_contextid?: string;
   background_color: string;
-  unowned_id?: "40901219093";
+  unowned_id?: string;
   icon_url: string;
   icon_url_large?: string;
   descriptions: TDescription[];

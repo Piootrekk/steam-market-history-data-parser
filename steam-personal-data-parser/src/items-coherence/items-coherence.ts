@@ -7,18 +7,17 @@ import TMarketHistoryResponse, {
   TVersionApi,
 } from "../fetch/fetch.types";
 import {
+  EventType,
   TEventData,
   TExtendedEventData,
+  TItemData,
+  TItemDTO,
   TListingsData,
+  TListingsInPurchasesData,
   TPurchaseData,
 } from "./items.types";
 
-const getGamesProps = (items: TMarketHistoryResponse) => {
-  const games = Object.keys(items);
-  return games;
-};
-
-const getVersion = (asset: TVersionApi): TAssetId => {
+const getFirstAPIVersion = (asset: TVersionApi): TAssetId => {
   const versions = Object.values(asset);
   return versions[0];
 };
@@ -48,27 +47,44 @@ const getActionWiki = (actions: TAction[]): string | undefined => {
 };
 
 const getCorrectEvent = (event: TEvent): TEventData => {
-  if (event.event_type === 1 || event.event_type === 2) {
-    return {
-      event_type: event.event_type,
-      listingid: event.listingid,
-      time_event: event.time_event,
-      steamid_actor: event.steamid_actor,
-    } as TEventData;
-  } else if (event.event_type === 3 || event.event_type === 4) {
-    return {
-      event_type: event.event_type,
-      time_event: event.time_event,
-      steamid_actor: event.steamid_actor,
-      purchaseid: `${event.listingid}_${event.purchaseid}` as const,
-    } as TEventData;
-  } else throw new Error("Invalid event_type");
+  switch (event.event_type) {
+    case EventType.CREATE:
+    case EventType.CANCEL:
+      return {
+        event_type: event.event_type,
+        listingid: event.listingid,
+        time_event: event.time_event,
+        steamid_actor: event.steamid_actor,
+        event_action:
+          event.event_type === EventType.CREATE ? "Create" : "Cancel",
+        purchaseid: undefined as never,
+      };
+
+    case EventType.SOLD:
+    case EventType.BOUGHT:
+      return {
+        event_type: event.event_type,
+        time_event: event.time_event,
+        steamid_actor: event.steamid_actor,
+        purchaseid: `${event.listingid}_${event.purchaseid}` as const,
+        event_action: event.event_type === EventType.SOLD ? "Sold" : "Bought",
+        listingid: event.listingid,
+      };
+
+    default:
+      throw new Error("Invalid event_type");
+  }
 };
 
-const fixEvents = (response: TMarketHistoryResponse): TExtendedEventData[] => {
+const fixEventResponse = (
+  response: TMarketHistoryResponse
+): TExtendedEventData[] => {
   const events = response.events.map((event) => {
     const correctEvent = getCorrectEvent(event);
-    if (correctEvent.event_type === 1 || correctEvent.event_type === 2) {
+    if (
+      correctEvent.event_type === EventType.CREATE ||
+      correctEvent.event_type === EventType.CANCEL
+    ) {
       const listing = appendListingCreateAndCancel(
         correctEvent,
         response.listings
@@ -77,24 +93,77 @@ const fixEvents = (response: TMarketHistoryResponse): TExtendedEventData[] => {
         ...correctEvent,
         ...listing,
       };
-    } else if (correctEvent.event_type === 3) {
+    } else if (correctEvent.event_type === EventType.SOLD) {
       const purchaseSold = appendPurchaseSold(correctEvent, response.purchases);
+      const listingsInSold = appedListingsInPurchases(
+        correctEvent,
+        response.listings
+      );
       return {
         ...correctEvent,
         ...purchaseSold,
+        ...listingsInSold,
       };
-    } else {
+    } else if (correctEvent.event_type === EventType.BOUGHT) {
       const purchaseBought = appendPurchaseBought(
         correctEvent,
         response.purchases
       );
+      const listingsInPurchase = appedListingsInPurchases(
+        correctEvent,
+        response.listings
+      );
       return {
         ...correctEvent,
         ...purchaseBought,
+        ...listingsInPurchase,
       };
-    }
+    } else throw new Error("Invalid envent type");
   });
   return events;
+};
+
+const appedListingsInPurchases = (
+  event: TEventData,
+  listings: TRecordListings
+): TListingsInPurchasesData => {
+  const listing = listings[event.listingid];
+  return {
+    item_id: listing.asset.id,
+    appid: listing.asset.appid,
+  };
+};
+
+const itemsResponse = (response: TMarketHistoryResponse): TItemDTO[] => {
+  const fixedEvents = fixEventResponse(response);
+  const items = fixedEvents.map((event) => {
+    const asset = getEventWithAssets(event, response);
+    return {
+      ...event,
+      ...asset,
+    };
+  });
+  return items;
+};
+
+const getEventWithAssets = (
+  event: TExtendedEventData,
+  response: TMarketHistoryResponse
+): TItemData => {
+  const assetGame = response.assets[event.appid.toString()];
+  const apiVersion = getFirstAPIVersion(assetGame);
+  const item = apiVersion[event.item_id];
+  const itemResponse: TItemData = {
+    instanceid: item.instanceid,
+    original_amount: item.original_amount,
+    background_color: item.background_color,
+    icon_url: item.icon_url,
+    inspect_in_game_url: getActionInspectInGame(item.actions),
+    name_color: item.name_color,
+    wiki_page: getActionWiki(item.actions),
+    market_hash_name: item.market_hash_name,
+  };
+  return itemResponse;
 };
 
 const appendListingCreateAndCancel = (
@@ -106,6 +175,7 @@ const appendListingCreateAndCancel = (
     price: singlePaid(listing.original_price),
     item_id: listing.asset.id,
     currency: listing.currencyid,
+    appid: listing.asset.appid,
   };
 };
 
@@ -116,9 +186,7 @@ const appendPurchaseSold = (
   const purchase = purchases[event.purchaseid];
   return {
     time_transaction: purchase.time_sold,
-    steamid_purchaser: purchase.steamid_purchaser,
     price: singlePaid(purchase.received_amount),
-    item_id: purchase.asset.id,
     currency: Number(purchase.received_currencyid),
   };
 };
@@ -130,17 +198,10 @@ const appendPurchaseBought = (
   const purchase = purchases[event.purchaseid];
   return {
     time_transaction: purchase.time_sold,
-    steamid_purchaser: purchase.steamid_purchaser,
     price: summaryPaid(purchase.paid_amount, purchase.paid_fee),
-    item_id: purchase.asset.id,
     currency: Number(purchase.currencyid),
   };
 };
 
-export {
-  getGamesProps,
-  getVersion,
-  getActionInspectInGame,
-  getActionWiki,
-  fixEvents,
-};
+export { getActionInspectInGame, getActionWiki, fixEventResponse };
+export default itemsResponse;
