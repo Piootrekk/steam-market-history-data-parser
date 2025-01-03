@@ -9,6 +9,15 @@ type TMarketHistoryResponse = {
   listings: TRecordListings;
 };
 
+type TIncorrectMarketHistoryResponse = {
+  success: boolean;
+  start: number;
+  total_count: 0;
+  listings: false;
+  assets: [];
+  events: undefined;
+};
+
 type TRecordGameId = Record<string, TVersionApi>;
 type TVersionApi = Record<string, TAssetId>;
 type TAssetId = Record<string, TItemId>;
@@ -29,7 +38,7 @@ type TItemId = {
   icon_url_large?: string;
   descriptions: TDescription[];
   tradable: number;
-  actions: TAction[];
+  actions?: TAction[];
   name: string;
   name_color: string;
   type: string;
@@ -123,6 +132,7 @@ type TListings = {
 
 export default TMarketHistoryResponse;
 export {
+  TIncorrectMarketHistoryResponse,
   TAction,
   TDescription,
   TEvent,

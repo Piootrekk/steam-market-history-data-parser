@@ -10,6 +10,9 @@ class CustomError extends Error {
       Error.captureStackTrace(this, CustomError);
     }
   }
+  public get getStatus() {
+    return this.codeStatus;
+  }
 }
 
 const convertToCustomError = (error: unknown): CustomError => {

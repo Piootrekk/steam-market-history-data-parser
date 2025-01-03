@@ -32,14 +32,18 @@ const singlePaid = (originalPrice: number) => {
   return Number(calculatedPaid);
 };
 
-const getActionInspectInGame = (actions: TAction[]): string | undefined => {
+const getActionInspectInGame = (
+  actions: TAction[] | undefined
+): string | undefined => {
+  if (!actions) return undefined;
   const inspectAction = actions.find(
     (action) => action.name === "Inspect in Game..."
   );
   return inspectAction ? inspectAction.link : undefined;
 };
 
-const getActionWiki = (actions: TAction[]): string | undefined => {
+const getActionWiki = (actions: TAction[] | undefined): string | undefined => {
+  if (!actions) return undefined;
   const wikiLink = actions.find(
     (action) => action.name === "Item Wiki Page..."
   );
@@ -79,6 +83,9 @@ const getCorrectEvent = (event: TEvent): TEventData => {
 const fixEventResponse = (
   response: TMarketHistoryResponse
 ): TExtendedEventData[] => {
+  if (response.events === undefined) {
+    console.log(response);
+  }
   const events = response.events.map((event) => {
     const correctEvent = getCorrectEvent(event);
     if (
@@ -134,7 +141,7 @@ const appedListingsInPurchases = (
   };
 };
 
-const itemsResponse = (response: TMarketHistoryResponse): TItemDTO[] => {
+const responesConverter = (response: TMarketHistoryResponse): TItemDTO[] => {
   const fixedEvents = fixEventResponse(response);
   const items = fixedEvents.map((event) => {
     const asset = getEventWithAssets(event, response);
@@ -204,4 +211,4 @@ const appendPurchaseBought = (
 };
 
 export { getActionInspectInGame, getActionWiki, fixEventResponse };
-export default itemsResponse;
+export default responesConverter;
