@@ -1,3 +1,4 @@
+import { error } from "console";
 import { convertToCustomError } from "../error-converter";
 import TMarketHistoryResponse from "../fetch/fetch.types";
 import { fetchMarketHistory } from "../fetch/fetches";
@@ -14,16 +15,25 @@ const retryFetch = async <T>(
     try {
       const res = await fetchFn();
       return res;
-    } catch (error) {
-      console.warn(`Retry attempt ${attempt + 1}/${retries}: ${error}`);
+    } catch (err) {
+      const error = convertToCustomError(err);
+      console.warn(
+        `Retry attempt ${attempt + 1}/${retries}: ${error.message} - ${
+          error.getStatus
+        }`
+      );
+      if (error.getStatus === 429 && attempt < retries) {
+        console.log("Too many requests... increase delay.");
+        await new Promise((resolve) => setTimeout(resolve, delay * 5));
+      }
       if (attempt < retries) {
         await new Promise((resolve) => setTimeout(resolve, delay));
-      } else {
-        throw new Error("Failed to fetch data after maximum retries");
       }
     }
   }
+  throw new Error("Failed to fetch data after maximum retries");
 };
+
 const fetchQueue = async (
   delay = 5000,
   fetchSize = 500,
@@ -33,12 +43,12 @@ const fetchQueue = async (
   let allHistory: TItemDTO[] = [];
   for (let index = 0; index < totalFetches; index++) {
     const startingItem = index * fetchSize + startFetch;
-    const response = await retryFetch(
+    const response = await retryFetch<TMarketHistoryResponse>(
       () => fetchMarketHistory(startingItem, fetchSize),
       5,
       delay
     );
-    const items = responesConverter(response as TMarketHistoryResponse);
+    const items = responesConverter(response);
     allHistory = allHistory.concat(items);
     console.log(
       `----- CORRECT FETCH AND APPEND TO FILE ${
