@@ -1,7 +1,11 @@
+import "./index.css";
+import TransactionOverview from "./TransactionOverview";
 const App = () => {
   return (
     <>
-      <p>HEllo</p>
+      <div className="app">
+        <TransactionOverview />
+      </div>
     </>
   );
 };
