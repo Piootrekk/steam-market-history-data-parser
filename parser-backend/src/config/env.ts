@@ -8,4 +8,10 @@ const getCookies = () => {
   return COOKIES;
 };
 
-export { getCookies };
+const getPort = () => {
+  const PORT = process.env.PORT;
+  if (PORT === undefined) throw new Error("ENV PORT NOT FOUND");
+  return PORT;
+};
+
+export { getCookies, getPort };

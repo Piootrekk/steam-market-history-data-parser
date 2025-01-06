@@ -1,4 +1,4 @@
-import { convertToCustomError } from "../error-converter";
+import { convertToCustomError } from "../../../config/error-converter";
 import { fetchMarketHistory } from "../fetch/fetches";
 
 const getTotalFetches = async (fetchSize: number, startFetch = 0) => {

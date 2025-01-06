@@ -1,5 +1,4 @@
-import { error } from "console";
-import { convertToCustomError } from "../error-converter";
+import CustomError from "../../../config/error-converter";
 import TMarketHistoryResponse from "../fetch/fetch.types";
 import { fetchMarketHistory } from "../fetch/fetches";
 import responesConverter from "./items-coherence";
@@ -16,12 +15,9 @@ const retryFetch = async <T>(
       const res = await fetchFn();
       return res;
     } catch (err) {
-      const error = convertToCustomError(err);
-      console.warn(
-        `Retry attempt ${attempt + 1}/${retries}: ${error.message} - ${
-          error.getStatus
-        }`
-      );
+      const error = new CustomError(err);
+      console.warn(error.logError(`Retry attempt ${attempt + 1}/${retries}:`));
+
       if (error.getStatus === 429 && attempt < retries) {
         console.log("Too many requests... increase delay.");
         await new Promise((resolve) => setTimeout(resolve, delay * 5));
@@ -31,7 +27,9 @@ const retryFetch = async <T>(
       }
     }
   }
-  throw new Error("Failed to fetch data after maximum retries");
+  throw new CustomError({
+    message: "Failed to fetch data after maximum retries",
+  });
 };
 
 const fetchQueue = async (

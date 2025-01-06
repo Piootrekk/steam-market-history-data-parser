@@ -1,5 +1,5 @@
-import CustomError from "../error-converter";
-import axiosInstance from "./axios-settings";
+import CustomError from "../../../config/error-converter";
+import { axiosSteamInstance } from "./axios-steam-settings";
 import TMarketHistoryResponse, {
   TIncorrectMarketHistoryResponse,
 } from "./fetch.types";
@@ -28,16 +28,20 @@ const fetchMarketHistory = async (min = 0, max = 1) => {
 
   url.search = params.toString();
 
-  const response = await axiosInstance.get<
+  const response = await axiosSteamInstance.get<
     TMarketHistoryResponse | TIncorrectMarketHistoryResponse
   >(url.href);
 
-  if (!response.data) throw new CustomError("Data not found", 418);
+  if (!response.data)
+    throw new CustomError({ message: "Data not found", status: 418 });
   if (isIncorrectResponse(response.data)) {
-    throw new CustomError("Received incorrect market history response", 409);
+    throw new CustomError({
+      message: "Received incorrect market history response",
+      status: 409,
+    });
   }
   if (!response.data.success)
-    throw new CustomError("Fetching success - false", 418);
+    throw new CustomError({ message: "Fetching success - false", status: 418 });
   return response.data;
 };
 
