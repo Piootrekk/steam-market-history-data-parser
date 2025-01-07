@@ -37,7 +37,7 @@ const TableData: React.FC<TableDataProps> = ({ transactions }) => {
               </td>
               <td>
                 <img
-                  src={transaction.icon_url}
+                  src={`https://community.fastly.steamstatic.com/economy/image/${transaction.icon_url}`}
                   alt={transaction.market_hash_name}
                   className="transaction-icon"
                 />
@@ -45,26 +45,26 @@ const TableData: React.FC<TableDataProps> = ({ transactions }) => {
               <td>{transaction.market_hash_name}</td>
               <td>{transaction.price}</td>
               <td>{transaction.original_amount}</td>
-              <td>{transaction.time_transaction}</td>
+              <td>
+                {transaction.time_transaction
+                  ? new Date(transaction.time_transaction).toLocaleString()
+                  : ""}
+              </td>
               <td>
                 <div className="actions">
                   {transaction.wiki_page && (
-                    <a
-                      className="action-btn"
-                      target="_blank"
-                      href={transaction.wiki_page}
-                    >
-                      Wiki
-                    </a>
+                    <button className="action-btn">
+                      <a target="_blank" href={transaction.wiki_page}>
+                        Wiki
+                      </a>
+                    </button>
                   )}
                   {transaction.inspect_in_game_url && (
-                    <a
-                      className="action-btn"
-                      target="_blank"
-                      href={transaction.inspect_in_game_url}
-                    >
-                      Inspect in game
-                    </a>
+                    <button className="action-btn">
+                      <a target="_blank" href={transaction.inspect_in_game_url}>
+                        Inspect in game
+                      </a>
+                    </button>
                   )}
                 </div>
               </td>
