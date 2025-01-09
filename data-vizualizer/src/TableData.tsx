@@ -79,10 +79,12 @@ const TableData: React.FC<TableDataProps> = ({ transactions }) => {
               </div>
             </td>
             <td>
-              <PriceFetcher
-                name={transaction.market_hash_name}
-                game={transaction.appid.toString()}
-              />
+              <div className="actions">
+                <PriceFetcher
+                  name={transaction.market_hash_name}
+                  game={transaction.appid.toString()}
+                />
+              </div>
             </td>
           </tr>
         ))}

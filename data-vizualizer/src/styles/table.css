@@ -37,6 +37,7 @@ th {
 .th-content {
   display: flex;
   align-items: center;
+  justify-self: center;
   gap: 4px;
   cursor: pointer;
 }
@@ -61,6 +62,7 @@ tr:hover {
 .actions {
   display: flex;
   gap: 8px;
+  width: 100%;
 }
 
 .action-btn {
@@ -69,6 +71,7 @@ tr:hover {
   border-radius: 4px;
   cursor: pointer;
   display: flex;
+  flex-grow: 1;
   align-items: center;
   justify-content: center;
   transition: background-color 0.2s;
@@ -76,6 +79,11 @@ tr:hover {
 
 .action-btn:hover {
   opacity: 0.8;
+}
+
+.action-btn:disabled {
+  opacity: 0.8;
+  cursor: not-allowed;
 }
 
 .pagination {
@@ -113,7 +121,7 @@ tr:hover {
 }
 
 .pagination-btn:disabled {
-  opacity: 0.5;
+  opacity: 0.8;
   cursor: not-allowed;
 }
 
@@ -142,21 +150,99 @@ tr:hover {
   box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.1);
 }
 
-.filters {
-  padding: 6px 8px;
-  margin-bottom: 12px;
+.filter-container {
+  background: #fff;
+  padding: 16px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.search-container {
+  position: relative;
+  margin-bottom: 16px;
+}
+
+.search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #6c757d;
+  z-index: 1;
 }
 
 .search-input {
-  width: 200px;
-  padding: 6px 8px;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 10px 12px 10px 40px;
   border: 1px solid #e9ecef;
-  border-radius: 4px;
+  border-radius: 6px;
   font-size: 14px;
+  transition: all 0.2s;
 }
 
 .search-input:focus {
   outline: none;
   border-color: #1976d2;
   box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.1);
+}
+
+.event-filters {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.filter-label {
+  font-weight: 500;
+  color: #4a4a4a;
+  font-size: 14px;
+}
+
+.checkbox-group {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  flex-grow: 1;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.checkbox-input {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.loader-spin {
+  animation: spin 1.5s linear infinite, dash 1.5s ease-in-out infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes dash {
+  0% {
+    stroke-dashoffset: 126;
+  }
+  50% {
+    stroke-dashoffset: 63;
+    transform: rotate(180deg);
+  }
+  100% {
+    stroke-dashoffset: 126;
+    transform: rotate(360deg);
+  }
 }

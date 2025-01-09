@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { getPrice } from "./utils/fetchPrice";
+import Loader from "./icons/Loader";
 type TPriceFetcher = {
   name: string;
   game: string;
@@ -24,13 +25,16 @@ const PriceFetcher: React.FC<TPriceFetcher> = ({ name, game }) => {
     },
   });
 
-  if (mutation.isPending) return <span>Fetching...</span>;
   if (mutation.isError) return <span>{mutation.error.message}</span>;
   if (mutation.isSuccess) return <span>{mutation.data}</span>;
 
   return (
-    <button className="action-btn" onClick={() => mutation.mutate()}>
-      Fetch
+    <button
+      className="action-btn"
+      disabled={mutation.isPending}
+      onClick={() => mutation.mutate()}
+    >
+      {mutation.isPending ? <Loader size={24} /> : "Fetch"}
     </button>
   );
 };
