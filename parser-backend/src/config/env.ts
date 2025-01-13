@@ -11,7 +11,14 @@ const getCookies = () => {
 const getPort = () => {
   const PORT = process.env.PORT;
   if (PORT === undefined) throw new Error("ENV PORT NOT FOUND");
-  return PORT;
+  return Number(PORT);
 };
 
-export { getCookies, getPort };
+const getMongoConnectionString = () => {
+  const MONGO_CON_STRING = process.env.MONGO_CON_STRING;
+  if (MONGO_CON_STRING === undefined)
+    throw new Error("MONGODB CONNECTION STRING NOT FOUND");
+  return MONGO_CON_STRING;
+};
+
+export { getCookies, getPort, getMongoConnectionString };

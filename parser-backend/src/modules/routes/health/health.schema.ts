@@ -1,9 +1,18 @@
-const healthSchema = {
-  type: "object",
-  properties: {
-    health: { type: "boolean" },
+import { RouteShorthandOptions } from "fastify";
+
+const healthSchema: RouteShorthandOptions = {
+  schema: {
+    tags: ["Health"],
+    response: {
+      200: {
+        type: "object",
+        properties: {
+          health: { type: "boolean" },
+        },
+        required: ["health"],
+      },
+    },
   },
-  required: ["health"],
 };
 
 export { healthSchema };

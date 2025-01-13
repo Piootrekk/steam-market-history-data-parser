@@ -10,24 +10,29 @@ class CustomError extends Error {
   private codeStatus?: number;
 
   public constructor(error: TCustomError | unknown) {
+    let message = "An unknown error occurred ¯\\_(ツ)_/¯";
+    let codeStatus: number | undefined;
+
     if (CustomError.isCustomErrorType(error)) {
-      super(error.message, error.options);
-      this.codeStatus = error.status;
-      this.name = "CustomError";
+      message = error.message;
+      codeStatus = error.status;
+    } else if (error instanceof AxiosError && error.request) {
+      message = error.request.message;
+      codeStatus = 500;
+    } else if (error instanceof AxiosError && error.response) {
+      message =
+        error.response.data?.message ||
+        "An error occurred during the response.";
+      codeStatus = error.response.status;
+    } else if (error instanceof Error) {
+      message = error.message;
+    } else if (error instanceof CustomError) {
+      message = error.message;
+      codeStatus = error.codeStatus;
     }
-    if (error instanceof AxiosError && error.request) {
-      super(error.request.message);
-      this.codeStatus = 500;
-    }
-    if (error instanceof AxiosError && error.response) {
-      super(error.response.data.message);
-      this.codeStatus = error.response.status;
-    }
-    if (error instanceof Error) super(error.message);
-    else {
-      super("An unknown error occurred ¯_(ツ)_/¯");
-      this.name = "CustomError";
-    }
+    super(message);
+    this.codeStatus = codeStatus;
+    this.name = "CustomError";
     if (Error.captureStackTrace) {
       Error.captureStackTrace(this, CustomError);
     }
@@ -35,6 +40,10 @@ class CustomError extends Error {
 
   public get getStatus() {
     return this.codeStatus;
+  }
+
+  public get getMessage() {
+    return this.message;
   }
 
   private static isCustomErrorType = (

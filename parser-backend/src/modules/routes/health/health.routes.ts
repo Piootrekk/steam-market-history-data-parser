@@ -3,17 +3,7 @@ import { healthSchema } from "./health.schema";
 import { getHealth } from "./health.controller";
 
 const healthRoutes = async (server: FastifyInstance) => {
-  server.get(
-    "/",
-    {
-      schema: {
-        response: {
-          200: healthSchema,
-        },
-      },
-    },
-    getHealth
-  );
+  server.get("", healthSchema, getHealth);
 };
 
 export default healthRoutes;
