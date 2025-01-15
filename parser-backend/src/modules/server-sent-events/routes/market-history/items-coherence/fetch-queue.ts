@@ -1,4 +1,4 @@
-import CustomError from "../../../config/error-converter";
+import CustomError from "../../../../../config/error-converter";
 import TMarketHistoryResponse from "../fetch/fetch.types";
 import { fetchMarketHistory } from "../fetch/fetches";
 import responesConverter from "./items-coherence";
@@ -19,7 +19,7 @@ const retryFetch = async <T>(
       console.warn(error.logError(`Retry attempt ${attempt + 1}/${retries}:`));
 
       if (error.getStatus === 429 && attempt < retries) {
-        console.log("Too many requests... increase delay.");
+        console.log("Too many requests... increasing delay.");
         await new Promise((resolve) => setTimeout(resolve, delay * 5));
       }
       if (attempt < retries) {
@@ -37,7 +37,7 @@ const fetchQueue = async (
   fetchSize = 500,
   startFetch = 0
 ): Promise<TItemDTO[]> => {
-  const totalFetches = await getTotalFetches(fetchSize, startFetch);
+  const { totalFetches } = await getTotalFetches(fetchSize, startFetch);
   let allHistory: TItemDTO[] = [];
   for (let index = 0; index < totalFetches; index++) {
     const startingItem = index * fetchSize + startFetch;

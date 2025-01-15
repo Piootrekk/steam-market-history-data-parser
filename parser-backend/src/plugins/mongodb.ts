@@ -7,6 +7,12 @@ const mongoDbPlugin = fp(async (fastify) => {
   fastify.register(fastifyMongodb, {
     url: mongodbConnectionString,
   });
+  fastify.after(() => {
+    if (fastify.mongo.client) {
+      console.log("MongoDB connected successfully!");
+    } else {
+      throw new Error("Failed to connect mongoDB");
+    }
+  });
 });
-
 export default mongoDbPlugin;

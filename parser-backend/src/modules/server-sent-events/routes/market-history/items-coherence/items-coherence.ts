@@ -192,7 +192,6 @@ const appendPurchaseSold = (
 ): TPurchaseData => {
   const purchase = purchases[event.purchaseid];
   return {
-    time_transaction: purchase.time_sold,
     price: singlePaid(purchase.received_amount),
     currency: Number(purchase.received_currencyid),
   };
@@ -204,7 +203,6 @@ const appendPurchaseBought = (
 ): TPurchaseData => {
   const purchase = purchases[event.purchaseid];
   return {
-    time_transaction: purchase.time_sold,
     price: summaryPaid(purchase.paid_amount, purchase.paid_fee),
     currency: Number(purchase.currencyid),
   };

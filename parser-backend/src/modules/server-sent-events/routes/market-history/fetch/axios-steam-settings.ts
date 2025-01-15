@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getCookies } from "../../../config/env";
+import { getCookies } from "../../../../../config/env";
 
 const axiosSteamInstance = axios.create({
   headers: {

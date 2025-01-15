@@ -28,7 +28,6 @@ type TExtendedEventData =
   | (TEventDataPurchase & TPurchaseData & TListingsInPurchasesData);
 
 type TPurchaseData = {
-  time_transaction: number;
   price: number;
   currency: number;
 };

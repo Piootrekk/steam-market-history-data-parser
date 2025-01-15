@@ -1,19 +1,36 @@
-import { RouteShorthandOptions } from "fastify";
+import { FastifySchema } from "fastify";
 
-const marketSynchronizeSchema: RouteShorthandOptions = {
+const marketSynchronizeSchema: { schema: FastifySchema } = {
   schema: {
     tags: ["Market History"],
     response: {
-      200: {},
+      200: {
+        type: "object",
+        properties: {
+          success: { type: "boolean" },
+        },
+      },
     },
   },
 };
 
-const marketHistorySchema: RouteShorthandOptions = {
+const marketHistorySchema: { schema: FastifySchema } = {
   schema: {
     tags: ["Market History"],
+    body: {
+      type: "object",
+      required: ["steamid"],
+      properties: {
+        steamid: { type: "string" },
+      },
+    },
     response: {
-      200: {},
+      200: {
+        type: "object",
+        properties: {
+          success: { type: "boolean" },
+        },
+      },
     },
   },
 };

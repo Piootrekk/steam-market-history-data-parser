@@ -1,4 +1,4 @@
-import CustomError from "../../../config/error-converter";
+import CustomError from "../../../../../config/error-converter";
 import { axiosSteamInstance } from "./axios-steam-settings";
 import TMarketHistoryResponse, {
   TIncorrectMarketHistoryResponse,
