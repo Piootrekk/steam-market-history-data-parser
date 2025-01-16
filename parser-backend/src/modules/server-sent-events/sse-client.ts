@@ -17,13 +17,13 @@ const removeClient = (clientId: string): void => {
   clients.delete(clientId);
 };
 
-const sendMessage = (client: TSSEClient, data: unknown): void => {
-  client.reply.raw.write(`data: ${JSON.stringify(data)}\n\n`);
+const sendMessage = (client: TSSEClient, message: string): void => {
+  client.reply.raw.write(message);
 };
 
-const sendMessageToAll = (data: unknown): void => {
+const sendMessageToAll = (message: string): void => {
   clients.forEach((client) => {
-    sendMessage(client, data);
+    sendMessage(client, message);
   });
 };
 

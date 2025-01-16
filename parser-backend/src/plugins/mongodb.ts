@@ -6,6 +6,8 @@ const mongoDbPlugin = fp(async (fastify) => {
   const mongodbConnectionString = getMongoConnectionString();
   fastify.register(fastifyMongodb, {
     url: mongodbConnectionString,
+    forceClose: true,
+    database: "Personal-data",
   });
   fastify.after(() => {
     if (fastify.mongo.client) {

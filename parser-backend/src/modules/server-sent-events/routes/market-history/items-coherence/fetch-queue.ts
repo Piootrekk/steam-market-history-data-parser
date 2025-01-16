@@ -58,4 +58,6 @@ const fetchQueue = async (
   return allHistory;
 };
 
+export { retryFetch };
+
 export default fetchQueue;
