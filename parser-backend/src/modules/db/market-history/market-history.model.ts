@@ -5,9 +5,4 @@ type TMarketHistoryModel = {
   _id?: ObjectId;
 } & TItemDTO;
 
-type TMarketHistoryStatsModel = {
-  _id?: ObjectId;
-  total_count: number;
-};
-
-export { TMarketHistoryModel, TMarketHistoryStatsModel };
+export { TMarketHistoryModel };

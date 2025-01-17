@@ -18,6 +18,7 @@ const removeClient = (clientId: string): void => {
 };
 
 const sendMessage = (client: TSSEClient, message: string): void => {
+  console.log(message);
   client.reply.raw.write(message);
 };
 

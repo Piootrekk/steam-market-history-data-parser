@@ -2,7 +2,7 @@ import CustomError from "../../../../../config/error-converter";
 import TMarketHistoryResponse from "../fetch/fetch.types";
 import { fetchMarketHistory } from "../fetch/fetches";
 import responesConverter from "./items-coherence";
-import { getTotalFetches } from "./items-prepare";
+import { getTotalFetchesAndCount } from "./items-prepare";
 import { TItemDTO } from "./items.types";
 
 const retryFetch = async <T>(
@@ -37,7 +37,7 @@ const fetchQueue = async (
   fetchSize = 500,
   startFetch = 0
 ): Promise<TItemDTO[]> => {
-  const { totalFetches } = await getTotalFetches(fetchSize, startFetch);
+  const { totalFetches } = await getTotalFetchesAndCount(fetchSize, startFetch);
   let allHistory: TItemDTO[] = [];
   for (let index = 0; index < totalFetches; index++) {
     const startingItem = index * fetchSize + startFetch;

@@ -31,6 +31,12 @@ const marketHistorySchema: { schema: FastifySchema } = {
           success: { type: "boolean" },
         },
       },
+      "5xx": {
+        type: "object",
+        properties: {
+          message: { type: "string" },
+        },
+      },
     },
   },
 };
