@@ -93,19 +93,22 @@ const synchronizeHistoryToDb = async (
     sseClient.sendMessage(clinet, JSON.stringify(sseData));
     await new Promise((resolve) => setTimeout(resolve, delay));
   }
-  const responseChange = await retryFetch<TMarketHistoryResponse>(
-    () => fetchMarketHistory(chunks * fetchChunkLimit, change),
-    5,
-    delay
-  );
-  const itemsChange = responesConverter(responseChange);
-  await insertBulkTransactions(steamid, itemsChange, db);
+  if (change !== 0) {
+    const responseChange = await retryFetch<TMarketHistoryResponse>(
+      () => fetchMarketHistory(chunks * fetchChunkLimit, change),
+      5,
+      delay
+    );
+    const itemsChange = responesConverter(responseChange);
+    await insertBulkTransactions(steamid, itemsChange, db);
 
-  const sseData = {
-    change,
-    totalCount,
-  };
-  sseClient.sendMessage(clinet, JSON.stringify(sseData));
+    const sseData = {
+      change,
+      totalCount,
+    };
+    sseClient.sendMessage(clinet, JSON.stringify(sseData));
+  }
+
   await new Promise((resolve) => setTimeout(resolve, delay));
 };
 

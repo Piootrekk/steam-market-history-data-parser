@@ -2,7 +2,7 @@ import { FastifySchema } from "fastify";
 
 const marketSynchronizeSchema: { schema: FastifySchema } = {
   schema: {
-    tags: ["Market History"],
+    tags: ["SSE - Market History (DB insert)"],
     response: {
       200: {
         type: "object",
@@ -16,7 +16,7 @@ const marketSynchronizeSchema: { schema: FastifySchema } = {
 
 const marketHistorySchema: { schema: FastifySchema } = {
   schema: {
-    tags: ["Market History"],
+    tags: ["SSE - Market History (DB insert)"],
     body: {
       type: "object",
       required: ["steamid"],
