@@ -1,7 +1,9 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import "./index.css";
-import TransactionOverview from "./TransactionOverview";
+import { RouterProvider } from "@tanstack/react-router";
+import router from "./routes/router";
+
 const App = () => {
   const queryClient = new QueryClient({
     defaultOptions: {
@@ -14,9 +16,7 @@ const App = () => {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="app">
-        <TransactionOverview />
-      </div>
+      <RouterProvider router={router} />
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );

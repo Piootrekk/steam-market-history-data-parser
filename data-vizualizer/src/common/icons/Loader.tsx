@@ -1,5 +1,5 @@
 import React from "react";
-import { TIcons } from "../types/icons.types";
+import { TIcons } from "../../types/icons.types";
 
 type LoaderProps = TIcons;
 

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import SearchIcon from "./icons/SearchIcon";
+import SearchIcon from "./common/icons/SearchIcon";
 import { TTransaction } from "./types/transaction.types";
 
 type FiltersProps = {
