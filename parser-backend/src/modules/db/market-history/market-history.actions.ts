@@ -1,7 +1,11 @@
 import { TItemDTO } from "../../server-sent-events/routes/market-history/items-coherence/items.types";
 import { Db } from "mongodb";
 import { TMarketHistoryModel } from "./market-history.model";
-import { clearCollectionByName, getDocumentsCount } from "../db-actions";
+import {
+  clearCollectionByName,
+  getAllCollections,
+  getDocumentsCount,
+} from "../db-actions";
 
 const insertBulkTransactions = async (
   steamid: string,
@@ -26,4 +30,17 @@ const getMarketHistoryRecords = async (
   return count;
 };
 
-export { insertBulkTransactions, clearAllHistor, getMarketHistoryRecords };
+const getMarketHistoryCollections = async (db: Db): Promise<string[]> => {
+  const allCollectios = await getAllCollections(db);
+  const marketCollections = allCollectios.filter((collection) =>
+    collection.includes("market-history")
+  );
+  return marketCollections;
+};
+
+export {
+  insertBulkTransactions,
+  clearAllHistor,
+  getMarketHistoryRecords,
+  getMarketHistoryCollections,
+};

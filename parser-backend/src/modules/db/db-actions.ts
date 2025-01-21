@@ -1,4 +1,4 @@
-import { Db } from "mongodb";
+import { CollectionInfo, Db } from "mongodb";
 
 const clearCollectionByName = async (collectionName: string, db: Db) => {
   const collection = db.collection(collectionName);
@@ -13,4 +13,10 @@ const getDocumentsCount = async (
   return collection.countDocuments();
 };
 
-export { clearCollectionByName, getDocumentsCount };
+const getAllCollections = async (db: Db): Promise<string[]> => {
+  const collections: CollectionInfo[] = await db.listCollections().toArray();
+  const collectionsNames: string[] = collections.map((col) => col.name);
+  return collectionsNames;
+};
+
+export { clearCollectionByName, getDocumentsCount, getAllCollections };

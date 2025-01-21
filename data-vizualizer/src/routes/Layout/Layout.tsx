@@ -14,7 +14,9 @@ const Layout: React.FC<LayoutProps> = () => {
       <header className="header">
         <div className="container">
           <div className="header-content">
-            <h1 className="header-title">Personal Data Parser</h1>
+            <Link to="/" className="nav-link" activeProps={activeProps}>
+              <h1 className="header-title">Personal Data Parser</h1>
+            </Link>
             <nav className="nav">
               <Link
                 to="/market-history"

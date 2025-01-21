@@ -8,9 +8,9 @@ import {
   marketSynchronizeSchema,
 } from "./market-history.schema";
 
-const marketHistoryRoutes = async (server: FastifyInstance) => {
+const marketHistoryRoutesSSE = async (server: FastifyInstance) => {
   server.post("/all", marketHistorySchema, initAllMarketHistory);
   server.post("/synchronize", marketSynchronizeSchema, synchronizeHistory);
 };
 
-export default marketHistoryRoutes;
+export default marketHistoryRoutesSSE;

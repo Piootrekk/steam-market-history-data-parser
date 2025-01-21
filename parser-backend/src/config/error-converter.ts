@@ -13,7 +13,7 @@ class CustomError extends Error {
     let message = "An unknown error occurred ¯\\_(ツ)_/¯";
     let codeStatus: number | undefined;
 
-    if (CustomError.isCustomErrorType(error)) {
+    if (CustomError.assertCustomErrorType(error)) {
       message = error.message;
       codeStatus = error.status;
     } else if (error instanceof AxiosError && error.request) {
@@ -46,7 +46,7 @@ class CustomError extends Error {
     return this.message;
   }
 
-  private static isCustomErrorType = (
+  private static assertCustomErrorType = (
     error: unknown
   ): error is TCustomError => {
     return (
