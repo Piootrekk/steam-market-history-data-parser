@@ -17,6 +17,7 @@
 .section-title {
   display: flex;
   align-items: center;
+  text-align: center;
   font-size: 1.25rem;
   font-weight: 600;
   color: #111827;
@@ -53,6 +54,7 @@
   font-weight: 500;
   cursor: pointer;
   transition: background-color 0.2s;
+  margin-top: auto;
 }
 
 .button:hover {
@@ -65,7 +67,48 @@
 }
 
 @media (max-width: 768px) {
-  .sections-grid {
+  .sections-container {
+    display: grid;
     grid-template-columns: 1fr;
   }
+}
+
+.badges-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.badge-radio {
+  display: none;
+}
+
+.badge-label {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background-color: #f3f4f6;
+  border: 1px solid #d1d5db;
+  border-radius: 2rem;
+  font-size: 0.875rem;
+  color: #374151;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.badge-label:hover {
+  background-color: #e5e7eb;
+}
+
+.badge-radio:checked + .badge-label {
+  background-color: #4f46e5;
+  border-color: #4f46e5;
+  color: white;
+}
+
+.badge-icon {
+  width: 1rem;
+  height: 1rem;
+  margin-right: 0.5rem;
 }

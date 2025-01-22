@@ -1,7 +1,7 @@
 import { TIcons } from "../../types/icons.types";
 
 type DatabaseProps = TIcons;
-const Database: React.FC<DatabaseProps> = ({
+const DatabaseIcon: React.FC<DatabaseProps> = ({
   width,
   height,
   size,
@@ -15,9 +15,9 @@ const Database: React.FC<DatabaseProps> = ({
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
       className={className}
     >
       <ellipse cx="12" cy="5" rx="9" ry="3" />
@@ -27,4 +27,4 @@ const Database: React.FC<DatabaseProps> = ({
   );
 };
 
-export default Database;
+export default DatabaseIcon;

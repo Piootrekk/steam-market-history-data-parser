@@ -9,6 +9,7 @@ const App = () => {
     defaultOptions: {
       queries: {
         refetchOnWindowFocus: false,
+        retry: false,
         gcTime: 1000 * 60 * 60 * 24,
       },
     },

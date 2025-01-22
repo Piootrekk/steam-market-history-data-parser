@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { getPrice } from "./utils/fetchPrice";
+import { getPrice } from "./api/fetchPrice";
 import Loader from "./common/icons/Loader";
 type TPriceFetcher = {
   name: string;

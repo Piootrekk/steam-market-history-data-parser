@@ -18,9 +18,7 @@ const getCollectionsMarketName = async (
     reply.status(200).send({ collections: collectionsName });
   } catch (error) {
     const customError = new CustomError(error);
-    reply
-      .status(customError.getStatus || 500)
-      .send({ message: customError.message });
+    reply.status(500).send({ message: customError.message });
   }
 };
 

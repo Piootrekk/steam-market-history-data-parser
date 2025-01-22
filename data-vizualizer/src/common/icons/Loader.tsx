@@ -17,9 +17,9 @@ const Loader: React.FC<LoaderProps> = ({
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
       className={`${className} loader-spin`}
     >
       <path d="M12 2v4" />

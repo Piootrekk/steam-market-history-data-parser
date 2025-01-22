@@ -4,7 +4,7 @@ import { getAllCollections } from "../db-actions";
 const getInventoryHistoryCollections = async (db: Db): Promise<string[]> => {
   const allCollectios = await getAllCollections(db);
   const marketCollections = allCollectios.filter((collection) =>
-    collection.includes("inventory-history")
+    collection.includes("IH")
   );
   return marketCollections;
 };
