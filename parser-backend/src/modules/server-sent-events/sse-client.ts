@@ -1,35 +1,38 @@
 import { FastifyReply } from "fastify";
-import { TSSEClient } from "./sse-client.types";
 import { v4 as uuidv4 } from "uuid";
+import { TSSEClient } from "./sse-client.types";
 
-const clients = new Map<string, TSSEClient>();
+const clients = new Map<string, TSSEClient<any>>();
 
-const addClient = (reply: FastifyReply): TSSEClient => {
-  const client: TSSEClient = {
+const addClient = <T>(reply: FastifyReply): TSSEClient<T> => {
+  const client: TSSEClient<T> = {
     id: uuidv4(),
     reply,
+    messageType: {} as T,
   };
   clients.set(client.id, client);
   return client;
 };
 
-const removeClient = (clientId: string): void => {
-  clients.delete(clientId);
+const removeClient = (client: TSSEClient): void => {
+  client.reply.raw.write(`${JSON.stringify({ success: true })}`);
+  client.reply.raw.end();
+  clients.delete(client.id);
 };
 
-const sendMessage = (client: TSSEClient, message: string): void => {
-  console.log(message);
-  client.reply.raw.write(message);
+const setErrorMessage = (client: TSSEClient, message: string): void => {
+  client.reply.raw.write(JSON.stringify({ message: message }));
+  client.reply.raw.end();
 };
 
-const sendMessageToAll = (message: string): void => {
-  clients.forEach((client) => {
-    sendMessage(client, message);
-  });
+const sendMessage = <T>(client: TSSEClient<T>, message: T): void => {
+  const serializedMessage = JSON.stringify(message);
+  console.log(serializedMessage);
+  client.reply.raw.write(serializedMessage + "\n");
 };
 
-const getClient = (clientId: string): TSSEClient | undefined => {
-  return clients.get(clientId);
+const getClient = <T>(clientId: string): TSSEClient<T> | undefined => {
+  return clients.get(clientId) as TSSEClient<T>;
 };
 
 const getActiveClientsCount = (): number => {
@@ -40,7 +43,7 @@ const sseClient = {
   addClient,
   removeClient,
   sendMessage,
-  sendMessageToAll,
+  setErrorMessage,
   getClient,
   getActiveClientsCount,
 };

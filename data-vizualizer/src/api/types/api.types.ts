@@ -61,6 +61,7 @@ export interface paths {
                 content: {
                     "application/json": {
                         steamid: string;
+                        cookies: string;
                     };
                 };
             };
@@ -111,7 +112,14 @@ export interface paths {
                 path?: never;
                 cookie?: never;
             };
-            requestBody?: never;
+            requestBody: {
+                content: {
+                    "application/json": {
+                        steamid: string;
+                        cookies: string;
+                    };
+                };
+            };
             responses: {
                 /** @description Default Response */
                 200: {

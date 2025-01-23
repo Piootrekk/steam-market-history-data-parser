@@ -16,7 +16,7 @@ const isIncorrectResponse = (
   );
 };
 
-const fetchMarketHistory = async (min = 0, max = 1) => {
+const fetchMarketHistory = async (min = 0, max = 1, cookies: string) => {
   const url = new URL("https://steamcommunity.com/market/myhistory/render/");
 
   const params = new URLSearchParams({
@@ -30,7 +30,11 @@ const fetchMarketHistory = async (min = 0, max = 1) => {
 
   const response = await axiosSteamInstance.get<
     TMarketHistoryResponse | TIncorrectMarketHistoryResponse
-  >(url.href);
+  >(url.href, {
+    headers: {
+      Cookie: cookies,
+    },
+  });
 
   if (!response.data)
     throw new CustomError({ message: "Data not found", status: 418 });

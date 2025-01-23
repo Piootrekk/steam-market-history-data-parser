@@ -35,14 +35,19 @@ const retryFetch = async <T>(
 const fetchQueue = async (
   delay = 5000,
   fetchSize = 500,
-  startFetch = 0
+  startFetch = 0,
+  cookies: string
 ): Promise<TItemDTO[]> => {
-  const { totalFetches } = await getTotalFetchesAndCount(fetchSize, startFetch);
+  const { totalFetches } = await getTotalFetchesAndCount(
+    fetchSize,
+    startFetch,
+    cookies
+  );
   let allHistory: TItemDTO[] = [];
   for (let index = 0; index < totalFetches; index++) {
     const startingItem = index * fetchSize + startFetch;
     const response = await retryFetch<TMarketHistoryResponse>(
-      () => fetchMarketHistory(startingItem, fetchSize),
+      () => fetchMarketHistory(startingItem, fetchSize, cookies),
       5,
       delay
     );

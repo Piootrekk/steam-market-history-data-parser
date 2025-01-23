@@ -1,8 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import "./home.css";
-import { getMarketHistoryCollectionsName } from "../../api/marketHistory";
-import DatabaseIcon from "../../common/icons/DatabaseIcon";
+import { getMarketHistoryCollectionsName } from "@/api/marketHistory";
 import { getInventoryHistoryCollectionsName } from "@/api/inventoryHistory";
+import AllHistoryMarket from "./Sections/AllHistoryMarket";
+import AllHistoryInventory from "./Sections/AllHistoryInventory";
+import SynchronizeHistoryMarket from "./Sections/SynchronizeHistoryMarket";
+import SynchronizeHistoryInventory from "./Sections/SynchronizeHistoryInventory";
 type HomeProps = {};
 
 const Home: React.FC<HomeProps> = ({}) => {
@@ -31,74 +34,14 @@ const Home: React.FC<HomeProps> = ({}) => {
 
   return (
     <div className="sections-container">
-      <section className="section">
-        <h2 className="section-title">Fetch All market</h2>
-        <div className="input-group">
-          <input type="text" placeholder="Identifier" className="input" />
-          <input type="text" placeholder="Cookies" className="input" />
-          <button className="button">Fetch</button>
-        </div>
-      </section>
-      <section className="section">
-        <h2 className="section-title">Fetch All inventory</h2>
-        <div className="input-group">
-          <input type="text" placeholder="Identifier" className="input" />
-          <input type="text" placeholder="Cookies" className="input" />
-          <button className="button">Fetch</button>
-        </div>
-      </section>
-      <section className="section">
-        <h2 className="section-title">Synchronize market</h2>
-        <div className="input-group">
-          <div className="badges-group">
-            {marketHistoryCollectionsName.data.map((collection, key) => {
-              return (
-                <div key={collection}>
-                  <input
-                    type="radio"
-                    id={`marketid-${key}`}
-                    name="market-sync"
-                    className="badge-radio"
-                    checked={key === 0}
-                  />
-                  <label htmlFor={`marketid-${key}`} className="badge-label">
-                    <DatabaseIcon size={16} className="badge-icon" />
-                    {collection}
-                  </label>
-                </div>
-              );
-            })}
-          </div>
-          <input type="text" placeholder="Cookies" className="input" />
-          <button className="button">Fetch</button>
-        </div>
-      </section>
-      <section className="section">
-        <h2 className="section-title">Synchronize inventory</h2>
-        <div className="input-group">
-          <div className="badges-group">
-            {inventoryHistoryCollectionsName.data.map((collection, key) => {
-              return (
-                <div key={collection}>
-                  <input
-                    type="radio"
-                    id={`inventoryid-${key}`}
-                    name="inventory-sync"
-                    className="badge-radio"
-                    checked={key === 0}
-                  />
-                  <label htmlFor={`inventoryid-${key}`} className="badge-label">
-                    <DatabaseIcon size={16} className="badge-icon" />
-                    {collection}
-                  </label>
-                </div>
-              );
-            })}
-          </div>
-          <input type="text" placeholder="Cookies" className="input" />
-          <button className="button">Fetch</button>
-        </div>
-      </section>
+      <AllHistoryMarket />
+      <AllHistoryInventory />
+      <SynchronizeHistoryMarket
+        marketHistoryCollectionsName={marketHistoryCollectionsName.data}
+      />
+      <SynchronizeHistoryInventory
+        inventoryHistoryCollectionsName={inventoryHistoryCollectionsName.data}
+      />
     </div>
   );
 };

@@ -1,4 +1,3 @@
-import { TSSEClient } from "../../sse-client.types";
 import { Db } from "mongodb";
 import {
   getTotalFetchesAndCount,
@@ -14,11 +13,16 @@ import {
   insertBulkTransactions,
 } from "../../../db/market-history/market-history.actions";
 import sseClient from "../../sse-client";
+import {
+  SSEMessageModel,
+  TSSEClientMessageModel,
+} from "./market-history.schema";
 
 const saveAllHistoryToDb = async (
   steamid: string,
-  clinet: TSSEClient,
-  db: Db
+  clinet: TSSEClientMessageModel,
+  db: Db,
+  cookies: string
 ): Promise<void> => {
   const delay = 5000;
   const fetchChunkLimit = 500;
@@ -26,12 +30,13 @@ const saveAllHistoryToDb = async (
 
   const { totalFetches, totalCount } = await getTotalFetchesAndCount(
     fetchChunkLimit,
-    startFetch
+    startFetch,
+    cookies
   );
   for (let index = 0; index < totalFetches; index++) {
     const startingItem = index * fetchChunkLimit + startFetch;
     const response = await retryFetch<TMarketHistoryResponse>(
-      () => fetchMarketHistory(startingItem, fetchChunkLimit),
+      () => fetchMarketHistory(startingItem, fetchChunkLimit, cookies),
       5,
       delay
     );
@@ -44,26 +49,27 @@ const saveAllHistoryToDb = async (
     );
 
     const sseData = {
-      fetch: index + 1,
-      totalFetches,
-      totalCount,
+      currentFetch: index + 1,
+      allFetches: totalFetches,
+      asdasd: "ssss",
     };
 
-    sseClient.sendMessage(clinet, JSON.stringify(sseData));
+    sseClient.sendMessage(clinet, sseData);
     await new Promise((resolve) => setTimeout(resolve, delay));
   }
 };
 
 const synchronizeHistoryToDb = async (
   steamid: string,
-  clinet: TSSEClient,
-  db: Db
+  clinet: TSSEClientMessageModel,
+  db: Db,
+  cookies: string
 ) => {
   const delay = 5000;
   const fetchChunkLimit = 500;
   const startFetch = 0;
 
-  const totalCount = await getTotalCount();
+  const totalCount = await getTotalCount(cookies);
   const lastTotalCount = await getMarketHistoryRecords(steamid, db);
   if (totalCount === lastTotalCount) return;
   const newItems = totalCount - lastTotalCount;
@@ -74,7 +80,7 @@ const synchronizeHistoryToDb = async (
   for (let index = 0; index < chunks; index++) {
     const startingItem = index * fetchChunkLimit + startFetch;
     const response = await retryFetch<TMarketHistoryResponse>(
-      () => fetchMarketHistory(startingItem, fetchChunkLimit),
+      () => fetchMarketHistory(startingItem, fetchChunkLimit, cookies),
       5,
       delay
     );
@@ -86,16 +92,15 @@ const synchronizeHistoryToDb = async (
       }/${chunks}, starting items: ${startingItem}`
     );
     const sseData = {
-      fetch: index + 1,
-      chunks,
-      totalCount,
+      currentFetch: index + 1,
+      allFetches: change ? chunks + 1 : chunks,
     };
-    sseClient.sendMessage(clinet, JSON.stringify(sseData));
+    sseClient.sendMessage(clinet, sseData);
     await new Promise((resolve) => setTimeout(resolve, delay));
   }
   if (change !== 0) {
     const responseChange = await retryFetch<TMarketHistoryResponse>(
-      () => fetchMarketHistory(chunks * fetchChunkLimit, change),
+      () => fetchMarketHistory(chunks * fetchChunkLimit, change, cookies),
       5,
       delay
     );
@@ -103,10 +108,10 @@ const synchronizeHistoryToDb = async (
     await insertBulkTransactions(steamid, itemsChange, db);
 
     const sseData = {
-      change,
-      totalCount,
+      currentFetch: chunks + 1,
+      allFetches: chunks + 1,
     };
-    sseClient.sendMessage(clinet, JSON.stringify(sseData));
+    sseClient.sendMessage(clinet, sseData);
   }
 
   await new Promise((resolve) => setTimeout(resolve, delay));

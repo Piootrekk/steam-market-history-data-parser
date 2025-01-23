@@ -6,6 +6,7 @@ import {
 import sseClient from "../../sse-client";
 import CustomError from "../../../../config/error-converter";
 import { clearAllHistor } from "../../../db/market-history/market-history.actions";
+import { SSEMessageModel, TRequestBody } from "./market-history.schema";
 
 const headers = {
   "Content-Type": "text/event-stream",
@@ -13,16 +14,12 @@ const headers = {
   "Cache-Control": "no-cache",
 };
 
-type TRequestBody = {
-  steamid: string;
-};
-
 const synchronizeHistory = async (
   request: FastifyRequest<{ Body: TRequestBody }>,
   reply: FastifyReply
 ) => {
   reply.raw.writeHead(200, headers);
-  const client = sseClient.addClient(reply);
+  const client = sseClient.addClient<SSEMessageModel>(reply);
   try {
     const db = request.server.mongo.db;
     if (!db) {
@@ -31,13 +28,19 @@ const synchronizeHistory = async (
         statusCode: 500,
       });
     }
-    await synchronizeHistoryToDb(request.body.steamid, client, db);
-    reply.raw.write(`data: ${JSON.stringify({ success: true })}`);
-    reply.raw.end();
+    await synchronizeHistoryToDb(
+      request.body.steamid,
+      client,
+      db,
+      request.body.cookies
+    );
   } catch (err) {
     const error = new CustomError(err);
-    reply.raw.write(JSON.stringify({ message: error.message }));
-    reply.raw.end();
+    sseClient.setErrorMessage(client, error.message);
+  } finally {
+    request.raw.on("close", () => {
+      sseClient.removeClient(client);
+    });
   }
 };
 
@@ -46,7 +49,7 @@ const initAllMarketHistory = async (
   reply: FastifyReply
 ) => {
   reply.raw.writeHead(200, headers);
-  const client = sseClient.addClient(reply);
+  const client = sseClient.addClient<SSEMessageModel>(reply);
   try {
     const db = request.server.mongo.db;
     if (!db) {
@@ -56,17 +59,20 @@ const initAllMarketHistory = async (
       });
     }
     await clearAllHistor(request.body.steamid, db);
-    await saveAllHistoryToDb(request.body.steamid, client, db);
-    reply.raw.write(`data: ${JSON.stringify({ success: true })}`);
-    reply.raw.end();
+    await saveAllHistoryToDb(
+      request.body.steamid,
+      client,
+      db,
+      request.body.cookies
+    );
   } catch (err) {
     const error = new CustomError(err);
-    reply.raw.write(JSON.stringify({ message: error.message }));
-    reply.raw.end();
+    sseClient.setErrorMessage(client, error.message);
+  } finally {
+    request.raw.on("close", () => {
+      sseClient.removeClient(client);
+    });
   }
-  request.raw.on("close", () => {
-    sseClient.removeClient(client.id);
-  });
 };
 
 export { synchronizeHistory, initAllMarketHistory };
