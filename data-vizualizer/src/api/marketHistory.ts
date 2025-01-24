@@ -11,15 +11,7 @@ const getMarketHistoryCollectionsName = async (): Promise<string[]> => {
 };
 
 const getAllMarketHistory = async (steamid: string, cookies: string) => {
-  const response = await axiosInstance.post<
-    paths["/market/all"]["post"]["responses"]["200"]["content"]["application/json"]
-  >("/market/all", {
-    steamid,
-    cookies,
-  });
-  if (!response.data) throw new Error("No data found");
-  if (response.data.success === undefined) throw new Error("No success found");
-  return response.data.success;
+  console.log(steamid, cookies);
 };
 
 export { getMarketHistoryCollectionsName, getAllMarketHistory };

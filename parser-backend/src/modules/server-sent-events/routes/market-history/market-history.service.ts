@@ -13,10 +13,7 @@ import {
   insertBulkTransactions,
 } from "../../../db/market-history/market-history.actions";
 import sseClient from "../../sse-client";
-import {
-  SSEMessageModel,
-  TSSEClientMessageModel,
-} from "./market-history.schema";
+import { TSSEClientMessageModel } from "./market-history.schema";
 
 const saveAllHistoryToDb = async (
   steamid: string,
@@ -51,10 +48,10 @@ const saveAllHistoryToDb = async (
     const sseData = {
       currentFetch: index + 1,
       allFetches: totalFetches,
-      asdasd: "ssss",
     };
 
     sseClient.sendMessage(clinet, sseData);
+    if (index === totalFetches - 1) return;
     await new Promise((resolve) => setTimeout(resolve, delay));
   }
 };
@@ -96,7 +93,8 @@ const synchronizeHistoryToDb = async (
       allFetches: change ? chunks + 1 : chunks,
     };
     sseClient.sendMessage(clinet, sseData);
-    await new Promise((resolve) => setTimeout(resolve, delay));
+    if (change !== 0)
+      await new Promise((resolve) => setTimeout(resolve, delay));
   }
   if (change !== 0) {
     const responseChange = await retryFetch<TMarketHistoryResponse>(
@@ -113,8 +111,6 @@ const synchronizeHistoryToDb = async (
     };
     sseClient.sendMessage(clinet, sseData);
   }
-
-  await new Promise((resolve) => setTimeout(resolve, delay));
 };
 
 export { saveAllHistoryToDb, synchronizeHistoryToDb };

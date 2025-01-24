@@ -34,12 +34,13 @@ const synchronizeHistory = async (
       db,
       request.body.cookies
     );
+    sseClient.endStream(client);
   } catch (err) {
     const error = new CustomError(err);
     sseClient.setErrorMessage(client, error.message);
   } finally {
     request.raw.on("close", () => {
-      sseClient.removeClient(client);
+      sseClient.destroyClient(client.id);
     });
   }
 };
@@ -65,12 +66,13 @@ const initAllMarketHistory = async (
       db,
       request.body.cookies
     );
+    sseClient.endStream(client);
   } catch (err) {
     const error = new CustomError(err);
     sseClient.setErrorMessage(client, error.message);
   } finally {
     request.raw.on("close", () => {
-      sseClient.removeClient(client);
+      sseClient.destroyClient(client.id);
     });
   }
 };

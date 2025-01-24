@@ -4,6 +4,12 @@ import { TSSEClient } from "./sse-client.types";
 
 const clients = new Map<string, TSSEClient<any>>();
 
+const headers = {
+  "Content-Type": "text/event-stream",
+  Connection: "keep-alive",
+  "Cache-Control": "no-cache",
+};
+
 const addClient = <T>(reply: FastifyReply): TSSEClient<T> => {
   const client: TSSEClient<T> = {
     id: uuidv4(),
@@ -14,21 +20,25 @@ const addClient = <T>(reply: FastifyReply): TSSEClient<T> => {
   return client;
 };
 
-const removeClient = (client: TSSEClient): void => {
+const endStream = (client: TSSEClient): void => {
   client.reply.raw.write(`${JSON.stringify({ success: true })}`);
   client.reply.raw.end();
-  clients.delete(client.id);
+};
+
+const destroyClient = (clientId: string): void => {
+  clients.delete(clientId);
 };
 
 const setErrorMessage = (client: TSSEClient, message: string): void => {
-  client.reply.raw.write(JSON.stringify({ message: message }));
+  const serializedMessage = JSON.stringify({ message: message });
+  client.reply.raw.write(serializedMessage + "\n\n");
   client.reply.raw.end();
 };
 
 const sendMessage = <T>(client: TSSEClient<T>, message: T): void => {
   const serializedMessage = JSON.stringify(message);
   console.log(serializedMessage);
-  client.reply.raw.write(serializedMessage + "\n");
+  client.reply.raw.write(serializedMessage + "\n\n");
 };
 
 const getClient = <T>(clientId: string): TSSEClient<T> | undefined => {
@@ -41,11 +51,12 @@ const getActiveClientsCount = (): number => {
 
 const sseClient = {
   addClient,
-  removeClient,
+  endStream,
   sendMessage,
   setErrorMessage,
   getClient,
   getActiveClientsCount,
+  destroyClient,
 };
 
 export default sseClient;
