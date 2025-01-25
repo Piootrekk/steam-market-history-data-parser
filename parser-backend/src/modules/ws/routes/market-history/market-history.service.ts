@@ -12,7 +12,6 @@ import {
   getMarketHistoryRecords,
   insertBulkTransactions,
 } from "../../../db/market-history/market-history.actions";
-import sseClient from "../../sse-client";
 import { TSSEClientMessageModel } from "./market-history.schema";
 
 const saveAllHistoryToDb = async (

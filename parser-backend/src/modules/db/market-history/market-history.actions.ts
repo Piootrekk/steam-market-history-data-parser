@@ -1,4 +1,4 @@
-import { TItemDTO } from "../../server-sent-events/routes/market-history/items-coherence/items.types";
+import { TItemDTO } from "../../ws/routes/market-history/items-coherence/items.types";
 import { Db } from "mongodb";
 import { TMarketHistoryModel } from "./market-history.model";
 import {
