@@ -12,11 +12,33 @@ import {
   getMarketHistoryRecords,
   insertBulkTransactions,
 } from "../../../db/market-history/market-history.actions";
-import { TSSEClientMessageModel } from "./market-history.schema";
+import { WebSocket } from "ws";
+import {
+  TFirstMessageRecieve,
+  TSendMessage,
+  validateClientPayload,
+} from "./market-history.schema";
+import CustomError from "../../../../config/error-converter";
+
+const recieveFirstMessage = (connect: WebSocket): TFirstMessageRecieve => {
+  let result: TFirstMessageRecieve = { steamid: "", cookies: "" };
+  connect.on("message", (message: string) => {
+    const parsedMessage = JSON.parse(message) as TFirstMessageRecieve;
+    if (!validateClientPayload(parsedMessage))
+      throw new CustomError({
+        message: "INVALID FIRST PAYLOAD WS",
+        status: 400,
+      });
+    const { steamid, cookies } = parsedMessage;
+    result = { steamid, cookies };
+  });
+  connect.removeAllListeners("message");
+  return result;
+};
 
 const saveAllHistoryToDb = async (
   steamid: string,
-  clinet: TSSEClientMessageModel,
+  connect: WebSocket,
   db: Db,
   cookies: string
 ): Promise<void> => {
@@ -44,12 +66,11 @@ const saveAllHistoryToDb = async (
       }/${totalFetches}, starting items: ${startingItem}`
     );
 
-    const sseData = {
+    const sendMessage: TSendMessage = {
       currentFetch: index + 1,
       allFetches: totalFetches,
     };
-
-    sseClient.sendMessage(clinet, sseData);
+    connect.send(JSON.stringify(sendMessage));
     if (index === totalFetches - 1) return;
     await new Promise((resolve) => setTimeout(resolve, delay));
   }
@@ -57,7 +78,7 @@ const saveAllHistoryToDb = async (
 
 const synchronizeHistoryToDb = async (
   steamid: string,
-  clinet: TSSEClientMessageModel,
+  connect: WebSocket,
   db: Db,
   cookies: string
 ) => {
@@ -87,11 +108,12 @@ const synchronizeHistoryToDb = async (
         index + 1
       }/${chunks}, starting items: ${startingItem}`
     );
-    const sseData = {
+    const sendMessage: TSendMessage = {
       currentFetch: index + 1,
       allFetches: change ? chunks + 1 : chunks,
     };
-    sseClient.sendMessage(clinet, sseData);
+
+    connect.send(JSON.stringify(sendMessage));
     if (change !== 0)
       await new Promise((resolve) => setTimeout(resolve, delay));
   }
@@ -104,12 +126,12 @@ const synchronizeHistoryToDb = async (
     const itemsChange = responesConverter(responseChange);
     await insertBulkTransactions(steamid, itemsChange, db);
 
-    const sseData = {
+    const changeToSend: TSendMessage = {
       currentFetch: chunks + 1,
       allFetches: chunks + 1,
     };
-    sseClient.sendMessage(clinet, sseData);
+    connect.send(JSON.stringify(changeToSend));
   }
 };
 
-export { saveAllHistoryToDb, synchronizeHistoryToDb };
+export { saveAllHistoryToDb, synchronizeHistoryToDb, recieveFirstMessage };

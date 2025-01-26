@@ -11,7 +11,7 @@ const getCollectionsMarketName = async (
     if (!db) {
       throw new CustomError({
         message: "Invalid database connection",
-        statusCode: 500,
+        status: 500,
       });
     }
     const collectionsName = await getInventoryHistoryCollections(db);

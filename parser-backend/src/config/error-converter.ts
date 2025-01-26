@@ -65,3 +65,4 @@ class CustomError extends Error {
 }
 
 export default CustomError;
+export type { TCustomError };
