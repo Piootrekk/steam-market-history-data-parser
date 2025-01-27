@@ -20,17 +20,27 @@ const validateClientPayload = (payload: TFirstMessageRecieve): boolean => {
   );
 };
 
-const marketSynchronizeSchema: { schema: FastifySchema } = {
-  schema: {
-    tags: ["WS - Market History (DB insert)"],
-  },
+const wsMarketHistorySchema: FastifySchema = {
+  tags: ["WS - Market History (DB insert)"],
+  description: `
+      WebSocket Connection
+      Upgrade to WebSocket connection on this endpoint. Use Postman instead of OPENAPI  
+      
+      Expected Client-to-Server Message: 
+      json:
+        {
+          "steamid": "string",
+          "cookies": "string"
+        }
+
+      Expected Server-to-Client Message:
+      json:
+        {
+          "currentFetch": "number",
+          "allFetches": "number"
+        }
+    `,
 };
 
-const marketHistorySchema: { schema: FastifySchema } = {
-  schema: {
-    tags: ["WS - Market History (DB insert)"],
-  },
-};
-
-export { marketHistorySchema, marketSynchronizeSchema, validateClientPayload };
+export { wsMarketHistorySchema, validateClientPayload };
 export type { TFirstMessageRecieve, TSendMessage };

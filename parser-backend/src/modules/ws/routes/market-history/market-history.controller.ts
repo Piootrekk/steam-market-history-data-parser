@@ -9,24 +9,26 @@ import { clearAllHistor } from "../../../db/market-history/market-history.action
 import { getDatabase } from "../../../../config/get-database";
 import { WebSocket } from "ws";
 
-const synchronizeHistory = async (
+const synchronizeHistoryController = async (
   connection: WebSocket,
   request: FastifyRequest
 ) => {
   try {
     const db = getDatabase(request);
-    const recieved = recieveFirstMessage(connection);
-    await synchronizeHistoryToDb(
-      recieved.steamid,
-      connection,
-      db,
-      recieved.cookies
-    );
+    connection.on("message", async (message: string) => {
+      const recieved = recieveFirstMessage(message);
+      await synchronizeHistoryToDb(
+        recieved.steamid,
+        connection,
+        db,
+        recieved.cookies
+      );
+      connection.removeAllListeners("message");
+      connection.close();
+    });
   } catch (err) {
     const error = new CustomError(err);
     connection.send(JSON.stringify({ error: error }));
-  } finally {
-    connection.close();
   }
 };
 
@@ -36,20 +38,22 @@ const allMarketHistoryController = async (
 ) => {
   try {
     const db = getDatabase(request);
-    const recieved = recieveFirstMessage(connection);
-    await clearAllHistor(recieved.steamid, db);
-    await saveAllHistoryToDb(
-      recieved.steamid,
-      connection,
-      db,
-      recieved.cookies
-    );
+    connection.on("message", async (message: string) => {
+      const recieved = recieveFirstMessage(message);
+      await clearAllHistor(recieved.steamid, db);
+      await saveAllHistoryToDb(
+        recieved.steamid,
+        connection,
+        db,
+        recieved.cookies
+      );
+      connection.removeAllListeners("message");
+      connection.close();
+    });
   } catch (err) {
     const error = new CustomError(err);
     connection.send(JSON.stringify({ error: error }));
-  } finally {
-    connection.close();
   }
 };
 
-export { allMarketHistoryController, synchronizeHistory };
+export { allMarketHistoryController, synchronizeHistoryController };

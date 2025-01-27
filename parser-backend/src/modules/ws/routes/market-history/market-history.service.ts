@@ -20,19 +20,16 @@ import {
 } from "./market-history.schema";
 import CustomError from "../../../../config/error-converter";
 
-const recieveFirstMessage = (connect: WebSocket): TFirstMessageRecieve => {
-  let result: TFirstMessageRecieve = { steamid: "", cookies: "" };
-  connect.on("message", (message: string) => {
-    const parsedMessage = JSON.parse(message) as TFirstMessageRecieve;
-    if (!validateClientPayload(parsedMessage))
-      throw new CustomError({
-        message: "INVALID FIRST PAYLOAD WS",
-        status: 400,
-      });
-    const { steamid, cookies } = parsedMessage;
-    result = { steamid, cookies };
-  });
-  connect.removeAllListeners("message");
+const recieveFirstMessage = (message: string): TFirstMessageRecieve => {
+  const result: TFirstMessageRecieve = { steamid: "", cookies: "" };
+  const parsedMessage = JSON.parse(message) as TFirstMessageRecieve;
+  if (!validateClientPayload(parsedMessage))
+    throw new CustomError({
+      message: "INVALID CLIENT PAYLOAD WS",
+      status: 400,
+    });
+  const { steamid, cookies } = parsedMessage;
+  (result.cookies = cookies), (result.steamid = steamid);
   return result;
 };
 
