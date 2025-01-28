@@ -11,14 +11,14 @@ import { retryFetch } from "./items-coherence/fetch-queue";
 import {
   getMarketHistoryRecords,
   insertBulkTransactions,
-} from "../../../db/market-history/market-history.actions";
+} from "@modules/db/market-history/market-history.actions";
 import { WebSocket } from "ws";
 import {
   TFirstMessageRecieve,
   TSendMessage,
   validateClientPayload,
 } from "./market-history.schema";
-import CustomError from "../../../../config/error-converter";
+import CustomError from "@/config/error-converter";
 
 const recieveFirstMessage = (message: string): TFirstMessageRecieve => {
   const result: TFirstMessageRecieve = { steamid: "", cookies: "" };

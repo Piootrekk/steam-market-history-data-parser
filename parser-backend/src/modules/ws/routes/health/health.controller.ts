@@ -1,17 +1,13 @@
 import { FastifyRequest } from "fastify";
-import CustomError from "../../../../config/error-converter";
+import CustomError from "@config/error-converter";
 import { WebSocket } from "ws";
-import {
-  TFirstMessageRecieve,
-  TSendMessage,
-  validateClientPayload,
-} from "./health.schema";
+import { TFirstMessageRecieve, validateClientPayload } from "./health.schema";
+import { handleCloseWsConnection } from "@modules/ws/ws-utils";
 
 const wsHeathController = (connection: WebSocket, req: FastifyRequest) => {
-  try {
-    const recievedFromClient: TFirstMessageRecieve = { health: false };
-
-    connection.on("message", (message: string) => {
+  const recievedFromClient: TFirstMessageRecieve = { health: false };
+  connection.on("message", (message: string) => {
+    try {
       const parsedMessage = JSON.parse(message) as TFirstMessageRecieve;
       recievedFromClient.health = parsedMessage.health;
 
@@ -21,30 +17,38 @@ const wsHeathController = (connection: WebSocket, req: FastifyRequest) => {
           status: 400,
         };
 
-        connection.send(JSON.stringify({ error }));
-        connection.close();
-        return;
+        throw new CustomError(error);
       }
       if (!validateClientPayload(recievedFromClient)) {
         const error = {
           message: "Failed to validate client payload",
           status: 400,
         };
-        connection.send(JSON.stringify({ error }));
-        connection.close();
+        throw new CustomError(error);
       }
-
-      const messageToSend: TSendMessage = {
-        approve: true,
-      };
-      connection.send(JSON.stringify(messageToSend));
+      connection.send(
+        JSON.stringify({
+          approve: true,
+        })
+      );
+    } catch (error) {
+      connection.send(JSON.stringify({ error }));
+    } finally {
       connection.removeAllListeners("message");
-      connection.close();
+      connection.close(1000);
+    }
+
+    connection.on("close", (code, reason) => {
+      try {
+        handleCloseWsConnection(code, reason.toString());
+      } catch (error) {
+        connection.send(JSON.stringify({ error }));
+      } finally {
+        connection.removeAllListeners("message");
+        connection.close(1000);
+      }
     });
-  } catch (err) {
-    const error = new CustomError(err);
-    connection.send(JSON.stringify({ error: error }));
-  }
+  });
 };
 
 export { wsHeathController };

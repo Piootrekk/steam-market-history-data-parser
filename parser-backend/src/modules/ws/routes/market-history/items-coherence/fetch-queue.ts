@@ -1,4 +1,4 @@
-import CustomError from "../../../../../config/error-converter";
+import CustomError from "@config/error-converter";
 import TMarketHistoryResponse from "../fetch/fetch.types";
 import { fetchMarketHistory } from "../fetch/fetches";
 import responesConverter from "./items-coherence";

@@ -4,18 +4,19 @@ import {
   saveAllHistoryToDb,
   synchronizeHistoryToDb,
 } from "./market-history.service";
-import CustomError from "../../../../config/error-converter";
-import { clearAllHistor } from "../../../db/market-history/market-history.actions";
-import { getDatabase } from "../../../../config/get-database";
+import { clearAllHistor } from "@modules/db/market-history/market-history.actions";
+import { getDatabase } from "@/config/get-database";
 import { WebSocket } from "ws";
+import { handleCloseWsConnection } from "@modules/ws/ws-utils";
+import { TFirstMessageRecieve } from "./market-history.schema";
 
 const synchronizeHistoryController = async (
   connection: WebSocket,
   request: FastifyRequest
 ) => {
-  try {
-    const db = getDatabase(request);
-    connection.on("message", async (message: string) => {
+  const db = getDatabase(request);
+  connection.on("message", async (message: string) => {
+    try {
       const recieved = recieveFirstMessage(message);
       await synchronizeHistoryToDb(
         recieved.steamid,
@@ -23,37 +24,60 @@ const synchronizeHistoryController = async (
         db,
         recieved.cookies
       );
+    } catch (error) {
+    } finally {
       connection.removeAllListeners("message");
-      connection.close();
-    });
-  } catch (err) {
-    const error = new CustomError(err);
-    connection.send(JSON.stringify({ error: error }));
-  }
+      connection.close(1000);
+    }
+  });
+
+  connection.on("close", (code, reason) => {
+    try {
+      handleCloseWsConnection(code, reason.toString());
+    } catch (error) {
+      connection.send(JSON.stringify({ error: error }));
+    } finally {
+      connection.removeAllListeners("message");
+      connection.close(1000);
+    }
+  });
 };
 
 const allMarketHistoryController = async (
   connection: WebSocket,
   request: FastifyRequest
 ) => {
-  try {
-    const db = getDatabase(request);
-    connection.on("message", async (message: string) => {
-      const recieved = recieveFirstMessage(message);
-      await clearAllHistor(recieved.steamid, db);
+  const db = getDatabase(request);
+  let received: TFirstMessageRecieve;
+  connection.on("message", async (message: string) => {
+    try {
+      received = recieveFirstMessage(message);
+      await clearAllHistor(received.steamid, db);
       await saveAllHistoryToDb(
-        recieved.steamid,
+        received.steamid,
         connection,
         db,
-        recieved.cookies
+        received.cookies
       );
+    } catch (error) {
+      connection.send(JSON.stringify({ error: error }));
+      if (received.steamid) await clearAllHistor(received.steamid, db);
+    } finally {
       connection.removeAllListeners("message");
-      connection.close();
-    });
-  } catch (err) {
-    const error = new CustomError(err);
-    connection.send(JSON.stringify({ error: error }));
-  }
+      connection.close(1000);
+    }
+  });
+  connection.on("close", async (code, reason) => {
+    try {
+      handleCloseWsConnection(code, reason.toString());
+    } catch (error) {
+      connection.send(JSON.stringify({ error: error }));
+      if (received.steamid) await clearAllHistor(received.steamid, db);
+    } finally {
+      connection.removeAllListeners("message");
+      connection.close(1000);
+    }
+  });
 };
 
 export { allMarketHistoryController, synchronizeHistoryController };

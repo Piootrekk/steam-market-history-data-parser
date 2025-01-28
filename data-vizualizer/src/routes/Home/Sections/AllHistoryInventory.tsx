@@ -1,9 +1,9 @@
 type AllHistoryInventoryProps = {};
 
 const AllHistoryInventory: React.FC<AllHistoryInventoryProps> = ({}) => {
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-  }
+  };
 
   return (
     <section className="section">

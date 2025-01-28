@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "dev": "ts-node src/server.ts",
-    "build": "tsc",
+    "dev": "ts-node -r tsconfig-paths/register src/server.ts",
+    "build": "tsc && tsc-alias",
     "start": "node dist/server.js"
   },
   "author": "Jakiś debil",
@@ -19,12 +19,14 @@
     "dotenv": "^16.4.7",
     "fastify": "^5.2.0",
     "fastify-plugin": "^5.0.1",
-    "ts-node": "^10.9.2",
     "typescript": "^5.7.2",
     "uuid": "^11.0.5"
   },
   "devDependencies": {
     "@types/node": "^22.10.10",
-    "@types/ws": "^8.5.14"
+    "@types/ws": "^8.5.14",
+    "ts-node": "^10.9.2",
+    "tsc-alias": "^1.8.10",
+    "tsconfig-paths": "^4.2.0"
   }
 }
