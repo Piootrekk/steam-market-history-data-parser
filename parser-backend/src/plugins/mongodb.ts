@@ -9,12 +9,5 @@ const mongoDbPlugin = fp(async (fastify) => {
     forceClose: true,
     database: "Personal-data",
   });
-  fastify.after(() => {
-    if (fastify.mongo.db) {
-      console.log("MongoDB connected successfully!");
-    } else {
-      throw new Error("Failed to connect mongoDB");
-    }
-  });
 });
 export default mongoDbPlugin;

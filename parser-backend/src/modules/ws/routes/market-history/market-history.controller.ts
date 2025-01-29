@@ -25,6 +25,7 @@ const synchronizeHistoryController = async (
         recieved.cookies
       );
     } catch (error) {
+      connection.send(JSON.stringify({ error: error }));
     } finally {
       connection.removeAllListeners("message");
       connection.close(1000);

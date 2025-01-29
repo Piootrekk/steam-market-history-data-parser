@@ -1,6 +1,10 @@
-type AllHistoryInventoryProps = {};
+type AllHistoryInventoryProps = {
+  disableButton: boolean;
+};
 
-const AllHistoryInventory: React.FC<AllHistoryInventoryProps> = ({}) => {
+const AllHistoryInventory: React.FC<AllHistoryInventoryProps> = ({
+  disableButton,
+}) => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
   };
@@ -21,7 +25,9 @@ const AllHistoryInventory: React.FC<AllHistoryInventoryProps> = ({}) => {
           className="input"
           name="cookies"
         />
-        <button className="button">Fetch</button>
+        <button className="button" disabled={disableButton}>
+          Fetch
+        </button>
       </form>
     </section>
   );

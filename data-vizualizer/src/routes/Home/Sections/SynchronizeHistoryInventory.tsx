@@ -2,11 +2,12 @@ import DatabaseIcon from "@/common/icons/DatabaseIcon";
 
 type SynchronizeHistoryInventoryProps = {
   inventoryHistoryCollectionsName: string[];
+  disableButton: boolean;
 };
 
 const SynchronizeHistoryInventory: React.FC<
   SynchronizeHistoryInventoryProps
-> = ({ inventoryHistoryCollectionsName }) => {
+> = ({ inventoryHistoryCollectionsName, disableButton }) => {
   return (
     <section className="section">
       <h2 className="section-title">Synchronize inventory</h2>
@@ -31,7 +32,9 @@ const SynchronizeHistoryInventory: React.FC<
           })}
         </div>
         <input type="text" placeholder="Cookies" className="input" />
-        <button className="button">Fetch</button>
+        <button className="button" disabled={disableButton}>
+          Fetch
+        </button>
       </div>
     </section>
   );

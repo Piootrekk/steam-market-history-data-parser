@@ -1,8 +1,14 @@
-import { getAllMarketHistory } from "@/api/marketHistory";
+import { TWsSendToServer } from "@/api/types/api.types";
+type AllHistoryMarketProps = {
+  disableButton: boolean;
+  webSocketAction: (url: string, sendPayload: TWsSendToServer) => void;
+};
 
-type AllHistoryMarketProps = {};
-
-const AllHistoryMarket: React.FC<AllHistoryMarketProps> = ({}) => {
+const AllHistoryMarket: React.FC<AllHistoryMarketProps> = ({
+  disableButton,
+  webSocketAction,
+}) => {
+  const url = "ws://127.0.0.1:1337/ws/market-history/all";
   const handleForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -10,7 +16,7 @@ const AllHistoryMarket: React.FC<AllHistoryMarketProps> = ({}) => {
       steamid: formData.get("steamid") as string,
       cookies: formData.get("cookies") as string,
     };
-    await getAllMarketHistory(formValues.steamid, formValues.cookies);
+    webSocketAction(url, formValues);
   };
 
   return (
@@ -29,7 +35,9 @@ const AllHistoryMarket: React.FC<AllHistoryMarketProps> = ({}) => {
           className="input"
           name="cookies"
         />
-        <button className="button">Fetch</button>
+        <button className="button" disabled={disableButton}>
+          Fetch
+        </button>
       </form>
     </section>
   );

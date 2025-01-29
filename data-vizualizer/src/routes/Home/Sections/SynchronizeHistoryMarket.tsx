@@ -2,10 +2,12 @@ import DatabaseIcon from "@/common/icons/DatabaseIcon";
 
 type SynchronizeHistoryMarketProps = {
   marketHistoryCollectionsName: string[];
+  disableButton: boolean;
 };
 
 const SynchronizeHistoryMarket: React.FC<SynchronizeHistoryMarketProps> = ({
   marketHistoryCollectionsName,
+  disableButton,
 }) => {
   return (
     <section className="section">
@@ -31,7 +33,9 @@ const SynchronizeHistoryMarket: React.FC<SynchronizeHistoryMarketProps> = ({
           })}
         </div>
         <input type="text" placeholder="Cookies" className="input" />
-        <button className="button">Fetch</button>
+        <button className="button" disabled={disableButton}>
+          Fetch
+        </button>
       </div>
     </section>
   );
