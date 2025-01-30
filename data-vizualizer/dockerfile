@@ -1,0 +1,26 @@
+FROM node:23-alpine
+
+WORKDIR /app
+
+COPY package*.json ./
+
+RUN npm install
+
+COPY . .
+RUN npm i -g serve
+ENV NODE_OPTIONS="--max-old-space-size=4096"
+
+
+ARG VITE_PORT=3034
+ARG VITE_BACKEND_URL
+ARG VITE_PROXY
+
+ENV VITE_PORT=$VITE_PORT
+ENV VITE_BACKEND_URL=$VITE_BACKEND_URL
+ENV VITE_PROXY=$VITE_PROXY
+
+RUN npm run build
+
+
+
+CMD serve -s dist -l ${VITE_PORT}

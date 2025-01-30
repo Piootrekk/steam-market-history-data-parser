@@ -67,3 +67,4 @@ dist-ssr
 *.sw?
 test*.json
 market-history*.json
+mongodb-data

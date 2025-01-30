@@ -15,6 +15,7 @@ const getBackend = (): string => {
     throw new Error("BACKEND ENV NOT FOUND");
   }
   const backendUrl = import.meta.env.VITE_BACKEND_URL;
+  console.log(backendUrl);
   if (typeof backendUrl !== "string" || backendUrl.trim() === "") {
     throw new Error("Invalid proxy: PROXY must be a non-empty string.");
   }
