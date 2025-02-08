@@ -55,17 +55,27 @@ const Home: React.FC<HomeProps> = ({}) => {
           disableButton={websocket.disableButton}
         />
       </div>
-
+      {websocket.error && (
+        <div className="response-section error">
+          <h2>{websocket.error || "FAILED TO ESTABLISH CONNECTION"}</h2>
+        </div>
+      )}
       {websocket.response.length > 0 && (
         <div className="response-section">
           <h2>
-            CLINET IS FETCHING HISTORY, DONT CLOSE THE BROWSER TAB UNTIL END
+            CLIENT IS FETCHING HISTORY, DON'T CLOSE THE BROWSER TAB UNTIL END
           </h2>
-          {websocket.response.map((message, index) => (
-            <p key={index}>
-              {message.currentFetch} / {message.allFetches}
-            </p>
-          ))}
+          {websocket.response.map((message, index) => {
+            const progress = (message.currentFetch / message.allFetches) * 100;
+            return (
+              <p
+                key={index}
+                style={{ "--progress": `${progress}%` } as React.CSSProperties}
+              >
+                {message.currentFetch} / {message.allFetches}
+              </p>
+            );
+          })}
         </div>
       )}
     </>

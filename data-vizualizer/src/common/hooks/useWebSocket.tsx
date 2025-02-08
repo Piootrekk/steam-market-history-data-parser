@@ -55,6 +55,9 @@ const useWebSocket = <T,>() => {
           setError(parsedError.message);
         }
       };
+      wsRef.current.onerror = () => {
+        setError("Failed to establish connection with websocket");
+      };
     } catch (error) {
       const parsedError = errorParser(error);
       setError(parsedError.message);
