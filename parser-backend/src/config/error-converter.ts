@@ -6,36 +6,44 @@ type TCustomError = {
   options?: ErrorOptions;
 };
 
+type TError =
+  | {
+      customError: TCustomError;
+      unknownError?: never;
+    }
+  | {
+      unknownError: unknown;
+      customError?: never;
+    };
+
 class CustomError extends Error {
   private codeStatus?: number;
 
-  public constructor(error: TCustomError | unknown) {
+  public constructor({ customError, unknownError }: TError) {
     let message = "An unknown error occurred ¯\\_(ツ)_/¯";
     let codeStatus: number | undefined;
 
-    if (CustomError.assertCustomErrorType(error)) {
-      message = error.message;
-      codeStatus = error.status;
-    } else if (error instanceof AxiosError && error.request) {
-      message = error.request.message;
+    if (customError) {
+      message = customError.message;
+      codeStatus = customError.status;
+    } else if (unknownError instanceof AxiosError && unknownError.request) {
+      message = unknownError.request.message || "Request error occurred.";
       codeStatus = 500;
-    } else if (error instanceof AxiosError && error.response) {
+    } else if (unknownError instanceof AxiosError && unknownError.response) {
+      message = unknownError.request.message || "Request error occurred.";
       message =
-        error.response.data?.message ||
+        unknownError.response.data?.message ||
         "An error occurred during the response.";
-      codeStatus = error.response.status;
-    } else if (error instanceof Error) {
-      message = error.message;
-    } else if (error instanceof CustomError) {
-      message = error.message;
-      codeStatus = error.codeStatus;
+      codeStatus = unknownError.response.status;
+    } else if (unknownError instanceof Error) {
+      message = unknownError.message;
+    } else if (typeof unknownError === "string") {
+      message = unknownError;
     }
-    super(message);
-    this.codeStatus = codeStatus;
+
+    super(message, customError?.options);
     this.name = "CustomError";
-    if (Error.captureStackTrace) {
-      Error.captureStackTrace(this, CustomError);
-    }
+    this.codeStatus = codeStatus;
   }
 
   public get getStatus() {
@@ -45,17 +53,6 @@ class CustomError extends Error {
   public get getMessage() {
     return this.message;
   }
-
-  private static assertCustomErrorType = (
-    error: unknown
-  ): error is TCustomError => {
-    return (
-      typeof error === "object" &&
-      error !== null &&
-      "message" in error &&
-      typeof (error as TCustomError).message === "string"
-    );
-  };
 
   public logError = (info?: string) => {
     return `${info && info} Message: ${this.message} ${

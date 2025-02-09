@@ -1,8 +1,11 @@
 import { CollectionInfo, Db } from "mongodb";
 
-const clearCollectionByName = async (collectionName: string, db: Db) => {
+const clearCollectionByName = async (
+  collectionName: string,
+  db: Db
+): Promise<void> => {
   const collection = db.collection(collectionName);
-  await collection.deleteMany();
+  await collection.drop();
 };
 
 const getDocumentsCount = async (

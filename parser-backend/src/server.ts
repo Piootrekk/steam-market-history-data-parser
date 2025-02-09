@@ -8,7 +8,7 @@ const main = async () => {
     const port = getPort();
     await server.listen({ port: port, host: "0.0.0.0" });
   } catch (error) {
-    const customError = new CustomError(error);
+    const customError = new CustomError({ unknownError: error });
     server.log.error(customError.logError());
     process.exit(1);
   }

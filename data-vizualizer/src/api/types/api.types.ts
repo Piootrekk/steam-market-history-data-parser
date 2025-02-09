@@ -237,13 +237,3 @@ export interface components {
 }
 export type $defs = Record<string, never>;
 export type operations = Record<string, never>;
-
-export type TWsSendToServer = {
-  cookies: string;
-  steamid: string;
-};
-
-export type TWsRecievedFromServer = {
-  currentFetch: number;
-  allFetches: number;
-};

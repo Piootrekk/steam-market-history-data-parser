@@ -1,4 +1,4 @@
-import { TWsSendToServer } from "@/api/types/api.types";
+import { TWsSendToServer } from "@/api/types/ws.types";
 type AllHistoryMarketProps = {
   disableButton: boolean;
   webSocketAction: (url: string, sendPayload: TWsSendToServer) => void;
@@ -8,7 +8,7 @@ const AllHistoryMarket: React.FC<AllHistoryMarketProps> = ({
   disableButton,
   webSocketAction,
 }) => {
-  const url = "ws://127.0.0.1:1337/ws/market-history/all";
+  const url = "ws://127.0.0.1:3034/ws/market-history/all";
   const handleForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);

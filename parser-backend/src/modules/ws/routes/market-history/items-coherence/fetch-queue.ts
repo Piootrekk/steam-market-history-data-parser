@@ -15,7 +15,7 @@ const retryFetch = async <T>(
       const res = await fetchFn();
       return res;
     } catch (err) {
-      const error = new CustomError(err);
+      const error = new CustomError({ unknownError: err });
       console.warn(error.logError(`Retry attempt ${attempt + 1}/${retries}:`));
 
       if (error.getStatus === 429 && attempt < retries) {
@@ -28,7 +28,9 @@ const retryFetch = async <T>(
     }
   }
   throw new CustomError({
-    message: "Failed to fetch data after maximum retries",
+    customError: {
+      message: "Failed to fetch data after maximum retries",
+    },
   });
 };
 

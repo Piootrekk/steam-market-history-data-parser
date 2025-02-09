@@ -10,14 +10,16 @@ const getCollectionsMarketName = async (
     const db = request.server.mongo.db;
     if (!db) {
       throw new CustomError({
-        message: "Invalid database connection",
-        statusCode: 500,
+        customError: {
+          message: "Invalid database connection",
+          status: 500,
+        },
       });
     }
     const collectionsName = await getMarketHistoryCollections(db);
     reply.status(200).send({ collections: collectionsName });
   } catch (error) {
-    const customError = new CustomError(error);
+    const customError = new CustomError({ unknownError: error });
     reply.status(500).send({ message: customError.message });
   }
 };

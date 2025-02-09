@@ -7,7 +7,7 @@ import AllHistoryInventory from "./Sections/AllHistoryInventory";
 import SynchronizeHistoryMarket from "./Sections/SynchronizeHistoryMarket";
 import SynchronizeHistoryInventory from "./Sections/SynchronizeHistoryInventory";
 import useWebSocket from "@/common/hooks/useWebSocket";
-import { TWsRecievedFromServer } from "@/api/types/api.types";
+import { TWsRecievedFromServer } from "@/api/types/ws.types";
 
 type HomeProps = {};
 
@@ -23,6 +23,9 @@ const Home: React.FC<HomeProps> = ({}) => {
   });
 
   const websocket = useWebSocket<TWsRecievedFromServer>();
+  const progress = websocket.response
+    ? (websocket.response.currentFetch / websocket.response.allFetches) * 100
+    : 0;
 
   if (
     marketHistoryCollectionsName.error ||
@@ -60,22 +63,26 @@ const Home: React.FC<HomeProps> = ({}) => {
           <h2>{websocket.error || "FAILED TO ESTABLISH CONNECTION"}</h2>
         </div>
       )}
-      {websocket.response.length > 0 && (
+
+      {websocket.response !== undefined && (
         <div className="response-section">
           <h2>
             CLIENT IS FETCHING HISTORY, DON'T CLOSE THE BROWSER TAB UNTIL END
           </h2>
-          {websocket.response.map((message, index) => {
-            const progress = (message.currentFetch / message.allFetches) * 100;
-            return (
-              <p
-                key={index}
-                style={{ "--progress": `${progress}%` } as React.CSSProperties}
-              >
-                {message.currentFetch} / {message.allFetches}
-              </p>
-            );
-          })}
+          <p
+            style={
+              {
+                "--progress": `${progress}%`,
+              } as React.CSSProperties
+            }
+          >
+            {websocket.response.currentFetch} / {websocket.response.allFetches}
+          </p>
+        </div>
+      )}
+      {websocket.closeMessage && (
+        <div className="response-section">
+          <h2>{websocket.closeMessage || "CONNECTION CLOSE"}</h2>
         </div>
       )}
     </>

@@ -37,15 +37,21 @@ const fetchMarketHistory = async (min = 0, max = 1, cookies: string) => {
   });
 
   if (!response.data)
-    throw new CustomError({ message: "Data not found", status: 418 });
+    throw new CustomError({
+      customError: { message: "Data not found", status: 418 },
+    });
   if (isIncorrectResponse(response.data)) {
     throw new CustomError({
-      message: "Received incorrect market history response",
-      status: 409,
+      customError: {
+        message: "Received incorrect market history response",
+        status: 409,
+      },
     });
   }
   if (!response.data.success)
-    throw new CustomError({ message: "Fetching success - false", status: 418 });
+    throw new CustomError({
+      customError: { message: "Fetching success - false", status: 418 },
+    });
   return response.data;
 };
 

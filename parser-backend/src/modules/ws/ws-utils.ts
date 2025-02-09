@@ -6,6 +6,7 @@ const closeDirectives = {
 const handleCloseWsConnection = (code: number, reason?: string) => {
   if (code === closeDirectives.NORMAL_CLOSE) {
     console.log("Ws connection close by server");
+    throw new Error("Ws connection close by server");
   } else if (code === closeDirectives.CLIENT_DISCONNECTED) {
     console.log("Client terrminated the ws connection");
     throw new Error("Client terrminated the ws connection");

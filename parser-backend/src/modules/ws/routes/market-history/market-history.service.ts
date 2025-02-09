@@ -25,11 +25,14 @@ const recieveFirstMessage = (message: string): TFirstMessageRecieve => {
   const parsedMessage = JSON.parse(message) as TFirstMessageRecieve;
   if (!validateClientPayload(parsedMessage))
     throw new CustomError({
-      message: "INVALID CLIENT PAYLOAD WS",
-      status: 400,
+      customError: {
+        message: "INVALID CLIENT PAYLOAD WS",
+        status: 400,
+      },
     });
   const { steamid, cookies } = parsedMessage;
-  (result.cookies = cookies), (result.steamid = steamid);
+  result.cookies = cookies;
+  result.steamid = steamid;
   return result;
 };
 
@@ -37,7 +40,8 @@ const saveAllHistoryToDb = async (
   steamid: string,
   connect: WebSocket,
   db: Db,
-  cookies: string
+  cookies: string,
+  isConnectionClosed: () => boolean
 ): Promise<void> => {
   const delay = 5000;
   const fetchChunkLimit = 500;
@@ -49,6 +53,7 @@ const saveAllHistoryToDb = async (
     cookies
   );
   for (let index = 0; index < totalFetches; index++) {
+    if (isConnectionClosed()) return;
     const startingItem = index * fetchChunkLimit + startFetch;
     const response = await retryFetch<TMarketHistoryResponse>(
       () => fetchMarketHistory(startingItem, fetchChunkLimit, cookies),
@@ -77,7 +82,8 @@ const synchronizeHistoryToDb = async (
   steamid: string,
   connect: WebSocket,
   db: Db,
-  cookies: string
+  cookies: string,
+  isConnectionClosed: () => boolean
 ) => {
   const delay = 5000;
   const fetchChunkLimit = 500;
@@ -92,6 +98,7 @@ const synchronizeHistoryToDb = async (
     newItems
   );
   for (let index = 0; index < chunks; index++) {
+    if (isConnectionClosed()) return;
     const startingItem = index * fetchChunkLimit + startFetch;
     const response = await retryFetch<TMarketHistoryResponse>(
       () => fetchMarketHistory(startingItem, fetchChunkLimit, cookies),

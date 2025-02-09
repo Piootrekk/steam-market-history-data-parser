@@ -12,8 +12,11 @@ const useWebSocket = <T,>() => {
   const [connectionState, setConnectionState] = useState<WebSocketState>(
     WebSocketState.CLOSED
   );
-  const [response, setResponse] = useState<T[]>([]);
+  const [response, setResponse] = useState<T | undefined>(undefined);
   const [error, setError] = useState<string>();
+  const [closeMessage, setCloseMessage] = useState<string | undefined>(
+    undefined
+  );
   const wsRef = useRef<WebSocket | null>(null);
 
   const disableButton =
@@ -39,17 +42,15 @@ const useWebSocket = <T,>() => {
         }
       };
 
-      wsRef.current.onclose = () => {
+      wsRef.current.onclose = (eventClose) => {
         setConnectionState(WebSocketState.CLOSED);
+        setCloseMessage(eventClose.reason);
       };
 
-      wsRef.current.onerror = (error) => {
-        console.error("WebSocket error:", error);
-      };
       wsRef.current.onmessage = (event) => {
         try {
           const payload: T = JSON.parse(event.data);
-          setResponse((prev) => [...prev, payload]);
+          setResponse(payload);
         } catch (error) {
           const parsedError = errorParser(error);
           setError(parsedError.message);
@@ -72,6 +73,7 @@ const useWebSocket = <T,>() => {
     response,
     error,
     disableButton,
+    closeMessage,
   };
 };
 

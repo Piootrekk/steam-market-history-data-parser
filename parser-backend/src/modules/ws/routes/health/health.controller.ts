@@ -12,19 +12,23 @@ const wsHeathController = (connection: WebSocket, req: FastifyRequest) => {
       recievedFromClient.health = parsedMessage.health;
 
       if (recievedFromClient.health === false) {
-        const error = {
+        const customError = {
           message: "Health check false",
           status: 400,
         };
 
-        throw new CustomError(error);
+        throw new CustomError({
+          customError: customError,
+        });
       }
       if (!validateClientPayload(recievedFromClient)) {
         const error = {
           message: "Failed to validate client payload",
           status: 400,
         };
-        throw new CustomError(error);
+        throw new CustomError({
+          customError: error,
+        });
       }
       connection.send(
         JSON.stringify({
