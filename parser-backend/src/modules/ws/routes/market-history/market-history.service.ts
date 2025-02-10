@@ -47,13 +47,16 @@ const saveAllHistoryToDb = async (
   const fetchChunkLimit = 500;
   const startFetch = 0;
 
-  const { totalFetches, totalCount } = await getTotalFetchesAndCount(
+  const { totalFetches } = await getTotalFetchesAndCount(
     fetchChunkLimit,
     startFetch,
     cookies
   );
   for (let index = 0; index < totalFetches; index++) {
-    if (isConnectionClosed()) return;
+    if (isConnectionClosed())
+      throw new CustomError({
+        customError: { message: "Connection terminated by client" },
+      });
     const startingItem = index * fetchChunkLimit + startFetch;
     const response = await retryFetch<TMarketHistoryResponse>(
       () => fetchMarketHistory(startingItem, fetchChunkLimit, cookies),
@@ -98,7 +101,10 @@ const synchronizeHistoryToDb = async (
     newItems
   );
   for (let index = 0; index < chunks; index++) {
-    if (isConnectionClosed()) return;
+    if (isConnectionClosed())
+      throw new CustomError({
+        customError: { message: "Connection terminated by client" },
+      });
     const startingItem = index * fetchChunkLimit + startFetch;
     const response = await retryFetch<TMarketHistoryResponse>(
       () => fetchMarketHistory(startingItem, fetchChunkLimit, cookies),

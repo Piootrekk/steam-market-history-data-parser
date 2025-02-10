@@ -1,27 +1,56 @@
 import { FastifyReply, FastifyRequest } from "fastify";
-import { getMarketHistoryCollections } from "@modules/db/market-history/market-history.actions";
+import {
+  getMarketHistory30Items,
+  getMarketHistoryCollections,
+} from "@modules/db/market-history/market-history.actions";
 import CustomError from "@config/error-converter";
+import { getDatabase } from "@/config/get-database";
 
-const getCollectionsMarketName = async (
+const collectionsMarketNameController = async (
   request: FastifyRequest,
   reply: FastifyReply
-) => {
+): Promise<void> => {
   try {
-    const db = request.server.mongo.db;
-    if (!db) {
-      throw new CustomError({
-        customError: {
-          message: "Invalid database connection",
-          status: 500,
-        },
-      });
-    }
+    const db = getDatabase(request);
     const collectionsName = await getMarketHistoryCollections(db);
     reply.status(200).send({ collections: collectionsName });
   } catch (error) {
     const customError = new CustomError({ unknownError: error });
-    reply.status(500).send({ message: customError.message });
+    reply
+      .status(customError.getStatus || 400)
+      .send({ message: customError.message });
   }
 };
 
-export { getCollectionsMarketName };
+type TRequestQuery = {
+  collectionName: string;
+  search?: string;
+  skip?: number;
+  limit?: number;
+};
+
+const pageItemsController = async (
+  request: FastifyRequest<{ Querystring: TRequestQuery }>,
+  reply: FastifyReply
+): Promise<void> => {
+  try {
+    const db = getDatabase(request);
+    const { collectionName, search, skip, limit } = request.query;
+    const currentItems = await getMarketHistory30Items(
+      db,
+      collectionName,
+      search,
+      skip,
+      limit
+    );
+
+    reply.status(200).send({ items: currentItems });
+  } catch (error) {
+    const customError = new CustomError({ unknownError: error });
+    reply
+      .status(customError.getStatus || 400)
+      .send({ message: customError.message });
+  }
+};
+
+export { collectionsMarketNameController, pageItemsController };

@@ -16,7 +16,7 @@ const insertBulkTransactions = async (
   await collection.insertMany(transactions);
 };
 
-const clearAllHistor = async (id: string, db: Db): Promise<void> => {
+const clearAllHistory = async (id: string, db: Db): Promise<void> => {
   await clearCollectionByName(`MH-${id}`, db);
 };
 
@@ -33,9 +33,34 @@ const getMarketHistoryCollections = async (db: Db): Promise<string[]> => {
   return marketCollections;
 };
 
+const getMarketHistory30Items = async (
+  db: Db,
+  collectionName: string,
+  search?: string,
+  skip: number = 0,
+  limit: number = 30
+): Promise<TMarketHistoryModel[]> => {
+  const collection = db.collection<TMarketHistoryModel>(collectionName);
+  const query: Partial<Record<keyof TMarketHistoryModel, any>> = {};
+  if (search) {
+    query.market_hash_name = {
+      $regex: search,
+      $options: "i",
+    };
+  }
+  const items = await collection
+    .find(query)
+    .sort({ time_event: -1 })
+    .skip(skip)
+    .limit(limit)
+    .toArray();
+  return items;
+};
+
 export {
   insertBulkTransactions,
-  clearAllHistor,
+  clearAllHistory,
   getMarketHistoryRecords,
   getMarketHistoryCollections,
+  getMarketHistory30Items,
 };

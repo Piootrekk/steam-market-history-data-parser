@@ -4,10 +4,14 @@ import {
   saveAllHistoryToDb,
   synchronizeHistoryToDb,
 } from "./market-history.service";
-import { clearAllHistor } from "@modules/db/market-history/market-history.actions";
+import { clearAllHistory } from "@modules/db/market-history/market-history.actions";
 import { getDatabase } from "@/config/get-database";
 import { WebSocket } from "ws";
-import { handleCloseWsConnection } from "@modules/ws/ws-utils";
+import {
+  handleCloseWsConnection,
+  wsCloseByError,
+  wsCloseCorrectly,
+} from "@modules/ws/ws-utils";
 import { TFirstMessageRecieve } from "./market-history.schema";
 import CustomError from "@/config/error-converter";
 
@@ -28,9 +32,10 @@ const synchronizeHistoryController = async (
         recieved.cookies,
         () => connectionClosed
       );
-      connection.close(1000, "Success with all fetches");
+      wsCloseCorrectly(connection, "Success with all fetches");
     } catch (error) {
-      connection.close(1000, new CustomError({ unknownError: error }).message);
+      const customError = new CustomError({ unknownError: error });
+      wsCloseByError(connection, customError.message);
     } finally {
       connection.removeAllListeners("message");
     }
@@ -41,9 +46,7 @@ const synchronizeHistoryController = async (
     try {
       handleCloseWsConnection(code, reason.toString());
     } catch (error) {
-      connection.send(
-        JSON.stringify({ error: `Connection close, code: ${code}` })
-      );
+      wsCloseByError(connection, `Error with close ${code}`);
     }
   });
 };
@@ -58,7 +61,7 @@ const allMarketHistoryController = async (
   connection.on("message", async (message: string) => {
     try {
       received = recieveFirstMessage(message);
-      await clearAllHistor(received.steamid, db);
+      await clearAllHistory(received.steamid, db);
       await saveAllHistoryToDb(
         received.steamid,
         connection,
@@ -66,11 +69,12 @@ const allMarketHistoryController = async (
         received.cookies,
         () => connectionClosed
       );
-      connection.close(1000, "Success with all fetches");
+      wsCloseCorrectly(connection, "Success with all fetches");
     } catch (error) {
-      connection.close(1000, new CustomError({ unknownError: error }).message);
+      const customError = new CustomError({ unknownError: error });
+      wsCloseByError(connection, customError.message);
       if (received && received.steamid)
-        await clearAllHistor(received.steamid, db);
+        await clearAllHistory(received.steamid, db);
     } finally {
       connection.removeAllListeners("message");
     }
@@ -80,7 +84,9 @@ const allMarketHistoryController = async (
     try {
       handleCloseWsConnection(code, reason.toString());
     } catch (error) {
-      connection.close(1000, `Error with close ${code}`);
+      wsCloseByError(connection, `Error with close ${code}`);
+      if (received && received.steamid)
+        await clearAllHistory(received.steamid, db);
     }
   });
 };

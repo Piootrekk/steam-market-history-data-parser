@@ -29,14 +29,14 @@ type TExtendedEventData =
 
 type TPurchaseData = {
   price: number;
-  currency: number;
+  currency: string;
 };
 
 type TListingsData = {
   price: number;
   item_id: string;
   appid: number;
-  currency: number;
+  currency: string;
 };
 
 type TItemData = {

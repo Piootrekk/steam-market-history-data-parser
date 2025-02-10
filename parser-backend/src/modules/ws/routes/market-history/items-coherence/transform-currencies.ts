@@ -1,3 +1,5 @@
+import CustomError from "@/config/error-converter";
+
 type TCurrencyMap = Map<number, string>;
 
 const currencyMap: TCurrencyMap = new Map([
@@ -50,9 +52,13 @@ const currencyMap: TCurrencyMap = new Map([
   [2047, "RON"],
 ]);
 
-const getCurrencyISO = (currencyMarketId: number): string => {
-  const currency = currencyMap.get(currencyMarketId);
-  if (currency === undefined) throw new Error("Invalid currency id");
+const getCurrencyISO = (currencyMarketId: string | number): string => {
+  const convertedToNumber = Number(currencyMarketId);
+  const currency = currencyMap.get(convertedToNumber);
+  if (currency === undefined)
+    throw new CustomError({
+      customError: { message: "Invalid currency id", status: 500 },
+    });
   return currency;
 };
 

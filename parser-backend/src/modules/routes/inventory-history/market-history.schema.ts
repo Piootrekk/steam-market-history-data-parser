@@ -1,8 +1,8 @@
-import { RouteShorthandOptions } from "fastify";
+import { FastifySchema } from "fastify";
 
-const healthSchema: RouteShorthandOptions = {
+const inventoryHistorySchema: { schema: FastifySchema } = {
   schema: {
-    tags: ["Collections Name"],
+    tags: ["Inventory History"],
     response: {
       200: {
         type: "object",
@@ -17,4 +17,4 @@ const healthSchema: RouteShorthandOptions = {
     },
   },
 };
-export { healthSchema };
+export { inventoryHistorySchema };

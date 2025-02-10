@@ -16,6 +16,7 @@ import {
   TListingsInPurchasesData,
   TPurchaseData,
 } from "./items.types";
+import getCurrencyISO from "./transform-currencies";
 
 const getFirstAPIVersion = (asset: TVersionApi): TAssetId => {
   const versions = Object.values(asset);
@@ -181,7 +182,7 @@ const appendListingCreateAndCancel = (
   return {
     price: singlePaid(listing.original_price),
     item_id: listing.asset.id,
-    currency: listing.currencyid,
+    currency: getCurrencyISO(listing.currencyid),
     appid: listing.asset.appid,
   };
 };
@@ -193,7 +194,7 @@ const appendPurchaseSold = (
   const purchase = purchases[event.purchaseid];
   return {
     price: singlePaid(purchase.received_amount),
-    currency: Number(purchase.received_currencyid),
+    currency: getCurrencyISO(purchase.received_currencyid),
   };
 };
 
@@ -204,7 +205,7 @@ const appendPurchaseBought = (
   const purchase = purchases[event.purchaseid];
   return {
     price: summaryPaid(purchase.paid_amount, purchase.paid_fee),
-    currency: Number(purchase.currencyid),
+    currency: getCurrencyISO(purchase.currencyid),
   };
 };
 

@@ -60,6 +60,7 @@ const Home: React.FC<HomeProps> = ({}) => {
       </div>
       {websocket.error && (
         <div className="response-section error">
+          <p>ERROR</p>
           <h2>{websocket.error || "FAILED TO ESTABLISH CONNECTION"}</h2>
         </div>
       )}
