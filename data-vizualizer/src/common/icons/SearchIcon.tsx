@@ -1,4 +1,4 @@
-import { TIcons } from "../../types/icons.types";
+import { TIcons } from "./icons.types";
 
 type SearchIconProps = TIcons;
 

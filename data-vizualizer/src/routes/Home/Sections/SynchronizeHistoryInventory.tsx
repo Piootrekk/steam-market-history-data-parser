@@ -2,16 +2,16 @@ import DatabaseIcon from "@/common/icons/DatabaseIcon";
 
 type SynchronizeHistoryInventoryProps = {
   inventoryHistoryCollectionsName: string[];
-  disableButton: boolean;
+  isLoadingButton: boolean;
 };
 
 const SynchronizeHistoryInventory: React.FC<
   SynchronizeHistoryInventoryProps
-> = ({ inventoryHistoryCollectionsName, disableButton }) => {
+> = ({ inventoryHistoryCollectionsName, isLoadingButton }) => {
   return (
     <section className="section">
       <h2 className="section-title">Synchronize inventory</h2>
-      <div className="input-group">
+      <form className="input-group">
         <div className="badges-group">
           {inventoryHistoryCollectionsName.map((collection, key) => {
             return (
@@ -31,11 +31,16 @@ const SynchronizeHistoryInventory: React.FC<
             );
           })}
         </div>
-        <input type="text" placeholder="Cookies" className="input" />
-        <button className="button" disabled={disableButton}>
+        <input
+          type="text"
+          placeholder="Cookies"
+          className="input"
+          name="cookies"
+        />
+        <button className="button" disabled={isLoadingButton}>
           Fetch
         </button>
-      </div>
+      </form>
     </section>
   );
 };

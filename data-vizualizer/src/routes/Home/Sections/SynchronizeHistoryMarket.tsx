@@ -1,18 +1,32 @@
+import { TWsSendToServer } from "@/api/types/ws.types";
 import DatabaseIcon from "@/common/icons/DatabaseIcon";
 
 type SynchronizeHistoryMarketProps = {
   marketHistoryCollectionsName: string[];
-  disableButton: boolean;
+  isLoadingButton: boolean;
+  webSocketAction: (url: string, sendPayload: TWsSendToServer) => void;
 };
 
 const SynchronizeHistoryMarket: React.FC<SynchronizeHistoryMarketProps> = ({
   marketHistoryCollectionsName,
-  disableButton,
+  isLoadingButton: disableButton,
+  webSocketAction,
 }) => {
+  const url = "ws://127.0.0.1:3034/ws/market-history/sync";
+  const handleForm = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const formValues = {
+      steamid: formData.get("market-sync") as string,
+      cookies: formData.get("cookies") as string,
+    };
+    console.log(formValues);
+    webSocketAction(url, formValues);
+  };
   return (
     <section className="section">
       <h2 className="section-title">Synchronize market</h2>
-      <div className="input-group">
+      <form className="input-group" onSubmit={handleForm}>
         <div className="badges-group">
           {marketHistoryCollectionsName.map((collection, key) => {
             return (
@@ -23,6 +37,7 @@ const SynchronizeHistoryMarket: React.FC<SynchronizeHistoryMarketProps> = ({
                   name="market-sync"
                   className="badge-radio"
                   defaultChecked={key === 0}
+                  value={collection}
                 />
                 <label htmlFor={`marketid-${key}`} className="badge-label">
                   <DatabaseIcon size={16} className="badge-icon" />
@@ -32,11 +47,16 @@ const SynchronizeHistoryMarket: React.FC<SynchronizeHistoryMarketProps> = ({
             );
           })}
         </div>
-        <input type="text" placeholder="Cookies" className="input" />
+        <input
+          type="text"
+          placeholder="Cookies"
+          className="input"
+          name="cookies"
+        />
         <button className="button" disabled={disableButton}>
           Fetch
         </button>
-      </div>
+      </form>
     </section>
   );
 };

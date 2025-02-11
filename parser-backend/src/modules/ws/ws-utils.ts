@@ -8,6 +8,23 @@ const closeDirectives = {
   PROTOCOL_ERROR: 1002,
 };
 
+const TIMEOUT_DEFAULT = 6000;
+
+const setTimeOutWSHandshake = (
+  connection: WebSocket,
+  timeout?: number
+): NodeJS.Timeout => {
+  return setTimeout(() => {
+    const customError = new CustomError({
+      customError: {
+        message: "Message not recieved, handshake timeouted",
+        status: 400,
+      },
+    });
+    wsCloseByError(connection, customError.message);
+  }, timeout || TIMEOUT_DEFAULT);
+};
+
 const handleCloseWsConnection = (code: number, reason?: string) => {
   if (code === closeDirectives.NORMAL_CLOSE) {
     console.log("Ws connection close by server");
@@ -56,4 +73,9 @@ const wsCloseByError = (connection: WebSocket, message: string) => {
   );
 };
 
-export { handleCloseWsConnection, wsCloseByError, wsCloseCorrectly };
+export {
+  handleCloseWsConnection,
+  wsCloseByError,
+  wsCloseCorrectly,
+  setTimeOutWSHandshake,
+};

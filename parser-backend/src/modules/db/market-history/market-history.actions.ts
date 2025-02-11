@@ -12,6 +12,15 @@ const insertBulkTransactions = async (
   transactions: TItemDTO[],
   db: Db
 ): Promise<void> => {
+  const collection = db.collection<TMarketHistoryModel>(id);
+  await collection.insertMany(transactions);
+};
+
+const insertBulkTransactionsWithPrefix = async (
+  id: string,
+  transactions: TItemDTO[],
+  db: Db
+): Promise<void> => {
   const collection = db.collection<TMarketHistoryModel>(`MH-${id}`);
   await collection.insertMany(transactions);
 };

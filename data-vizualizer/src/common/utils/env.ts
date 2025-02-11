@@ -15,12 +15,22 @@ const getBackend = (): string => {
     throw new Error("BACKEND ENV NOT FOUND");
   }
   const backendUrl = import.meta.env.VITE_BACKEND_URL;
-  console.log(backendUrl);
   if (typeof backendUrl !== "string" || backendUrl.trim() === "") {
-    throw new Error("Invalid proxy: PROXY must be a non-empty string.");
+    throw new Error("Invalid backend env, must be a non-empty string.");
   }
 
   return backendUrl;
 };
 
-export { getProxy, getBackend };
+const getWsBackend = (): URL => {
+  if (!("VITE_BACKEND_WS" in import.meta.env)) {
+    throw new Error("VITE_BACKEND_WS");
+  }
+  const wsBackend = import.meta.env.VITE_BACKEND_WS;
+  if (typeof wsBackend !== "string" || wsBackend.trim() === "") {
+    throw new Error("Invalid wsBackend: PROXY must be a non-empty string.");
+  }
+  return new URL(wsBackend);
+};
+
+export { getProxy, getBackend, getWsBackend };

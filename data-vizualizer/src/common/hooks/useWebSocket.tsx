@@ -30,7 +30,6 @@ const useWebSocket = <T,>() => {
     connectionState === WebSocketState.CLOSING;
 
   const connect = useCallback(<G,>(url: string, sendPayload: G) => {
-    if (url === undefined) return;
     if (wsRef.current?.readyState === WebSocketState.OPEN) {
       setError("Connection is already open");
       return;

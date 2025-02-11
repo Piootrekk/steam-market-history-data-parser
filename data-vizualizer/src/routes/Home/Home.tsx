@@ -45,22 +45,22 @@ const Home: React.FC<HomeProps> = ({}) => {
     <>
       <div className="sections-container">
         <AllHistoryMarket
-          disableButton={websocket.disableButton}
+          isLoadingButton={websocket.disableButton}
           webSocketAction={websocket.connect}
         />
         <AllHistoryInventory disableButton={websocket.disableButton} />
         <SynchronizeHistoryMarket
-          disableButton={websocket.disableButton}
+          isLoadingButton={websocket.disableButton}
           marketHistoryCollectionsName={marketHistoryCollectionsName.data}
+          webSocketAction={websocket.connect}
         />
         <SynchronizeHistoryInventory
           inventoryHistoryCollectionsName={inventoryHistoryCollectionsName.data}
-          disableButton={websocket.disableButton}
+          isLoadingButton={websocket.disableButton}
         />
       </div>
       {websocket.error && (
         <div className="response-section error">
-          <p>ERROR</p>
           <h2>{websocket.error || "FAILED TO ESTABLISH CONNECTION"}</h2>
         </div>
       )}

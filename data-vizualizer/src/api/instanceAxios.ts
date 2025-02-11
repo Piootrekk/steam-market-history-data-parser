@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getBackend } from "../utils/env";
+import { getBackend } from "../common/utils/env";
 
 const axiosInstance = axios.create({
   baseURL: getBackend(),

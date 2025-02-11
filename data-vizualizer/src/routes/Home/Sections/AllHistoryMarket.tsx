@@ -1,11 +1,11 @@
 import { TWsSendToServer } from "@/api/types/ws.types";
 type AllHistoryMarketProps = {
-  disableButton: boolean;
+  isLoadingButton: boolean;
   webSocketAction: (url: string, sendPayload: TWsSendToServer) => void;
 };
 
 const AllHistoryMarket: React.FC<AllHistoryMarketProps> = ({
-  disableButton,
+  isLoadingButton,
   webSocketAction,
 }) => {
   const url = "ws://127.0.0.1:3034/ws/market-history/all";
@@ -35,7 +35,7 @@ const AllHistoryMarket: React.FC<AllHistoryMarketProps> = ({
           className="input"
           name="cookies"
         />
-        <button className="button" disabled={disableButton}>
+        <button className="button" disabled={isLoadingButton}>
           Fetch
         </button>
       </form>

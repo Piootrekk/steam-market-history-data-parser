@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getProxy } from "@/utils/env";
+import { getProxy } from "@/common/utils/env";
 
 type TMarketPrice = {
   lowest_price: string;

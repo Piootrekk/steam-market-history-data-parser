@@ -9,6 +9,7 @@ import { getDatabase } from "@/config/get-database";
 import { WebSocket } from "ws";
 import {
   handleCloseWsConnection,
+  setTimeOutWSHandshake,
   wsCloseByError,
   wsCloseCorrectly,
 } from "@modules/ws/ws-utils";
@@ -21,10 +22,11 @@ const synchronizeHistoryController = async (
 ) => {
   const db = getDatabase(request);
   let connectionClosed = false;
+  const timeout = setTimeOutWSHandshake(connection);
   connection.on("message", async (message: string) => {
     try {
       const recieved = recieveFirstMessage(message);
-
+      clearTimeout(timeout);
       await synchronizeHistoryToDb(
         recieved.steamid,
         connection,
@@ -38,6 +40,7 @@ const synchronizeHistoryController = async (
       wsCloseByError(connection, customError.message);
     } finally {
       connection.removeAllListeners("message");
+      clearTimeout(timeout);
     }
   });
 
@@ -58,9 +61,11 @@ const allMarketHistoryController = async (
   const db = getDatabase(request);
   let received: TFirstMessageRecieve;
   let connectionClosed = false;
+  const timeout = setTimeOutWSHandshake(connection);
   connection.on("message", async (message: string) => {
     try {
       received = recieveFirstMessage(message);
+      clearTimeout(timeout);
       await clearAllHistory(received.steamid, db);
       await saveAllHistoryToDb(
         received.steamid,
@@ -77,6 +82,7 @@ const allMarketHistoryController = async (
         await clearAllHistory(received.steamid, db);
     } finally {
       connection.removeAllListeners("message");
+      clearTimeout(timeout);
     }
   });
   connection.on("close", async (code, reason) => {
