@@ -3,6 +3,8 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import "./index.css";
 import { RouterProvider } from "@tanstack/react-router";
 import router from "./routes/router";
+import HistoryCollectionsProvider from "./common/context/MarketHistoryContext";
+import InventoryCollectionsProvider from "./common/context/InventoryContext";
 
 const App = () => {
   const queryClient = new QueryClient({
@@ -10,15 +12,18 @@ const App = () => {
       queries: {
         refetchOnWindowFocus: false,
         retry: false,
-        gcTime: 1000 * 60 * 60 * 24,
       },
     },
   });
 
   return (
     <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
-      <ReactQueryDevtools initialIsOpen={false} />
+      <HistoryCollectionsProvider>
+        <InventoryCollectionsProvider>
+          <RouterProvider router={router} />
+          <ReactQueryDevtools initialIsOpen={false} />
+        </InventoryCollectionsProvider>
+      </HistoryCollectionsProvider>
     </QueryClientProvider>
   );
 };

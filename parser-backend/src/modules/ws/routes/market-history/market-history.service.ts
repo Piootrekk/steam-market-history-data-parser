@@ -3,7 +3,7 @@ import {
   getTotalFetchesAndCount,
   getTotalCount,
   getChunksAndChange,
-} from "./items-coherence/items-prepare";
+} from "./items-coherence/fetch-prepare";
 import TMarketHistoryResponse from "./fetch/fetch.types";
 import { fetchMarketHistory } from "./fetch/fetches";
 import responesConverter from "./items-coherence/items-coherence";

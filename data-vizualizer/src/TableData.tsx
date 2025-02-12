@@ -1,6 +1,5 @@
 import PriceFetcher from "./PriceFetcher";
 import { TTransaction } from "./types/transaction.types";
-import getCurrencyISO from "./utils/transformCurrencies";
 
 type TableDataProps = {
   transactions: TTransaction[];
@@ -45,9 +44,7 @@ const TableData: React.FC<TableDataProps> = ({ transactions }) => {
               />
             </td>
             <td>{transaction.market_hash_name}</td>
-            <td>{`${transaction.price} ${getCurrencyISO(
-              transaction.currency
-            )}`}</td>
+            <td>{`${transaction.price} ${transaction.currency}`}</td>
             <td>{transaction.original_amount}</td>
             <td>{new Date(transaction.time_event * 1000).toLocaleString()}</td>
             <td>

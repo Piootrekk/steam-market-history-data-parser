@@ -33,6 +33,11 @@ const singlePaid = (originalPrice: number) => {
   return Number(calculatedPaid);
 };
 
+const setPrmaLink = (itemIconURl: string) => {
+  const itemIconPermaLink = `https://community.fastly.steamstatic.com/economy/image/`;
+  return `${itemIconPermaLink}${itemIconURl}`;
+};
+
 const getActionInspectInGame = (
   actions: TAction[] | undefined
 ): string | undefined => {
@@ -165,7 +170,7 @@ const getEventWithAssets = (
     instanceid: item.instanceid,
     original_amount: item.original_amount,
     background_color: item.background_color,
-    icon_url: item.icon_url,
+    icon_url: setPrmaLink(item.icon_url),
     inspect_in_game_url: getActionInspectInGame(item.actions),
     name_color: item.name_color,
     wiki_page: getActionWiki(item.actions),

@@ -2,7 +2,7 @@ import CustomError from "@config/error-converter";
 import TMarketHistoryResponse from "../fetch/fetch.types";
 import { fetchMarketHistory } from "../fetch/fetches";
 import responesConverter from "./items-coherence";
-import { getTotalFetchesAndCount } from "./items-prepare";
+import { getTotalFetchesAndCount } from "./fetch-prepare";
 import { TItemDTO } from "./items.types";
 
 const retryFetch = async <T>(

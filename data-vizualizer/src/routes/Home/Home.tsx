@@ -1,26 +1,18 @@
-import { useQuery } from "@tanstack/react-query";
 import "./home.css";
-import { getMarketHistoryCollectionsName } from "@/api/marketHistory";
-import { getInventoryHistoryCollectionsName } from "@/api/inventoryHistory";
 import AllHistoryMarket from "./Sections/AllHistoryMarket";
 import AllHistoryInventory from "./Sections/AllHistoryInventory";
 import SynchronizeHistoryMarket from "./Sections/SynchronizeHistoryMarket";
 import SynchronizeHistoryInventory from "./Sections/SynchronizeHistoryInventory";
 import useWebSocket from "@/common/hooks/useWebSocket";
 import { TWsRecievedFromServer } from "@/api/types/ws.types";
+import { useHistoryCollections } from "@/common/context/MarketHistoryContext";
+import { useInventoryCollections } from "@/common/context/InventoryContext";
 
 type HomeProps = {};
 
 const Home: React.FC<HomeProps> = ({}) => {
-  const marketHistoryCollectionsName = useQuery<string[]>({
-    queryKey: ["marketCollectionsName"],
-    queryFn: getMarketHistoryCollectionsName,
-  });
-
-  const inventoryHistoryCollectionsName = useQuery<string[]>({
-    queryKey: ["inventoryCollectionsName"],
-    queryFn: getInventoryHistoryCollectionsName,
-  });
+  const marketHistoryCollectionsName = useHistoryCollections();
+  const inventoryHistoryCollectionsName = useInventoryCollections();
 
   const websocket = useWebSocket<TWsRecievedFromServer>();
   const progress = websocket.response
