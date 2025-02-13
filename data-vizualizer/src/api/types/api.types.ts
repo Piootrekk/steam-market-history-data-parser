@@ -4,236 +4,302 @@
  */
 
 export interface paths {
-  "/ws/market-history/all": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** @description
-     *           WebSocket Connection
-     *           Upgrade to WebSocket connection on this endpoint. Use Postman instead of OPENAPI
-     *
-     *           Expected Client-to-Server Message:
-     *           json:
-     *             {
-     *               "steamid": "string",
-     *               "cookies": "string"
-     *             }
-     *
-     *           Expected Server-to-Client Message:
-     *           json:
-     *             {
-     *               "currentFetch": "number",
-     *               "allFetches": "number"
-     *             }
-     *          */
-    get: {
-      parameters: {
-        query?: never;
-        header?: never;
-        path?: never;
-        cookie?: never;
-      };
-      requestBody?: never;
-      responses: {
-        /** @description Default Response */
-        200: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content?: never;
+    "/ws/market-history/all": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
         };
-      };
-    };
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/ws/market-history/sync": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** @description
-     *           WebSocket Connection
-     *           Upgrade to WebSocket connection on this endpoint. Use Postman instead of OPENAPI
-     *
-     *           Expected Client-to-Server Message:
-     *           json:
-     *             {
-     *               "steamid": "string",
-     *               "cookies": "string"
-     *             }
-     *
-     *           Expected Server-to-Client Message:
-     *           json:
-     *             {
-     *               "currentFetch": "number",
-     *               "allFetches": "number"
-     *             }
-     *          */
-    get: {
-      parameters: {
-        query?: never;
-        header?: never;
-        path?: never;
-        cookie?: never;
-      };
-      requestBody?: never;
-      responses: {
-        /** @description Default Response */
-        200: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content?: never;
-        };
-      };
-    };
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/ws/health": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** @description
-     *           WebSocket Connection
-     *           Upgrade to WebSocket connection on this endpoint. Use Postman instead of OPENAPI
-     *
-     *           Expected Client-to-Server Message:
-     *           json:
-     *             { "health": true }
-     *
-     *           Expected Server-to-Client Message:
-     *           json:
-     *             { "approve": true }
-     *          */
-    get: {
-      parameters: {
-        query?: never;
-        header?: never;
-        path?: never;
-        cookie?: never;
-      };
-      requestBody?: never;
-      responses: {
-        /** @description Default Response */
-        200: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content?: never;
-        };
-      };
-    };
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/market/collections-market": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: {
-      parameters: {
-        query?: never;
-        header?: never;
-        path?: never;
-        cookie?: never;
-      };
-      requestBody?: never;
-      responses: {
-        /** @description Default Response */
-        200: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": {
-              collections: string[];
+        /** @description
+         *           WebSocket Connection
+         *           Upgrade to WebSocket connection on this endpoint. Use Postman instead of OPENAPI
+         *
+         *           Expected Client-to-Server Message:
+         *           json:
+         *             {
+         *               "steamid": "string",
+         *               "cookies": "string"
+         *             }
+         *
+         *           Expected Server-to-Client Message:
+         *           json:
+         *             {
+         *               "currentFetch": "number",
+         *               "allFetches": "number"
+         *             }
+         *          */
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
             };
-          };
-        };
-      };
-    };
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/inventory/collections-inventory": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: {
-      parameters: {
-        query?: never;
-        header?: never;
-        path?: never;
-        cookie?: never;
-      };
-      requestBody?: never;
-      responses: {
-        /** @description Default Response */
-        200: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": {
-              collections: string[];
+            requestBody?: never;
+            responses: {
+                /** @description Default Response */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
             };
-          };
         };
-      };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
+    "/ws/market-history/sync": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description
+         *           WebSocket Connection
+         *           Upgrade to WebSocket connection on this endpoint. Use Postman instead of OPENAPI
+         *
+         *           Expected Client-to-Server Message:
+         *           json:
+         *             {
+         *               "steamid": "string",
+         *               "cookies": "string"
+         *             }
+         *
+         *           Expected Server-to-Client Message:
+         *           json:
+         *             {
+         *               "currentFetch": "number",
+         *               "allFetches": "number"
+         *             }
+         *          */
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description Default Response */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/ws/health": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description
+         *           WebSocket Connection
+         *           Upgrade to WebSocket connection on this endpoint. Use Postman instead of OPENAPI
+         *
+         *           Expected Client-to-Server Message:
+         *           json:
+         *             { "health": true }
+         *
+         *           Expected Server-to-Client Message:
+         *           json:
+         *             { "approve": true }
+         *          */
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description Default Response */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/market/collections-market": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description Default Response */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": {
+                            collections: string[];
+                        };
+                    };
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/market/documents": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query: {
+                    /** @description Starting index for pagination */
+                    skip?: number;
+                    /** @description Number of items per page */
+                    limit?: number;
+                    /** @description Collection name to query */
+                    collectionName: string;
+                    /** @description Optional search term for market_hash_name */
+                    search?: string | null;
+                };
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description Default Response */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": {
+                            items: {
+                                _id: string;
+                                event_type: number;
+                                time_event: number;
+                                steamid_actor: string;
+                                purchaseid: string;
+                                event_action: string;
+                                listingid: string;
+                                price: number;
+                                currency: string;
+                                item_id: string;
+                                appid: number;
+                                instanceid: string;
+                                original_amount: string;
+                                background_color: string;
+                                icon_url: string;
+                                inspect_in_game_url: string;
+                                name_color: string;
+                                wiki_page: string;
+                                market_hash_name: string;
+                            }[];
+                        };
+                    };
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/inventory/collections-inventory": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description Default Response */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": {
+                            collections: string[];
+                        };
+                    };
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
-  schemas: never;
-  responses: never;
-  parameters: never;
-  requestBodies: never;
-  headers: never;
-  pathItems: never;
+    schemas: never;
+    responses: never;
+    parameters: never;
+    requestBodies: never;
+    headers: never;
+    pathItems: never;
 }
 export type $defs = Record<string, never>;
 export type operations = Record<string, never>;

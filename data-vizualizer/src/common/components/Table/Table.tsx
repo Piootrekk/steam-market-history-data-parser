@@ -1,27 +1,33 @@
 import "./table.css";
 
-import { ReactNode } from "react";
-
-type TTableProps = {
-  elements: Record<string, ReactNode>;
+type Column<T> = {
+  name: string;
+  render: (row: T) => React.ReactNode;
 };
 
-const Table: React.FC<TTableProps> = ({ elements }) => {
+type TableProps<T> = {
+  columns: Column<T>[];
+  data: T[];
+};
+
+const Table = <T,>({ columns, data }: TableProps<T>) => {
   return (
     <table>
       <thead>
         <tr>
-          {Object.keys(elements).map((thread) => (
-            <th key={thread}>
-              <div className="th-content">{thread}</div>
+          {columns.map((col, index) => (
+            <th key={index}>
+              <div className="th-content">{col.name}</div>
             </th>
           ))}
         </tr>
       </thead>
       <tbody>
-        {Object.entries(elements).map((element) => (
-          <tr key={element[0]}>
-            <td>{element[1]}</td>
+        {data.map((row, rowIndex) => (
+          <tr key={rowIndex}>
+            {columns.map((col, colIndex) => (
+              <td key={colIndex}>{col.render(row)}</td>
+            ))}
           </tr>
         ))}
       </tbody>
