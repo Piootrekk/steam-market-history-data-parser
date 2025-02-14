@@ -198,12 +198,12 @@ export interface paths {
         get: {
             parameters: {
                 query: {
+                    /** @description Collection name to query */
+                    collectionName: string;
                     /** @description Starting index for pagination */
                     skip?: number;
                     /** @description Number of items per page */
                     limit?: number;
-                    /** @description Collection name to query */
-                    collectionName: string;
                     /** @description Optional search term for market_hash_name */
                     search?: string | null;
                 };
@@ -236,9 +236,9 @@ export interface paths {
                                 original_amount: string;
                                 background_color: string;
                                 icon_url: string;
-                                inspect_in_game_url: string;
+                                inspect_in_game_url?: string;
                                 name_color: string;
-                                wiki_page: string;
+                                wiki_page?: string;
                                 market_hash_name: string;
                             }[];
                         };

@@ -11,6 +11,7 @@ import { retryFetch } from "./items-coherence/fetch-queue";
 import {
   getMarketHistoryRecords,
   insertBulkTransactions,
+  insertBulkTransactionsWithPrefix,
 } from "@modules/db/market-history/market-history.actions";
 import { WebSocket } from "ws";
 import {
@@ -64,7 +65,7 @@ const saveAllHistoryToDb = async (
       delay
     );
     const items = responesConverter(response);
-    await insertBulkTransactions(steamid, items, db);
+    await insertBulkTransactionsWithPrefix(steamid, items, db);
     console.log(
       `----- CORRECT FETCH AND APPEND TO Db ${
         index + 1

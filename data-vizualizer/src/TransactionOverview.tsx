@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import TableData from "./TableData";
 import "./styles/table.css";
-import getTransactions from "./utils/jsonFetcher";
+import getTransactions from "./jsonFetcher";
 import Pagination from "./Pagination";
 import Filters from "./Filters";
 import { TTransaction } from "./types/transaction.types";

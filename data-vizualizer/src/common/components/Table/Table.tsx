@@ -1,12 +1,12 @@
 import "./table.css";
 
-type Column<T> = {
+type TColumn<T> = {
   name: string;
   render: (row: T) => React.ReactNode;
 };
 
 type TableProps<T> = {
-  columns: Column<T>[];
+  columns: TColumn<T>[];
   data: T[];
 };
 
@@ -36,3 +36,4 @@ const Table = <T,>({ columns, data }: TableProps<T>) => {
 };
 
 export default Table;
+export type { TColumn };

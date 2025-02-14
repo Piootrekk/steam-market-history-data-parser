@@ -72,4 +72,5 @@ export {
   getMarketHistoryRecords,
   getMarketHistoryCollections,
   getMarketHistory30Items,
+  insertBulkTransactionsWithPrefix,
 };

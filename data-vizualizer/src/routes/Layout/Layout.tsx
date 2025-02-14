@@ -22,6 +22,7 @@ const Layout: React.FC<LayoutProps> = () => {
                 to="/market-history"
                 className="nav-link"
                 activeProps={activeProps}
+                search={{ collectionName: "MH-sec" }}
               >
                 <MarketIcon size={20} />
                 Market History

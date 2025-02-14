@@ -24,6 +24,11 @@ const itemsPerPageSchema: { schema: FastifySchema } = {
     querystring: {
       type: "object",
       properties: {
+        collectionName: {
+          type: "string",
+          minLength: 1,
+          description: "Collection name to query",
+        },
         skip: {
           type: "integer",
           minimum: 0,
@@ -36,11 +41,6 @@ const itemsPerPageSchema: { schema: FastifySchema } = {
           maximum: 100,
           default: 30,
           description: "Number of items per page",
-        },
-        collectionName: {
-          type: "string",
-          minLength: 1,
-          description: "Collection name to query",
         },
         search: {
           type: "string",
@@ -95,9 +95,7 @@ const itemsPerPageSchema: { schema: FastifySchema } = {
                 "original_amount",
                 "background_color",
                 "icon_url",
-                "inspect_in_game_url",
                 "name_color",
-                "wiki_page",
                 "market_hash_name",
               ],
             },

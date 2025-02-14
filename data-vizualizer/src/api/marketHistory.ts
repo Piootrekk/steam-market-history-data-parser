@@ -2,16 +2,39 @@ import { paths } from "./types/api.types";
 
 import axiosInstance from "./instanceAxios";
 
+type TMarketHistoryName =
+  paths["/market/collections-market"]["get"]["responses"]["200"]["content"]["application/json"];
+
 const getMarketHistoryCollectionsName = async (): Promise<string[]> => {
-  const names = await axiosInstance.get<
-    paths["/market/collections-market"]["get"]["responses"]["200"]["content"]["application/json"]
-  >("/market/collections-market");
+  const names = await axiosInstance.get<TMarketHistoryName>(
+    "/market/collections-market"
+  );
   if (!names.data) throw new Error("No data found");
   return names.data.collections;
 };
 
-const getAllMarketHistory = async (steamid: string, cookies: string) => {
-  console.log(steamid, cookies);
+type TDocuments =
+  paths["/market/documents"]["get"]["responses"]["200"]["content"]["application/json"];
+
+const getDocument = async (
+  collectionName: string,
+  skip?: string,
+  limit?: string,
+  search?: string
+): Promise<TDocuments> => {
+  const params = new URLSearchParams({
+    collectionName: collectionName,
+  });
+
+  if (skip !== undefined) params.append("skip", skip);
+  if (limit !== undefined) params.append("limit", limit);
+  if (search !== undefined) params.append("search", search);
+  const docs = await axiosInstance.get<TDocuments>(
+    `/market/documents?${params.toString()}`
+  );
+  if (!docs.data) throw new Error("No data found");
+  return docs.data;
 };
 
-export { getMarketHistoryCollectionsName, getAllMarketHistory };
+export { getMarketHistoryCollectionsName, getDocument };
+export type { TDocuments, TMarketHistoryName };
