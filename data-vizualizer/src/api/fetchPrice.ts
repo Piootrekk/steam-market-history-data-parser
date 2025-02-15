@@ -8,11 +8,11 @@ type TMarketPrice = {
   volume: string;
 };
 
-const getPrice = async (name: string, game: string) => {
+const getPrice = async (name: string, game: number) => {
   const proxy = getProxy();
   const url = new URL("https://steamcommunity.com/market/priceoverview/");
   const params = new URLSearchParams({
-    appid: game,
+    appid: game.toString(),
     currency: "6",
     market_hash_name: name,
     l: "english",

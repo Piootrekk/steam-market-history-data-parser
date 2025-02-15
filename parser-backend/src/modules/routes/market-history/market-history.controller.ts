@@ -1,5 +1,6 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 import {
+  getDocumentCount as getDocumentsCount,
   getMarketHistory30Items,
   getMarketHistoryCollections,
 } from "@modules/db/market-history/market-history.actions";
@@ -43,8 +44,8 @@ const pageItemsController = async (
       skip,
       limit
     );
-
-    reply.status(200).send({ items: currentItems });
+    const totalCount = await getDocumentsCount(db, collectionName);
+    reply.status(200).send({ items: currentItems, total_count: totalCount });
   } catch (error) {
     const customError = new CustomError({ unknownError: error });
     reply

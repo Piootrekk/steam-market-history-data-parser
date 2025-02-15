@@ -1,8 +1,10 @@
-import "./tableInventoryHistory.css";
+import "./tableMarketHistory.css";
 
 import { TDocuments } from "@/api/marketHistory";
 import Table from "@/common/components/Table/Table";
 import type { TColumn } from "@/common/components/Table/Table";
+import ItemActions from "./ItemActions";
+import ItemCurrentPrice from "./ItemCurrentPrice";
 type TableMarketHistoryProps = {
   items: TDocuments["items"];
 };
@@ -43,16 +45,29 @@ const TableMarketHistory: React.FC<TableMarketHistoryProps> = ({ items }) => {
         new Date(item.time_event * 1000).toLocaleString(),
     },
     {
-      name: "Actions",
-      render: (_item: TItem) => "SOON",
+      name: "Game ID",
+      render: (item: TItem) => item.appid,
+    },
+    {
+      name: "Buttons Action",
+      render: (item: TItem) => (
+        <ItemActions
+          name={item.market_hash_name}
+          appid={item.appid}
+          wiki={item.wiki_page}
+          inspect={item.inspect_in_game_url}
+        />
+      ),
     },
     {
       name: "Current Price",
-      render: (_item: TItem) => "SOON",
+      render: (item: TItem) => (
+        <ItemCurrentPrice name={item.market_hash_name} game={item.appid} />
+      ),
     },
   ];
 
-  return <Table columns={columns} data={items} />;
+  return <Table columns={columns} data={items} nrCol />;
 };
 
 export default TableMarketHistory;

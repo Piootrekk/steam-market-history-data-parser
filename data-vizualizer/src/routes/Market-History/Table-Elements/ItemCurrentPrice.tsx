@@ -1,12 +1,13 @@
+import { getPrice } from "@/api/fetchPrice";
+import Loader from "@/common/icons/Loader";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { getPrice } from "./api/fetchPrice";
-import Loader from "./common/icons/Loader";
-type TPriceFetcher = {
+
+type ItemCurrentPriceProps = {
   name: string;
-  game: string;
+  game: number;
 };
 
-const PriceFetcher: React.FC<TPriceFetcher> = ({ name, game }) => {
+const ItemCurrentPrice: React.FC<ItemCurrentPriceProps> = ({ name, game }) => {
   const queryClient = useQueryClient();
 
   const handleMutation = async () => {
@@ -14,7 +15,7 @@ const PriceFetcher: React.FC<TPriceFetcher> = ({ name, game }) => {
     if (cachedData) {
       return cachedData;
     }
-    return getPrice(name, Number(game));
+    return getPrice(name, game);
   };
 
   const mutation = useMutation({
@@ -29,14 +30,15 @@ const PriceFetcher: React.FC<TPriceFetcher> = ({ name, game }) => {
   if (mutation.isSuccess) return <span>{mutation.data}</span>;
 
   return (
-    <button
-      className="action-btn"
-      disabled={mutation.isPending}
-      onClick={() => mutation.mutate()}
-    >
-      {mutation.isPending ? <Loader size={24} /> : "Fetch"}
-    </button>
+    <div className="actions">
+      <button
+        className="action-btn"
+        disabled={mutation.isPending}
+        onClick={() => mutation.mutate()}
+      >
+        {mutation.isPending ? <Loader size={24} /> : "Fetch"}
+      </button>
+    </div>
   );
 };
-
-export default PriceFetcher;
+export default ItemCurrentPrice;

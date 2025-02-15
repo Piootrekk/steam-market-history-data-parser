@@ -31,3 +31,30 @@
   opacity: 0.8;
   cursor: not-allowed;
 }
+
+.loader-spin {
+  animation: spin 1.5s linear infinite, dash 1.5s ease-in-out infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes dash {
+  0% {
+    stroke-dashoffset: 126;
+  }
+  50% {
+    stroke-dashoffset: 63;
+    transform: rotate(180deg);
+  }
+  100% {
+    stroke-dashoffset: 126;
+    transform: rotate(360deg);
+  }
+}

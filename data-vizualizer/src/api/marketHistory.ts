@@ -18,16 +18,16 @@ type TDocuments =
 
 const getDocument = async (
   collectionName: string,
-  skip?: string,
-  limit?: string,
+  skip?: number,
+  limit?: number,
   search?: string
 ): Promise<TDocuments> => {
   const params = new URLSearchParams({
     collectionName: collectionName,
   });
 
-  if (skip !== undefined) params.append("skip", skip);
-  if (limit !== undefined) params.append("limit", limit);
+  if (skip !== undefined) params.append("skip", skip.toString());
+  if (limit !== undefined) params.append("limit", limit.toString());
   if (search !== undefined) params.append("search", search);
   const docs = await axiosInstance.get<TDocuments>(
     `/market/documents?${params.toString()}`

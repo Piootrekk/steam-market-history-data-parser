@@ -1,6 +1,6 @@
 type TMarketHistorySearchParams = {
-  skip?: string;
-  limit?: string;
+  skip?: number;
+  limit?: number;
   collectionName: string;
   search?: string;
 };

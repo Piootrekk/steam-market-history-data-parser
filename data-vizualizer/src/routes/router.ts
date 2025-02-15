@@ -33,8 +33,8 @@ const marketHistoryRoute = createRoute({
   validateSearch: (
     search: TMarketHistorySearchParams
   ): TMarketHistorySearchParams => ({
-    skip: search.skip || undefined,
-    limit: search.limit || undefined,
+    skip: Number(search.skip) || undefined,
+    limit: Number(search.limit) || undefined,
     collectionName: search.collectionName,
     search: search.search || undefined,
   }),

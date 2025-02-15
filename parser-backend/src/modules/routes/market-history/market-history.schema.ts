@@ -37,8 +37,7 @@ const itemsPerPageSchema: { schema: FastifySchema } = {
         },
         limit: {
           type: "integer",
-          minimum: 0,
-          maximum: 100,
+          minimum: 1,
           default: 30,
           description: "Number of items per page",
         },
@@ -54,6 +53,9 @@ const itemsPerPageSchema: { schema: FastifySchema } = {
       200: {
         type: "object",
         properties: {
+          total_count: {
+            type: "number",
+          },
           items: {
             type: "array",
             items: {
@@ -101,7 +103,7 @@ const itemsPerPageSchema: { schema: FastifySchema } = {
             },
           },
         },
-        required: ["items"],
+        required: ["items", "total_count"],
       },
     },
   },

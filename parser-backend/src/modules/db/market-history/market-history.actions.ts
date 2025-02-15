@@ -42,7 +42,7 @@ const getMarketHistoryCollections = async (db: Db): Promise<string[]> => {
   return marketCollections;
 };
 
-const getMarketHistory30Items = async (
+const getMarketHistoryItems = async (
   db: Db,
   collectionName: string,
   search?: string,
@@ -66,11 +66,21 @@ const getMarketHistory30Items = async (
   return items;
 };
 
+const getDocumentCount = async (
+  db: Db,
+  collectionName: string
+): Promise<number> => {
+  const collection = db.collection<TMarketHistoryModel>(collectionName);
+  const docsCount = await collection.countDocuments();
+  return docsCount;
+};
+
 export {
   insertBulkTransactions,
   clearAllHistory,
   getMarketHistoryRecords,
   getMarketHistoryCollections,
-  getMarketHistory30Items,
+  getMarketHistoryItems as getMarketHistory30Items,
   insertBulkTransactionsWithPrefix,
+  getDocumentCount,
 };
