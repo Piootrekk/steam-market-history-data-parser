@@ -56,6 +56,13 @@
   font-size: 14px;
 }
 
+.pagination-input:disabled {
+  cursor: not-allowed;
+  opacity: 0.8;
+  border: 1px solid #e9ecef;
+  background-color: transparent;
+}
+
 .pagination-input:focus {
   outline: none;
   border-color: #1976d2;

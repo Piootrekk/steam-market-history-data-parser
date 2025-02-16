@@ -1,7 +1,7 @@
 import { Link, Outlet } from "@tanstack/react-router";
 import "./layout.css";
-import InventoryIcon from "../../common/icons/InventoryIcon";
-import MarketIcon from "../../common/icons/MarketIcon";
+import InventoryIcon from "@common/icons/InventoryIcon";
+import MarketIcon from "@common/icons/MarketIcon";
 
 type LayoutProps = {};
 

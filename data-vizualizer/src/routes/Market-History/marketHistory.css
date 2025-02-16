@@ -1,6 +1,5 @@
 .transaction-overview {
   padding: 24px;
-  max-width: 1200px;
   margin: 0 auto;
 }
 
@@ -19,4 +18,30 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+.empty-container {
+  background-color: white;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  flex: 1;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
+.empty-title {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 1.5rem;
+}
+
+
+.empty-colNames {
+  display: flex;
+  flex-direction: row;
+  gap: 10rem;
+}

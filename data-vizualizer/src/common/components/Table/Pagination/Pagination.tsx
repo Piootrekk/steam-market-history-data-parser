@@ -3,15 +3,15 @@ import { useState } from "react";
 
 type TablePaginationProps = {
   totalCount: number;
-  skip: number | undefined;
-  limit: number | undefined;
+  skipElements: number | undefined;
+  limitElements: number | undefined;
   onPageChange: (elements: number) => void;
 };
 
 const TablePagination: React.FC<TablePaginationProps> = ({
   totalCount,
-  skip,
-  limit,
+  skipElements: skip,
+  limitElements: limit,
   onPageChange,
 }) => {
   const [inputPage, setInputPage] = useState("");
@@ -106,14 +106,14 @@ const TablePagination: React.FC<TablePaginationProps> = ({
     <div className="pagination">
       <button
         className="pagination-btn"
-        disabled={currentPage === 1}
+        disabled={currentPage === 1 || totalPages === 0}
         onClick={() => handlePageChange(1)}
       >
         {"<<"}
       </button>
       <button
         className="pagination-btn"
-        disabled={currentPage === 1}
+        disabled={currentPage === 1 || totalPages === 0}
         onClick={() => handlePageChange(currentPage - 1)}
       >
         {"<"}
@@ -129,19 +129,20 @@ const TablePagination: React.FC<TablePaginationProps> = ({
           value={inputPage}
           onChange={(e) => setInputPage(e.target.value.replace(/\D/g, ""))}
           onKeyDown={handlePageInput}
+          disabled={totalPages === 0}
         />
       </div>
 
       <button
         className="pagination-btn"
-        disabled={currentPage === totalPages}
+        disabled={currentPage === totalPages || totalPages === 0}
         onClick={() => handlePageChange(currentPage + 1)}
       >
         {">"}
       </button>
       <button
         className="pagination-btn"
-        disabled={currentPage === totalPages}
+        disabled={currentPage === totalPages || totalPages === 0}
         onClick={() => handlePageChange(totalPages)}
       >
         {">>"}

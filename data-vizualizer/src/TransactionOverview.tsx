@@ -73,7 +73,7 @@ const TransactionOverview = () => {
   return (
     <>
       <div className="transaction-overview">
-        <h1 className="overview-title">Transaction History</h1>
+        <h2 className="overview-title">Transaction History</h2>
         <Filters
           onSearch={setSearchTerm}
           selectedEvents={selectedEvents}
