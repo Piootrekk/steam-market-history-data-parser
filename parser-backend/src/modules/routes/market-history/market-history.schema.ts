@@ -62,11 +62,14 @@ const itemsPerPageSchema: { schema: FastifySchema } = {
               type: "object",
               properties: {
                 _id: { type: "string" },
-                event_type: { type: "integer" },
+                event_type: { type: "integer", enum: [1, 2, 3, 4] },
                 time_event: { type: "integer" },
                 steamid_actor: { type: "string" },
                 purchaseid: { type: "string" },
-                event_action: { type: "string" },
+                event_action: {
+                  type: "string",
+                  enum: ["Bought", "Sold", "Create", "Cancel"],
+                },
                 listingid: { type: "string" },
                 price: { type: "number" },
                 currency: { type: "string" },

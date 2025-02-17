@@ -39,9 +39,16 @@
   margin-bottom: 1.5rem;
 }
 
-
 .empty-colNames {
   display: flex;
   flex-direction: row;
   gap: 10rem;
+}
+
+.query-container {
+  background: #fff;
+  padding: 16px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
