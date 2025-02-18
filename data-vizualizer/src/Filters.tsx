@@ -35,6 +35,7 @@ const Filters: React.FC<FiltersProps> = ({
     "Sold",
     "Create",
   ] as const;
+
   const allGames: string[] = ["252490", "730", "440", "others"];
   return (
     <div className="filter-container">

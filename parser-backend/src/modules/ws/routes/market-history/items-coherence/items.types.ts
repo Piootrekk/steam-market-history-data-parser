@@ -23,9 +23,10 @@ type TListingsInPurchasesData = {
   appid: number;
 };
 
-type TExtendedEventData =
+type TExtendedEventData = { event_action: string } & (
   | (TEventDataListing & TListingsData)
-  | (TEventDataPurchase & TPurchaseData & TListingsInPurchasesData);
+  | (TEventDataPurchase & TPurchaseData & TListingsInPurchasesData)
+);
 
 type TPurchaseData = {
   price: number;
@@ -50,7 +51,27 @@ type TItemData = {
   instanceid: string;
 };
 
-type TItemDTO = TItemData & TExtendedEventData;
+type TItemDTO = {
+  time_event: number;
+  steamid_actor: string;
+  purchaseid: string;
+  event_action: string;
+  listingid: string;
+  price: number;
+  currency: string;
+  item_id: string;
+  appid: number;
+  instanceid: string;
+  original_amount: string;
+  background_color: string;
+  icon_url: string;
+  inspect_in_game_url?: string;
+  name_color: string;
+  wiki_page?: string;
+  market_hash_name: string;
+};
+
+type _TItemDTO = TItemData & TExtendedEventData;
 
 enum EventType {
   CREATE = 1,
@@ -68,4 +89,5 @@ export {
   TItemData,
   TListingsInPurchasesData,
   TItemDTO,
+  _TItemDTO,
 };

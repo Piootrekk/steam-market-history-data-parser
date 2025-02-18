@@ -3,9 +3,13 @@ import {
   getMarketHistoryDocumentCount,
   getMarketHistory30Items,
   getMarketHistoryCollections,
-} from "@modules/db/market-history/market-history.actions";
+} from "@/modules/db/market-history/market-history.actions";
 import CustomError from "@config/error-converter";
 import { getDatabase } from "@/config/get-database";
+import {
+  TMarketActions,
+  TMarketGames,
+} from "@/modules/db/market-history/market-history.model";
 
 const collectionsMarketNameController = async (
   request: FastifyRequest,
@@ -28,6 +32,8 @@ type TRequestQuery = {
   search?: string;
   skip?: number;
   limit?: number;
+  actions?: TMarketActions[];
+  games?: TMarketGames[];
 };
 
 const pageItemsController = async (
@@ -36,18 +42,23 @@ const pageItemsController = async (
 ): Promise<void> => {
   try {
     const db = getDatabase(request);
-    const { collectionName, search, skip, limit } = request.query;
+    const { collectionName, search, skip, limit, actions, games } =
+      request.query;
     const currentItems = await getMarketHistory30Items(
       db,
       collectionName,
       search,
       skip,
-      limit
+      limit,
+      actions,
+      games
     );
     const totalCount = await getMarketHistoryDocumentCount(
       db,
       collectionName,
-      search
+      search,
+      actions,
+      games
     );
     reply.status(200).send({ items: currentItems, total_count: totalCount });
   } catch (error) {

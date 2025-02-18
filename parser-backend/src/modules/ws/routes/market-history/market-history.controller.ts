@@ -4,7 +4,7 @@ import {
   saveAllHistoryToDb,
   synchronizeHistoryToDb,
 } from "./market-history.service";
-import { clearAllHistory } from "@modules/db/market-history/market-history.actions";
+import { clearAllHistory } from "@/modules/db/market-history/market-history.actions";
 import { getDatabase } from "@/config/get-database";
 import { WebSocket } from "ws";
 import {

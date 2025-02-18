@@ -1,11 +1,18 @@
 import { TItemDTO } from "@modules/ws/routes/market-history/items-coherence/items.types";
-import { Db } from "mongodb";
-import { TMarketHistoryModel } from "./market-history.model";
+import { Db, Filter } from "mongodb";
+
 import {
   clearCollectionByName,
   getAllCollections,
   getDocumentsCount,
 } from "../db-actions";
+
+import type {
+  TMarketActions,
+  TMarketGames,
+  TMarketHistoryModel,
+} from "./market-history.model";
+import { getQueryForMarketHistory } from "./market-history.queries";
 
 const insertBulkTransactions = async (
   id: string,
@@ -47,16 +54,12 @@ const getMarketHistoryItems = async (
   collectionName: string,
   search?: string,
   skip: number = 0,
-  limit: number = 30
+  limit: number = 30,
+  actions?: TMarketActions[],
+  games?: TMarketGames[]
 ): Promise<TMarketHistoryModel[]> => {
   const collection = db.collection<TMarketHistoryModel>(collectionName);
-  const query: Partial<Record<keyof TMarketHistoryModel, any>> = {};
-  if (search) {
-    query.market_hash_name = {
-      $regex: search,
-      $options: "i",
-    };
-  }
+  const query = getQueryForMarketHistory(search, actions, games);
   const items = await collection
     .find(query)
     .sort({ time_event: -1 })
@@ -69,17 +72,12 @@ const getMarketHistoryItems = async (
 const getMarketHistoryDocumentCount = async (
   db: Db,
   collectionName: string,
-  search?: string
+  search?: string,
+  actions?: TMarketActions[],
+  games?: TMarketGames[]
 ): Promise<number> => {
   const collection = db.collection<TMarketHistoryModel>(collectionName);
-  let query: Partial<Record<keyof TMarketHistoryModel, any>> = {};
-
-  if (search !== undefined) {
-    query.market_hash_name = {
-      $regex: search,
-      $options: "i",
-    };
-  }
+  const query = getQueryForMarketHistory(search, actions, games);
 
   const docsCount = await collection.countDocuments(query);
   return docsCount;

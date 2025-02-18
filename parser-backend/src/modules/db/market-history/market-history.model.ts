@@ -5,4 +5,8 @@ type TMarketHistoryModel = {
   _id?: ObjectId;
 } & TItemDTO;
 
-export { TMarketHistoryModel };
+type TMarketActions = "Bought" | "Cancel" | "Sold" | "Create";
+
+type TMarketGames = "730" | "252490" | "440" | "others";
+
+export { TMarketHistoryModel, TMarketActions, TMarketGames };
