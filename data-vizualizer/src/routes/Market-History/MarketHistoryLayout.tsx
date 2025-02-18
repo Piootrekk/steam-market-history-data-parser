@@ -7,7 +7,7 @@ import ItemFilters from "./Table-Elements/ItemFilters";
 
 const MarketHistoryLayout = () => {
   const navigate = routeApiMarketHistory.useNavigate();
-  const { collectionName } = routeApiMarketHistory.useSearch();
+  const { collectionName, games, actions } = routeApiMarketHistory.useSearch();
 
   if (collectionName === undefined) {
     return <MarketHistoryEmpty />;
@@ -15,10 +15,20 @@ const MarketHistoryLayout = () => {
 
   const onSearch = (searchTerms: string) => {
     navigate({
-      search: (perv) => ({
-        ...perv,
+      search: (prev) => ({
+        ...prev,
         skip: undefined,
         search: searchTerms,
+      }),
+    });
+  };
+
+  const onFiliter = (gameFilter?: string[], actionFilter?: string[]) => {
+    navigate({
+      search: (prev) => ({
+        ...prev,
+        actions: actionFilter,
+        games: gameFilter,
       }),
     });
   };
@@ -28,7 +38,7 @@ const MarketHistoryLayout = () => {
       <h2 className="overview-title">Transaction in market history</h2>
       <div className="query-container">
         <Search onSearch={onSearch} timeoutDebaunce={600} />
-        <ItemFilters />
+        <ItemFilters onFiliter={onFiliter} games={games} events={actions} />
       </div>
       <div className="table-container">
         <Outlet />

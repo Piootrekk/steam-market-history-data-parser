@@ -8,20 +8,21 @@ import TablePagination from "@/common/components/Table/Pagination/Pagination";
 type MarketHistoryOverviewProps = {};
 
 const MarketHistoryOverview: React.FC<MarketHistoryOverviewProps> = ({}) => {
-  const { skip, limit, collectionName, search } =
+  const { skip, limit, collectionName, search, actions, games } =
     routeApiMarketHistory.useSearch();
 
   const navigate = routeApiMarketHistory.useNavigate();
 
   const docs = useQuery<TDocuments>({
-    queryKey: ["document", collectionName, skip, search],
-    queryFn: () => getDocument(collectionName!, skip, limit, search),
+    queryKey: ["document", collectionName, skip, search, actions, games],
+    queryFn: () =>
+      getDocument(collectionName!, skip, limit, search, actions, games),
   });
 
   const onPageChange = (skipElements: number) => {
     navigate({
-      search: (perv) => ({
-        ...perv,
+      search: (prev) => ({
+        ...prev,
         skip: skipElements !== 0 ? skipElements : undefined,
       }),
     });

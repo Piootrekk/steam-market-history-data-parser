@@ -1,7 +1,7 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 import {
   getMarketHistoryDocumentCount,
-  getMarketHistory30Items,
+  getMarketHistoryItems,
   getMarketHistoryCollections,
 } from "@/modules/db/market-history/market-history.actions";
 import CustomError from "@config/error-converter";
@@ -44,7 +44,7 @@ const pageItemsController = async (
     const db = getDatabase(request);
     const { collectionName, search, skip, limit, actions, games } =
       request.query;
-    const currentItems = await getMarketHistory30Items(
+    const currentItems = await getMarketHistoryItems(
       db,
       collectionName,
       search,

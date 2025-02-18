@@ -1,21 +1,76 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Filters from "@common/components/Table/Filters/Filters";
 import type { TItemFilter } from "@/common/components/Table/Filters/Filters";
 
-const ItemFilters = () => {
+type ItemFiltersProps = {
+  onFiliter: (gameFilter?: string[], actionFilter?: string[]) => void;
+  games?: string[];
+  events?: string[];
+};
+
+const ItemFilters: React.FC<ItemFiltersProps> = ({
+  onFiliter,
+  games: initialGames,
+  events: initialEvents,
+}) => {
   const [events, setEvents] = useState<TItemFilter[]>([
-    { label: "Bought", isChecked: true },
-    { label: "Cancel", isChecked: true },
-    { label: "Sold", isChecked: true },
-    { label: "Create", isChecked: true },
+    {
+      label: "Bought",
+      isChecked:
+        initialGames === undefined ? true : initialGames.includes("Bought"),
+    },
+    {
+      label: "Cancel",
+      isChecked:
+        initialGames === undefined ? true : initialGames.includes("Cancel"),
+    },
+    {
+      label: "Sold",
+      isChecked:
+        initialGames === undefined ? true : initialGames.includes("Sold"),
+    },
+    {
+      label: "Create",
+      isChecked:
+        initialGames === undefined ? true : initialGames.includes("Create"),
+    },
   ]);
 
   const [games, setGames] = useState<TItemFilter[]>([
-    { label: "252490", isChecked: true },
-    { label: "730", isChecked: true },
-    { label: "440", isChecked: true },
-    { label: "Others", isChecked: true },
+    {
+      label: "252490",
+      isChecked:
+        initialEvents === undefined ? true : initialEvents.includes("252490"),
+    },
+    {
+      label: "730",
+      isChecked:
+        initialEvents === undefined ? true : initialEvents.includes("730"),
+    },
+    {
+      label: "440",
+      isChecked:
+        initialEvents === undefined ? true : initialEvents.includes("440"),
+    },
+    {
+      label: "Others",
+      isChecked:
+        initialEvents === undefined ? true : initialEvents.includes("Others"),
+    },
   ]);
+
+  useEffect(() => {
+    const isEveryEventsOn = events.every((event) => event.isChecked);
+    const isEveryGamgeOn = games.every((game) => game.isChecked);
+    const eventsToPush = isEveryEventsOn
+      ? undefined
+      : events.filter((event) => event.isChecked).map((event) => event.label);
+    const gamesToPush = isEveryGamgeOn
+      ? undefined
+      : games.filter((game) => game.isChecked).map((game) => game.label);
+    console.log(eventsToPush, gamesToPush);
+    onFiliter(gamesToPush, eventsToPush);
+  }, [events, games]);
 
   const toggleEvent = (label: string) => {
     setEvents((prev) =>

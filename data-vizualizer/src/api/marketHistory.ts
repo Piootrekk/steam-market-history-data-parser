@@ -16,11 +16,19 @@ const getMarketHistoryCollectionsName = async (): Promise<string[]> => {
 type TDocuments =
   paths["/market/documents"]["get"]["responses"]["200"]["content"]["application/json"];
 
+// type TActionsQuery =
+//   paths["/market/documents"]["get"]["parameters"]["query"]["actions"];
+
+// type TGamesQuery =
+//   paths["/market/documents"]["get"]["parameters"]["query"]["games"];
+
 const getDocument = async (
   collectionName: string,
   skip?: number,
   limit?: number,
-  search?: string
+  search?: string,
+  actions?: string[],
+  games?: string[]
 ): Promise<TDocuments> => {
   const params = new URLSearchParams({
     collectionName: collectionName,
@@ -29,6 +37,12 @@ const getDocument = async (
   if (skip !== undefined) params.append("skip", skip.toString());
   if (limit !== undefined) params.append("limit", limit.toString());
   if (search !== undefined) params.append("search", search);
+  if (actions && actions.length > 0) {
+    actions.forEach((action) => params.append("actions", action));
+  }
+  if (games && games.length > 0) {
+    games.forEach((game) => params.append("games", game));
+  }
   const docs = await axiosInstance.get<TDocuments>(
     `/market/documents?${params.toString()}`
   );

@@ -43,7 +43,6 @@ const itemsPerPageSchema: { schema: FastifySchema } = {
         },
         search: {
           type: "string",
-          nullable: true,
           description: "Optional search term for market_hash_name",
         },
         actions: {
@@ -52,17 +51,15 @@ const itemsPerPageSchema: { schema: FastifySchema } = {
             type: "string",
             enum: ["Bought", "Cancel", "Sold", "Create"],
           },
-          nullable: true,
           description: "Filter results by market actions",
         },
         games: {
           type: "array",
           items: {
             type: "string",
-            enum: ["730", "252490", "440", "others"],
+            enum: ["730", "252490", "440", "Others"],
           },
-          nullable: true,
-          description: "Filter results by game CS:GO, Rust, TF2, or others",
+          description: "Filter results by game CS:GO, Rust, TF2, or Others",
         },
       },
       required: ["collectionName"],
@@ -80,6 +77,7 @@ const itemsPerPageSchema: { schema: FastifySchema } = {
               type: "object",
               properties: {
                 _id: { type: "string" },
+                event_type: { type: "integer", enum: [1, 2, 3, 4] },
                 time_event: { type: "integer" },
                 steamid_actor: { type: "string" },
                 purchaseid: { type: "string" },
@@ -103,6 +101,7 @@ const itemsPerPageSchema: { schema: FastifySchema } = {
               },
               required: [
                 "_id",
+                "event_type",
                 "time_event",
                 "steamid_actor",
                 "purchaseid",

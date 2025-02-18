@@ -41,6 +41,8 @@ const marketHistoryLayout = createRoute({
     limit: Number(search.limit) || undefined,
     collectionName: search.collectionName || undefined,
     search: search.search || undefined,
+    actions: search.actions || undefined,
+    games: search.games || undefined,
   }),
 });
 

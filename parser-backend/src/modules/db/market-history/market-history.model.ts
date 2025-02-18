@@ -7,6 +7,6 @@ type TMarketHistoryModel = {
 
 type TMarketActions = "Bought" | "Cancel" | "Sold" | "Create";
 
-type TMarketGames = "730" | "252490" | "440" | "others";
+type TMarketGames = "730" | "252490" | "440" | "Others";
 
 export { TMarketHistoryModel, TMarketActions, TMarketGames };

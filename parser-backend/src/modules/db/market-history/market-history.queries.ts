@@ -5,37 +5,39 @@ import type {
   TMarketHistoryModel,
 } from "./market-history.model";
 
-const getQueryForMarketHistory = (
-  search?: string,
-  actions?: TMarketActions[],
-  games?: TMarketGames[]
-) => {
-  const query: Filter<TMarketHistoryModel> = {};
-  if (search !== undefined) {
-    query.market_hash_name = {
+const getSearchQuery = (search?: string): Filter<TMarketHistoryModel> => {
+  if (!search) return {};
+  return {
+    market_hash_name: {
       $regex: search,
       $options: "i",
-    };
-  }
-
-  if (actions !== undefined) {
-    query.event_action = { $in: actions };
-  }
-
-  if (games !== undefined) {
-    const baseGames: number[] = [252490, 440, 730];
-    const isOthersSelected = games.includes("others");
-    const selectedGames = games.filter((game) => game !== "others").map(Number);
-
-    const notSelectedInBaseGames = baseGames.filter(
-      (gameCheck) => !selectedGames.includes(gameCheck)
-    );
-
-    query.appid = isOthersSelected
-      ? { $nin: notSelectedInBaseGames }
-      : { $in: selectedGames };
-  }
-  return query;
+    },
+  };
 };
 
-export { getQueryForMarketHistory };
+const getActionsQuery = (
+  actions?: TMarketActions[]
+): Filter<TMarketHistoryModel> => {
+  if (!actions) return {};
+  return { event_action: { $in: actions } };
+};
+
+const getGamesQuery = (games?: TMarketGames[]): Filter<TMarketHistoryModel> => {
+  if (!games) return {};
+
+  const baseGames: number[] = [252490, 440, 730];
+  const isOthersSelected = games.includes("Others");
+  const selectedGames = games.filter((game) => game !== "Others").map(Number);
+
+  const notSelectedInBaseGames = baseGames.filter(
+    (gameCheck) => !selectedGames.includes(gameCheck)
+  );
+
+  return {
+    appid: isOthersSelected
+      ? { $nin: notSelectedInBaseGames }
+      : { $in: selectedGames },
+  };
+};
+
+export { getSearchQuery, getActionsQuery, getGamesQuery };

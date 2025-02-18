@@ -52,6 +52,7 @@ type TItemData = {
 };
 
 type TItemDTO = {
+  event_type: 1 | 2 | 3 | 4;
   time_event: number;
   steamid_actor: string;
   purchaseid: string;

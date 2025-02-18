@@ -12,7 +12,11 @@ import type {
   TMarketGames,
   TMarketHistoryModel,
 } from "./market-history.model";
-import { getQueryForMarketHistory } from "./market-history.queries";
+import {
+  getSearchQuery,
+  getActionsQuery,
+  getGamesQuery,
+} from "./market-history.queries";
 
 const insertBulkTransactions = async (
   id: string,
@@ -59,7 +63,11 @@ const getMarketHistoryItems = async (
   games?: TMarketGames[]
 ): Promise<TMarketHistoryModel[]> => {
   const collection = db.collection<TMarketHistoryModel>(collectionName);
-  const query = getQueryForMarketHistory(search, actions, games);
+  const query = {
+    ...getSearchQuery(search),
+    ...getActionsQuery(actions),
+    ...getGamesQuery(games),
+  };
   const items = await collection
     .find(query)
     .sort({ time_event: -1 })
@@ -77,7 +85,11 @@ const getMarketHistoryDocumentCount = async (
   games?: TMarketGames[]
 ): Promise<number> => {
   const collection = db.collection<TMarketHistoryModel>(collectionName);
-  const query = getQueryForMarketHistory(search, actions, games);
+  const query = {
+    ...getSearchQuery(search),
+    ...getActionsQuery(actions),
+    ...getGamesQuery(games),
+  };
 
   const docsCount = await collection.countDocuments(query);
   return docsCount;
@@ -88,7 +100,7 @@ export {
   clearAllHistory,
   getMarketHistoryRecords,
   getMarketHistoryCollections,
-  getMarketHistoryItems as getMarketHistory30Items,
+  getMarketHistoryItems,
   insertBulkTransactionsWithPrefix,
   getMarketHistoryDocumentCount,
 };

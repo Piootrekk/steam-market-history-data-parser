@@ -205,7 +205,11 @@ export interface paths {
                     /** @description Number of items per page */
                     limit?: number;
                     /** @description Optional search term for market_hash_name */
-                    search?: string | null;
+                    search?: string;
+                    /** @description Filter results by market actions */
+                    actions?: ("Bought" | "Cancel" | "Sold" | "Create")[];
+                    /** @description Filter results by game CS:GO, Rust, TF2, or others */
+                    games?: ("730" | "252490" | "440" | "Others")[];
                 };
                 header?: never;
                 path?: never;
@@ -223,8 +227,6 @@ export interface paths {
                             total_count: number;
                             items: {
                                 _id: string;
-                                /** @enum {integer} */
-                                event_type: 1 | 2 | 3 | 4;
                                 time_event: number;
                                 steamid_actor: string;
                                 purchaseid: string;
