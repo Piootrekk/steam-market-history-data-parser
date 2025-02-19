@@ -19,10 +19,8 @@ const Filters: React.FC<FilterProps> = ({ groups }) => {
   return (
     <div className="event-filters">
       {groups.map((group, index) => (
-        <>
-          <span className="filter-label" key={index}>
-            {group.title}
-          </span>
+        <div className="event-group" key={`${index}${group.title}`}>
+          <span className="filter-label">{group.title}</span>
           <div className="checkbox-group">
             {group.items.map((item) => (
               <label key={item.label} className="checkbox-label">
@@ -36,7 +34,7 @@ const Filters: React.FC<FilterProps> = ({ groups }) => {
               </label>
             ))}
           </div>
-        </>
+        </div>
       ))}
     </div>
   );

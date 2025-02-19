@@ -14,8 +14,6 @@ const InventoryHistory = lazy(
   () => import("./Inventory-History/InventoryHistory")
 );
 
-const TransactionOverview = lazy(() => import("@/TransactionOverview"));
-
 const MarketHistoryOverview = lazy(
   () => import("./Market-History/MarketHistoryOverview")
 );
@@ -58,16 +56,9 @@ const inventoryHistoryRoute = createRoute({
   component: InventoryHistory,
 });
 
-const oldTableDisplay = createRoute({
-  getParentRoute: () => rootRoute,
-  path: "/old-table",
-  component: TransactionOverview,
-});
-
 const routeTree = rootRoute.addChildren([
   homeRoute,
   inventoryHistoryRoute,
-  oldTableDisplay,
   marketHistoryLayout.addChildren([MarketHistoryTableRoute]),
 ]);
 

@@ -8,7 +8,7 @@ enum WebSocketState {
   CLOSED = 3,
 }
 
-type TErrorPayload = {
+type TClosePayload = {
   type: "error" | "close";
   message: string;
 };
@@ -48,7 +48,7 @@ const useWebSocket = <T,>() => {
 
       wsRef.current.onclose = (eventClose) => {
         setConnectionState(WebSocketState.CLOSED);
-        const closeMessage: TErrorPayload = JSON.parse(eventClose.reason);
+        const closeMessage: TClosePayload = JSON.parse(eventClose.reason);
         if (closeMessage.type === "error") {
           setResponse(undefined);
           setError(closeMessage.message);

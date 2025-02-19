@@ -1,11 +1,19 @@
 .event-filters {
   display: flex;
-  gap: 16px;
   flex-wrap: wrap;
+  justify-content: space-between;
+}
+.event-group {
+  display: flex;
+  flex-direction: row;
+  margin: 0 auto;
+  padding-bottom: 0.5rem;
 }
 
 .filter-label {
   font-weight: 500;
+  padding-right: 2rem;
+  margin-left: 4px;
   color: #4a4a4a;
   font-size: 14px;
 }

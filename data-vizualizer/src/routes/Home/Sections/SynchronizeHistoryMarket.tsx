@@ -1,5 +1,6 @@
 import { TWsSendToServer } from "@/api/types/ws.types";
 import DatabaseIcon from "@/common/icons/DatabaseIcon";
+import { getWsBackend } from "@/common/utils/env";
 
 type SynchronizeHistoryMarketProps = {
   marketHistoryCollectionsName: string[];
@@ -12,7 +13,9 @@ const SynchronizeHistoryMarket: React.FC<SynchronizeHistoryMarketProps> = ({
   isLoadingButton: disableButton,
   webSocketAction,
 }) => {
-  const url = "ws://127.0.0.1:3034/ws/market-history/sync";
+  const wsConnection = getWsBackend();
+  wsConnection.pathname += "/market-history/sync";
+  const url = wsConnection.href;
   const handleForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);

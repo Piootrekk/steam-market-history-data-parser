@@ -1,4 +1,5 @@
 import { TWsSendToServer } from "@/api/types/ws.types";
+import { getWsBackend } from "@/common/utils/env";
 type AllHistoryMarketProps = {
   isLoadingButton: boolean;
   webSocketAction: (url: string, sendPayload: TWsSendToServer) => void;
@@ -8,7 +9,9 @@ const AllHistoryMarket: React.FC<AllHistoryMarketProps> = ({
   isLoadingButton,
   webSocketAction,
 }) => {
-  const url = "ws://127.0.0.1:3034/ws/market-history/all";
+  const wsConnection = getWsBackend();
+  wsConnection.pathname += "/market-history/all";
+  const url = wsConnection.href;
   const handleForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
