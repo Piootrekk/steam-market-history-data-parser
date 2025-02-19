@@ -13,7 +13,11 @@ type TClosePayload = {
   message: string;
 };
 
-const useWebSocket = <T,>() => {
+type useWebSocketPops = {
+  onCloseAction?: () => void;
+};
+
+const useWebSocket = <T,>({ onCloseAction }: useWebSocketPops = {}) => {
   const [connectionState, setConnectionState] = useState<WebSocketState>(
     WebSocketState.CLOSED
   );
@@ -40,7 +44,8 @@ const useWebSocket = <T,>() => {
 
       wsRef.current.onopen = () => {
         setConnectionState(WebSocketState.OPEN);
-
+        setError(undefined);
+        setResponse(undefined);
         if (wsRef.current?.readyState === WebSocketState.OPEN) {
           wsRef.current.send(JSON.stringify(sendPayload));
         }
@@ -49,11 +54,12 @@ const useWebSocket = <T,>() => {
       wsRef.current.onclose = (eventClose) => {
         setConnectionState(WebSocketState.CLOSED);
         const closeMessage: TClosePayload = JSON.parse(eventClose.reason);
+        setResponse(undefined);
         if (closeMessage.type === "error") {
-          setResponse(undefined);
           setError(closeMessage.message);
         } else {
           setCloseMessage(closeMessage.message);
+          onCloseAction && onCloseAction();
         }
       };
 

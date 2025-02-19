@@ -3,6 +3,7 @@ import DatabaseIcon from "@/common/icons/DatabaseIcon";
 type SynchronizeHistoryInventoryProps = {
   inventoryHistoryCollectionsName: string[];
   isLoadingButton: boolean;
+  setColName: (coll: string) => void;
 };
 
 const SynchronizeHistoryInventory: React.FC<

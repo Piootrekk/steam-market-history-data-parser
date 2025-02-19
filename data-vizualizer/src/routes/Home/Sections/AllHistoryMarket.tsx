@@ -3,11 +3,13 @@ import { getWsBackend } from "@/common/utils/env";
 type AllHistoryMarketProps = {
   isLoadingButton: boolean;
   webSocketAction: (url: string, sendPayload: TWsSendToServer) => void;
+  setColName: (coll: string) => void;
 };
 
 const AllHistoryMarket: React.FC<AllHistoryMarketProps> = ({
   isLoadingButton,
   webSocketAction,
+  setColName,
 }) => {
   const wsConnection = getWsBackend();
   wsConnection.pathname += "/market-history/all";
@@ -15,11 +17,13 @@ const AllHistoryMarket: React.FC<AllHistoryMarketProps> = ({
   const handleForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
+    const steamid = formData.get("steamid") as string;
     const formValues = {
-      steamid: formData.get("steamid") as string,
+      steamid: steamid.includes("MH-") ? steamid : `MH-${steamid}`,
       cookies: formData.get("cookies") as string,
     };
     webSocketAction(url, formValues);
+    setColName(formValues.steamid);
   };
 
   return (

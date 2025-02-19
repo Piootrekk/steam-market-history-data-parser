@@ -6,12 +6,14 @@ type SynchronizeHistoryMarketProps = {
   marketHistoryCollectionsName: string[];
   isLoadingButton: boolean;
   webSocketAction: (url: string, sendPayload: TWsSendToServer) => void;
+  setColName: (coll: string) => void;
 };
 
 const SynchronizeHistoryMarket: React.FC<SynchronizeHistoryMarketProps> = ({
   marketHistoryCollectionsName,
   isLoadingButton: disableButton,
   webSocketAction,
+  setColName,
 }) => {
   const wsConnection = getWsBackend();
   wsConnection.pathname += "/market-history/sync";
@@ -23,8 +25,8 @@ const SynchronizeHistoryMarket: React.FC<SynchronizeHistoryMarketProps> = ({
       steamid: formData.get("market-sync") as string,
       cookies: formData.get("cookies") as string,
     };
-    console.log(formValues);
     webSocketAction(url, formValues);
+    setColName(formValues.steamid);
   };
   return (
     <section className="section">

@@ -9,7 +9,7 @@ import { fetchMarketHistory } from "./fetch/fetches";
 import responesConverter from "./items-coherence/items-coherence";
 import { retryFetch } from "./items-coherence/fetch-queue";
 import {
-  getMarketHistoryRecords,
+  getMarketHistoryRecordsCount,
   insertBulkTransactions,
   insertBulkTransactionsWithPrefix,
 } from "@/modules/db/market-history/market-history.actions";
@@ -94,8 +94,16 @@ const synchronizeHistoryToDb = async (
   const startFetch = 0;
 
   const totalCount = await getTotalCount(cookies);
-  const lastTotalCount = await getMarketHistoryRecords(steamid, db);
+  const lastTotalCount = await getMarketHistoryRecordsCount(steamid, db);
+
   if (totalCount === lastTotalCount) return;
+  if (lastTotalCount > totalCount) {
+    throw new CustomError({
+      customError: {
+        message: "Data in desync, delete and refetch all again",
+      },
+    });
+  }
   const newItems = totalCount - lastTotalCount;
   const { chunks, change } = await getChunksAndChange(
     fetchChunkLimit,

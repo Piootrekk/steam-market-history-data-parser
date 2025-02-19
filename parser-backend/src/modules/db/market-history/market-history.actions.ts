@@ -32,16 +32,19 @@ const insertBulkTransactionsWithPrefix = async (
   transactions: TItemDTO[],
   db: Db
 ): Promise<void> => {
-  const collection = db.collection<TMarketHistoryModel>(`MH-${id}`);
+  const collection = db.collection<TMarketHistoryModel>(id);
   await collection.insertMany(transactions);
 };
 
 const clearAllHistory = async (id: string, db: Db): Promise<void> => {
-  await clearCollectionByName(`MH-${id}`, db);
+  await clearCollectionByName(id, db);
 };
 
-const getMarketHistoryRecords = async (id: string, db: Db): Promise<number> => {
-  const count = await getDocumentsCount(`MH-${id}`, db);
+const getMarketHistoryRecordsCount = async (
+  documentName: string,
+  db: Db
+): Promise<number> => {
+  const count = await getDocumentsCount(documentName, db);
   return count;
 };
 
@@ -98,7 +101,7 @@ const getMarketHistoryDocumentCount = async (
 export {
   insertBulkTransactions,
   clearAllHistory,
-  getMarketHistoryRecords,
+  getMarketHistoryRecordsCount,
   getMarketHistoryCollections,
   getMarketHistoryItems,
   insertBulkTransactionsWithPrefix,

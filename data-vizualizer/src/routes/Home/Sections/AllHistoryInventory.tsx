@@ -1,5 +1,6 @@
 type AllHistoryInventoryProps = {
   disableButton: boolean;
+  setColName: (coll: string) => void;
 };
 
 const AllHistoryInventory: React.FC<AllHistoryInventoryProps> = ({

@@ -140,6 +140,12 @@
   letter-spacing: 0.5px;
 }
 
+.response-section h3 {
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
 .response-section p {
   background: rgba(255, 255, 255, 0.1);
   padding: 0.75rem;
@@ -168,6 +174,12 @@
   background: rgba(220, 38, 38, 0.9);
 }
 
+.response-section.success {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+}
 
 @keyframes fadeIn {
   from {

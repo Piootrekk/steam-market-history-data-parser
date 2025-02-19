@@ -68,7 +68,6 @@ const ItemFilters: React.FC<ItemFiltersProps> = ({
     const gamesToPush = isEveryGamgeOn
       ? undefined
       : games.filter((game) => game.isChecked).map((game) => game.label);
-    console.log(eventsToPush, gamesToPush);
     onFiliter(gamesToPush, eventsToPush);
   }, [events, games]);
 
