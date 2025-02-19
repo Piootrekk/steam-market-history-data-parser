@@ -20,7 +20,8 @@
   flex-grow: 1;
   align-items: center;
   justify-content: center;
-  transition: background-color 0.2s;
+  color: white;
+  background-color: rgb(101, 148, 241);
 }
 
 .action-btn:hover {
@@ -57,4 +58,8 @@
     stroke-dashoffset: 126;
     transform: rotate(360deg);
   }
+}
+
+.current-price {
+  text-align: center;
 }

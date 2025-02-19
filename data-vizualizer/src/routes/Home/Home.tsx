@@ -27,12 +27,7 @@ const Home: React.FC<HomeProps> = ({}) => {
 
   if (
     marketHistoryCollectionsNames.error ||
-    marketHistoryCollectionsNames.data === undefined
-  ) {
-    return;
-  }
-
-  if (
+    marketHistoryCollectionsNames.data === undefined ||
     inventoryHistoryCollectionsNames.error ||
     inventoryHistoryCollectionsNames.data === undefined
   ) {

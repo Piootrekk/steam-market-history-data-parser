@@ -6,9 +6,11 @@ import {
 } from "@/modules/db/market-history/market-history.actions";
 import CustomError from "@config/error-converter";
 import { getDatabase } from "@/config/get-database";
-import {
+import promiseAll from "@/config/promise-all";
+import type {
   TMarketActions,
   TMarketGames,
+  TMarketHistoryModel,
 } from "@/modules/db/market-history/market-history.model";
 
 const collectionsMarketNameController = async (
@@ -44,22 +46,29 @@ const pageItemsController = async (
     const db = getDatabase(request);
     const { collectionName, search, skip, limit, actions, games } =
       request.query;
-    const currentItems = await getMarketHistoryItems(
-      db,
-      collectionName,
-      search,
-      skip,
-      limit,
-      actions,
-      games
-    );
-    const totalCount = await getMarketHistoryDocumentCount(
-      db,
-      collectionName,
-      search,
-      actions,
-      games
-    );
+
+    const [currentItems, totalCount] = await promiseAll<
+      [TMarketHistoryModel[], number]
+    >([
+      () =>
+        getMarketHistoryItems(
+          db,
+          collectionName,
+          search,
+          skip,
+          limit,
+          actions,
+          games
+        ),
+      () =>
+        getMarketHistoryDocumentCount(
+          db,
+          collectionName,
+          search,
+          actions,
+          games
+        ),
+    ]);
     reply.status(200).send({ items: currentItems, total_count: totalCount });
   } catch (error) {
     const customError = new CustomError({ unknownError: error });

@@ -4,14 +4,15 @@ import { getDocument } from "@/api/marketHistory";
 import TableMarketHistory from "./Table-Elements/TableMarketHistory";
 import type { TDocuments } from "@/api/marketHistory";
 import TablePagination from "@/common/components/Table/Pagination/Pagination";
+import TableSkeleton from "./TableSkeleton";
 
 type MarketHistoryOverviewProps = {};
-
 const MarketHistoryOverview: React.FC<MarketHistoryOverviewProps> = ({}) => {
   const { skip, limit, collectionName, search, actions, games } =
     routeApiMarketHistory.useSearch();
 
   const navigate = routeApiMarketHistory.useNavigate();
+  const baseLoadingAmount = 30;
 
   const docs = useQuery<TDocuments>({
     queryKey: ["document", collectionName, skip, search, actions, games],
@@ -28,6 +29,14 @@ const MarketHistoryOverview: React.FC<MarketHistoryOverviewProps> = ({}) => {
     });
   };
 
+  if (docs.isLoading || docs.data === undefined) {
+    return (
+      <div className="market-loading">
+        <TableSkeleton amount={limit || baseLoadingAmount} />
+      </div>
+    );
+  }
+
   if (docs.data) {
     return (
       <>
@@ -41,8 +50,6 @@ const MarketHistoryOverview: React.FC<MarketHistoryOverviewProps> = ({}) => {
       </>
     );
   }
-
-  return null;
 };
 
 export default MarketHistoryOverview;

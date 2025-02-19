@@ -27,7 +27,12 @@ const ItemCurrentPrice: React.FC<ItemCurrentPriceProps> = ({ name, game }) => {
   });
 
   if (mutation.isError) return <span>{mutation.error.message}</span>;
-  if (mutation.isSuccess) return <span>{mutation.data}</span>;
+  if (mutation.isSuccess)
+    return (
+      <div className="current-price">
+        <span>{mutation.data}</span>
+      </div>
+    );
 
   return (
     <div className="actions">

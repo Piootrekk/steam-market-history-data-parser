@@ -13,29 +13,25 @@ const ItemActions: React.FC<ItemActionsProps> = ({
 }) => {
   return (
     <div className="actions">
-      <button className="action-btn">
-        <a
-          target="_blank"
-          href={`https://steamcommunity.com/market/listings/${appid}/${encodeURIComponent(
-            name
-          )}`}
-        >
-          Market
-        </a>
-      </button>
+      <a
+        className="action-btn"
+        target="_blank"
+        href={`https://steamcommunity.com/market/listings/${appid}/${encodeURIComponent(
+          name
+        )}`}
+      >
+        Market
+      </a>
+
       {wiki && (
-        <button className="action-btn">
-          <a target="_blank" href={wiki}>
-            Wiki
-          </a>
-        </button>
+        <a className="action-btn" target="_blank" href={wiki}>
+          Wiki
+        </a>
       )}
       {inspect && (
-        <button className="action-btn">
-          <a target="_blank" href={inspect}>
-            Inspect
-          </a>
-        </button>
+        <a className="action-btn" target="_blank" href={inspect}>
+          Inspect
+        </a>
       )}
     </div>
   );

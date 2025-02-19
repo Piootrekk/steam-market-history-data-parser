@@ -24,6 +24,7 @@ const fetchMarketHistory = async (min = 0, max = 1, cookies: string) => {
     start: min.toString(),
     count: max.toString(),
     norender: "1",
+    l: "english",
   });
 
   url.search = params.toString();

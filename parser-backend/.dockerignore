@@ -21,3 +21,6 @@ build/
 *.swo
 test*.json
 market-history*.json
+
+
+# docker run -d -p 27017:27017 --name mongodb -v ./dev-mongodb-data:/data/db mongo:latest for just db dev

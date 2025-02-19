@@ -1,6 +1,6 @@
-# Pliki środowiskowe
+
 .env
-# Express.js ignore files
+
 node_modules/
 dist/
 
@@ -14,34 +14,32 @@ dist/
 *.temp
 *.bak
 
-# Logi błędów
+
 npm-debug.log*
 
-# Plik konfiguracyjny Yarn
+
 .yarn
 
-# Pliki tymczasowe Windows
+
 Thumbs.db
 Desktop.ini
 $RECYCLE.BIN/
 
-# Pliky Visual Studio Code
+
 .vscode/
 *.code-workspace
 
-# Katalog yarn cache
 .yarn/cache/
 .yarn/unplugged/
 .yarn/build-state.yml
 
-# Katalogi specyficzne dla różnych narzędzi
 .idea/
 .eslintcache
 .pnp/
 .pnpm/
 npm-debug.log*
 yarn-error.log*
-# Logs
+
 logs
 *.log
 npm-debug.log*
@@ -55,7 +53,6 @@ dist
 dist-ssr
 *.local
 
-# Editor directories and files
 .vscode/*
 !.vscode/extensions.json
 .idea
@@ -68,3 +65,4 @@ dist-ssr
 test*.json
 market-history*.json
 mongodb-data
+dev-mongodb-data

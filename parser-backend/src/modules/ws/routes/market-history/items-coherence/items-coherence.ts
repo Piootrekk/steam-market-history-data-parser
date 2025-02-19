@@ -7,6 +7,7 @@ import TMarketHistoryResponse, {
   TVersionApi,
 } from "../fetch/fetch.types";
 import {
+  _TItemDTO,
   EventType,
   TEventData,
   TExtendedEventData,
@@ -147,7 +148,7 @@ const appedListingsInPurchases = (
   };
 };
 
-const responesConverter = (response: TMarketHistoryResponse): TItemDTO[] => {
+const responesConverter = (response: TMarketHistoryResponse): _TItemDTO[] => {
   const fixedEvents = fixEventResponse(response);
   const items = fixedEvents.map((event) => {
     const asset = getEventWithAssets(event, response);
