@@ -1,0 +1,10 @@
+.inv-his-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.inv-his-container h2 {
+  font-size: larger;
+}

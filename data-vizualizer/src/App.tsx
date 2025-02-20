@@ -12,6 +12,8 @@ const App = () => {
       queries: {
         refetchOnWindowFocus: false,
         retry: false,
+        refetchOnReconnect: false,
+        refetchOnMount: false,
       },
     },
   });

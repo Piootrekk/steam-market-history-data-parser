@@ -72,19 +72,35 @@ const ItemFilters: React.FC<ItemFiltersProps> = ({
   }, [events, games]);
 
   const toggleEvent = (label: string) => {
-    setEvents((prev) =>
-      prev.map((item) =>
-        item.label === label ? { ...item, isChecked: !item.isChecked } : item
-      )
-    );
+    setEvents((prev) => {
+      const checkedCount = prev.filter((item) => item.isChecked).length;
+
+      return prev.map((item) => {
+        if (item.label === label) {
+          if (item.isChecked && checkedCount === 1) {
+            return item;
+          }
+          return { ...item, isChecked: !item.isChecked };
+        }
+        return item;
+      });
+    });
   };
 
   const toggleGame = (label: string) => {
-    setGames((prev) =>
-      prev.map((item) =>
-        item.label === label ? { ...item, isChecked: !item.isChecked } : item
-      )
-    );
+    setGames((prev) => {
+      const checkedCount = prev.filter((item) => item.isChecked).length;
+
+      return prev.map((item) => {
+        if (item.label === label) {
+          if (item.isChecked && checkedCount === 1) {
+            return item;
+          }
+          return { ...item, isChecked: !item.isChecked };
+        }
+        return item;
+      });
+    });
   };
 
   return (

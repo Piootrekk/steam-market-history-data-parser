@@ -17,19 +17,23 @@ const MarketHistoryEmpty: React.FC<MarketHistoryEmptyProps> = ({}) => {
       <div className="empty-container">
         <h2 className="empty-title">Market History fetched</h2>
         <div className="empty-colNames">
-          {inventoryCollections.data.map((coll) => (
-            <Link
-              to="."
-              search={{
-                collectionName: coll,
-              }}
-              className="empty-fetched"
-              key={coll}
-            >
-              <DatabaseIcon size={16} className="badge-icon" />
-              <span key={coll}>{coll}</span>
-            </Link>
-          ))}
+          {inventoryCollections.data.length > 0 &&
+            inventoryCollections.data.map((coll) => (
+              <Link
+                to="."
+                search={{
+                  collectionName: coll,
+                }}
+                className="empty-fetched"
+                key={coll}
+              >
+                <DatabaseIcon size={16} className="badge-icon" />
+                <span key={coll}>{coll}</span>
+              </Link>
+            ))}
+          {inventoryCollections.data.length === 0 && (
+            <p className="empty-no-items">No fetches found...</p>
+          )}
         </div>
       </div>
     );

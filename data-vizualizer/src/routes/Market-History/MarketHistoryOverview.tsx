@@ -37,9 +37,9 @@ const MarketHistoryOverview: React.FC<MarketHistoryOverviewProps> = ({}) => {
     );
   }
 
-  if (docs.data) {
+  if (docs.data && docs.data.total_count > 0) {
     return (
-      <>
+      <div className="table-container">
         <TableMarketHistory items={docs.data.items} />
         <TablePagination
           totalCount={docs.data.total_count}
@@ -47,9 +47,11 @@ const MarketHistoryOverview: React.FC<MarketHistoryOverviewProps> = ({}) => {
           limitElements={limit ? limit : undefined}
           onPageChange={onPageChange}
         />
-      </>
+      </div>
     );
-  }
+  } else if (docs.data.total_count === 0) {
+    return <p className="no-items-paragraph">No items found...</p>;
+  } else return null;
 };
 
 export default MarketHistoryOverview;

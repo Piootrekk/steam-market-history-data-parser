@@ -33,7 +33,32 @@
 }
 
 .checkbox-input {
+  appearance: none;
   width: 16px;
   height: 16px;
+  background-color: rgb(101, 148, 241);
+  border-radius: 4px;
+  position: relative;
   cursor: pointer;
+}
+
+.checkbox-input:checked,
+.checkbox-input:checked::before {
+  background-color: rgb(101, 148, 241);
+}
+
+.checkbox-input:checked::before {
+  content: "✔";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.checkbox-input:not(:checked) {
+  background-color: white;
+  border: 1px solid rgb(101, 148, 241);
 }

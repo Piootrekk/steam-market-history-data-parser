@@ -75,3 +75,17 @@
 .market-loading {
   width: 100%;
 }
+
+.no-items-paragraph {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #6c757d;
+  height: 100%;
+  font-size: large;
+}
+
+.empty-no-items {
+  color: #6c757d;
+}

@@ -2,7 +2,9 @@ FROM node:23-alpine
 
 WORKDIR /app
 
-COPY package*.json ./
+COPY package.json ./
+
+RUN npm install --package-lock-only
 
 RUN npm install
 
@@ -14,10 +16,12 @@ ENV NODE_OPTIONS="--max-old-space-size=4096"
 ARG VITE_PORT=3034
 ARG VITE_BACKEND_URL
 ARG VITE_PROXY
+ARG VITE_BACKEND_WS
 
 ENV VITE_PORT=$VITE_PORT
 ENV VITE_BACKEND_URL=$VITE_BACKEND_URL
 ENV VITE_PROXY=$VITE_PROXY
+ENV VITE_BACKEND_WS=$VITE_BACKEND_WS
 
 RUN npm run build
 

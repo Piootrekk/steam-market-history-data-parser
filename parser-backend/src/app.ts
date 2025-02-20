@@ -8,7 +8,7 @@ import wsPlugin from "./plugins/ws";
 
 const buildApp = async () => {
   const app = Fastify({
-    logger: true,
+    logger: false,
   });
 
   await app.register(corsPlugin);

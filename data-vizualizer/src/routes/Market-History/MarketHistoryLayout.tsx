@@ -48,9 +48,7 @@ const MarketHistoryLayout = () => {
         <Search onSearch={onSearch} timeoutDebaunce={600} />
         <ItemFilters onFiliter={onFiliter} games={games} events={actions} />
       </div>
-      <div className="table-container">
-        <Outlet />
-      </div>
+      <Outlet />
     </div>
   );
 };
