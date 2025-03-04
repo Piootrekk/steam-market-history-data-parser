@@ -2,7 +2,7 @@ import Fastify from "fastify";
 import swaggerPlugin from "./plugins/swagger";
 import mongoDbPlugin from "./plugins/mongodb";
 
-import allRoutes from "./plugins/routes";
+import allModules from "./modules/module";
 import corsPlugin from "./plugins/cors";
 import wsPlugin from "./plugins/ws";
 
@@ -15,7 +15,8 @@ const buildApp = async () => {
   await app.register(swaggerPlugin);
   await app.register(mongoDbPlugin);
   await app.register(wsPlugin);
-  await app.register(allRoutes);
+  // await app.register(allRoutes);
+  app.register(allModules);
   return app;
 };
 

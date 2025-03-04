@@ -18,7 +18,8 @@ const validateClientPayload = (payload: TFirstMessageRecieve): boolean => {
 };
 
 const wsHealthSchema: FastifySchema = {
-  tags: ["WS - Connection Test"],
+  tags: ["WS"],
+  summary: "Connection test - health check",
   description: `
       WebSocket Connection
       Upgrade to WebSocket connection on this endpoint. Use Postman instead of OPENAPI  

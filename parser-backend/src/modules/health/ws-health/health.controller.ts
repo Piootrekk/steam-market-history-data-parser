@@ -2,7 +2,7 @@ import { FastifyRequest } from "fastify";
 import CustomError from "@config/error-converter";
 import { WebSocket } from "ws";
 import { TFirstMessageRecieve, validateClientPayload } from "./health.schema";
-import { handleCloseWsConnection } from "@modules/ws/ws-utils";
+import { handleCloseWsConnection } from "@common/ws/ws-utils";
 
 const wsHeathController = (connection: WebSocket, req: FastifyRequest) => {
   const recievedFromClient: TFirstMessageRecieve = { health: false };

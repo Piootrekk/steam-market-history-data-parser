@@ -4,7 +4,7 @@ import {
   saveAllHistoryToDb,
   synchronizeHistoryToDb,
 } from "./market-history.service";
-import { clearAllHistory } from "@/modules/db/market-history/market-history.actions";
+import { clearAllHistory } from "../repository/market-history.repository";
 import { getDatabase } from "@/config/get-database";
 import { WebSocket } from "ws";
 import {
@@ -12,7 +12,7 @@ import {
   setTimeOutWSHandshake,
   wsCloseByError,
   wsCloseCorrectly,
-} from "@modules/ws/ws-utils";
+} from "@common/ws/ws-utils";
 import { TFirstMessageRecieve } from "./market-history.schema";
 import CustomError from "@/config/error-converter";
 

@@ -1,6 +1,6 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 import CustomError from "@config/error-converter";
-import { getInventoryHistoryCollections } from "@modules/db/inventory-history/inventory-history.actions";
+import { getInventoryHistoryCollections } from "../repository/inventory-history.repository";
 
 const getCollectionsMarketName = async (
   request: FastifyRequest,

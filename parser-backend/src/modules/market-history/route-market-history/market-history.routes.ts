@@ -8,7 +8,7 @@ import {
   pageItemsController,
 } from "./market-history.controller";
 
-const marketHistory = async (server: FastifyInstance) => {
+const marketHistoryRoute = async (server: FastifyInstance) => {
   server.get(
     "/collections-market",
     collectionsMarketNameSchema,
@@ -17,4 +17,4 @@ const marketHistory = async (server: FastifyInstance) => {
   server.get("/documents", itemsPerPageSchema, pageItemsController);
 };
 
-export default marketHistory;
+export default marketHistoryRoute;

@@ -1,11 +1,11 @@
-import { TItemDTO } from "@modules/ws/routes/market-history/items-coherence/items.types";
-import { Db, Filter } from "mongodb";
+import { TItemDTO } from "../ws-market-history/items-coherence/items.types";
+import { Db } from "mongodb";
 
 import {
   clearCollectionByName,
   getAllCollections,
   getDocumentsCount,
-} from "../db-actions";
+} from "@common/db/db-actions";
 
 import type {
   TMarketActions,

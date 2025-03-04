@@ -1,5 +1,5 @@
 import { Db } from "mongodb";
-import { getAllCollections } from "../db-actions";
+import { getAllCollections } from "@common/db/db-actions";
 
 const getInventoryHistoryCollections = async (db: Db): Promise<string[]> => {
   const allCollectios = await getAllCollections(db);

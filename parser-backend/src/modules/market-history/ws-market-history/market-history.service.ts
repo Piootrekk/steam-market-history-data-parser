@@ -12,7 +12,7 @@ import {
   getMarketHistoryRecordsCount,
   insertBulkTransactions,
   insertBulkTransactionsWithPrefix,
-} from "@/modules/db/market-history/market-history.actions";
+} from "../repository/market-history.repository";
 import { WebSocket } from "ws";
 import {
   TFirstMessageRecieve,

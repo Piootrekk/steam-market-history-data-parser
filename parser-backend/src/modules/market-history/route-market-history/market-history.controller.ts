@@ -3,7 +3,7 @@ import {
   getMarketHistoryDocumentCount,
   getMarketHistoryItems,
   getMarketHistoryCollections,
-} from "@/modules/db/market-history/market-history.actions";
+} from "../repository/market-history.repository";
 import CustomError from "@config/error-converter";
 import { getDatabase } from "@/config/get-database";
 import promiseAll from "@/config/promise-all";
@@ -11,7 +11,7 @@ import type {
   TMarketActions,
   TMarketGames,
   TMarketHistoryModel,
-} from "@/modules/db/market-history/market-history.model";
+} from "../repository/market-history.model";
 
 const collectionsMarketNameController = async (
   request: FastifyRequest,

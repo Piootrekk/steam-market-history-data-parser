@@ -5,7 +5,7 @@ import {
 } from "./market-history.controller";
 import { wsMarketHistorySchema } from "./market-history.schema";
 
-const wsMarketHistoryRoutes = async (server: FastifyInstance) => {
+const marketHistoryWs = async (server: FastifyInstance) => {
   server.get(
     "/market-history/all",
     { websocket: true, schema: wsMarketHistorySchema },
@@ -18,4 +18,4 @@ const wsMarketHistoryRoutes = async (server: FastifyInstance) => {
   );
 };
 
-export default wsMarketHistoryRoutes;
+export default marketHistoryWs;

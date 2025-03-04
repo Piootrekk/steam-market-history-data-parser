@@ -21,7 +21,8 @@ const validateClientPayload = (payload: TFirstMessageRecieve): boolean => {
 };
 
 const wsMarketHistorySchema: FastifySchema = {
-  tags: ["WS - Market History (DB insert)"],
+  tags: ["WS"],
+  summary: "Market History (DB insert)",
   description: `
       WebSocket Connection
       Upgrade to WebSocket connection on this endpoint. Use Postman instead of OPENAPI  
