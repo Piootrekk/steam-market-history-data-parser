@@ -52,6 +52,7 @@ node_modules
 dist
 dist-ssr
 *.local
+dist-electron
 
 .vscode/*
 !.vscode/extensions.json
