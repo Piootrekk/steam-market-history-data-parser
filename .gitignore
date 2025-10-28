@@ -39,7 +39,7 @@ $RECYCLE.BIN/
 .pnpm/
 npm-debug.log*
 yarn-error.log*
-
+migrations
 logs
 *.log
 npm-debug.log*
@@ -67,4 +67,4 @@ test*.json
 market-history*.json
 mongodb-data
 dev-mongodb-data
-
+database.db

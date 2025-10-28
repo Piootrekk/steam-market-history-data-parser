@@ -5,25 +5,37 @@
   "description": "",
   "main": "dist-electron/main.js",
   "scripts": {
-    "dev": "vite"
+    "dev": "vite",
+    "db:generate": "drizzle-kit generate --config electron/core/db/drizzle.config.ts",
+    "db:migrate": "drizzle-kit migrate --config electron/core/db/drizzle.config.ts",
+    "db:studio": "drizzle-kit studio --config electron/core/db/drizzle.config.ts"
   },
   "keywords": [],
   "author": "debil jakiś",
   "license": "UNLICENSED",
   "type": "module",
   "dependencies": {
+    "better-sqlite3": "^12.4.1",
+    "drizzle-orm": "^0.44.7",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
   },
   "devDependencies": {
+    "@types/better-sqlite3": "^7.6.13",
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.2",
     "@vitejs/plugin-react": "^5.0.4",
+    "drizzle-kit": "^0.31.5",
     "electron": "^38.4.0",
+    "tsx": "^4.20.6",
     "typescript": "^5.9.3",
     "vite": "^7.1.11",
     "vite-plugin-electron": "^0.29.0",
     "vite-tsconfig-paths": "^5.1.4"
   },
-  "packageManager": "npm@11.6.1"
+  "overrides": {
+    "esbuild": "^0.25.9",
+    "esm-loader": "tsx@^4.20.4"
+  },
+  "packageManager": "npm@11.6.2"
 }

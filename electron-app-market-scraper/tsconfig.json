@@ -14,12 +14,7 @@
     "skipLibCheck": true,
     "strict": true,
     "noUnusedLocals": true,
-    "isolatedModules": true,
-    "paths": {
-      "@/*": ["src/*"],
-      "@main/*": ["electron/main/*"],
-      "@preload/*": ["electron/preload/*"]
-    }
+    "isolatedModules": true
   },
   "include": ["src", "electron"]
 }
