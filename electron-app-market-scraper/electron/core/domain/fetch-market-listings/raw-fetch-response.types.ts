@@ -1,3 +1,5 @@
+type MarketRawResponse = IncorrectMarketFetchResponse | MarketFetchResponse;
+
 type IncorrectMarketFetchResponse = {
   success: boolean;
   start: number;
@@ -141,4 +143,5 @@ export type {
   IncorrectMarketFetchResponse,
   Assets,
   CurrentAsset,
+  MarketRawResponse,
 };

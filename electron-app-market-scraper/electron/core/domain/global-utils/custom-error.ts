@@ -1,16 +1,20 @@
-const standarizeCustomError = (err: unknown): CustomError => {
-  if (err instanceof CustomError) return err;
-  else return new CustomError("Unknown error", 500);
+const getFetchError = (err: unknown): FetchError => {
+  if (err instanceof FetchError) return err;
+  else return new FetchError("Unknown error", "UnknownError");
 };
 
-class CustomError extends Error {
-  constructor(message: string, public status: number) {
-    super(message);
-    this.name = "CustomError";
-    this.status = status;
+type FetchErrorType =
+  | "UnknownError"
+  | "ToManyRequestsError"
+  | "InvalidResponseError"
+  | "ResponseNotOk";
 
-    Object.setPrototypeOf(this, CustomError.prototype);
+class FetchError extends Error {
+  constructor(message: string, public errorType: FetchErrorType) {
+    super(message);
+    this.name = "FetchError";
+    Object.setPrototypeOf(this, FetchError.prototype);
   }
 }
-
-export { CustomError, standarizeCustomError };
+export { FetchError, getFetchError };
+export type { FetchErrorType };

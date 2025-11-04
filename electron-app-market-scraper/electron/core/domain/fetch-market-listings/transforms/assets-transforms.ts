@@ -1,4 +1,4 @@
-import type { Assets, CurrentAsset } from "../fetch.types";
+import type { Assets, CurrentAsset } from "../raw-fetch-response.types";
 
 const getAllCurrentAssets = (assets: Assets): CurrentAsset[] => {
   const games = getCurrentGamesFromAssets(assets);

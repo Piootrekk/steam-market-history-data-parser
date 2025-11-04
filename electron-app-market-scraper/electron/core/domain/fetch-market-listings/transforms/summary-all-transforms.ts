@@ -1,5 +1,5 @@
-import { getAllCurrentAssets } from "./fetch-assets-transforms";
-import type { MarketFetchResponse } from "../fetch.types";
+import { getAllCurrentAssets } from "./assets-transforms";
+import type { MarketFetchResponse } from "../raw-fetch-response.types";
 
 const getSummaryObject = (response: MarketFetchResponse) => {
   const assets = getAllCurrentAssets(response.assets);
