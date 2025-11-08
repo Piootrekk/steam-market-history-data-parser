@@ -21,20 +21,23 @@ const createWindow = () => {
     minWidth: 400,
     minHeight: 400,
     autoHideMenuBar: true,
-    icon: path.join(process.env.VITE_PUBLIC, "electron-vite.svg"),
+    // icon: path.join(process.env.VITE_PUBLIC, "electron-vite.svg"),
     webPreferences: {
       preload: path.join(__dirname, "preload.mjs"),
       nodeIntegration: false,
       contextIsolation: true,
-      sandbox: false,
+      sandbox: true,
     },
   });
+  setupRenderer(win);
+};
 
+const setupRenderer = (win: BrowserWindow) => {
   if (VITE_DEV_SERVER_URL) {
     win.loadURL(VITE_DEV_SERVER_URL);
     win.webContents.openDevTools();
   } else {
-    win.loadFile(path.join(RENDERER_DIST, "dist/index.html"));
+    win.loadFile(path.join(RENDERER_DIST, "index.html"));
   }
 };
 
