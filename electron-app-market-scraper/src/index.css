@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
-/* === Tailwind v4 Design Tokens === */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
 @theme {
   /* Base */
   --color-background: hsl(0 0% 100%);
@@ -81,9 +82,8 @@
   --color-sidebar-ring: hsl(262 83% 58%);
 }
 
-/* === Dark Theme Overrides === */
-@media (prefers-color-scheme: dark) {
-  @theme {
+@layer theme {
+  [data-theme="dark"] {
     --color-background: hsl(240 10% 3.9%);
     --color-foreground: hsl(0 0% 98%);
     --color-card: hsl(240 10% 6%);
