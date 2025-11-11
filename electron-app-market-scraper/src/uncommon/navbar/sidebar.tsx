@@ -1,79 +1,29 @@
 import { useState } from "react";
 import { cn } from "../../common/utils/merge-styles";
 import Button from "src/common/components/button";
-import {
-  BarChart3,
-  Bell,
-  ChevronLeft,
-  ChevronRight,
-  FileText,
-  LayoutDashboard,
-  Settings,
-  Sun,
-  TrendingUp,
-  Users,
-} from "lucide-react";
+import SidebarHeader from "./sidebar-header";
+import SideBarNav from "./sidebar-nav";
+import { sidebarItems } from "./nav-items";
+import { Sun } from "lucide-react";
 
-const sidebarItems = [
-  { icon: LayoutDashboard, label: "Dashboard", active: true },
-  { icon: BarChart3, label: "Analytics" },
-  { icon: TrendingUp, label: "Revenue" },
-  { icon: Users, label: "Users" },
-  { icon: FileText, label: "Reports" },
-  { icon: Bell, label: "Notifications" },
-  { icon: Settings, label: "Settings" },
-];
+const appTitle = "Market History Manager";
 
 const Sidebar = () => {
   const [isCollabsed, setIsCollabsed] = useState(false);
   return (
-    <div
+    <aside
       className={cn(
-        "h-full border-r border-sidebar-border bg-sidebar transition-all duration-300",
+        "h-full border-r border-sidebar-border bg-sidebar transition-all duration-100 flex flex-col",
         isCollabsed ? "w-16" : "w-64"
       )}
     >
-      <div className="flex h-16 items-center justify-between border-b border-sidebar-border px-4">
-        {!isCollabsed && (
-          <div className="flex items-center gap-2">
-            <div className="h-8 w-8 rounded-lg bg-gradient-primary flex items-center justify-center">
-              <LayoutDashboard className="h-5 w-5 text-white" />
-            </div>
-            <span className="font-semibold text-sidebar-foreground">
-              Dashboard
-            </span>
-          </div>
-        )}
-        <Button
-          onClick={() => setIsCollabsed(!isCollabsed)}
-          variant="ghost"
-          size="sm"
-          className="h-8 w-8 p-0 text-sidebar-foreground hover:bg-sidebar-accent"
-        >
-          {isCollabsed ? (
-            <ChevronRight className="h-4 w-4" />
-          ) : (
-            <ChevronLeft className="h-4 w-4" />
-          )}
-        </Button>
-      </div>
+      <SidebarHeader
+        isCollabsed={isCollabsed}
+        title={appTitle}
+        setIsCollabsed={setIsCollabsed}
+      />
       <nav className="flex-1 p-2 space-y-1">
-        {sidebarItems.map((item) => (
-          <Button
-            key={item.label}
-            variant={item.active ? "default" : "ghost"}
-            className={cn(
-              "w-full justify-start gap-3 h-10",
-              isCollabsed && "justify-center px-0",
-              item.active
-                ? "bg-sidebar-primary text-sidebar-primary-foreground hover:bg-sidebar-primary/90"
-                : "text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
-            )}
-          >
-            <item.icon className="h-5 w-5 shrink-0" />
-            {!isCollabsed && <span className="truncate">{item.label}</span>}
-          </Button>
-        ))}
+        <SideBarNav sidebarItems={sidebarItems} isCollabsed={isCollabsed} />
       </nav>
       <div
         className={cn(
@@ -82,10 +32,12 @@ const Sidebar = () => {
         )}
       >
         <div>
-          <Sun />
+          <Button variant="ghost">
+            <Sun />
+          </Button>
         </div>
       </div>
-    </div>
+    </aside>
   );
 };
 

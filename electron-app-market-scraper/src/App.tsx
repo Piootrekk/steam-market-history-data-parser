@@ -1,11 +1,7 @@
-import Dashboard from "./uncommon/dashboard";
+import Router from "./router";
 
 const App = () => {
-  return (
-    <>
-      <Dashboard />
-    </>
-  );
+  return <Router />;
 };
 
 export default App;

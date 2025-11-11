@@ -131,6 +131,39 @@
   }
 }
 
+@utility bg-gradient-primary {
+  background-image: var(--gradient-primary);
+}
+
+@utility bg-gradient-success {
+  background-image: var(--gradient-success);
+}
+
+@utility bg-gradient-warning {
+  background-image: var(--gradient-warning);
+}
+
+@utility bg-gradient-danger {
+  background-image: var(--gradient-danger);
+}
+
+@utility bg-gradient-card {
+  background-image: var(--gradient-card);
+}
+
+/* Shadow Utilities */
+@utility shadow-glow {
+  box-shadow: var(--shadow-glow);
+}
+
+@utility shadow-card {
+  box-shadow: var(--shadow-card);
+}
+
+@utility shadow-elevated {
+  box-shadow: var(--shadow-elevated);
+}
+
 @layer base {
   * {
     @apply border-border;
