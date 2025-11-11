@@ -1,8 +1,8 @@
 import NavLink from "src/common/components/navlink";
 import { cn } from "src/common/utils/merge-styles";
-import type { SidebarItem } from "./nav-items";
+import type { Route } from "../../routes";
 
-type CurrentSideBarProps = SidebarItem & {
+type CurrentSideBarProps = Route & {
   isCollabsed: boolean;
 };
 
@@ -28,7 +28,7 @@ const CurrentSideBar = ({
 };
 
 type SideBarNavProps = {
-  sidebarItems: SidebarItem[];
+  sidebarItems: Route[];
   isCollabsed: boolean;
 };
 
@@ -39,8 +39,3 @@ const SideBarNav = ({ sidebarItems, isCollabsed }: SideBarNavProps) => {
 };
 
 export default SideBarNav;
-
-//  item.active
-//                 ? "bg-sidebar-primary text-sidebar-primary-foreground hover:bg-sidebar-primary/90"
-//                 : "text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
-//             )}
