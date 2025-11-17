@@ -1,10 +1,4 @@
-import {
-  BarChart3,
-  History,
-  LayoutDashboard,
-  Settings,
-  TrendingUp,
-} from "lucide-react";
+import { Download, Info, LayoutDashboard, Settings, User } from "lucide-react";
 import Dashboard from "./uncommon/dashboard/dashboard";
 
 type Route = {
@@ -21,23 +15,23 @@ const ROUTES = {
     label: "Dashboard",
     icon: LayoutDashboard,
   },
-  analytics: {
-    to: "/analytics",
+  download: {
+    to: "/download",
     component: <></>,
-    label: "Analytics",
-    icon: BarChart3,
+    label: "Download",
+    icon: Download,
   },
-  history: {
-    to: "/history",
+  accounts: {
+    to: "/account",
     component: <></>,
-    label: "History",
-    icon: History,
+    label: "Accounts",
+    icon: User,
   },
-  revenue: {
-    to: "/revenue",
+  about: {
+    to: "/about",
     component: <></>,
-    label: "Revenue",
-    icon: TrendingUp,
+    label: "About",
+    icon: Info,
   },
   settings: {
     to: "/settings",

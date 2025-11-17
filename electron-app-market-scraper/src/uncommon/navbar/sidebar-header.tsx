@@ -19,8 +19,7 @@ const SidebarHeader = ({
         <div className="flex items-center gap-2">
           <span
             className={cn(
-              "font-semibold text-sidebar-foreground whitespace-nowrap transition-opacity",
-              isCollabsed ? "opacity-0" : "opacity-100"
+              "font-semibold text-sidebar-foreground whitespace-nowrap"
             )}
           >
             {title}

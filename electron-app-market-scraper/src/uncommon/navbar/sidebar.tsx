@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { cn } from "../../common/utils/merge-styles";
-import Button from "src/common/components/button";
-import SidebarHeader from "./sidebar-header";
-import SideBarNav from "./sidebar-nav";
 import { ROUTES } from "../../routes";
-import { Sun } from "lucide-react";
+import SidebarHeaderCollapsed from "./collabsed/sidebar-header";
+import SidebarHeaderExtended from "./expended/sidebar-header";
+import SideBarNavCollabsed from "./collabsed/sidebar-nav";
+import SideBarNavExtended from "./expended/sidebar-nav";
 
 const appTitle = "Market History Manager";
 
@@ -18,26 +18,19 @@ const Sidebar = () => {
         isCollabsed ? "w-16" : "w-64"
       )}
     >
-      <SidebarHeader
-        isCollabsed={isCollabsed}
-        title={appTitle}
-        setIsCollabsed={setIsCollabsed}
-      />
-      <nav className="flex-1 p-2 space-y-1">
-        <SideBarNav sidebarItems={routesArray} isCollabsed={isCollabsed} />
-      </nav>
-      <div
-        className={cn(
-          "p-4 border-t border-sidebar-border",
-          isCollabsed && "flex justify-center p-2"
-        )}
-      >
-        <div>
-          <Button variant="ghost">
-            <Sun />
-          </Button>
-        </div>
-      </div>
+      {isCollabsed ? (
+        <SidebarHeaderCollapsed onToggle={() => setIsCollabsed(!isCollabsed)} />
+      ) : (
+        <SidebarHeaderExtended
+          title={appTitle}
+          onToggle={() => setIsCollabsed(!isCollabsed)}
+        />
+      )}
+      {isCollabsed ? (
+        <SideBarNavCollabsed sidebarItems={routesArray} />
+      ) : (
+        <SideBarNavExtended sidebarItems={routesArray} />
+      )}
     </aside>
   );
 };

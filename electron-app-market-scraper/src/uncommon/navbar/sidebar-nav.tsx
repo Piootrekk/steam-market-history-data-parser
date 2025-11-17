@@ -33,9 +33,13 @@ type SideBarNavProps = {
 };
 
 const SideBarNav = ({ sidebarItems, isCollabsed }: SideBarNavProps) => {
-  return sidebarItems.map((item) => (
-    <CurrentSideBar key={item.to} {...item} isCollabsed={isCollabsed} />
-  ));
+  return (
+    <nav className="flex-1 p-2 space-y-1">
+      {sidebarItems.map((item) => (
+        <CurrentSideBar key={item.to} {...item} isCollabsed={isCollabsed} />
+      ))}
+    </nav>
+  );
 };
 
 export default SideBarNav;
