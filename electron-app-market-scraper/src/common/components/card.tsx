@@ -6,7 +6,7 @@ const Card = ({ children, className, ...rest }: CardProps) => {
   return (
     <div
       className={cn(
-        "rounded-lg border bg-gradient-card shadow-card",
+        "rounded-lg border text-card-foreground shadow-sm bg-gradient-card shadow-card hover:shadow-elevated transition-all duration-200",
         className
       )}
       {...rest}
@@ -16,18 +16,39 @@ const Card = ({ children, className, ...rest }: CardProps) => {
   );
 };
 
-const CardTitle = ({ className, ...props }: CardProps) => {
+const CardHeader = ({ className, ...rest }: CardProps) => {
+  return (
+    <div className={cn("flex flex-col space-y-1.5 p-6", className)} {...rest} />
+  );
+};
+
+const CardTitle = ({ className, ...rest }: CardProps) => {
   return (
     <div
       className={cn(
         "text-2xl font-semibold leading-none tracking-tight",
         className
       )}
-      {...props}
+      {...rest}
     />
   );
 };
 
+const CardDescription = ({ className, ...rest }: CardProps) => {
+  return (
+    <div className={cn("text-sm text-muted-foreground", className)} {...rest} />
+  );
+};
+
+const CardContent = ({ className, ...rest }: CardProps) => {
+  return <div className={cn("p-6 pt-0", className)} {...rest} />;
+};
+
+// rounded-lg border text-card-foreground shadow-sm bg-gradient-card shadow-card hover:shadow-elevated transition-all duration-200
+
+Card.Header = CardHeader;
 Card.Title = CardTitle;
+Card.Description = CardDescription;
+Card.Content = CardContent;
 
 export default Card;

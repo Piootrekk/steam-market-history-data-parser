@@ -1,5 +1,6 @@
 import { Download, Info, LayoutDashboard, Settings, User } from "lucide-react";
-import Dashboard from "./uncommon/dashboard/dashboard";
+import DashboardPage from "./uncommon/dashboard/dashboard.page";
+import DownloadPage from "./uncommon/download/download.page";
 
 type Route = {
   to: string;
@@ -11,13 +12,13 @@ type Route = {
 const ROUTES = {
   dashboard: {
     to: "/",
-    component: <Dashboard />,
+    component: <DashboardPage />,
     label: "Dashboard",
     icon: LayoutDashboard,
   },
   download: {
     to: "/download",
-    component: <></>,
+    component: <DownloadPage />,
     label: "Download",
     icon: Download,
   },
