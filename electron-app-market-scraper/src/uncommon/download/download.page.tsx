@@ -2,11 +2,17 @@ import { Cookie, Download, User } from "lucide-react";
 import BasicPageWrapper from "src/common/components/base-page-wrapper";
 import BasicPageInfo from "src/common/components/basic-page-info";
 import Button from "src/common/components/button";
-import Card from "src/common/components/card";
-import Input from "src/common/components/input";
-import RecentActivity from "./recent-activity";
 
-const DownloadPage = () => {
+import RecentActivity from "./recent-activity";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "src/common/components/card";
+import { Input, InputContainer, InputLabel } from "src/common/components/input";
+
+const DownloadAllPage = () => {
   return (
     <BasicPageWrapper>
       <BasicPageInfo
@@ -17,37 +23,38 @@ const DownloadPage = () => {
         Icon={Download}
       />
       <Card>
-        <Card.Header>
-          <Card.Title>Steam Credentials</Card.Title>
-        </Card.Header>
-        <Card.Content>
-          <form className="space-y-4">
-            <Input.Container>
-              <Input.Label htmlFor="steamId">Steam ID / Name / ID</Input.Label>
-              <Input
-                id="steamId"
-                type="text"
-                placeholder="Enter your Steam ID, name, or ID"
-                leftIcon={<User />}
-              />
-            </Input.Container>
-
-            <Input.Container>
-              <Input.Label htmlFor="cookies">Cookies</Input.Label>
-              <Input
-                id="cookies"
-                type="password"
-                placeholder="Enter your cookies"
-                leftIcon={<Cookie />}
-              />
-            </Input.Container>
-            <Button type="submit">Start Fetching</Button>
+        <CardHeader>
+          <CardTitle>Steam Credentials</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <form onSubmit={(e) => e.preventDefault()} className="space-y-4">
+            <div className="flex flex-wrap gap-4">
+              <InputContainer className="flex-1 min-w-full md:min-w-0 space-y-2">
+                <InputLabel htmlFor="steamId">Steam ID / Name / ID</InputLabel>
+                <Input
+                  id="steamId"
+                  type="text"
+                  placeholder="Enter your Steam ID, name, or ID"
+                  leftIcon={<User size={20} />}
+                />
+              </InputContainer>
+              <InputContainer className="flex-1 min-w-full md:min-w-0 space-y-2">
+                <InputLabel htmlFor="cookies">Cookies</InputLabel>
+                <Input
+                  id="cookies"
+                  type="password"
+                  placeholder="Enter your cookies"
+                  leftIcon={<Cookie size={20} />}
+                />
+              </InputContainer>
+            </div>
+            <Button type="submit">Start Fetching...</Button>
           </form>
-        </Card.Content>
+        </CardContent>
       </Card>
       <RecentActivity />
     </BasicPageWrapper>
   );
 };
 
-export default DownloadPage;
+export default DownloadAllPage;

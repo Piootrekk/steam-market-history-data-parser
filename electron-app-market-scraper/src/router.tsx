@@ -9,8 +9,12 @@ const Router = () => {
         <Route path={ROUTES.dashboard.to} element={<LeftNavLayout />}>
           <Route index element={ROUTES.dashboard.component} />
           <Route
-            path={ROUTES.download.to}
-            element={ROUTES.download.component}
+            path={ROUTES.downloadAll.to}
+            element={ROUTES.downloadAll.component}
+          />
+          <Route
+            path={ROUTES.downloadAmount.to}
+            element={ROUTES.downloadAmount.component}
           />
           <Route
             path={ROUTES.accounts.to}

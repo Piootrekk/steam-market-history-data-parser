@@ -176,3 +176,34 @@
     @apply cursor-pointer;
   }
 }
+
+@layer components {
+  .scroll-area {
+    -webkit-overflow-scrolling: auto;
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+  }
+
+  .scroll-area:hover,
+  .scroll-area:focus-within {
+    scrollbar-color: var(--color-muted-foreground) transparent;
+  }
+
+  .scroll-area::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  .scroll-area::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scroll-area::-webkit-scrollbar-thumb {
+    background: transparent;
+  }
+
+  .scroll-area:hover::-webkit-scrollbar-thumb,
+  .scroll-area:focus-within::-webkit-scrollbar-thumb {
+    background: var(--color-muted-foreground);
+  }
+}

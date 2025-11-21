@@ -93,7 +93,5 @@ const Input = ({
     </div>
   );
 };
-Input.Container = InputContainer;
-Input.Label = InputLabel;
 
-export default Input;
+export { Input, InputContainer, InputLabel };

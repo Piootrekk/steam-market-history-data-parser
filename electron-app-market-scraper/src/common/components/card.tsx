@@ -44,11 +44,4 @@ const CardContent = ({ className, ...rest }: CardProps) => {
   return <div className={cn("p-6 pt-0", className)} {...rest} />;
 };
 
-// rounded-lg border text-card-foreground shadow-sm bg-gradient-card shadow-card hover:shadow-elevated transition-all duration-200
-
-Card.Header = CardHeader;
-Card.Title = CardTitle;
-Card.Description = CardDescription;
-Card.Content = CardContent;
-
-export default Card;
+export { Card, CardHeader, CardTitle, CardContent, CardDescription };
