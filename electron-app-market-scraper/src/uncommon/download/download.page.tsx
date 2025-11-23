@@ -16,7 +16,7 @@ const DownloadAllPage = () => {
   return (
     <BasicPageWrapper>
       <BasicPageInfo
-        name={"Fetch all new data"}
+        name={"Fetch all user data"}
         desc={
           "Fetch the full Steam Market transaction history for the currently account."
         }
