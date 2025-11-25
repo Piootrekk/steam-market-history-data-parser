@@ -8,5 +8,7 @@ declare namespace NodeJS {
 }
 
 interface Window {
-  ipcRenderer: import("electron").IpcRenderer;
+  electronAPI: {
+    connectionCheck: (callback: (value: string) => void) => void;
+  };
 }

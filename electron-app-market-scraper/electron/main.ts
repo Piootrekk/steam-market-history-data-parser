@@ -15,7 +15,7 @@ process.env.VITE_PUBLIC = VITE_DEV_SERVER_URL
   : RENDERER_DIST;
 
 const createWindow = () => {
-  const win = new BrowserWindow({
+  const mainWindow = new BrowserWindow({
     width: 900,
     height: 670,
     minWidth: 400,
@@ -28,15 +28,18 @@ const createWindow = () => {
       sandbox: true,
     },
   });
-  setupRenderer(win);
-};
+  setupRenderer(mainWindow);
 
-const setupRenderer = (win: BrowserWindow) => {
+  mainWindow.webContents.on("did-finish-load", () => {
+    getInitConnectionTest(mainWindow);
+  });
+};
+const setupRenderer = (mainWindow: BrowserWindow) => {
   if (VITE_DEV_SERVER_URL) {
-    win.loadURL(VITE_DEV_SERVER_URL);
-    win.webContents.openDevTools();
+    mainWindow.loadURL(VITE_DEV_SERVER_URL);
+    mainWindow.webContents.openDevTools();
   } else {
-    win.loadFile(path.join(RENDERER_DIST, "index.html"));
+    mainWindow.loadFile(path.join(RENDERER_DIST, "index.html"));
   }
 };
 
@@ -51,5 +54,9 @@ app.on("activate", () => {
     createWindow();
   }
 });
+
+const getInitConnectionTest = (window: BrowserWindow) => {
+  window.webContents.send("connection-test", "Connection success");
+};
 
 app.whenReady().then(createWindow);

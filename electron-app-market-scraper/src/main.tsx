@@ -12,6 +12,6 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
 
 document.body.setAttribute("data-theme", getBasePrefersColorSchema());
 
-window.ipcRenderer.on("main-process-message", (_event, message) => {
-  console.log(message);
+window.electronAPI.connectionCheck((value) => {
+  console.log("Counter updated: ", value);
 });

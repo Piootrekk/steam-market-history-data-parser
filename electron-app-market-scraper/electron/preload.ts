@@ -1,22 +1,12 @@
-import { ipcRenderer, contextBridge } from "electron";
+import { contextBridge, ipcRenderer, type IpcRendererEvent } from "electron";
 
-contextBridge.exposeInMainWorld("ipcRenderer", {
-  on(...args: Parameters<typeof ipcRenderer.on>) {
-    const [channel, listener] = args;
-    return ipcRenderer.on(channel, (event, ...args) =>
-      listener(event, ...args)
+contextBridge.exposeInMainWorld("electronAPI", {
+  connectionCheck: (callback: (value: string) => void) => {
+    ipcRenderer.on(
+      "connection-test",
+      (_event: IpcRendererEvent, value: string) => {
+        callback(value);
+      }
     );
   },
-  off(...args: Parameters<typeof ipcRenderer.off>) {
-    const [channel, ...omit] = args;
-    return ipcRenderer.off(channel, ...omit);
-  },
-  send(...args: Parameters<typeof ipcRenderer.send>) {
-    const [channel, ...omit] = args;
-    return ipcRenderer.send(channel, ...omit);
-  },
-  invoke(...args: Parameters<typeof ipcRenderer.invoke>) {
-    const [channel, ...omit] = args;
-    return ipcRenderer.invoke(channel, ...omit);
-  },
-});
+} satisfies Window["electronAPI"]);

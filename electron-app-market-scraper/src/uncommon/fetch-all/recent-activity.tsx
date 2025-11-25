@@ -99,7 +99,7 @@ const RecentActivity = () => {
       </CardHeader>
       <CardContent className="flex flex-col ">
         <ScrollArea className=" h-80" direction="horizontal">
-          <div className="px-2">
+          <div className="pr-2">
             <div className="space-y-4">
               {activities.map((activity) => (
                 <RecentActivitySection key={activity.id} {...activity} />

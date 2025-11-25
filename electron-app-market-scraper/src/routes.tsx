@@ -7,7 +7,7 @@ import {
   User,
 } from "lucide-react";
 import DashboardPage from "./uncommon/dashboard/dashboard.page";
-import DownloadAllPage from "./uncommon/download/download.page";
+import DownloadAllPage from "./uncommon/fetch-all/download.page";
 
 type Route = {
   to: string;

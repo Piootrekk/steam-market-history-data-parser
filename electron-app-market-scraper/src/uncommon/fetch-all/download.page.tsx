@@ -1,4 +1,4 @@
-import { Cookie, Download, User } from "lucide-react";
+import { Cookie, Files, User } from "lucide-react";
 import BasicPageWrapper from "src/common/components/base-page-wrapper";
 import BasicPageInfo from "src/common/components/basic-page-info";
 import Button from "src/common/components/button";
@@ -20,7 +20,7 @@ const DownloadAllPage = () => {
         desc={
           "Fetch the full Steam Market transaction history for the currently account."
         }
-        Icon={Download}
+        Icon={Files}
       />
       <Card>
         <CardHeader>

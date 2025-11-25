@@ -32,14 +32,16 @@ const RecentActivitySection = ({
           activityStyles[activityStyle]
         )}
       >
-        <Icon className={cn("h-5 w-5")} />
+        <Icon className="h-5 w-5" />
       </div>
+
       <div className="flex-1 min-w-0 space-y-1.5">
-        <div className="flex items-center justify-between gap-3">
-          <div className="flex items-center gap-2">
-            <span className="text-sm font-semibold text-foreground uppercase">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <div className="flex items-center gap-2 min-w-0 flex-wrap">
+            <span className="text-sm font-semibold text-foreground uppercase truncate">
               {title}
             </span>
+
             <Badge
               variant="outline"
               className={cn(
@@ -50,10 +52,12 @@ const RecentActivitySection = ({
               {activityStyle}
             </Badge>
           </div>
+
           <p className="text-xs text-muted-foreground whitespace-nowrap">
             {time}
           </p>
         </div>
+
         <p className="text-sm text-muted-foreground leading-relaxed">
           {message}
         </p>
