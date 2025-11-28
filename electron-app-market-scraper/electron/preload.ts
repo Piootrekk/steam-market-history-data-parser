@@ -1,9 +1,9 @@
 import { contextBridge, ipcRenderer, type IpcRendererEvent } from "electron";
 
 contextBridge.exposeInMainWorld("electronAPI", {
-  connectionCheck: (callback: (value: string) => void) => {
-    ipcRenderer.on(
-      "connection-test",
+  setupCheck: (callback: (value: string) => void) => {
+    ipcRenderer.once(
+      "init-setup-check",
       (_event: IpcRendererEvent, value: string) => {
         callback(value);
       }

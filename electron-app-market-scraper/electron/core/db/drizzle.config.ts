@@ -1,13 +1,10 @@
 import type { Config } from "drizzle-kit";
-import path from "path";
 
-const drizzleConfig = {
+export default {
   dialect: "sqlite",
-  schema: path.resolve(__dirname, "./schema.ts"),
-  out: path.resolve(__dirname, "./migrations"),
+  schema: "./electron/core/db/schema.ts",
+  out: "./electron/core/db/migrations",
   dbCredentials: {
-    url: path.resolve(__dirname, "./database.db"),
+    url: process.env.DB_PATH ?? "./electron/core/db/database.db",
   },
 } satisfies Config;
-
-export { drizzleConfig };

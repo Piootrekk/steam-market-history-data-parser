@@ -12,6 +12,6 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
 
 document.body.setAttribute("data-theme", getBasePrefersColorSchema());
 
-window.electronAPI.connectionCheck((value) => {
-  console.log("Counter updated: ", value);
+window.electronAPI.setupCheck((value) => {
+  console.log("Initialize desktop app: ", value);
 });

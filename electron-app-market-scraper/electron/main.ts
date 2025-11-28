@@ -1,18 +1,6 @@
 import { app, BrowserWindow } from "electron";
-import { fileURLToPath } from "node:url";
 import path from "node:path";
-
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-
-process.env.APP_ROOT = path.join(__dirname, "..");
-
-export const VITE_DEV_SERVER_URL = process.env["VITE_DEV_SERVER_URL"];
-export const MAIN_DIST = path.join(process.env.APP_ROOT, "dist-electron");
-export const RENDERER_DIST = path.join(process.env.APP_ROOT, "dist");
-
-process.env.VITE_PUBLIC = VITE_DEV_SERVER_URL
-  ? path.join(process.env.APP_ROOT, "public")
-  : RENDERER_DIST;
+import { PRELOAD_PATH, RENDERER_DIST, VITE_DEV_SERVER_URL } from "./env";
 
 const createWindow = () => {
   const mainWindow = new BrowserWindow({
@@ -22,7 +10,7 @@ const createWindow = () => {
     minHeight: 400,
     autoHideMenuBar: true,
     webPreferences: {
-      preload: path.join(__dirname, "preload.mjs"),
+      preload: PRELOAD_PATH,
       nodeIntegration: false,
       contextIsolation: true,
       sandbox: true,
@@ -31,9 +19,10 @@ const createWindow = () => {
   setupRenderer(mainWindow);
 
   mainWindow.webContents.on("did-finish-load", () => {
-    getInitConnectionTest(mainWindow);
+    initConnectionCheck(mainWindow);
   });
 };
+
 const setupRenderer = (mainWindow: BrowserWindow) => {
   if (VITE_DEV_SERVER_URL) {
     mainWindow.loadURL(VITE_DEV_SERVER_URL);
@@ -55,8 +44,11 @@ app.on("activate", () => {
   }
 });
 
-const getInitConnectionTest = (window: BrowserWindow) => {
-  window.webContents.send("connection-test", "Connection success");
+const initConnectionCheck = (window: BrowserWindow) => {
+  window.webContents.send("init-setup-check", "Connection success");
 };
 
-app.whenReady().then(createWindow);
+app.whenReady().then(() => {
+  createWindow();
+  console.log(process.env.DB_PATH);
+});

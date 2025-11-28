@@ -11,8 +11,9 @@
   "scripts": {
     "dev": "vite",
     "db:generate": "drizzle-kit generate --config electron/core/db/drizzle.config.ts",
+    "db:push": "drizzle-kit push --config electron/core/db/drizzle.config.ts",
     "db:migrate": "drizzle-kit migrate --config electron/core/db/drizzle.config.ts",
-    "db:studio": "drizzle-kit studio --config electron/core/db/drizzle.config.ts"
+    "db:studio": "drizzle-kit studio --port=5001 --config electron/core/db/drizzle.config.ts"
   },
   "dependencies": {
     "better-sqlite3": "^12.4.1",

@@ -9,6 +9,6 @@ declare namespace NodeJS {
 
 interface Window {
   electronAPI: {
-    connectionCheck: (callback: (value: string) => void) => void;
+    setupCheck: (callback: (value: string) => void) => void;
   };
 }
