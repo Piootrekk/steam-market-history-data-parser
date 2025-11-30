@@ -10,16 +10,17 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "rebuild": "electron-rebuild -f -w better-sqlite3",
     "db:generate": "drizzle-kit generate --config electron/core/db/drizzle.config.ts",
     "db:push": "drizzle-kit push --config electron/core/db/drizzle.config.ts",
     "db:migrate": "drizzle-kit migrate --config electron/core/db/drizzle.config.ts",
     "db:studio": "drizzle-kit studio --port=5001 --config electron/core/db/drizzle.config.ts"
   },
   "dependencies": {
-    "better-sqlite3": "^12.4.1",
+    "better-sqlite3": "^12.5.0",
     "clsx": "^2.1.1",
     "drizzle-orm": "^0.44.7",
-    "lucide-react": "^0.552.0",
+    "lucide-react": "^0.555.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-router-dom": "^7.9.5",
@@ -33,6 +34,7 @@
     "@vitejs/plugin-react": "^5.0.4",
     "drizzle-kit": "^0.31.6",
     "electron": "^39.0.0",
+    "electron-rebuild": "^3.2.9",
     "npm": "^11.6.0",
     "tailwindcss": "^4.1.16",
     "tsx": "^4.20.6",

@@ -3,9 +3,10 @@ import path from "node:path";
 import { app } from "electron";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+export const __filename = fileURLToPath(import.meta.url);
 
 process.env.APP_ROOT = path.join(__dirname, "..");
-process.env.DB_PATH = path.join(app.getPath("userData"), "data.db");
+process.env.DB_PATH = path.join(app.getPath("userData"), "database.db");
 
 const PRELOAD_PATH = path.join(__dirname, "preload.mjs");
 const VITE_DEV_SERVER_URL = process.env["VITE_DEV_SERVER_URL"];

@@ -1,5 +1,6 @@
-import { app, BrowserWindow } from "electron";
 import path from "node:path";
+import { app, BrowserWindow } from "electron";
+import { initDatabase } from "./core/db";
 import { PRELOAD_PATH, RENDERER_DIST, VITE_DEV_SERVER_URL } from "./env";
 
 const createWindow = () => {
@@ -48,7 +49,16 @@ const initConnectionCheck = (window: BrowserWindow) => {
   window.webContents.send("init-setup-check", "Connection success");
 };
 
-app.whenReady().then(() => {
-  createWindow();
-  console.log(process.env.DB_PATH);
+app.whenReady().then(async () => {
+  try {
+    const dbPath = path.join(app.getPath("userData"), "database.db");
+    console.log("PATH", dbPath);
+
+    await initDatabase(dbPath);
+
+    createWindow();
+  } catch (err) {
+    console.error("DB error or startup error:", err);
+    app.quit();
+  }
 });
