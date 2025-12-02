@@ -10,7 +10,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "rebuild": "electron-rebuild -f -w better-sqlite3",
+    "rebuild:electron": "electron-rebuild -f -w better-sqlite3",
+    "rebuild:node": "npm rebuild",
     "db:generate": "drizzle-kit generate --config electron/core/db/drizzle.config.ts",
     "db:push": "drizzle-kit push --config electron/core/db/drizzle.config.ts",
     "db:migrate": "drizzle-kit migrate --config electron/core/db/drizzle.config.ts",

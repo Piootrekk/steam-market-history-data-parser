@@ -1,18 +1,23 @@
 import { drizzle } from "drizzle-orm/better-sqlite3";
 import Database from "better-sqlite3";
 import * as schema from "./schema";
+import { migrate } from "drizzle-orm/better-sqlite3/migrator";
 
-let db: ReturnType<typeof drizzle> | null = null;
 let sqlite: Database.Database | null = null;
+let db: ReturnType<typeof drizzle> | null = null;
 
-const initDatabase = async (userDataPath: string) => {
+const initDatabase = (userDataPath: string) => {
   if (!userDataPath || typeof userDataPath !== "string") {
     throw new Error("initDatabase requires a valid filesystem path");
   }
   sqlite = new Database(userDataPath);
   sqlite.pragma("journal_mode = WAL");
   db = drizzle(sqlite, { schema });
-  console.log("DB CREATED at", userDataPath);
+};
+
+const runMigrate = (migrationsFolderPath: string) => {
+  if (db === null) throw new Error("Db not defined, initialize it first");
+  migrate(db, { migrationsFolder: migrationsFolderPath });
 };
 
 const getDb = () => {
@@ -31,4 +36,4 @@ const closeDbConnection = () => {
   }
 };
 
-export { getDb, initDatabase, closeDbConnection };
+export { getDb, initDatabase, closeDbConnection, runMigrate };

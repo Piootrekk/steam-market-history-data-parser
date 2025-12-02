@@ -5,6 +5,7 @@ declare namespace NodeJS {
     APP_ROOT: string;
     VITE_PUBLIC: string;
     DB_PATH: string;
+    MIGRATION_PATH: string;
   }
 }
 

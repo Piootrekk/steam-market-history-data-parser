@@ -5,6 +5,6 @@ export default {
   schema: "./electron/core/db/schema.ts",
   out: "./electron/core/db/migrations",
   dbCredentials: {
-    url: process.env.DB_PATH ?? "./electron/core/db/database.db",
+    url: process.env.DB_PATH,
   },
 } satisfies Config;
