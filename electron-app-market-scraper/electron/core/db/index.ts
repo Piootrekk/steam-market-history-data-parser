@@ -33,7 +33,7 @@ const closeDbConnection = () => {
     db = null;
     sqlite = null;
     console.log("Database connection closed");
-  }
+  } else throw new Error("Connection already closed");
 };
 
 export { getDb, initDatabase, closeDbConnection, runMigrate };

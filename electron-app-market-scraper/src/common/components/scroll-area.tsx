@@ -1,8 +1,17 @@
 import { cn } from "../utils/merge-styles";
 
+type ScrollContainerProps = React.ComponentProps<"div">;
+
+const ScrollContainer = ({ className, children }: ScrollContainerProps) => {
+  return (
+    <div className={cn("h-[calc(95vh-(var(--spacing)*12))] w-full", className)}>
+      {children}
+    </div>
+  );
+};
+
 type ScrollAreaProps = {
-  direction: keyof typeof directionStyles;
-  ariaLabel?: string;
+  direction?: keyof typeof directionStyles;
 } & React.ComponentProps<"div">;
 
 const directionStyles = {
@@ -14,23 +23,26 @@ const ScrollArea = ({
   className = "",
   children,
   direction = "horizontal",
-  ariaLabel = "Scroll area",
+  "aria-label": ariaLabel = "Scroll area",
   ...rest
 }: ScrollAreaProps) => {
   return (
-    <div
-      role="region"
-      aria-label={ariaLabel}
-      tabIndex={0}
-      className={cn(
-        directionStyles[direction],
-        "focus:outline-none focus-visible:ring-2 ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
-        className
-      )}
-      {...rest}
-    >
-      {children}
-    </div>
+    <ScrollContainer>
+      <div
+        role="region"
+        aria-label={ariaLabel}
+        tabIndex={0}
+        className={cn(
+          directionStyles[direction],
+
+          "h-full overscroll-contain focus:outline-none focus-visible:ring-2 ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-ring focus-visible:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50",
+          className
+        )}
+        {...rest}
+      >
+        {children}
+      </div>
+    </ScrollContainer>
   );
 };
 export { ScrollArea };
