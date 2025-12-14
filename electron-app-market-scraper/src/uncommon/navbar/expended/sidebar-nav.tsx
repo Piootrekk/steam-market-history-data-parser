@@ -1,4 +1,4 @@
-import NavLink from "src/common/components/navlink";
+import NavLink from "src/common/components/primitives/navlink";
 import type { Route } from "src/routes";
 import SideBarSubCategoryExpended from "./sub-category";
 import { Users2 } from "lucide-react";

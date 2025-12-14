@@ -1,6 +1,6 @@
 import { LayoutDashboard } from "lucide-react";
-import BasicPageWrapper from "src/common/components/base-page-wrapper";
-import BasicPageInfo from "src/common/components/basic-page-info";
+import BasicPageWrapper from "src/common/components/composites/base-page-wrapper";
+import BasicPageInfo from "src/common/components/composites/basic-page-info";
 
 const DashboardPage = () => {
   return (

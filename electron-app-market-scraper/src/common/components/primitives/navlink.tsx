@@ -3,7 +3,7 @@ import {
   type NavLinkProps as NavRouterLinkProps,
 } from "react-router-dom";
 import { baseStyles, sizes, variants } from "./base-styles";
-import { cn } from "../utils/merge-styles";
+import { cn } from "../../utils/merge-styles";
 
 type NavLink = NavRouterLinkProps & {
   className?: string;

@@ -4,66 +4,10 @@ import {
   CardHeader,
   CardTitle,
   CardContent,
-} from "src/common/components/card";
+} from "src/common/components/primitives/card";
 import RecentActivitySection from "./recent-activity-section";
 
 const activities = [
-  {
-    id: 1,
-    title: "fetch",
-    message: "Successfully fetched user data from API",
-    time: "2 minutes ago",
-    activityStyle: "success" as const,
-    Icon: CheckCircle2,
-  },
-  {
-    id: 1,
-    title: "fetch",
-    message: "Successfully fetched user data from API",
-    time: "2 minutes ago",
-    activityStyle: "success" as const,
-    Icon: CheckCircle2,
-  },
-  {
-    id: 1,
-    title: "fetch",
-    message: "Successfully fetched user data from API",
-    time: "2 minutes ago",
-    activityStyle: "success" as const,
-    Icon: CheckCircle2,
-  },
-  {
-    id: 1,
-    title: "fetch",
-    message: "Successfully fetched user data from API",
-    time: "2 minutes ago",
-    activityStyle: "success" as const,
-    Icon: CheckCircle2,
-  },
-  {
-    id: 1,
-    title: "fetch",
-    message: "Successfully fetched user data from API",
-    time: "2 minutes ago",
-    activityStyle: "success" as const,
-    Icon: CheckCircle2,
-  },
-  {
-    id: 1,
-    title: "fetch",
-    message: "Successfully fetched user data from API",
-    time: "2 minutes ago",
-    activityStyle: "success" as const,
-    Icon: CheckCircle2,
-  },
-  {
-    id: 1,
-    title: "fetch",
-    message: "Successfully fetched user data from API",
-    time: "2 minutes ago",
-    activityStyle: "success" as const,
-    Icon: CheckCircle2,
-  },
   {
     id: 1,
     title: "fetch",

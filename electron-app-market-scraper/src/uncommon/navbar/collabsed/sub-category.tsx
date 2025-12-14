@@ -1,6 +1,6 @@
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { useState } from "react";
-import Button from "src/common/components/button";
+import Button from "src/common/components/primitives/button";
 
 type SideBarSubCategoryCollabsedProsp = {
   children: React.ReactNode;

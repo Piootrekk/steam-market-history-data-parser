@@ -1,4 +1,4 @@
-import { cn } from "../utils/merge-styles";
+import { cn } from "../../utils/merge-styles";
 
 type CardProps = React.ComponentProps<"div">;
 

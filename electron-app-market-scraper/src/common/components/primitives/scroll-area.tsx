@@ -1,10 +1,12 @@
-import { cn } from "../utils/merge-styles";
+import { cn } from "../../utils/merge-styles";
 
 type ScrollContainerProps = React.ComponentProps<"div">;
 
 const ScrollContainer = ({ className, children }: ScrollContainerProps) => {
   return (
-    <div className={cn("h-[calc(95vh-(var(--spacing)*12))] w-full", className)}>
+    <div
+      className={cn("h-[calc(95vh-(var(--spacing)*12))] w-full ", className)}
+    >
       {children}
     </div>
   );

@@ -1,7 +1,7 @@
 import { Cookie, Files, User } from "lucide-react";
-import BasicPageWrapper from "src/common/components/base-page-wrapper";
-import BasicPageInfo from "src/common/components/basic-page-info";
-import Button from "src/common/components/button";
+import BasicPageWrapper from "src/common/components/composites/base-page-wrapper";
+import BasicPageInfo from "src/common/components/composites/basic-page-info";
+import Button from "src/common/components/primitives/button";
 
 import RecentActivity from "./recent-activity";
 import {
@@ -9,14 +9,18 @@ import {
   CardContent,
   CardHeader,
   CardTitle,
-} from "src/common/components/card";
-import { Input, InputContainer, InputLabel } from "src/common/components/input";
-import { ScrollArea } from "src/common/components/scroll-area";
+} from "src/common/components/primitives/card";
+import {
+  Input,
+  InputContainer,
+  InputLabel,
+} from "src/common/components/primitives/input";
+import { ScrollArea } from "src/common/components/primitives/scroll-area";
 
 const DownloadAllPage = () => {
   return (
     <BasicPageWrapper>
-      <ScrollArea className="space-y-6 flex flex-col">
+      <ScrollArea className="space-y-6 flex flex-col pr-2">
         <BasicPageInfo
           name={"Fetch all user data"}
           desc={
@@ -38,7 +42,7 @@ const DownloadAllPage = () => {
                   <Input
                     id="steamId"
                     type="text"
-                    placeholder="Enter your Steam ID, name, or ID"
+                    placeholder="Enter your Steam ID, name, or fetch identity"
                     leftIcon={<User size={20} />}
                   />
                 </InputContainer>
