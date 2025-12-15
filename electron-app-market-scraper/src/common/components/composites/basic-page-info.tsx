@@ -13,7 +13,7 @@ const BasicPageInfo = ({ name, desc, Icon }: BasicPageInfoProps) => {
         </div>
         <h1 className="text-3xl font-bold text-foreground">{name}</h1>
       </div>
-      <p className="text-muted-foreground mt-2">{desc}</p>
+      <p className="text-muted-foreground">{desc}</p>
     </>
   );
 };

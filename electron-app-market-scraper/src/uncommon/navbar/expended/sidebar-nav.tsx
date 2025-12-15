@@ -1,4 +1,4 @@
-import NavLink from "src/common/components/primitives/navlink";
+import NavLinkProps from "src/common/components/primitives/navlink";
 import type { Route } from "src/routes";
 import SideBarSubCategoryExpended from "./sub-category";
 import { Users2 } from "lucide-react";
@@ -7,10 +7,14 @@ type CurrentSideBarProps = Route;
 
 const CurrentSideBar = ({ to, icon: Icon, label }: CurrentSideBarProps) => {
   return (
-    <NavLink to={to} key={label} className={"w-full justify-start gap-3 h-10"}>
+    <NavLinkProps
+      to={to}
+      key={label}
+      className={"w-full justify-start gap-3 h-10"}
+    >
       <Icon className="h-5 w-5 shrink-0" />
       <span className="truncate">{label}</span>
-    </NavLink>
+    </NavLinkProps>
   );
 };
 

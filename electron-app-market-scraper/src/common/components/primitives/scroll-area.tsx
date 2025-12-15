@@ -5,7 +5,10 @@ type ScrollContainerProps = React.ComponentProps<"div">;
 const ScrollContainer = ({ className, children }: ScrollContainerProps) => {
   return (
     <div
-      className={cn("h-[calc(95vh-(var(--spacing)*12))] w-full ", className)}
+      className={cn(
+        "h-[calc(95vh-(var(--spacing)*12))] w-full focus-visible:ring-2 ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-ring focus-visible:ring-offset-1",
+        className
+      )}
     >
       {children}
     </div>
@@ -37,7 +40,7 @@ const ScrollArea = ({
         className={cn(
           directionStyles[direction],
 
-          "h-full overscroll-contain focus:outline-none focus-visible:ring-2 ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-ring focus-visible:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50",
+          "h-full w-full overscroll-contain focus:outline-none  disabled:cursor-not-allowed disabled:opacity-50",
           className
         )}
         {...rest}

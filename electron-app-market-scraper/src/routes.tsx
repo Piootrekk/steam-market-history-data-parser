@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import DashboardPage from "./uncommon/dashboard/dashboard.page";
 import DownloadAllPage from "./uncommon/fetch-all/download.page";
+import FetchedDataLayout from "./uncommon/fetched-data/fetched-data.layout";
 
 type Route = {
   to: string;
@@ -36,8 +37,8 @@ const ROUTES = {
     icon: File,
   },
   accounts: {
-    to: "/account",
-    component: <></>,
+    to: "/accounts",
+    component: <FetchedDataLayout />,
     label: "Accounts",
     icon: User,
   },

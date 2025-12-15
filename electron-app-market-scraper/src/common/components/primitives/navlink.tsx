@@ -5,10 +5,10 @@ import {
 import { baseStyles, sizes, variants } from "./base-styles";
 import { cn } from "../../utils/merge-styles";
 
-type NavLink = NavRouterLinkProps & {
+type NavLinkProps = NavRouterLinkProps & {
   className?: string;
 };
-const NavLink = ({ className, ...props }: NavLink) => {
+const NavLink = ({ className, ...props }: NavLinkProps) => {
   return (
     <NavRouterLink
       {...props}

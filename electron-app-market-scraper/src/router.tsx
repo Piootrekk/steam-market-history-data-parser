@@ -1,5 +1,5 @@
 import { HashRouter, Route, Routes } from "react-router-dom";
-import LeftNavLayout from "./uncommon/layout/left-nav-layout";
+import LeftNavLayout from "./uncommon/navbar/sidebar.layout";
 import { ROUTES } from "./routes";
 
 const Router = () => {
