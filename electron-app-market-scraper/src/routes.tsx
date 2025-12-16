@@ -56,5 +56,26 @@ const ROUTES = {
   },
 } as const satisfies Record<string, Route>;
 
-export { ROUTES };
+const ACCOUNT_ROUTES = [
+  {
+    to: "/account1",
+    component: <FetchedDataLayout />,
+    label: "account1",
+    icon: User,
+  },
+  {
+    to: "/account2",
+    component: <FetchedDataLayout />,
+    label: "account2",
+    icon: User,
+  },
+  {
+    to: "/account3",
+    component: <FetchedDataLayout />,
+    label: "account3",
+    icon: User,
+  },
+] satisfies Route[];
+
+export { ROUTES, ACCOUNT_ROUTES };
 export type { Route };

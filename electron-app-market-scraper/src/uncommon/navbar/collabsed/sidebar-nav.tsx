@@ -1,7 +1,8 @@
 import NavLink from "src/common/components/primitives/navlink";
-import type { Route } from "src/routes";
+import { ACCOUNT_ROUTES, ROUTES, type Route } from "src/routes";
 import SideBarSubCategoryCollabsed from "./sub-category";
 import { Users2 } from "lucide-react";
+import ToolTip from "src/common/components/primitives/tooltip";
 
 type CurrentSideBarProps = Route;
 
@@ -17,17 +18,31 @@ const CurrentSideBar = ({ to, icon: Icon, label }: CurrentSideBarProps) => {
   );
 };
 
-type SideBarNavProps = {
-  sidebarItems: Route[];
-};
-
-const SideBarNavCollabsed = ({ sidebarItems }: SideBarNavProps) => {
+const SideBarNavCollabsed = () => {
+  const routesArray = Object.values(ROUTES);
+  const accountSubArray = Object.values(ACCOUNT_ROUTES);
   return (
     <nav className="flex-1 p-2 space-y-1">
-      {sidebarItems.map((item) => (
-        <CurrentSideBar key={item.to} {...item} />
+      {routesArray.map((route, index) => (
+        <ToolTip
+          key={`${route.label}-${index}`}
+          side="right"
+          message={route.label}
+        >
+          <CurrentSideBar {...route} />
+        </ToolTip>
       ))}
-      <SideBarSubCategoryCollabsed children={undefined} icon={Users2} />
+      <SideBarSubCategoryCollabsed icon={Users2}>
+        {accountSubArray.map((route, index) => (
+          <ToolTip
+            key={`${route.label}-${index}`}
+            side="right"
+            message={route.label}
+          >
+            <CurrentSideBar {...route} />
+          </ToolTip>
+        ))}
+      </SideBarSubCategoryCollabsed>
     </nav>
   );
 };

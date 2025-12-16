@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { cn } from "../../common/utils/merge-styles";
-import { ROUTES } from "../../routes";
 import SidebarHeaderCollapsed from "./collabsed/sidebar-header";
 import SidebarHeaderExtended from "./expended/sidebar-header";
 import SideBarNavCollabsed from "./collabsed/sidebar-nav";
@@ -10,7 +9,7 @@ const appTitle = "Market History Manager";
 
 const Sidebar = () => {
   const [isCollabsed, setIsCollabsed] = useState(false);
-  const routesArray = Object.values(ROUTES);
+
   return (
     <aside
       className={cn(
@@ -26,11 +25,7 @@ const Sidebar = () => {
           onToggle={() => setIsCollabsed(!isCollabsed)}
         />
       )}
-      {isCollabsed ? (
-        <SideBarNavCollabsed sidebarItems={routesArray} />
-      ) : (
-        <SideBarNavExtended sidebarItems={routesArray} />
-      )}
+      {isCollabsed ? <SideBarNavCollabsed /> : <SideBarNavExtended />}
     </aside>
   );
 };
