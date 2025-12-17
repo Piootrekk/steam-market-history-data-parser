@@ -6,10 +6,10 @@ import ToolTip from "src/common/components/primitives/tooltip";
 
 type CurrentSideBarProps = Route;
 
-const CurrentSideBar = ({ to, icon: Icon, label }: CurrentSideBarProps) => {
+const CurrentSideBar = ({ path, icon: Icon, label }: CurrentSideBarProps) => {
   return (
     <NavLink
-      to={to}
+      to={path}
       key={label}
       className={"w-full gap-3 h-10 justify-center px-0"}
     >

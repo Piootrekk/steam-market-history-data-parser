@@ -5,10 +5,10 @@ import { Users2 } from "lucide-react";
 
 type CurrentSideBarProps = Route;
 
-const CurrentSideBar = ({ to, icon: Icon, label }: CurrentSideBarProps) => {
+const CurrentSideBar = ({ path, icon: Icon, label }: CurrentSideBarProps) => {
   return (
     <NavLinkProps
-      to={to}
+      to={path}
       key={label}
       className={"w-full justify-start gap-3 h-10"}
     >
@@ -24,11 +24,11 @@ const SideBarNavExtended = () => {
   return (
     <nav className="flex-1 p-2 space-y-1">
       {routesArray.map((route) => (
-        <CurrentSideBar key={route.to} {...route} />
+        <CurrentSideBar key={route.path} {...route} />
       ))}
       <SideBarSubCategoryExpended icon={Users2} name={"Users"}>
         {accountSubArray.map((route) => (
-          <CurrentSideBar key={route.to} {...route} />
+          <CurrentSideBar key={route.path} {...route} />
         ))}
       </SideBarSubCategoryExpended>
     </nav>

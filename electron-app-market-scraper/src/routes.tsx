@@ -11,71 +11,65 @@ import DownloadAllPage from "./uncommon/fetch-all/download.page";
 import FetchedDataLayout from "./uncommon/fetched-data/fetched-data.layout";
 
 type Route = {
-  to: string;
-  component: React.ReactElement;
+  path: string;
+  element: React.ReactElement;
   label: string;
   icon: React.ElementType;
 };
 
 const ROUTES = {
   dashboard: {
-    to: "/",
-    component: <DashboardPage />,
+    path: "/",
+    element: <DashboardPage />,
     label: "Dashboard",
     icon: LayoutDashboard,
   },
   downloadAll: {
-    to: "/download/all",
-    component: <DownloadAllPage />,
+    path: "/download/all",
+    element: <DownloadAllPage />,
     label: "Download All",
     icon: Files,
   },
   downloadAmount: {
-    to: "/download/amount",
-    component: <DownloadAllPage />,
+    path: "/download/amount",
+    element: <></>,
     label: "Download Amount",
     icon: File,
   },
-  accounts: {
-    to: "/accounts",
-    component: <FetchedDataLayout />,
-    label: "Accounts",
-    icon: User,
-  },
   about: {
-    to: "/about",
-    component: <></>,
+    path: "/about",
+    element: <></>,
     label: "About",
     icon: Info,
   },
   settings: {
-    to: "/settings",
-    component: <></>,
+    path: "/settings",
+    element: <></>,
     label: "Settings",
     icon: Settings,
   },
 } as const satisfies Record<string, Route>;
 
-const ACCOUNT_ROUTES = [
-  {
-    to: "/account1",
-    component: <FetchedDataLayout />,
+const ACCOUNT_ROUTES = {
+  account1: {
+    path: "/account1",
+    element: <FetchedDataLayout />,
     label: "account1",
     icon: User,
   },
-  {
-    to: "/account2",
-    component: <FetchedDataLayout />,
+  account2: {
+    path: "/account2",
+    element: <FetchedDataLayout />,
     label: "account2",
     icon: User,
   },
-  {
-    to: "/account3",
-    component: <FetchedDataLayout />,
+  account3: {
+    path: "/account3",
+    element: <FetchedDataLayout />,
     label: "account3",
     icon: User,
   },
-] satisfies Route[];
+} satisfies Record<string, Route>;
 
 export { ROUTES, ACCOUNT_ROUTES };
 export type { Route };
