@@ -26,7 +26,7 @@ const RecentActivity = () => {
       </CardHeader>
       <CardContent>
         <div className="pr-2">
-          <div className="space-y-4">
+          <div className="space-y-1">
             {activities.map((activity) => (
               <RecentActivitySection key={activity.id} {...activity} />
             ))}

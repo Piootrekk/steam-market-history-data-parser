@@ -1,9 +1,11 @@
 import type { ClassValue } from "clsx";
 import { cn } from "src/common/utils/merge-styles";
+import { Card } from "./card";
+import { createPortal } from "react-dom";
+import { useEffect, useRef, useState } from "react";
 
 type ToolTipProps = {
   side?: "left" | "right" | "top" | "bottom";
-  show?: boolean;
   message: string;
 } & React.ComponentProps<"div">;
 
@@ -44,31 +46,91 @@ const ToolTip = ({
   side = "right",
   ...props
 }: ToolTipProps) => {
-  return (
-    <div className="relative group">
-      {children}
-      <div
-        {...props}
-        className={cn(
-          "absolute z-50 px-3 py-1.5 text-sm rounded-md whitespace-nowrap",
-          "bg-popover text-popover-foreground border border-border shadow-md",
-          "opacity-0 invisible group-hover:opacity-100 group-hover:visible",
-          "transition-opacity duration-150",
-          positionClasses[side],
-          className
-        )}
-      >
-        {message}
+  const [isVisible, setIsVisible] = useState(false);
+  const [position, setPosition] = useState({ top: 0, left: 0 });
+  const triggerRef = useRef<HTMLDivElement>(null);
 
-        <span className={caretWrapperClasses[side]}>
-          <span
-            className={cn("relative block w-0 h-0", caretBorderClasses[side])}
-          >
-            <span className={cn("block w-0 h-0", caretInnerClasses[side])} />
-          </span>
+  useEffect(() => {
+    if (!isVisible || !triggerRef.current) return;
+
+    const updatePosition = () => {
+      const rect = triggerRef.current!.getBoundingClientRect();
+      const spacing = 1;
+
+      let top = 0;
+      let left = 0;
+
+      switch (side) {
+        case "top":
+          top = rect.top - spacing;
+          left = rect.left + rect.width / 2;
+          break;
+        case "bottom":
+          top = rect.bottom + spacing;
+          left = rect.left + rect.width / 2;
+          break;
+        case "left":
+          top = rect.top + rect.height / 2;
+          left = rect.left - spacing;
+          break;
+        case "right":
+          top = rect.top + rect.height / 2;
+          left = rect.right + spacing;
+          break;
+      }
+
+      setPosition({ top, left });
+    };
+
+    updatePosition();
+    window.addEventListener("scroll", updatePosition, true);
+    window.addEventListener("resize", updatePosition);
+
+    return () => {
+      window.removeEventListener("scroll", updatePosition, true);
+      window.removeEventListener("resize", updatePosition);
+    };
+  }, [isVisible, side]);
+
+  const tooltipContent = isVisible && (
+    <Card
+      {...props}
+      style={{
+        position: "absolute",
+        top: `${position.top}px`,
+        left: `${position.left}px`,
+        zIndex: 9999,
+      }}
+      className={cn(
+        "px-3 py-1.5 text-sm rounded-md whitespace-nowrap",
+        "transition-opacity duration-150",
+        positionClasses[side],
+        className
+      )}
+    >
+      {message}
+
+      <span className={caretWrapperClasses[side]}>
+        <span
+          className={cn("relative block w-0 h-0", caretBorderClasses[side])}
+        >
+          <span className={cn("block w-0 h-0", caretInnerClasses[side])} />
         </span>
+      </span>
+    </Card>
+  );
+
+  return (
+    <>
+      <div
+        ref={triggerRef}
+        onMouseEnter={() => setIsVisible(true)}
+        onMouseLeave={() => setIsVisible(false)}
+      >
+        {children}
       </div>
-    </div>
+      {createPortal(tooltipContent, document.body)}
+    </>
   );
 };
 

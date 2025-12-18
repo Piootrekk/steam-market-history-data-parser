@@ -1,5 +1,6 @@
 import os from "os";
 import path from "path";
+import pkg from "../../../package.json";
 
 const getAppdataPath = () => {
   const home = os.homedir();
@@ -17,12 +18,7 @@ const getAppdataPath = () => {
 
 const getDbPath = () => {
   const appdataPath = getAppdataPath();
-  const dbPath = path.join(
-    appdataPath,
-    "electron-app-market-history-scraper",
-    "database.db"
-  );
-  console.log("PATH: ", dbPath);
+  const dbPath = path.join(appdataPath, pkg.name, "database.db");
   return dbPath;
 };
 

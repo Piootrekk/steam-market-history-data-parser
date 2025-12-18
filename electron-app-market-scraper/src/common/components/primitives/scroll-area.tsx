@@ -6,7 +6,7 @@ const ScrollContainer = ({ className, children }: ScrollContainerProps) => {
   return (
     <div
       className={cn(
-        "h-[calc(95vh-(var(--spacing)*12))] w-full focus-visible:ring-2 ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-ring focus-visible:ring-offset-1",
+        "h-[calc(95vh-(var(--spacing)*12))]  w-full focus-visible:ring-2 ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-ring focus-visible:ring-offset-1",
         className
       )}
     >
@@ -32,22 +32,38 @@ const ScrollArea = ({
   ...rest
 }: ScrollAreaProps) => {
   return (
-    <ScrollContainer>
-      <div
-        role="region"
-        aria-label={ariaLabel}
-        tabIndex={0}
-        className={cn(
-          directionStyles[direction],
+    <div
+      role="region"
+      aria-label={ariaLabel}
+      tabIndex={0}
+      className={cn(
+        directionStyles[direction],
+        "h-full w-full overscroll-contain focus:outline-none  disabled:cursor-not-allowed disabled:opacity-50",
+        className
+      )}
+      {...rest}
+    >
+      {children}
+    </div>
+  );
+};
 
-          "h-full w-full overscroll-contain focus:outline-none  disabled:cursor-not-allowed disabled:opacity-50",
-          className
-        )}
+const ScrollAreaContainer = ({
+  className,
+  children,
+  direction = "horizontal",
+  "aria-label": ariaLabel = "Scroll area",
+  ...rest
+}: ScrollAreaProps) => {
+  return (
+    <ScrollContainer>
+      <ScrollArea
+        className={cn(directionStyles[direction], className)}
         {...rest}
       >
         {children}
-      </div>
+      </ScrollArea>
     </ScrollContainer>
   );
 };
-export { ScrollArea };
+export { ScrollAreaContainer, ScrollArea, ScrollContainer };

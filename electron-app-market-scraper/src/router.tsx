@@ -1,5 +1,5 @@
 import { HashRouter, Route, Routes } from "react-router-dom";
-import LeftNavLayout from "./uncommon/navbar/sidebar.layout";
+import MainWithNavLayout from "./uncommon/navbar/sidebar.layout";
 import { ACCOUNT_ROUTES, ROUTES } from "./routes";
 
 const Router = () => {
@@ -8,7 +8,7 @@ const Router = () => {
   return (
     <HashRouter>
       <Routes>
-        <Route path={dashboard.path} element={<LeftNavLayout />}>
+        <Route path={dashboard.path} element={<MainWithNavLayout />}>
           <Route index element={dashboard.element} />
           <Route {...downloadAll} />
           <Route {...downloadAmount} />

@@ -4,8 +4,10 @@ import SideBarSubCategoryCollabsed from "./sub-category";
 import { Users2 } from "lucide-react";
 import ToolTip from "src/common/components/primitives/tooltip";
 
-type CurrentSideBarProps = Route;
+const accountSubArray = Object.values(ACCOUNT_ROUTES);
+const routesArray = Object.values(ROUTES);
 
+type CurrentSideBarProps = Route;
 const CurrentSideBar = ({ path, icon: Icon, label }: CurrentSideBarProps) => {
   return (
     <NavLink
@@ -19,8 +21,6 @@ const CurrentSideBar = ({ path, icon: Icon, label }: CurrentSideBarProps) => {
 };
 
 const SideBarNavCollabsed = () => {
-  const routesArray = Object.values(ROUTES);
-  const accountSubArray = Object.values(ACCOUNT_ROUTES);
   return (
     <nav className="flex-1 p-2 space-y-1">
       {routesArray.map((route, index) => (
