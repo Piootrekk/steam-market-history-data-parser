@@ -1,12 +1,7 @@
-import { contextBridge, ipcRenderer, type IpcRendererEvent } from "electron";
+import { contextBridge } from "electron";
+import { ipcRendererAdapter } from "./ipc-adapter/ipc.preload.adapter";
 
 contextBridge.exposeInMainWorld("electronAPI", {
-  setupCheck: (callback: (value: string) => void) => {
-    ipcRenderer.once(
-      "init-setup-check",
-      (_event: IpcRendererEvent, value: string) => {
-        callback(value);
-      }
-    );
-  },
+  setupCheck: (callback) =>
+    ipcRendererAdapter.once("init-setup-check", callback),
 } satisfies Window["electronAPI"]);

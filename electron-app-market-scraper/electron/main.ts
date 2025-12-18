@@ -2,6 +2,7 @@ import path from "node:path";
 import { app, BrowserWindow } from "electron";
 import { initDatabase, runMigrate } from "./core/db";
 import { PRELOAD_PATH, RENDERER_DIST, VITE_DEV_SERVER_URL } from "./env";
+import { ipcMainAdapter } from "./ipc-adapter/ipc.main.adapter";
 
 const createWindow = () => {
   const mainWindow = new BrowserWindow({
@@ -45,10 +46,6 @@ app.on("activate", () => {
   }
 });
 
-const initConnectionCheck = (window: BrowserWindow) => {
-  window.webContents.send("init-setup-check", "Connection success");
-};
-
 app.whenReady().then(async () => {
   try {
     const dbPath = path.join(app.getPath("userData"), "database.db");
@@ -61,3 +58,7 @@ app.whenReady().then(async () => {
     app.quit();
   }
 });
+
+const initConnectionCheck = (window: BrowserWindow) => {
+  ipcMainAdapter.send(window, "init-setup-check", "Connection success");
+};
