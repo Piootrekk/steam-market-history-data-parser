@@ -3,37 +3,35 @@ import Database from "better-sqlite3";
 import * as schema from "./schema";
 import { migrate } from "drizzle-orm/better-sqlite3/migrator";
 
-let sqlite: Database.Database | null = null;
-let db: ReturnType<typeof drizzle> | null = null;
+type Db = ReturnType<typeof drizzle>;
+type Client = Database.Database;
 
-const initDatabase = (userDataPath: string) => {
-  if (!userDataPath || typeof userDataPath !== "string") {
+const getClientInit = (userDataPath: string): Client => {
+  if (!userDataPath) {
     throw new Error("initDatabase requires a valid filesystem path");
   }
-  sqlite = new Database(userDataPath);
-  sqlite.pragma("journal_mode = WAL");
-  db = drizzle(sqlite, { schema });
+  const sqliteClient = new Database(userDataPath);
+  sqliteClient.pragma("foreign_keys = ON");
+  sqliteClient.pragma("journal_mode = WAL");
+  return sqliteClient;
 };
 
-const runMigrate = (migrationsFolderPath: string) => {
+const getDatabaseInit = (client: Client): Db => {
+  const db = drizzle(client, { schema });
+  return db;
+};
+
+const runMigrate = (migrationsFolderPath: string, db: Db) => {
   if (db === null) throw new Error("Db not defined, initialize it first");
   migrate(db, { migrationsFolder: migrationsFolderPath });
 };
 
-const getDb = () => {
-  if (!db) {
-    throw new Error("Database not initialized. Call initDatabase first.");
-  }
-  return db;
-};
-
-const closeDbConnection = () => {
-  if (sqlite) {
-    sqlite.close();
-    db = null;
-    sqlite = null;
+const closeDbConnection = (client: Client) => {
+  if (client) {
+    client.close();
     console.log("Database connection closed");
   } else throw new Error("Connection already closed");
 };
 
-export { getDb, initDatabase, closeDbConnection, runMigrate };
+export { getDatabaseInit, closeDbConnection, runMigrate, getClientInit };
+export type { Db, Client };

@@ -1,12 +1,22 @@
 import { relations, sql } from "drizzle-orm";
 import { integer, real, sqliteTable, text } from "drizzle-orm/sqlite-core";
 
+const accountTable = sqliteTable("accounts", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  createdAt: integer("time_event")
+    .notNull()
+    .default(sql`(strftime('%s', 'now'))`),
+  steamId: text("steam_id").notNull().unique(),
+});
+
 const snapshotsTable = sqliteTable("snapshots", {
   id: integer("id").primaryKey({ autoIncrement: true }),
   createdAt: integer("time_event")
     .notNull()
     .default(sql`(strftime('%s', 'now'))`),
-  steamId: text("steam_id").notNull(),
+  accountId: integer("account_id")
+    .notNull()
+    .references(() => accountTable.id, { onDelete: "cascade" }),
 });
 
 const listingsTable = sqliteTable("listings", {
@@ -32,8 +42,16 @@ const listingsTable = sqliteTable("listings", {
     .references(() => snapshotsTable.id, { onDelete: "cascade" }),
 });
 
-const snapshotsRelations = relations(snapshotsTable, ({ many }) => ({
+const accountRelations = relations(accountTable, ({ many }) => ({
+  snapshots: many(snapshotsTable),
+}));
+
+const snapshotsRelations = relations(snapshotsTable, ({ many, one }) => ({
   listings: many(listingsTable),
+  account: one(accountTable, {
+    fields: [snapshotsTable.accountId],
+    references: [accountTable.id],
+  }),
 }));
 
 const listingsRelations = relations(listingsTable, ({ one }) => ({
@@ -43,4 +61,11 @@ const listingsRelations = relations(listingsTable, ({ one }) => ({
   }),
 }));
 
-export { listingsTable, snapshotsTable, snapshotsRelations, listingsRelations };
+export {
+  listingsTable,
+  snapshotsTable,
+  accountTable,
+  snapshotsRelations,
+  listingsRelations,
+  accountRelations,
+};

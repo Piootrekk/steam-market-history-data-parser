@@ -1,8 +1,8 @@
 import path from "node:path";
 import { app, BrowserWindow } from "electron";
-import { initDatabase, runMigrate } from "./core/db";
 import { PRELOAD_PATH, RENDERER_DIST, VITE_DEV_SERVER_URL } from "./env";
 import { ipcMainAdapter } from "./ipc-adapter/ipc.main.adapter";
+import { connectDb } from "./db.config";
 
 const createWindow = () => {
   const mainWindow = new BrowserWindow({
@@ -48,13 +48,10 @@ app.on("activate", () => {
 
 app.whenReady().then(async () => {
   try {
-    const dbPath = path.join(app.getPath("userData"), "database.db");
-    initDatabase(dbPath);
-    runMigrate(process.env.MIGRATION_PATH);
-
+    connectDb();
     createWindow();
   } catch (err) {
-    console.error("DB error or startup error:", err);
+    console.error("App launching error: ", err);
     app.quit();
   }
 });
