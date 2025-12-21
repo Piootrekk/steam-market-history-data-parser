@@ -1,25 +1,27 @@
 import { Outlet } from "react-router-dom";
 import BasicPageInfo from "src/common/components/composites/basic-page-info";
-import TabNav, { type TabNavLinks } from "./tab-nav";
+import TabNav from "./tab-nav";
 import { Database, RefreshCw, Table } from "lucide-react";
+import { ROUTE_PATHS, type NavRoutes } from "src/routes";
 
 const subtabs = [
   {
-    icon: RefreshCw,
-    path: "/sync",
-    label: "Synchronize",
-  },
-  {
-    icon: Table,
-    path: "/table",
+    path: ROUTE_PATHS.accountTable,
     label: "Table",
+    Icon: Table,
   },
   {
-    icon: Database,
-    path: "/db-config",
-    label: "Database Config",
+    path: ROUTE_PATHS.accountSync,
+    label: "Synchronize",
+    Icon: RefreshCw,
   },
-] satisfies TabNavLinks[];
+
+  {
+    path: ROUTE_PATHS.accountConfigDb,
+    label: "Database Config",
+    Icon: Database,
+  },
+] satisfies NavRoutes[];
 
 const AccountsLayout = () => {
   return (

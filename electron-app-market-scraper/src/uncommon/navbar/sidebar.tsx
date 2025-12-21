@@ -8,14 +8,13 @@ import {
   ScrollArea,
   ScrollContainer,
 } from "src/common/components/primitives/scroll-area";
-import type { NavRoutes } from "./sidebar.types";
-import { ROUTE_PATHS } from "src/routes";
-import { File, Files, Info, LayoutDashboard, User } from "lucide-react";
+import { ROUTE_PATHS, type NavRoutes } from "src/routes";
+import { File, Files, Info, LayoutDashboard, User, Users } from "lucide-react";
 import { useUserNavInvoices } from "./sidebar.loader";
 
 const appTitle = "Market History Manager";
 const navItems = [
-  { path: ROUTE_PATHS.dashborad, label: "Dashboard", Icon: LayoutDashboard },
+  { path: ROUTE_PATHS.dashboard, label: "Dashboard", Icon: LayoutDashboard },
   {
     path: ROUTE_PATHS.downloadAll,
     label: "Download All",
@@ -37,13 +36,22 @@ const Sidebar = () => {
   const [isCollabsed, setIsCollabsed] = useState(false);
   const accounts = useUserNavInvoices();
 
-  const accountsNav = accounts.map((account) => {
+  const accountsNavWithoutAll = accounts.map((account) => {
     return {
       path: `${ROUTE_PATHS.accounts}/${account}`,
       label: account,
       Icon: User,
     } satisfies NavRoutes;
   });
+
+  const accountsNav = [
+    {
+      path: `${ROUTE_PATHS.accounts}/${ROUTE_PATHS.accountsAll}`,
+      label: "All accounts",
+      Icon: Users,
+    } satisfies NavRoutes,
+    ...accountsNavWithoutAll,
+  ];
 
   return (
     <aside

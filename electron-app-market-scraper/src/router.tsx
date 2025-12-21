@@ -8,12 +8,13 @@ import AccountsLayout from "./uncommon/accounts/accounts.layout";
 
 const router = createHashRouter([
   {
-    path: "/",
+    path: ROUTE_PATHS.root,
     element: <MainWithNavLayout />,
     loader: usersNavLoader,
     children: [
       {
         index: true,
+        path: ROUTE_PATHS.dashboard,
         element: <DashboardPage />,
       },
       {
@@ -33,12 +34,22 @@ const router = createHashRouter([
         element: <></>,
       },
       {
-        path: ROUTE_PATHS.currentAccount,
-        element: <AccountsLayout />,
-      },
-      {
         path: ROUTE_PATHS.accounts,
-        element: <AccountsLayout />,
+        children: [
+          {
+            path: ROUTE_PATHS.accountsAll,
+            element: <></>,
+          },
+          {
+            path: ROUTE_PATHS.account,
+            element: <AccountsLayout />,
+            children: [
+              { index: true, path: ROUTE_PATHS.accountTable, element: <></> },
+              { path: ROUTE_PATHS.accountSync, element: <></> },
+              { path: ROUTE_PATHS.accountConfigDb, element: <></> },
+            ],
+          },
+        ],
       },
     ],
   },

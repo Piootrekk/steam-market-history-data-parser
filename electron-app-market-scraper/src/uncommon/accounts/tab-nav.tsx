@@ -1,13 +1,8 @@
 import NavLink from "src/common/components/primitives/navlink";
-
-type TabNavLinks = {
-  icon: React.ElementType;
-  path: string;
-  label: string;
-};
+import type { NavRoutes } from "src/routes";
 
 type TabNavProps = {
-  subtabs: TabNavLinks[];
+  subtabs: NavRoutes[];
 };
 
 const TabNav = ({ subtabs }: TabNavProps) => {
@@ -19,6 +14,7 @@ const TabNav = ({ subtabs }: TabNavProps) => {
             <NavLink
               key={`${subtab.path}-${id}`}
               to={subtab.path}
+              end
               className={`
                 px-1
                 flex-1 flex items-center justify-center gap-1 sm:gap-2
@@ -27,7 +23,7 @@ const TabNav = ({ subtabs }: TabNavProps) => {
                 min-w-0
               `}
             >
-              <subtab.icon className="h-4 w-4 shrink-0" />
+              <subtab.Icon className="h-4 w-4 shrink-0" />
               <span className="hidden sm:block truncate">{subtab.label}</span>
             </NavLink>
           ))}
@@ -38,4 +34,3 @@ const TabNav = ({ subtabs }: TabNavProps) => {
 };
 
 export default TabNav;
-export type { TabNavLinks };
