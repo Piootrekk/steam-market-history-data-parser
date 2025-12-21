@@ -21,7 +21,7 @@ const subtabs = [
   },
 ] satisfies TabNavLinks[];
 
-const FetchedDataLayout = () => {
+const AccountsLayout = () => {
   return (
     <>
       <BasicPageInfo
@@ -37,4 +37,4 @@ const FetchedDataLayout = () => {
   );
 };
 
-export default FetchedDataLayout;
+export default AccountsLayout;

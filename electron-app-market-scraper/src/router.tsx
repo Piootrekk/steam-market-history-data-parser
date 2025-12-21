@@ -1,26 +1,51 @@
-import { HashRouter, Route, Routes } from "react-router-dom";
+import { createHashRouter, RouterProvider } from "react-router-dom";
 import MainWithNavLayout from "./uncommon/navbar/sidebar.layout";
-import { ACCOUNT_ROUTES, ROUTES } from "./routes";
+import { usersNavLoader } from "./uncommon/navbar/sidebar.loader";
+import DashboardPage from "./uncommon/dashboard/dashboard.page";
+import DownloadAllPage from "./uncommon/fetch-all/download.page";
+import { ROUTE_PATHS } from "./routes";
+import AccountsLayout from "./uncommon/accounts/accounts.layout";
+
+const router = createHashRouter([
+  {
+    path: "/",
+    element: <MainWithNavLayout />,
+    loader: usersNavLoader,
+    children: [
+      {
+        index: true,
+        element: <DashboardPage />,
+      },
+      {
+        path: ROUTE_PATHS.downloadAll,
+        element: <DownloadAllPage />,
+      },
+      {
+        path: ROUTE_PATHS.downloadAmount,
+        element: <DownloadAllPage />,
+      },
+      {
+        path: ROUTE_PATHS.settings,
+        element: <></>,
+      },
+      {
+        path: ROUTE_PATHS.about,
+        element: <></>,
+      },
+      {
+        path: ROUTE_PATHS.currentAccount,
+        element: <AccountsLayout />,
+      },
+      {
+        path: ROUTE_PATHS.accounts,
+        element: <AccountsLayout />,
+      },
+    ],
+  },
+]);
 
 const Router = () => {
-  const { dashboard, downloadAll, downloadAmount, settings, about } = ROUTES;
-  const { account1, account2, account3 } = ACCOUNT_ROUTES;
-  return (
-    <HashRouter>
-      <Routes>
-        <Route path={dashboard.path} element={<MainWithNavLayout />}>
-          <Route index element={dashboard.element} />
-          <Route {...downloadAll} />
-          <Route {...downloadAmount} />
-          <Route {...settings} />
-          <Route {...about} />
-          <Route {...account1} />
-          <Route {...account2} />
-          <Route {...account3} />
-        </Route>
-      </Routes>
-    </HashRouter>
-  );
+  return <RouterProvider router={router} />;
 };
 
 export default Router;

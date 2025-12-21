@@ -1,11 +1,31 @@
 import NavLinkProps from "src/common/components/primitives/navlink";
-import { ACCOUNT_ROUTES, ROUTES, type Route } from "src/routes";
 import SideBarSubCategoryExpended from "./sub-category";
 import { Users2 } from "lucide-react";
+import type { NavRoutes } from "../sidebar.types";
 
-type CurrentSideBarProps = Route;
+type SideBarNavExtendedProps = {
+  routes: NavRoutes[];
+  accounts: NavRoutes[];
+};
 
-const CurrentSideBar = ({ path, icon: Icon, label }: CurrentSideBarProps) => {
+const SideBarNavExtended = ({ routes, accounts }: SideBarNavExtendedProps) => {
+  return (
+    <nav className="flex-1 p-2 space-y-1">
+      {routes.map((route) => (
+        <CurrentSideBar key={route.path} {...route} />
+      ))}
+      <SideBarSubCategoryExpended icon={Users2} name={"Users"}>
+        {accounts.map((account, index) => (
+          <CurrentSideBar key={`${account}-${index}`} {...account} />
+        ))}
+      </SideBarSubCategoryExpended>
+    </nav>
+  );
+};
+
+type CurrentSideBarProps = NavRoutes;
+
+const CurrentSideBar = ({ path, Icon, label }: CurrentSideBarProps) => {
   return (
     <NavLinkProps
       to={path}
@@ -15,23 +35,6 @@ const CurrentSideBar = ({ path, icon: Icon, label }: CurrentSideBarProps) => {
       <Icon className="h-5 w-5 shrink-0" />
       <span className="truncate">{label}</span>
     </NavLinkProps>
-  );
-};
-
-const SideBarNavExtended = () => {
-  const routesArray = Object.values(ROUTES);
-  const accountSubArray = Object.values(ACCOUNT_ROUTES);
-  return (
-    <nav className="flex-1 p-2 space-y-1">
-      {routesArray.map((route) => (
-        <CurrentSideBar key={route.path} {...route} />
-      ))}
-      <SideBarSubCategoryExpended icon={Users2} name={"Users"}>
-        {accountSubArray.map((route) => (
-          <CurrentSideBar key={route.path} {...route} />
-        ))}
-      </SideBarSubCategoryExpended>
-    </nav>
   );
 };
 

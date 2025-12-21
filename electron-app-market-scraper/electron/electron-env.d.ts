@@ -12,5 +12,6 @@ declare namespace NodeJS {
 interface Window {
   electronAPI: {
     setupCheck: (callback: (value: string) => void) => void;
+    getAllUsers: () => Promise<string[]>;
   };
 }
