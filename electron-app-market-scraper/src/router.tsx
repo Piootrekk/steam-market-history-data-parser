@@ -46,7 +46,7 @@ const router = createHashRouter([
             children: [
               { index: true, path: ROUTE_PATHS.accountTable, element: <></> },
               { path: ROUTE_PATHS.accountSync, element: <></> },
-              { path: ROUTE_PATHS.accountConfigDb, element: <></> },
+              { path: ROUTE_PATHS.accountConfig, element: <></> },
             ],
           },
         ],

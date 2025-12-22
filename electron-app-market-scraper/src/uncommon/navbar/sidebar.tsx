@@ -11,6 +11,8 @@ import {
 import { ROUTE_PATHS, type NavRoutes } from "src/routes";
 import { File, Files, Info, LayoutDashboard, User, Users } from "lucide-react";
 import { useUserNavInvoices } from "./sidebar.loader";
+import { useAccountSubRoute } from "./nav-tab-selected.hook";
+import { generatePath } from "react-router-dom";
 
 const appTitle = "Market History Manager";
 const navItems = [
@@ -35,14 +37,16 @@ const navItems = [
 const Sidebar = () => {
   const [isCollabsed, setIsCollabsed] = useState(false);
   const accounts = useUserNavInvoices();
+  const subRoute = useAccountSubRoute();
 
-  const accountsNavWithoutAll = accounts.map((account) => {
-    return {
-      path: `${ROUTE_PATHS.accounts}/${account}`,
-      label: account,
-      Icon: User,
-    } satisfies NavRoutes;
-  });
+  const accountsNavWithoutAll = accounts.map((accountId) => ({
+    label: accountId,
+    path: generatePath("/accounts/:accountId/:tab?", {
+      accountId,
+      tab: subRoute || null,
+    }),
+    Icon: User,
+  }));
 
   const accountsNav = [
     {

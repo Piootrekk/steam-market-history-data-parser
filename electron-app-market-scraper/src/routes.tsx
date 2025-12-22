@@ -12,7 +12,7 @@ const ROUTE_PATHS = {
 
   accountTable: "",
   accountSync: "sync",
-  accountConfigDb: "config",
+  accountConfig: "config",
 } as const satisfies Record<string, string>;
 
 type NavRoutes = {

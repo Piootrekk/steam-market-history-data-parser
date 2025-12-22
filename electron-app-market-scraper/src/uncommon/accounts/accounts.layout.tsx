@@ -17,7 +17,7 @@ const subtabs = [
   },
 
   {
-    path: ROUTE_PATHS.accountConfigDb,
+    path: ROUTE_PATHS.accountConfig,
     label: "Database Config",
     Icon: Database,
   },
