@@ -1,5 +1,5 @@
-import type { Db } from ".";
-import { accountTable } from "./schema";
+import type { Db } from "..";
+import { accountTable } from "../schema";
 
 const getAllSteamIdsFromAccounts = async (db: Db) => {
   const steamIds = await db

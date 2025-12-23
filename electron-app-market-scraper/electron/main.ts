@@ -3,7 +3,7 @@ import { app, BrowserWindow } from "electron";
 import { PRELOAD_PATH, RENDERER_DIST, VITE_DEV_SERVER_URL } from "./env";
 import { ipcMainAdapter } from "./ipc-adapter/ipc.main.adapter";
 import { connectDb, getDbInstance } from "./db.config";
-import { getAllSteamIdsFromAccounts } from "./core/db/queries";
+import { getAllSteamIdsFromAccounts } from "./core/db/queries/get";
 
 const createWindow = () => {
   const mainWindow = new BrowserWindow({

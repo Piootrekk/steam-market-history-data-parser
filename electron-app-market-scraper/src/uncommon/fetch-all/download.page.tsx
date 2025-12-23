@@ -13,8 +13,15 @@ import {
   InputContainer,
   InputLabel,
 } from "src/common/components/primitives/input";
+import type { FormEvent } from "react";
 
 const DownloadAllPage = () => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    const formData = new FormData(event.currentTarget);
+    const steamId = formData.get("steamId");
+    const steamCookies = formData.get("cookies");
+  };
+
   return (
     <>
       <BasicPageInfo
@@ -29,12 +36,12 @@ const DownloadAllPage = () => {
           <CardTitle>Steam Credentials</CardTitle>
         </CardHeader>
         <CardContent>
-          <form onSubmit={(e) => e.preventDefault()} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-4">
             <div className="flex flex-wrap gap-4">
               <InputContainer className="flex-1 min-w-full md:min-w-0 space-y-2">
                 <InputLabel htmlFor="steamId">Steam ID / Name / ID</InputLabel>
                 <Input
-                  id="steamId"
+                  name="steamId"
                   type="text"
                   placeholder="Enter your Steam ID, name, or fetch identity"
                   leftIcon={<User size={20} />}
@@ -43,7 +50,7 @@ const DownloadAllPage = () => {
               <InputContainer className="flex-1 min-w-full md:min-w-0 space-y-2">
                 <InputLabel htmlFor="cookies">Cookies</InputLabel>
                 <Input
-                  id="cookies"
+                  name="cookies"
                   type="password"
                   placeholder="Enter your cookies"
                   leftIcon={<Cookie size={20} />}
