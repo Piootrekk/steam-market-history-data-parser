@@ -11,6 +11,7 @@ const router = createHashRouter([
     path: ROUTE_PATHS.root,
     element: <MainWithNavLayout />,
     loader: usersNavLoader,
+    shouldRevalidate: () => false,
     children: [
       {
         index: true,

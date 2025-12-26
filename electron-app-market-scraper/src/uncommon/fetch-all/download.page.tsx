@@ -1,4 +1,4 @@
-import { Cookie, Files, User } from "lucide-react";
+import { AlertTriangle, Cookie, Files, User } from "lucide-react";
 import BasicPageInfo from "src/common/components/composites/basic-page-info";
 import Button from "src/common/components/primitives/button";
 import RecentActivity from "./recent-activity";
@@ -13,13 +13,24 @@ import {
   InputContainer,
   InputLabel,
 } from "src/common/components/primitives/input";
-import type { FormEvent } from "react";
+import { useState, type FormEvent } from "react";
 
 const DownloadAllPage = () => {
+  const [error, setError] = useState<string | null>(null);
+
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    event.stopPropagation();
     const formData = new FormData(event.currentTarget);
     const steamId = formData.get("steamId");
     const steamCookies = formData.get("cookies");
+    if (!steamId || !steamCookies) {
+      setError("Fill inputs before start fetching.");
+      return;
+    } else {
+      if (error) setError(null);
+      return;
+    }
   };
 
   return (
@@ -57,7 +68,15 @@ const DownloadAllPage = () => {
                 />
               </InputContainer>
             </div>
-            <Button type="submit">Start Fetching...</Button>
+            <div className="flex flex-wrap gap-4 items-center">
+              <Button type="submit">Start Fetching...</Button>
+              {error && (
+                <p className="text-destructive flex flex-row gap-2 items-center">
+                  <AlertTriangle size={22} />
+                  {error}
+                </p>
+              )}
+            </div>
           </form>
         </CardContent>
       </Card>

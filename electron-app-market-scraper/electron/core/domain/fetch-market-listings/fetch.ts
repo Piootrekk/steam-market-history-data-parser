@@ -4,12 +4,14 @@ import type {
   MarketRawResponse,
 } from "./raw-fetch-response.types";
 
-const fetchMarketHistory = async (
-  start: number,
-  count: number,
-  cookies: string
-) => {
-  const response = await fetchMarketHistoryResponse(start, count, cookies);
+type FetchParams = {
+  start: number;
+  count: number;
+  cookies: string;
+};
+
+const fetchMarketHistory = async (fetchConfig: FetchParams) => {
+  const response = await fetchMarketHistoryResponse(fetchConfig);
   if (response.status === 429)
     throw new FetchError("Response 429", "ToManyRequestsError");
   else if (!response.ok)
@@ -32,11 +34,8 @@ const isIncorrectResponse = (
   );
 };
 
-const fetchMarketHistoryResponse = async (
-  start: number,
-  count: number,
-  cookies: string
-) => {
+const fetchMarketHistoryResponse = async (fetchConfig: FetchParams) => {
+  const { start, count, cookies } = fetchConfig;
   const url = new URL("https://steamcommunity.com/market/myhistory/render/");
   const queryParams = new URLSearchParams({
     start: start.toString(),
@@ -54,3 +53,4 @@ const fetchMarketHistoryResponse = async (
 };
 
 export { fetchMarketHistory };
+export type { FetchParams };

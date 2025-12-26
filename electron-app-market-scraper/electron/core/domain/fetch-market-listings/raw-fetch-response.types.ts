@@ -105,13 +105,13 @@ type CurrentPurchase = {
   };
   paid_amount: number;
   paid_fee: number;
-  currencyid: string;
+  currencyid: `${number}`;
   steam_fee: number;
   publisher_fee: number;
   publisher_fee_percent: string;
   publisher_fee_app: number;
   received_amount: number;
-  received_currencyid: string;
+  received_currencyid: `${number}`;
   funds_held: number;
   time_funds_held_until: number;
   funds_revoked: number;
