@@ -1,5 +1,8 @@
 import { getFetchError } from "../global-utils/custom-error";
 import { fetchMarketHistory, type FetchParams } from "./fetch";
+import type { MarketFetchResponse } from "./raw-fetch-response.types";
+import { mergeResponse } from "./transforms/summary-all-transforms";
+import { transformDto, type TransformDto } from "./transforms/transform.dto";
 
 const sleep = async (timeMs: number): Promise<void> => {
   return new Promise((resolve) => setTimeout(resolve, timeMs));
@@ -47,7 +50,15 @@ const retryFetchAttemptsIfFailed = async (
   throw lastError;
 };
 
-const calculateBatch = (min: number, count: number, totalCount: number) => {};
+const getTransformedCorrectResponse = async (
+  resp: MarketFetchResponse,
+  actionCorrectLogger: (reponseDto: TransformDto) => Promise<void> | void
+) => {
+  const transformedResponse = mergeResponse(resp);
+  const responseDto = transformDto(transformedResponse);
+  await actionCorrectLogger(responseDto);
+  return responseDto;
+};
 
-export { retryFetchAttemptsIfFailed, calculateBatch };
+export { retryFetchAttemptsIfFailed, getTransformedCorrectResponse };
 export type { FetchRetryParams };

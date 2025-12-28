@@ -4,6 +4,8 @@ import { getSelectedCurrecyISO } from "./steam-currencies";
 import { getPrice } from "./steam-price";
 import type { MergeResponse } from "./summary-all-transforms";
 
+type TransformDto = ReturnType<typeof transformDto>;
+
 const transformDto = (response: MergeResponse) => {
   return response.map((resp) => {
     return {
@@ -38,3 +40,4 @@ const transformDto = (response: MergeResponse) => {
 };
 
 export { transformDto };
+export type { TransformDto };

@@ -17,6 +17,8 @@ const fetchMarketHistory = async (fetchConfig: FetchParams) => {
   else if (!response.ok)
     throw new FetchError("Response not okay", "ResponseNotOk");
   const data: MarketRawResponse = await response.json();
+  if (data.total_count === 0)
+    throw new Error("Cookies expired or there is no data to fetch");
   if (isIncorrectResponse(data))
     throw new FetchError("Invalid data", "InvalidResponseError");
   return data;

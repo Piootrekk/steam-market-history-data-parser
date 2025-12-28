@@ -1,6 +1,8 @@
 import { getAllCurrentAssets } from "./assets-transforms";
 import type { MarketFetchResponse } from "../raw-fetch-response.types";
 
+type MergeResponse = ReturnType<typeof mergeResponse>;
+
 const mergeResponse = (response: MarketFetchResponse) => {
   const assets = getAllCurrentAssets(response.assets);
   const connectedMarketData = response.events.map((event) => {
@@ -18,8 +20,6 @@ const mergeResponse = (response: MarketFetchResponse) => {
   });
   return connectedMarketData;
 };
-
-type MergeResponse = ReturnType<typeof mergeResponse>;
 
 export { mergeResponse };
 export type { MergeResponse };
