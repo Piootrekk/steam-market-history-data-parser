@@ -1,27 +1,28 @@
 import { BrowserWindow, ipcMain } from "electron";
-import type { AppEventHandlers } from "./ipc.payload";
+import type {
+  Channel,
+  HandlerArgs,
+  HandlerFn,
+  HandlerFnWithEvent,
+} from "./ipc.payload";
 
 const ipcMainAdapter = {
-  send<K extends keyof AppEventHandlers>(
+  send<K extends Channel>(
     window: BrowserWindow,
     channel: K,
-    ...args: Parameters<AppEventHandlers[K]>
-  ) {
+    ...args: HandlerArgs<K>
+  ): void {
     window.webContents.send(channel, ...args);
   },
-  handle<K extends keyof AppEventHandlers>(
-    channel: K,
-    callback: AppEventHandlers[K]
-  ) {
-    ipcMain.handle(channel, (_event, ...args) => {
-      return callback(...args);
+
+  handle<K extends Channel>(channel: K, callback: HandlerFnWithEvent<K>): void {
+    ipcMain.handle(channel, (event, ...args: HandlerArgs<K>) => {
+      return callback(event, ...args);
     });
   },
-  on<K extends keyof AppEventHandlers>(
-    channel: K,
-    callback: AppEventHandlers[K]
-  ) {
-    ipcMain.on(channel, (_event, ...args) => {
+
+  on<K extends Channel>(channel: K, callback: HandlerFn<K>): void {
+    ipcMain.on(channel, (_event, ...args: HandlerArgs<K>) => {
       callback(...args);
     });
   },

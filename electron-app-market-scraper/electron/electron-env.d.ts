@@ -13,5 +13,18 @@ interface Window {
   electronAPI: {
     setupCheck: (callback: (value: string) => void) => void;
     getAllUsers: () => Promise<string[]>;
+    startFetchingAll: (
+      steamId: string,
+      cookies: string
+    ) => Promise<{ jobId: string }>;
+    progressFetchingAll: (
+      callback: (
+        jobId: string,
+        completed: number,
+        total: number,
+        status: "success" | "error",
+        message?: string
+      ) => void
+    ) => void;
   };
 }
