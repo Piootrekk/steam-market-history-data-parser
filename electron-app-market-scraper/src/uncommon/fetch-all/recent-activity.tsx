@@ -6,19 +6,19 @@ import {
   CardContent,
 } from "src/common/components/primitives/card";
 import RecentActivitySection from "./recent-activity-section";
+import type { FetchProgress } from "./progress.types";
 
-const activities = [
-  {
-    id: 1,
-    title: "fetch",
-    message: "Successfully fetched user data from API",
-    time: "2 minutes ago",
-    activityStyle: "success" as const,
-    Icon: CheckCircle2,
-  },
-];
+const activitiesDefault = {
+  title: "Fetch",
+  activityStyle: "success" as const,
+  Icon: CheckCircle2,
+};
 
-const RecentActivity = () => {
+type RecentActivityProps = {
+  activities: FetchProgress[];
+};
+
+const RecentActivity = ({ activities }: RecentActivityProps) => {
   return (
     <Card>
       <CardHeader>
@@ -26,10 +26,20 @@ const RecentActivity = () => {
       </CardHeader>
       <CardContent>
         <div className="pr-2">
-          <div className="space-y-1">
-            {activities.map((activity) => (
-              <RecentActivitySection key={activity.id} {...activity} />
-            ))}
+          <div className="space-y-4">
+            {activities.length > 0 &&
+              activities.map((activity) => (
+                <RecentActivitySection
+                  key={activity.timestamp}
+                  {...activitiesDefault}
+                  {...activity}
+                />
+              ))}
+            {activities.length === 0 && (
+              <p className="text-sm text-muted-foreground">
+                There's no recent activities.
+              </p>
+            )}
           </div>
         </div>
       </CardContent>

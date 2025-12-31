@@ -8,7 +8,7 @@ const startFetchingAll = async (
 ) => {
   const jobId = randomUUID();
   const webContents = event.sender;
-  progressFetchingAll(webContents, steamid, cookies);
+  progressFetchingAll(webContents, jobId, steamid, cookies);
   return { jobId };
 };
 
@@ -27,18 +27,22 @@ const test = async (iteration: number) => {
 
 const progressFetchingAll = async (
   webContents: Electron.WebContents,
+  jobId: string,
   steamid: string,
   cookies: string
 ) => {
   const total = 5;
   for (let index = 1; index <= total; index++) {
     const { current, status, message } = await test(index);
+    const timestamp = Date.now();
     ipcWebContentsAdapter.send(
       webContents,
       "fetch:all:progress",
+      jobId,
       current,
       total,
       status,
+      timestamp,
       message
     );
     console.log("SEND xDD ", { current, total, status, message });

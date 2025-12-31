@@ -32,9 +32,10 @@ const ipcWebContentsAdapter = {
   send<K extends Channel>(
     wc: WebContents,
     channel: K,
+    jobId: string,
     ...args: HandlerArgs<K>
   ): void {
-    wc.send(channel, ...args);
+    wc.send(channel, jobId, ...args);
   },
 };
 

@@ -12,7 +12,13 @@ type EventHandlers = {
     response: Promise<{ jobId: string }>;
   };
   "fetch:all:progress": {
-    args: [currnet: number, total: number, status: string, message?: string];
+    args: [
+      currnet: number,
+      total: number,
+      status: string,
+      timestamp: number,
+      message?: string
+    ];
     response: void;
   };
 };

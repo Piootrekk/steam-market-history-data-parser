@@ -14,10 +14,10 @@ import {
   InputLabel,
 } from "src/common/components/primitives/input";
 import { Form } from "react-router-dom";
-import { useFetchAllHistoryAction } from "./download.action";
+import { useFetchAllHistoryAction } from "./download.hook";
 
 const DownloadAllPage = () => {
-  const { error, data, loading } = useFetchAllHistoryAction();
+  const { error, loading, logs } = useFetchAllHistoryAction();
   return (
     <>
       <BasicPageInfo
@@ -67,7 +67,7 @@ const DownloadAllPage = () => {
           </Form>
         </CardContent>
       </Card>
-      <RecentActivity />
+      <RecentActivity activities={logs} />
     </>
   );
 };

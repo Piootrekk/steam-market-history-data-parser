@@ -31,7 +31,7 @@ const ipcRendererAdapter = {
     ) => callback(...args);
     ipcRenderer.on(channel, listener);
     return () => {
-      ipcRenderer.removeListener("fetch:progress", listener);
+      ipcRenderer.removeListener(channel, listener);
     };
   },
 };

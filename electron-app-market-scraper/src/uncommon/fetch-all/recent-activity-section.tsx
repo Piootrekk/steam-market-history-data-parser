@@ -6,8 +6,8 @@ type RecentActivitySectionProps = {
   activityStyle: keyof typeof activityStyles;
   Icon: React.ElementType;
   title: string;
-  time: string;
-  message: string;
+  message?: string;
+  timestamp: number;
 };
 
 const activityStyles = {
@@ -21,7 +21,7 @@ const RecentActivitySection = ({
   activityStyle = "info",
   Icon = Info,
   title,
-  time,
+  timestamp,
   message,
 }: RecentActivitySectionProps) => {
   return (
@@ -54,7 +54,7 @@ const RecentActivitySection = ({
           </div>
 
           <p className="text-xs text-muted-foreground whitespace-nowrap">
-            {time}
+            {timestamp}
           </p>
         </div>
 
