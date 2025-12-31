@@ -24,10 +24,15 @@ const ipcRendererAdapter = {
     ipcRenderer.send(channel, ...args);
   },
 
-  on<K extends Channel>(channel: K, callback: HandlerFn<K>): void {
-    ipcRenderer.on(channel, (_event, ...args: HandlerArgs<K>) => {
-      callback(...args);
-    });
+  on<K extends Channel>(channel: K, callback: HandlerFn<K>) {
+    const listener = (
+      _event: Electron.IpcRendererEvent,
+      ...args: HandlerArgs<K>
+    ) => callback(...args);
+    ipcRenderer.on(channel, listener);
+    return () => {
+      ipcRenderer.removeListener("fetch:progress", listener);
+    };
   },
 };
 

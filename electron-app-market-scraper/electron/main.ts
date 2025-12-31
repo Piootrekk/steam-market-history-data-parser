@@ -2,9 +2,8 @@ import path from "node:path";
 import { app, BrowserWindow } from "electron";
 import { PRELOAD_PATH, RENDERER_DIST, VITE_DEV_SERVER_URL } from "./env";
 import { ipcMainAdapter } from "./ipc-adapter/ipc.main.adapter";
-import { connectDb, getDbInstance } from "./db.config";
-import { getAllSteamIdsFromAccounts } from "./core/db/queries/get";
-import { randomUUID } from "crypto";
+import { connectDb } from "./db.config";
+import { registerAllHandlers } from "./handlers";
 
 const createWindow = () => {
   const mainWindow = new BrowserWindow({
@@ -59,22 +58,6 @@ app.whenReady().then(() => {
   }
 });
 
-const registerAllHandlers = () => {
-  ipcMainAdapter.handle("db:getAllUsers", getAllUsersHandler);
-  ipcMainAdapter.handle("fetch:all:start", async (event, steamid, cookies) => {
-    const jobId = randomUUID();
-    const webContents = event.sender;
-    return { jobId };
-  });
-};
-
 const initConnectionCheck = (window: BrowserWindow) => {
   ipcMainAdapter.send(window, "init:setup-check", "Connection success");
-};
-
-const getAllUsersHandler = async () => {
-  const db = getDbInstance();
-  const accounts = await getAllSteamIdsFromAccounts(db);
-  const steamIds = accounts.map((account) => account.steamid);
-  return steamIds;
 };

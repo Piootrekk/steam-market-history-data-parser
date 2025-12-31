@@ -1,4 +1,4 @@
-import { BrowserWindow, ipcMain } from "electron";
+import { BrowserWindow, ipcMain, type WebContents } from "electron";
 import type {
   Channel,
   HandlerArgs,
@@ -28,4 +28,14 @@ const ipcMainAdapter = {
   },
 };
 
-export { ipcMainAdapter };
+const ipcWebContentsAdapter = {
+  send<K extends Channel>(
+    wc: WebContents,
+    channel: K,
+    ...args: HandlerArgs<K>
+  ): void {
+    wc.send(channel, ...args);
+  },
+};
+
+export { ipcMainAdapter, ipcWebContentsAdapter };

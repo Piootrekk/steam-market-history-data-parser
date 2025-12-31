@@ -22,15 +22,15 @@ const DownloadAllPage = () => {
     event.preventDefault();
     event.stopPropagation();
     const formData = new FormData(event.currentTarget);
-    const steamId = formData.get("steamId");
-    const steamCookies = formData.get("cookies");
+    const steamId = formData.get("steamId")?.toString();
+    const steamCookies = formData.get("cookies")?.toString();
     if (!steamId || !steamCookies) {
       setError("Fill inputs before start fetching.");
       return;
     } else {
       if (error) setError(null);
-      return;
     }
+    window.electronAPI.startFetchingAll(steamId, steamCookies);
   };
 
   return (
