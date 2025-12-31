@@ -5,6 +5,7 @@ import DashboardPage from "./uncommon/dashboard/dashboard.page";
 import DownloadAllPage from "./uncommon/fetch-all/download.page";
 import { ROUTE_PATHS } from "./routes";
 import AccountsLayout from "./uncommon/accounts/accounts.layout";
+import { fetchAllHistortyAction } from "./uncommon/fetch-all/download.action";
 
 const router = createHashRouter([
   {
@@ -21,6 +22,7 @@ const router = createHashRouter([
       {
         path: ROUTE_PATHS.downloadAll,
         element: <DownloadAllPage />,
+        action: fetchAllHistortyAction,
       },
       {
         path: ROUTE_PATHS.downloadAmount,
