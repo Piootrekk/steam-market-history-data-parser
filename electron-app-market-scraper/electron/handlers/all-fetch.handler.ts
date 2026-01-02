@@ -8,6 +8,7 @@ const startFetchingAll = async (
 ) => {
   const jobId = randomUUID();
   const webContents = event.sender;
+  await sleep(5000);
   progressFetchingAll(webContents, jobId, steamid, cookies);
   return { jobId };
 };

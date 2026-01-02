@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { FetchProgress } from "./progress.types";
 import { useActionData, useNavigation } from "react-router-dom";
 import type { fetchAllHistortyAction } from "./download.action";
@@ -12,39 +12,58 @@ type FetchAll = {
 
 const useJobId = (activeJobId?: string) => {
   const [logs, setLogs] = useState<FetchProgress[]>([]);
-  const [isPending, setIsPending] = useState<boolean>(false);
+  const [isPending, setIsPending] = useState(false);
+  const [isDone, setIsDone] = useState(false);
+  const prevJobId = useRef<string>(undefined);
+
+  if (activeJobId && prevJobId.current !== activeJobId) {
+    prevJobId.current = activeJobId;
+    setIsPending(true);
+    setIsDone(false);
+  }
+
   useEffect(() => {
     if (!activeJobId) return;
-    setIsPending(true);
+
     window.electronAPI.progressFetchingAll(
       (jobId, current, total, status, timestamp, message) => {
         if (jobId !== activeJobId) return;
-        console.log("FETCH ", { current, total, status, timestamp, message });
-        setLogs((perv) => [
-          ...perv,
+
+        setLogs((prev) => [
+          ...prev,
           { current, jobId, total, status, timestamp, message },
         ]);
+
         if (status === "done" || current === total) {
           setIsPending(false);
+          setIsDone(true);
         }
       }
     );
-    return () => {
-      setIsPending(false);
-    };
   }, [activeJobId]);
-  return { logs, isPending };
-};
 
+  return { logs, isPending, isDone };
+};
 const useFetchAllHistoryAction = (): FetchAll => {
   const actionData = useActionData<typeof fetchAllHistortyAction>();
-  const { isPending, logs } = useJobId(actionData?.jobId);
+  const [manualLoading, setManualLoading] = useState(false);
   const navigation = useNavigation();
-  const loadingForm = navigation.state !== "idle";
-  const loading = loadingForm || isPending;
+  const { logs, isPending, isDone } = useJobId(actionData?.jobId);
+
+  useEffect(() => {
+    console.log(`Pending states:`, {
+      nav: navigation.state,
+      progress: isPending,
+      sync: manualLoading,
+    });
+    if (navigation.state !== "idle" && manualLoading === false)
+      setManualLoading(true);
+    if (manualLoading === true && isDone) setManualLoading(false);
+  }, [navigation.state, isPending]);
+
   return {
-    error: !loadingForm ? actionData?.error : undefined,
-    loading,
+    loading: manualLoading,
+    error: actionData?.error,
     logs,
   };
 };
