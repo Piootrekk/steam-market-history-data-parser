@@ -8,7 +8,7 @@ const startFetchingAll = async (
 ) => {
   const jobId = randomUUID();
   const webContents = event.sender;
-  await sleep(5000);
+  await sleep(500);
   progressFetchingAll(webContents, jobId, steamid, cookies);
   return { jobId };
 };
@@ -18,7 +18,7 @@ const sleep = async (timeMs: number): Promise<void> => {
 };
 
 const test = async (iteration: number) => {
-  await sleep(5000);
+  await sleep(100);
   return {
     current: iteration,
     status: "success",

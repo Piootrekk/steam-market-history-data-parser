@@ -54,7 +54,7 @@ const DownloadAllPage = () => {
               </InputContainer>
             </div>
             <div className="flex flex-wrap gap-4 items-center">
-              <Button disabled={loading} type="submit">
+              <Button disabled={loading} type="submit" className="min-w-30">
                 {loading ? "Fetching... " : "Start Fetching"}
               </Button>
               {error && (

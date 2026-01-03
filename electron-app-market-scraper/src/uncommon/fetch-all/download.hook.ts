@@ -12,14 +12,12 @@ type FetchAll = {
 
 const useJobId = (activeJobId?: string) => {
   const [logs, setLogs] = useState<FetchProgress[]>([]);
-  const [isPending, setIsPending] = useState(false);
-  const [isDone, setIsDone] = useState(false);
+  const [completedJobId, setCompletedJobId] = useState<string | null>(null);
   const prevJobId = useRef<string>(undefined);
 
   if (activeJobId && prevJobId.current !== activeJobId) {
     prevJobId.current = activeJobId;
-    setIsPending(true);
-    setIsDone(false);
+    setCompletedJobId(null);
   }
 
   useEffect(() => {
@@ -35,35 +33,26 @@ const useJobId = (activeJobId?: string) => {
         ]);
 
         if (status === "done" || current === total) {
-          setIsPending(false);
-          setIsDone(true);
+          setCompletedJobId(jobId);
         }
       }
     );
   }, [activeJobId]);
 
-  return { logs, isPending, isDone };
+  const isPending = activeJobId != null && completedJobId !== activeJobId;
+
+  return { logs, isPending };
 };
 const useFetchAllHistoryAction = (): FetchAll => {
   const actionData = useActionData<typeof fetchAllHistortyAction>();
-  const [manualLoading, setManualLoading] = useState(false);
   const navigation = useNavigation();
-  const { logs, isPending, isDone } = useJobId(actionData?.jobId);
+  const { logs, isPending } = useJobId(actionData?.jobId);
 
-  useEffect(() => {
-    console.log(`Pending states:`, {
-      nav: navigation.state,
-      progress: isPending,
-      sync: manualLoading,
-    });
-    if (navigation.state !== "idle" && manualLoading === false)
-      setManualLoading(true);
-    if (manualLoading === true && isDone) setManualLoading(false);
-  }, [navigation.state, isPending]);
+  const loading = navigation.state !== "idle" || isPending;
 
   return {
-    loading: manualLoading,
-    error: actionData?.error,
+    loading,
+    error: !loading ? actionData?.error : undefined,
     logs,
   };
 };
