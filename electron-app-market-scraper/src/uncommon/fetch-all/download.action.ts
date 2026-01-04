@@ -5,7 +5,12 @@ const fetchAllHistortyAction = async ({ request }: ActionFunctionArgs) => {
   const steamId = formData.get("steamId")?.toString();
   const steamCookies = formData.get("cookies")?.toString();
   if (!steamId || !steamCookies) return { error: "Fill inputs before start" };
-  isCookiesCorrect(steamCookies);
+  const isCorrect = isCookiesCorrect(steamCookies);
+  if (!isCorrect)
+    return {
+      error:
+        "Invalid cookies pattern: steamLoginSecure=your_steamLoginSecure; sessionid=your_session_id;",
+    };
   const jobId = await window.electronAPI.startFetchingAll(
     steamId,
     steamCookies
@@ -17,8 +22,11 @@ const fetchAllHistortyAction = async ({ request }: ActionFunctionArgs) => {
   };
 };
 
-const isCookiesCorrect = (steamCookies: string) => {
-  // Kiedyś parser regex'a się doda ¯\_(ツ)_/¯
+const isCookiesCorrect = (steamCookies: string): boolean => {
+  const regex = new RegExp(
+    "(steamLoginSecure=[^;]*;.*sessionid=[^;]*;)|(sessionid=[^;]*;.*steamLoginSecure=[^;]*;)"
+  );
+  return steamCookies.match(regex) !== null;
 };
 
 export { fetchAllHistortyAction, isCookiesCorrect };

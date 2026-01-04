@@ -40,7 +40,7 @@ const DownloadAllPage = () => {
                   name="steamId"
                   type="text"
                   placeholder="Enter your Steam ID, name, or fetch identity"
-                  leftIcon={<User size={20} />}
+                  leftIcon={<User size={20} className="shrink-0" />}
                 />
               </InputContainer>
               <InputContainer className="flex-1 min-w-full md:min-w-0 space-y-2">
@@ -49,7 +49,7 @@ const DownloadAllPage = () => {
                   name="cookies"
                   type="password"
                   placeholder="Enter your cookies"
-                  leftIcon={<Cookie size={20} />}
+                  leftIcon={<Cookie size={20} className="shrink-0" />}
                 />
               </InputContainer>
             </div>
@@ -58,8 +58,8 @@ const DownloadAllPage = () => {
                 {loading ? "Fetching... " : "Start Fetching"}
               </Button>
               {error && (
-                <p className="text-destructive flex flex-row gap-2 items-center">
-                  <AlertTriangle size={22} />
+                <p className="text-destructive flex flex-row gap-2 break-all items-center">
+                  <AlertTriangle size={22} className="shrink-0" />
                   {error}
                 </p>
               )}

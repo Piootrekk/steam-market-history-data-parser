@@ -13,7 +13,8 @@ type EventHandlers = {
   };
   "fetch:all:progress": {
     args: [
-      currnet: number,
+      jobId: string,
+      current: number,
       total: number,
       status: string,
       timestamp: number,

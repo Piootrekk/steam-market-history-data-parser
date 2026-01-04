@@ -17,6 +17,26 @@ const activityStyles = {
   info: "bg-primary/10 text-primary border-primary/20 hover:bg-primary/20",
 } as const;
 
+const getconvertedDate = (timestamp: number) => {
+  const localStringDate = new Date(timestamp).toLocaleString("en-GB");
+  return localStringDate;
+};
+
+const getTimeAgo = (timestamp: number) => {
+  const rtf = new Intl.RelativeTimeFormat("en", { numeric: "auto" });
+  const diff = Date.now() - timestamp;
+
+  const seconds = Math.round(diff / 1000);
+  const minutes = Math.round(seconds / 60);
+  const hours = Math.round(minutes / 60);
+  const days = Math.round(hours / 24);
+
+  if (Math.abs(seconds) < 60) return rtf.format(-seconds, "second");
+  if (Math.abs(minutes) < 60) return rtf.format(-minutes, "minute");
+  if (Math.abs(hours) < 24) return rtf.format(-hours, "hour");
+  return rtf.format(-days, "day");
+};
+
 const RecentActivitySection = ({
   activityStyle = "info",
   Icon = Info,
@@ -53,8 +73,11 @@ const RecentActivitySection = ({
             </Badge>
           </div>
 
-          <p className="text-xs text-muted-foreground whitespace-nowrap">
-            {timestamp}
+          <p
+            className="text-xs text-muted-foreground whitespace-nowrap"
+            title={getconvertedDate(timestamp)}
+          >
+            {getTimeAgo(timestamp)}
           </p>
         </div>
 

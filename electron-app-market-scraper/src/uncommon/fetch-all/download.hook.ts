@@ -28,8 +28,8 @@ const useJobId = (activeJobId?: string) => {
         if (jobId !== activeJobId) return;
 
         setLogs((prev) => [
-          ...prev,
           { current, jobId, total, status, timestamp, message },
+          ...prev,
         ]);
 
         if (status === "done" || current === total) {
