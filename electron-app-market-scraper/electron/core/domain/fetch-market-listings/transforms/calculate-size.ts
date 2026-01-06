@@ -1,4 +1,4 @@
-import type { TransformDto } from "./transform.dto";
+import type { TransformDto } from "../fetch/listing.dto";
 
 type FetchIteration = {
   min: number;

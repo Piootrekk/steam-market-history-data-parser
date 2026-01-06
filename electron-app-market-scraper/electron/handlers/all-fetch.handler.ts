@@ -8,17 +8,11 @@ const startFetchingAll = async (
 ) => {
   const jobId = randomUUID();
   const webContents = event.sender;
-  await sleep(500);
   progressFetchingAll(webContents, jobId, steamid, cookies);
   return { jobId };
 };
 
-const sleep = async (timeMs: number): Promise<void> => {
-  return new Promise((resolve) => setTimeout(resolve, timeMs));
-};
-
 const test = async (iteration: number) => {
-  await sleep(100);
   return {
     current: iteration,
     status: "success",
@@ -28,6 +22,7 @@ const test = async (iteration: number) => {
 
 const progressFetchingAll = async (
   webContents: Electron.WebContents,
+
   jobId: string,
   steamid: string,
   cookies: string

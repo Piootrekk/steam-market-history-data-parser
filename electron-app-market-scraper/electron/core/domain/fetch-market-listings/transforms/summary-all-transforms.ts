@@ -1,5 +1,5 @@
 import { getAllCurrentAssets } from "./assets-transforms";
-import type { MarketFetchResponse } from "../raw-fetch-response.types";
+import type { MarketFetchResponse } from "../fetch/raw-fetch-response.types";
 
 type MergeResponse = ReturnType<typeof mergeResponse>;
 

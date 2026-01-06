@@ -1,8 +1,8 @@
-import { getTransformedEvent } from "./event-transform";
-import { getGameFromAppId } from "./game-transform";
-import { getSelectedCurrecyISO } from "./steam-currencies";
-import { getPrice } from "./steam-price";
-import type { MergeResponse } from "./summary-all-transforms";
+import { getTransformedEvent } from "../transforms/event-transform";
+import { getGameFromAppId } from "../transforms/game-transform";
+import { getSelectedCurrecyISO } from "../transforms/steam-currencies";
+import { getPrice } from "../transforms/steam-price";
+import type { MergeResponse } from "../transforms/summary-all-transforms";
 
 type TransformDto = ReturnType<typeof transformDto>;
 
