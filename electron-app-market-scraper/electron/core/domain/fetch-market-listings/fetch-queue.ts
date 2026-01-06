@@ -60,5 +60,5 @@ const getTransformedCorrectResponse = async (
   return responseDto;
 };
 
-export { retryFetchAttemptsIfFailed, getTransformedCorrectResponse };
+export { retryFetchAttemptsIfFailed, getTransformedCorrectResponse, sleep };
 export type { FetchRetryParams };

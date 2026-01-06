@@ -6,7 +6,7 @@ import {
   CardContent,
 } from "src/common/components/primitives/card";
 import RecentActivitySection from "./recent-activity-section";
-import type { FetchProgress } from "./progress.types";
+import type { FetchProgress } from "../progress.types";
 
 const activitiesDefault = {
   title: "Fetch",

@@ -8,10 +8,13 @@ const mergeResponse = (response: MarketFetchResponse) => {
   const connectedMarketData = response.events.map((event) => {
     const currentPurchaseProp: `${number}_${number}` = `${event.listingid}_${event.purchaseid}`;
     const currentPurchase = response.purchases[currentPurchaseProp];
-    const currentAsset = assets.find((asset) => {
-      return asset.unowned_id === currentPurchase.asset.id;
-    });
-    if (!currentAsset) throw new Error("Invalid asset id");
+    const currentListing = response.listings[event.listingid];
+    const currentAsset = assets[currentListing.asset.id];
+
+    if (!currentAsset) {
+      console.log(`Anomaly detected for event: ${currentPurchase.asset.id}`);
+      throw new Error("Invalid asset id");
+    }
     return {
       ...event,
       ...currentPurchase,

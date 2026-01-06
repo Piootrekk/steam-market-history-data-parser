@@ -1,6 +1,6 @@
 const EVENTS: Record<string, string> = {
-  "3": "sold",
-  "4": "bought",
+  "3": "Sold",
+  "4": "Bought",
 } as const;
 
 const getTransformedEvent = (event: `${number}` | number): string => {

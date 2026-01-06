@@ -12,7 +12,7 @@ const getGameFromAppId = (appId: number | `${number}`) => {
   const baseApp = Object.keys(APPS);
   const matchGame = baseApp.find((game) => game === appIdStringify);
   if (matchGame) return APPS[matchGame];
-  else return "Others";
+  else return `Others ${appId}`;
 };
 
 export { getGameFromAppId };

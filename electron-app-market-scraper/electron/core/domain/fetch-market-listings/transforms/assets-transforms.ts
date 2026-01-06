@@ -1,14 +1,16 @@
 import type { Assets, CurrentAsset } from "../raw-fetch-response.types";
 
-const getAllCurrentAssets = (assets: Assets): CurrentAsset[] => {
+const getAllCurrentAssets = (assets: Assets) => {
   const games = getCurrentGamesFromAssets(assets);
-  const currentAsset = games.map((game) => {
-    const currentversion = getFirstVersion(assets[game]);
-    const currentAssetRecords = assets[game][currentversion];
-    const currentAsset = Object.values(currentAssetRecords);
-    return currentAsset;
-  });
-  return currentAsset.flat();
+  const assetRecords = games.reduce<Record<string, CurrentAsset>>(
+    (acc, game) => {
+      const currentversion = getFirstVersion(assets[game]);
+      const records = assets[game][currentversion];
+      return { ...acc, ...records };
+    },
+    {}
+  );
+  return assetRecords;
 };
 
 const getCurrentGamesFromAssets = (assets: Assets): `${number}`[] => {

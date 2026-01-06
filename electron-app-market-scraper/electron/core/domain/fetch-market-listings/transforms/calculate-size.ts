@@ -14,7 +14,7 @@ const ReduceSizeDto = (
 
 const calculateBatches = (count: number, totalCount: number) => {
   const remainingFetches = Math.ceil((totalCount - count) / count);
-  const fetches: FetchIteration[] = Array.from(
+  const fetchesCalc: FetchIteration[] = Array.from(
     { length: remainingFetches },
     (_, index) =>
       ({
@@ -22,9 +22,7 @@ const calculateBatches = (count: number, totalCount: number) => {
         count,
       } satisfies FetchIteration)
   );
-
-  console.log(fetches);
-  return remainingFetches;
+  return { remainingFetches, fetchesCalc };
 };
 
 export { ReduceSizeDto, calculateBatches };

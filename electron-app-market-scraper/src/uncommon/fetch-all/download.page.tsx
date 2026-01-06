@@ -1,7 +1,7 @@
 import { AlertTriangle, Cookie, Files, User } from "lucide-react";
 import BasicPageInfo from "src/common/components/composites/basic-page-info";
 import Button from "src/common/components/primitives/button";
-import RecentActivity from "./recent-activity";
+import RecentActivity from "./activity-logs/recent-activity";
 import {
   Card,
   CardContent,
