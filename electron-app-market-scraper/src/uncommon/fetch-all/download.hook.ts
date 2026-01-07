@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import type { FetchProgress } from "./progress.types";
 import { useActionData, useNavigation } from "react-router-dom";
 import type { fetchAllHistortyAction } from "./download.action";
@@ -13,30 +13,20 @@ type FetchAll = {
 const useJobId = (activeJobId?: string) => {
   const [logs, setLogs] = useState<FetchProgress[]>([]);
   const [completedJobId, setCompletedJobId] = useState<string | null>(null);
-  const prevJobId = useRef<string>(undefined);
-
-  if (activeJobId && prevJobId.current !== activeJobId) {
-    prevJobId.current = activeJobId;
-    setCompletedJobId(null);
-  }
 
   useEffect(() => {
     if (!activeJobId) return;
-
-    window.electronAPI.progressFetchingAll(
-      (jobId, current, total, status, timestamp, message) => {
-        if (jobId !== activeJobId) return;
-
-        setLogs((prev) => [
-          { current, jobId, total, status, timestamp, message },
-          ...prev,
-        ]);
-
-        if (status === "done" || current === total) {
+    const removeListener = window.electronAPI.progressFetchingAll(
+      (jobId, status, timestamp, message) => {
+        setLogs((prev) => [{ jobId, status, timestamp, message }, ...prev]);
+        if (status === "finish") {
           setCompletedJobId(jobId);
         }
       }
     );
+    return () => {
+      removeListener();
+    };
   }, [activeJobId]);
 
   const isPending = activeJobId != null && completedJobId !== activeJobId;

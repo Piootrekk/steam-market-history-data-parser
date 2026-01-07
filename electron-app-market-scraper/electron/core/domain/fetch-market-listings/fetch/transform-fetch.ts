@@ -1,4 +1,4 @@
-import { getFetchError } from "../../global-utils/custom-error";
+import { getFetchError } from "../fetch-error/custom-error";
 import { type FetchParams, fetchMarketHistory } from "./raw-fetch";
 import type { MarketFetchResponse } from "./raw-fetch-response.types";
 import { mergeResponse } from "../transforms/summary-all-transforms";

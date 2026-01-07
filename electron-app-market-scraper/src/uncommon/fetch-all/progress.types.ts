@@ -1,6 +1,4 @@
 type FetchProgress = {
-  current: number;
-  total: number;
   status: string;
   timestamp: number;
   message?: string;

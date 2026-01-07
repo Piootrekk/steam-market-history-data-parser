@@ -24,7 +24,7 @@ const ipcRendererAdapter = {
     ipcRenderer.send(channel, ...args);
   },
 
-  on<K extends Channel>(channel: K, callback: HandlerFn<K>) {
+  on<K extends Channel>(channel: K, callback: HandlerFn<K>): () => void {
     const listener = (
       _event: Electron.IpcRendererEvent,
       ...args: HandlerArgs<K>

@@ -1,4 +1,4 @@
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircle2, Info, TriangleAlert } from "lucide-react";
 import {
   Card,
   CardHeader,
@@ -8,17 +8,28 @@ import {
 import RecentActivitySection from "./recent-activity-section";
 import type { FetchProgress } from "../progress.types";
 
-const activitiesDefault = {
-  title: "Fetch",
-  activityStyle: "success" as const,
-  Icon: CheckCircle2,
-};
+const defaultIcons: Record<string, React.ElementType> = {
+  success: CheckCircle2,
+  error: TriangleAlert,
+  info: Info,
+  start: Info,
+  finish: Info,
+} as const;
 
 type RecentActivityProps = {
   activities: FetchProgress[];
 };
 
 const RecentActivity = ({ activities }: RecentActivityProps) => {
+  const activitiesLogs = activities.map(({ message, status, timestamp }) => {
+    return {
+      title: "Fetch",
+      Icon: defaultIcons[status],
+      message,
+      activityStyle: status,
+      timestamp,
+    };
+  });
   return (
     <Card>
       <CardHeader>
@@ -28,10 +39,9 @@ const RecentActivity = ({ activities }: RecentActivityProps) => {
         <div className="pr-2">
           <div className="space-y-4">
             {activities.length > 0 &&
-              activities.map((activity) => (
+              activitiesLogs.map((activity, index) => (
                 <RecentActivitySection
-                  key={activity.timestamp}
-                  {...activitiesDefault}
+                  key={`${activity.timestamp}-${index}`}
                   {...activity}
                 />
               ))}

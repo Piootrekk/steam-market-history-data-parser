@@ -20,12 +20,10 @@ interface Window {
     progressFetchingAll: (
       callback: (
         jobId: string,
-        current: number,
-        total: number,
         status: string,
         timestamp: number,
         message?: string
       ) => void
-    ) => void;
+    ) => () => void;
   };
 }

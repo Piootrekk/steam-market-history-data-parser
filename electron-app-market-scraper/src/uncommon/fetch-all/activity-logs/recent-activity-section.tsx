@@ -3,18 +3,19 @@ import Badge from "src/common/components/primitives/badge";
 import { cn } from "src/common/utils/merge-styles";
 
 type RecentActivitySectionProps = {
-  activityStyle: keyof typeof activityStyles;
+  activityStyle: string;
   Icon: React.ElementType;
   title: string;
   message?: string;
   timestamp: number;
 };
 
-const activityStyles = {
-  success: "bg-success/10 text-success border-success/20 hover:bg-success/20",
-  error:
-    "bg-destructive/10 text-destructive border-destructive/20 hover:bg-destructive/20",
-  info: "bg-primary/10 text-primary border-primary/20 hover:bg-primary/20",
+const activityStyles: Record<string, string> = {
+  success: "bg-success/10 text-success border-success/20",
+  error: "bg-destructive/10 text-destructive border-destructive/20",
+  info: "bg-primary/10 text-primary border-primary/20",
+  start: "bg-primary/10 text-primary border-primary/20",
+  finish: "bg-primary/10 text-primary border-primary/20",
 } as const;
 
 const getconvertedDate = (timestamp: number) => {
@@ -49,7 +50,7 @@ const RecentActivitySection = ({
       <div
         className={cn(
           "p-2.5 rounded-full shrink-0 h-fit",
-          activityStyles[activityStyle]
+          activityStyles[activityStyle] ?? activityStyles.info
         )}
       >
         <Icon className="h-5 w-5" />
@@ -72,7 +73,6 @@ const RecentActivitySection = ({
               {activityStyle}
             </Badge>
           </div>
-
           <p
             className="text-xs text-muted-foreground whitespace-nowrap"
             title={getconvertedDate(timestamp)}
@@ -80,7 +80,6 @@ const RecentActivitySection = ({
             {getTimeAgo(timestamp)}
           </p>
         </div>
-
         <p className="text-sm text-muted-foreground leading-relaxed">
           {message}
         </p>

@@ -2,7 +2,7 @@ import type { Db } from "..";
 
 type DbTransaction = Omit<Db, "$client">;
 
-const transactionSession = async <T>(
+const transactionSession = async <T = void>(
   db: Db,
   callback: (tx: DbTransaction) => Promise<T>
 ): Promise<T> => {

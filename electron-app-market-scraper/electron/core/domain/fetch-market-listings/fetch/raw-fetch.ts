@@ -1,4 +1,4 @@
-import { FetchError } from "../../global-utils/custom-error";
+import { FetchError } from "../fetch-error/custom-error";
 import type {
   IncorrectMarketFetchResponse,
   MarketRawResponse,
