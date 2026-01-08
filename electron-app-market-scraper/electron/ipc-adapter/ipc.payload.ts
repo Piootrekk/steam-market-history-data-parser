@@ -1,41 +1,8 @@
-type EventHandlers = {
-  "init:setup-check": {
-    args: string[];
-    response: void;
-  };
-  "db:getAllUsers": {
-    args: [];
-    response: Promise<string[]>;
-  };
-  "fetch:all:start": {
-    args: [steamId: string, cookies: string];
-    response: Promise<{ jobId: string }>;
-  };
-  "fetch:all:progress": {
-    args: [jobId: string, status: string, timestamp: number, message?: string];
-    response: void;
-  };
-};
+const channels = {
+  setupCheck: "init:setup-check",
+  getAllUsers: "db:users:all",
+  startFetchingAll: "fetch:all:start",
+  progressFetchingAll: "fetch:all:progress",
+} as const satisfies Record<keyof Window["electronAPI"], string>;
 
-type Channel = keyof EventHandlers;
-
-type HandlerArgs<K extends Channel> = EventHandlers[K]["args"];
-type HandlerResponse<K extends Channel> = EventHandlers[K]["response"];
-
-type HandlerFn<K extends Channel> = (
-  ...args: HandlerArgs<K>
-) => HandlerResponse<K>;
-
-type HandlerFnWithEvent<K extends Channel> = (
-  event: Electron.IpcMainInvokeEvent,
-  ...args: HandlerArgs<K>
-) => HandlerResponse<K>;
-
-export type {
-  EventHandlers,
-  Channel,
-  HandlerArgs,
-  HandlerResponse,
-  HandlerFn,
-  HandlerFnWithEvent,
-};
+export { channels };

@@ -31,7 +31,6 @@ const progressFetchingAllTest = async (
 ) => {
   const total = 5;
   for (let index = 1; index <= total; index++) {
-    await new Promise((resolve) => setTimeout(resolve, 500));
     const { current, status, message } = await test(index);
     const timestamp = Date.now();
     ipcWebContentsAdapter.send(
@@ -101,4 +100,4 @@ const progressFetchingAll = async (
   );
 };
 
-export { startFetchingAll };
+export { startFetchingAll, progressFetchingAll };

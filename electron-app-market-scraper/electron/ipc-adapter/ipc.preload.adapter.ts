@@ -1,30 +1,22 @@
 import { ipcRenderer } from "electron";
-import type {
-  HandlerFn,
-  HandlerArgs,
-  HandlerResponse,
-  Channel,
-} from "./ipc.payload";
+import type { ChannelValue, HandlerArgs, HandlerFn } from "./ipc.types";
 
 const ipcRendererAdapter = {
-  once<K extends Channel>(channel: K, callback: HandlerFn<K>): void {
+  once<K extends ChannelValue>(channel: K, callback: HandlerFn<K>): void {
     ipcRenderer.once(channel, (_event, ...args: HandlerArgs<K>) => {
       callback(...args);
     });
   },
 
-  invoke<K extends Channel>(
-    channel: K,
-    ...args: HandlerArgs<K>
-  ): HandlerResponse<K> {
+  invoke<K extends ChannelValue>(channel: K, ...args: HandlerArgs<K>) {
     return ipcRenderer.invoke(channel, ...args);
   },
 
-  send<K extends Channel>(channel: K, ...args: HandlerArgs<K>): void {
+  send<K extends ChannelValue>(channel: K, ...args: HandlerArgs<K>): void {
     ipcRenderer.send(channel, ...args);
   },
 
-  on<K extends Channel>(channel: K, callback: HandlerFn<K>): () => void {
+  on<K extends ChannelValue>(channel: K, callback: HandlerFn<K>): () => void {
     const listener = (
       _event: Electron.IpcRendererEvent,
       ...args: HandlerArgs<K>

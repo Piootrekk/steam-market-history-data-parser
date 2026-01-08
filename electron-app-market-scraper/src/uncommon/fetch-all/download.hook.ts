@@ -15,7 +15,6 @@ const useJobId = (activeJobId?: string) => {
   const [completedJobId, setCompletedJobId] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!activeJobId) return;
     const removeListener = window.electronAPI.progressFetchingAll(
       (jobId, status, timestamp, message) => {
         setLogs((prev) => [{ jobId, status, timestamp, message }, ...prev]);

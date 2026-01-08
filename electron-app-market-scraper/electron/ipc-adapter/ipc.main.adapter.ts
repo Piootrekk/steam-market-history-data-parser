@@ -1,13 +1,13 @@
 import { BrowserWindow, ipcMain, type WebContents } from "electron";
 import type {
-  Channel,
+  ChannelValue,
   HandlerArgs,
   HandlerFn,
   HandlerFnWithEvent,
-} from "./ipc.payload";
+} from "./ipc.types";
 
 const ipcMainAdapter = {
-  send<K extends Channel>(
+  send<K extends ChannelValue>(
     window: BrowserWindow,
     channel: K,
     ...args: HandlerArgs<K>
@@ -15,13 +15,16 @@ const ipcMainAdapter = {
     window.webContents.send(channel, ...args);
   },
 
-  handle<K extends Channel>(channel: K, callback: HandlerFnWithEvent<K>): void {
+  handle<K extends ChannelValue>(
+    channel: K,
+    callback: HandlerFnWithEvent<K>
+  ): void {
     ipcMain.handle(channel, (event, ...args: HandlerArgs<K>) => {
       return callback(event, ...args);
     });
   },
 
-  on<K extends Channel>(channel: K, callback: HandlerFn<K>): void {
+  on<K extends ChannelValue>(channel: K, callback: HandlerFn<K>): void {
     ipcMain.on(channel, (_event, ...args: HandlerArgs<K>) => {
       callback(...args);
     });
@@ -29,7 +32,7 @@ const ipcMainAdapter = {
 };
 
 const ipcWebContentsAdapter = {
-  send<K extends Channel>(
+  send<K extends ChannelValue>(
     wc: WebContents,
     channel: K,
     ...args: HandlerArgs<K>

@@ -46,7 +46,7 @@ const RecentActivitySection = ({
   message,
 }: RecentActivitySectionProps) => {
   return (
-    <div className="flex gap-4 p-4 rounded-lg border border-border/50 bg-background/50 hover:bg-background/80 transition-colors">
+    <div className="flex gap-4 p-4 rounded-lg border border-border/50 bg-background/50  transition-colors">
       <div
         className={cn(
           "p-2.5 rounded-full shrink-0 h-fit",

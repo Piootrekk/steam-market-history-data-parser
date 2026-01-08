@@ -4,7 +4,7 @@ import { ipcRendererAdapter } from "./ipc-adapter/ipc.preload.adapter";
 contextBridge.exposeInMainWorld("electronAPI", {
   setupCheck: (callback) =>
     ipcRendererAdapter.once("init:setup-check", callback),
-  getAllUsers: () => ipcRendererAdapter.invoke("db:getAllUsers"),
+  getAllUsers: () => ipcRendererAdapter.invoke("db:users:all"),
   startFetchingAll: (steamId: string, cookies: string) =>
     ipcRendererAdapter.invoke("fetch:all:start", steamId, cookies),
   progressFetchingAll: (callback) =>
