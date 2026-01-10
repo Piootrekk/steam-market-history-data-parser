@@ -2,13 +2,16 @@ import type { Db } from "..";
 
 type DbTransaction = Omit<Db, "$client">;
 
-const transactionSession = async <T = void>(
+const transactionSession = <T = void>(
   db: Db,
-  callback: (tx: DbTransaction) => Promise<T>
-): Promise<T> => {
-  return await db.transaction(async (tx: DbTransaction) => {
-    return await callback(tx);
-  });
+  callback: (tx: DbTransaction) => T
+): T => {
+  return db.transaction(
+    (tx: DbTransaction) => {
+      return callback(tx);
+    },
+    { behavior: "deferred" }
+  );
 };
 
 export { transactionSession };

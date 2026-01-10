@@ -12,6 +12,7 @@ type RecentActivitySectionProps = {
 
 const activityStyles: Record<string, string> = {
   success: "bg-success/10 text-success border-success/20",
+  warning: "bg-warning/10 text-warning border-warning/20",
   error: "bg-destructive/10 text-destructive border-destructive/20",
   info: "bg-primary/10 text-primary border-primary/20",
   start: "bg-primary/10 text-primary border-primary/20",
@@ -46,7 +47,7 @@ const RecentActivitySection = ({
   message,
 }: RecentActivitySectionProps) => {
   return (
-    <div className="flex gap-4 p-4 rounded-lg border border-border/50 bg-background/50  transition-colors">
+    <div className="flex gap-4  p-4 rounded-lg border border-border/50 bg-background/50  transition-colors">
       <div
         className={cn(
           "p-2.5 rounded-full shrink-0 h-fit",

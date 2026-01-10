@@ -13,8 +13,7 @@ const fetchAllHistortyAction = async ({ request }: ActionFunctionArgs) => {
     val.steamId,
     val.steamCookies
   );
-  console.log(jobId.jobId);
-  console.log("asdasdasdasd");
+
   return {
     jobId: jobId.jobId,
   };

@@ -11,7 +11,7 @@ type MethodOrCallbackResponse<T> = T extends (
   ...args: infer Params
 ) => infer Return
   ? Params extends [infer First, ...unknown[]]
-    ? First extends (...args: infer CallbackArgs) => infer CallbackReturn
+    ? First extends (...args: infer _CallbackArgs) => infer CallbackReturn
       ? CallbackReturn
       : Return
     : Return

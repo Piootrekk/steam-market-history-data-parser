@@ -11,6 +11,7 @@ import type { FetchProgress } from "../progress.types";
 const defaultIcons: Record<string, React.ElementType> = {
   success: CheckCircle2,
   error: TriangleAlert,
+  warning: TriangleAlert,
   info: Info,
   start: Info,
   finish: Info,

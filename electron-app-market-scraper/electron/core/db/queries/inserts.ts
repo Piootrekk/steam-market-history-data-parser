@@ -7,11 +7,17 @@ import type {
 import { accountTable, listingsTable, snapshotsTable } from "../schema";
 import type { DbTransaction } from "./transaction";
 
-const insertNewAccount = async (
+const insertNewAccount = (
   db: Db | DbTransaction,
   newAccount: NewAccountModel
 ) => {
-  await db.insert(accountTable).values(newAccount);
+  const insertResult = db
+    .insert(accountTable)
+    .values(newAccount)
+    .returning({ id: accountTable.id })
+    .get();
+
+  return insertResult.id;
 };
 
 const insertNewSnapshot = async (
