@@ -20,11 +20,16 @@ const insertNewAccount = (
   return insertResult.id;
 };
 
-const insertNewSnapshot = async (
+const insertNewSnapshot = (
   db: Db | DbTransaction,
   newSnapshot: NewSnapshotModel
 ) => {
-  await db.insert(snapshotsTable).values(newSnapshot);
+  const insertedSnapshot = db
+    .insert(snapshotsTable)
+    .values(newSnapshot)
+    .returning()
+    .get();
+  return insertedSnapshot;
 };
 
 const insertBulkNewListings = async (

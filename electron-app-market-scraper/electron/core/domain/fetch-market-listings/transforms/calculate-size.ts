@@ -6,9 +6,9 @@ type FetchIteration = {
 };
 
 const ReduceSizeDto = (
-  responseDto: TransformDto[],
+  responseDto: TransformDto,
   expectedSize: number
-): TransformDto[] => {
+): TransformDto => {
   return responseDto.slice(0, expectedSize);
 };
 

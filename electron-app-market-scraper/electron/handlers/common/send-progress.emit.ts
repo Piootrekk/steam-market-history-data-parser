@@ -1,45 +1,32 @@
 import { ipcWebContentsAdapter } from "../../ipc-adapter/ipc.main.adapter";
 
-const sendStartProgress = (
-  webContents: Electron.WebContents,
-  jobId: string
-) => {
+const sendStartProgress = (webContents: Electron.WebContents) => {
   const dateNow = Date.now();
   ipcWebContentsAdapter.send(
     webContents,
     "fetch:all:progress",
-    jobId,
     "info",
     dateNow,
     "Fetching has been started..."
   );
 };
 
-const sendFinishProgress = (
-  webContents: Electron.WebContents,
-  jobId: string
-) => {
+const sendFinishProgress = (webContents: Electron.WebContents) => {
   const dateNow = Date.now();
   ipcWebContentsAdapter.send(
     webContents,
     "fetch:all:progress",
-    jobId,
-    "finish",
+    "info",
     dateNow,
-    "Fetching has been started..."
+    "Fetching has been finished..."
   );
 };
 
-const sendErrorProgress = (
-  webContents: Electron.WebContents,
-  error: Error,
-  jobId: string
-) => {
+const sendErrorProgress = (webContents: Electron.WebContents, error: Error) => {
   const dateNow = Date.now();
   ipcWebContentsAdapter.send(
     webContents,
     "fetch:all:progress",
-    jobId,
     "error",
     dateNow,
     `${error.message}`

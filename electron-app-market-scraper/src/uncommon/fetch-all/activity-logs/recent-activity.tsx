@@ -13,8 +13,6 @@ const defaultIcons: Record<string, React.ElementType> = {
   error: TriangleAlert,
   warning: TriangleAlert,
   info: Info,
-  start: Info,
-  finish: Info,
 } as const;
 
 type RecentActivityProps = {

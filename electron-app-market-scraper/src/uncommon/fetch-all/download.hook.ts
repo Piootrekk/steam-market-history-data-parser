@@ -10,34 +10,28 @@ type FetchAll = {
   logs: FetchProgress[];
 };
 
-const useJobId = (activeJobId?: string) => {
+const useJobId = () => {
   const [logs, setLogs] = useState<FetchProgress[]>([]);
-  const [completedJobId, setCompletedJobId] = useState<string | null>(null);
 
   useEffect(() => {
     const removeListener = window.electronAPI.progressFetchingAll(
-      (jobId, status, timestamp, message) => {
-        setLogs((prev) => [{ jobId, status, timestamp, message }, ...prev]);
-        if (status === "finish" || status === "error") {
-          setCompletedJobId(jobId);
-        }
+      (status, timestamp, message) => {
+        setLogs((prev) => [{ status, timestamp, message }, ...prev]);
       }
     );
     return () => {
       removeListener();
     };
-  }, [activeJobId]);
+  }, []);
 
-  const isPending = activeJobId != null && completedJobId !== activeJobId;
-
-  return { logs, isPending };
+  return { logs };
 };
 const useFetchAllHistoryAction = (): FetchAll => {
   const actionData = useActionData<typeof fetchAllHistortyAction>();
   const navigation = useNavigation();
-  const { logs, isPending } = useJobId(actionData?.jobId);
+  const { logs } = useJobId();
 
-  const loading = navigation.state !== "idle" || isPending;
+  const loading = navigation.state !== "idle";
 
   return {
     loading,

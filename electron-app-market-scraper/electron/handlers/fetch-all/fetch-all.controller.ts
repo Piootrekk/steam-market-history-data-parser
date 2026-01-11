@@ -1,4 +1,7 @@
 import { randomUUID } from "crypto";
+import { progressAllService } from "./fetch-all.service";
+import { sanitizeError } from "../../error";
+import { sendErrorProgress } from "../common/send-progress.emit";
 
 const fetchAllController = async (
   event: Electron.IpcMainInvokeEvent,
@@ -7,18 +10,21 @@ const fetchAllController = async (
 ) => {
   const jobId = randomUUID();
   const webContents = event.sender;
-  progressAllController(webContents, jobId, steamid, cookies);
+  await progressAllController(webContents, steamid, cookies);
   return { jobId };
 };
 
-const progressAllController = (
+const progressAllController = async (
   webContents: Electron.WebContents,
-  jobId: string,
   steamid: string,
   cookies: string
 ) => {
   try {
-  } catch (err) {}
+    await progressAllService(webContents, steamid, cookies);
+  } catch (error) {
+    const err = sanitizeError(error);
+    sendErrorProgress(webContents, err);
+  }
 };
 
 export { fetchAllController };

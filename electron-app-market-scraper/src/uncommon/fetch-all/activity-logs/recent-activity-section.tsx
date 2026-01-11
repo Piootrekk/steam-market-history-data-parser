@@ -15,8 +15,6 @@ const activityStyles: Record<string, string> = {
   warning: "bg-warning/10 text-warning border-warning/20",
   error: "bg-destructive/10 text-destructive border-destructive/20",
   info: "bg-primary/10 text-primary border-primary/20",
-  start: "bg-primary/10 text-primary border-primary/20",
-  finish: "bg-primary/10 text-primary border-primary/20",
 } as const;
 
 const getconvertedDate = (timestamp: number) => {
