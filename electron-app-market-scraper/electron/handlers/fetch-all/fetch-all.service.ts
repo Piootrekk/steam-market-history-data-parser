@@ -13,12 +13,16 @@ const progressAllService = async (
   cookies: string
 ) => {
   const db = getDbInstance();
-  transactionSession(db, (tx) => {
+  await transactionSession(db, async (tx) => {
     sendStartProgress(webContents);
-    const accountId = insertNewAccount(tx, { steamId: steamid });
+    const accountId = await insertNewAccount(tx, { steamId: steamid });
     sendAccountCreated(webContents, steamid);
-    const newSnapshot = insertNewSnapshot(tx, { totalCount: 0, accountId });
+    const newSnapshot = await insertNewSnapshot(tx, {
+      totalCount: 0,
+      accountId,
+    });
     console.log(newSnapshot);
+    // await fetchbulk; ///30 times sendlog and insert every fetch
   });
 };
 

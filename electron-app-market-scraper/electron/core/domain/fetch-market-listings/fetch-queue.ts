@@ -1,9 +1,11 @@
 import { BASE_CONFIG } from "./base.config";
+import type { TransformDto } from "./fetch/listing.dto";
 import type { FetchParams } from "./fetch/raw-fetch";
 
 const queueFetchBulkAll = (
   cookies: string,
-  eventCallback: (message: string) => void
+  logCallback: (message: string, status: "warning" | "success") => void,
+  returnIterationCallback: (listings: TransformDto) => void
 ) => {
   const fetchConfig = {
     start: 0,
@@ -12,14 +14,4 @@ const queueFetchBulkAll = (
   } satisfies FetchParams;
 };
 
-const queueFetchBulkSync = (
-  cookies: string,
-  eventCallback: (message: string) => void
-) => {};
-
-const queueFetchBulkCustom = (
-  cookies: string,
-  eventCallback: (message: string) => void
-) => {};
-
-export { queueFetchBulkAll, queueFetchBulkCustom, queueFetchBulkSync };
+export { queueFetchBulkAll };

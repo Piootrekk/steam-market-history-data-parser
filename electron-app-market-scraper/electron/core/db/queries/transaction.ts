@@ -1,18 +1,15 @@
 import type { Db } from "..";
 
-type DbTransaction = Omit<Db, "$client">;
+type DbTransaction = Parameters<Parameters<Db["transaction"]>[0]>[0];
 
-const transactionSession = <T = void>(
+const transactionSession = async <T = void>(
   db: Db,
-  callback: (tx: DbTransaction) => T
-): T => {
-  return db.transaction(
-    (tx: DbTransaction) => {
-      return callback(tx);
-    },
-    { behavior: "deferred" }
-  );
+  callback: (tx: DbTransaction) => T | Promise<T>
+): Promise<T> => {
+  return db.transaction(async (tx) => {
+    return callback(tx);
+  });
 };
 
-export { transactionSession };
 export type { DbTransaction };
+export { transactionSession };

@@ -18,7 +18,7 @@
     "db:studio": "drizzle-kit studio --port=5001 --config electron/core/db/drizzle.config.ts"
   },
   "dependencies": {
-    "better-sqlite3": "^12.5.0",
+    "@libsql/client": "^0.17.0",
     "clsx": "^2.1.1",
     "drizzle-orm": "^0.45.1",
     "lucide-react": "^0.560.0",
@@ -30,7 +30,6 @@
   "devDependencies": {
     "@electron/rebuild": "^4.0.2",
     "@tailwindcss/vite": "^4.1.18",
-    "@types/better-sqlite3": "^7.6.13",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^5.1.2",

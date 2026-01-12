@@ -24,8 +24,8 @@ const closeDb = () => {
 };
 
 const getDbInstance = () => {
-  if (db) return db;
-  else throw new Error("Db not exist, connect/init first");
+  if (!db) throw new Error("Db not exist, connect/init first");
+  return db;
 };
 
 export { connectDb, closeDb, getDbInstance };

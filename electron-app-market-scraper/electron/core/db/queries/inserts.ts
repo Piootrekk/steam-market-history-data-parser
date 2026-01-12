@@ -7,11 +7,11 @@ import type {
 import { accountTable, listingsTable, snapshotsTable } from "../schema";
 import type { DbTransaction } from "./transaction";
 
-const insertNewAccount = (
-  db: Db | DbTransaction,
+const insertNewAccount = async (
+  db: DbTransaction,
   newAccount: NewAccountModel
 ) => {
-  const insertResult = db
+  const insertResult = await db
     .insert(accountTable)
     .values(newAccount)
     .returning({ id: accountTable.id })
@@ -20,11 +20,11 @@ const insertNewAccount = (
   return insertResult.id;
 };
 
-const insertNewSnapshot = (
+const insertNewSnapshot = async (
   db: Db | DbTransaction,
   newSnapshot: NewSnapshotModel
 ) => {
-  const insertedSnapshot = db
+  const insertedSnapshot = await db
     .insert(snapshotsTable)
     .values(newSnapshot)
     .returning()
@@ -36,7 +36,7 @@ const insertBulkNewListings = async (
   db: Db | DbTransaction,
   newListings: NewListingModel[]
 ) => {
-  db.insert(listingsTable).values(newListings);
+  await db.insert(listingsTable).values(newListings);
 };
 
 export { insertNewAccount, insertNewSnapshot, insertBulkNewListings };
