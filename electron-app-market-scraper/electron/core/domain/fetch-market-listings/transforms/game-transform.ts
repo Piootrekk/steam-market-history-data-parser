@@ -7,7 +7,7 @@ const APPS: Record<string, string> = {
   "304930": "UNT",
 } as const;
 
-const getGameFromAppId = (appId: number | `${number}`) => {
+const getGameFromAppId = (appId: number | string) => {
   const appIdStringify = appId.toString();
   const baseApp = Object.keys(APPS);
   const matchGame = baseApp.find((game) => game === appIdStringify);

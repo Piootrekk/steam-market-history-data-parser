@@ -10,10 +10,10 @@ import {
 let client: Client | null = null;
 let db: Db | null = null;
 
-const connectDb = () => {
+const connectDb = async () => {
   client = getClientInit(process.env.DB_PATH);
   db = getDatabaseInit(client);
-  runMigrate(process.env.MIGRATION_PATH, db);
+  await runMigrate(process.env.MIGRATION_PATH, db);
 };
 
 const closeDb = () => {

@@ -25,22 +25,22 @@ type Assets = Record<
   Record<VersionApiId, Record<ItemId, CurrentAsset>>
 >;
 
-type GameId = `${number}`;
-type VersionApiId = `${number}`;
-type ItemId = `${number}`;
+type GameId = string;
+type VersionApiId = string;
+type ItemId = string;
 
 type CurrentAsset = {
   currency: number;
   appid: number;
-  contextid: `${number}`;
-  id: `${number}`;
-  classid: `${number}`;
-  instanceid: `${number}`;
-  amount: `${number}`;
+  contextid: string;
+  id: string;
+  classid: string;
+  instanceid: string;
+  amount: string;
   status: number;
-  original_amount: `${number}`;
-  unowned_id: `${number}`;
-  unowned_contextid: `${number}`;
+  original_amount: string;
+  unowned_id: string;
+  unowned_contextid: string;
   background_color: string;
   icon_url: string;
   descriptions: AssetDesc[];
@@ -74,12 +74,12 @@ type AssetAction = {
 };
 
 type Event = {
-  listingid: `${number}`;
-  purchaseid: `${number}`;
+  listingid: string;
+  purchaseid: string;
   event_type: number;
   time_event: number;
   time_event_fraction: number;
-  steamid_actor: `${number}`;
+  steamid_actor: string;
   date_event: string;
 };
 
@@ -105,13 +105,13 @@ type CurrentPurchase = {
   };
   paid_amount: number;
   paid_fee: number;
-  currencyid: `${number}`;
+  currencyid: string;
   steam_fee: number;
   publisher_fee: number;
   publisher_fee_percent: string;
   publisher_fee_app: number;
   received_amount: number;
-  received_currencyid: `${number}`;
+  received_currencyid: string;
   funds_held: number;
   time_funds_held_until: number;
   funds_revoked: number;
@@ -119,7 +119,7 @@ type CurrentPurchase = {
   added_tax: number;
 };
 
-type Listings = Record<`${number}`, CurrentListing>;
+type Listings = Record<string, CurrentListing>;
 type CurrentListing = {
   listingid: string;
   price: number;

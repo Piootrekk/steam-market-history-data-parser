@@ -13,14 +13,14 @@ const getAllCurrentAssets = (assets: Assets) => {
   return assetRecords;
 };
 
-const getCurrentGamesFromAssets = (assets: Assets): `${number}`[] => {
-  const games = Object.keys(assets) as `${number}`[];
+const getCurrentGamesFromAssets = (assets: Assets): string[] => {
+  const games = Object.keys(assets) as string[];
   return games;
 };
 
 const getFirstVersion = (assetGame: Record<string, unknown>) => {
   const versions = Object.keys(assetGame);
-  return versions[0] as `${number}`;
+  return versions[0] as string;
 };
 
 export { getAllCurrentAssets };

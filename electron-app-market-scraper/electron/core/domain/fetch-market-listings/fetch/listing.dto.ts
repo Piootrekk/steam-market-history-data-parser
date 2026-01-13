@@ -16,7 +16,7 @@ const transformDto = (response: MergeResponse) => {
       timeEvent: resp.time_event,
       steamidActor: resp.steamid_actor,
       appId: resp.appid,
-      app: getGameFromAppId(resp.appid),
+      game: getGameFromAppId(resp.appid),
       price: getPrice(
         resp.event_type,
         resp.paid_amount,

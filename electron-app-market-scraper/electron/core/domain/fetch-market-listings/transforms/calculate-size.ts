@@ -1,6 +1,7 @@
 import type { TransformDto } from "../fetch/listing.dto";
 
 type FetchIteration = {
+  index: number;
   min: number;
   count: number;
 };
@@ -12,18 +13,19 @@ const ReduceSizeDto = (
   return responseDto.slice(0, expectedSize);
 };
 
-const calculateBatches = (count: number, totalCount: number) => {
+const calculateRestBatches = (count: number, totalCount: number) => {
   const remainingFetches = Math.ceil((totalCount - count) / count);
   const fetchesCalc: FetchIteration[] = Array.from(
     { length: remainingFetches },
     (_, index) =>
       ({
+        index,
         min: index * count + count,
         count,
       } satisfies FetchIteration)
   );
-  return { remainingFetches, fetchesCalc };
+  return fetchesCalc;
 };
 
-export { ReduceSizeDto, calculateBatches };
+export { ReduceSizeDto, calculateRestBatches };
 export type { FetchIteration };

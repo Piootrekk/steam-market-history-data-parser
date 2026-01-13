@@ -47,9 +47,9 @@ app.on("activate", () => {
   }
 });
 
-app.whenReady().then(() => {
+app.whenReady().then(async () => {
   try {
-    connectDb();
+    await connectDb();
     registerAllHandlers();
     createWindow();
   } catch (err) {

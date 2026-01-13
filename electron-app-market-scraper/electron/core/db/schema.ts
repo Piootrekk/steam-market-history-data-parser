@@ -34,8 +34,8 @@ const logsTable = sqliteTable("logs_snapshot", {
 
 const listingsTable = sqliteTable("listings", {
   id: integer("id").primaryKey({ autoIncrement: true }),
-  listingId: text("listing_id").unique(),
-  purchaseId: text("purchase_id").unique(),
+  listingId: text("listing_id"),
+  purchaseId: text("purchase_id"),
   eventType: integer("event_type").notNull(),
   eventAction: text("event_action").notNull(),
   timeEvent: integer("time_event").notNull(),
@@ -45,7 +45,7 @@ const listingsTable = sqliteTable("listings", {
   currency: text("currency").notNull(),
   instanceId: text("instance_id").notNull(),
   classId: text("class_id").notNull(),
-  originalAmount: integer("original_amount").notNull(),
+  originalAmount: text("original_amount").notNull(),
   backgroundColor: text("background_color").notNull(),
   urlIcon: text("url_icon").notNull(),
   nameColor: text("name_color").notNull(),

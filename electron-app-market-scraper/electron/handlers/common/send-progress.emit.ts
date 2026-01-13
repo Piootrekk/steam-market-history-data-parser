@@ -29,7 +29,7 @@ const sendErrorProgress = (webContents: Electron.WebContents, error: Error) => {
     "fetch:all:progress",
     "error",
     dateNow,
-    `${error.message}`
+    `${error.name} | ${error.message}  ${error.cause ? `| ${error.cause}` : ""}`
   );
 };
 

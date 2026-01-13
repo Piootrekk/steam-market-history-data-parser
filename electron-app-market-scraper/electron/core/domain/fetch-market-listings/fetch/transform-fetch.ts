@@ -2,7 +2,7 @@ import { getFetchError } from "../fetch-error/custom-error";
 import { type FetchParams, fetchMarketHistory } from "./raw-fetch";
 import type { MarketFetchResponse } from "./raw-fetch-response.types";
 import { mergeResponse } from "../transforms/summary-all-transforms";
-import { type TransformDto, transformDto } from "./listing.dto";
+import { transformDto } from "./listing.dto";
 
 const sleep = async (timeMs: number): Promise<void> => {
   return new Promise((resolve) => setTimeout(resolve, timeMs));
@@ -17,7 +17,7 @@ type FetchRetryParams = {
 const retryFetchAttemptsIfFailed = async (
   fetchConfig: FetchParams,
   retryConfig: FetchRetryParams,
-  actionFailedLogger: (status: string, message: string) => void
+  actionFailedLogger: (message: string, status: "warning" | "success") => void
 ) => {
   const { retryAttempts, retrySleepMs, sleepMs429 } = retryConfig;
   let lastError: unknown;
@@ -29,18 +29,18 @@ const retryFetchAttemptsIfFailed = async (
       const standarizedError = getFetchError(err);
       if (standarizedError.errorType === "ToManyRequestsError") {
         actionFailedLogger(
-          "Error",
           `fetching chunk error 429: ${standarizedError.message} - ${
             attempt + 1
-          }/ ${retryAttempts}`
+          }/ ${retryAttempts}`,
+          "warning"
         );
         await sleep(sleepMs429 || retryAttempts);
       } else if (attempt < retryAttempts - 1) {
         actionFailedLogger(
-          "Error",
           `fetching chunk error: ${standarizedError.message} - ${
             attempt + 1
-          }/ ${retryAttempts}`
+          }/ ${retryAttempts}`,
+          "warning"
         );
         await sleep(retrySleepMs);
       }
@@ -50,13 +50,9 @@ const retryFetchAttemptsIfFailed = async (
   throw lastError;
 };
 
-const getTransformedCorrectResponse = async (
-  resp: MarketFetchResponse,
-  actionCorrectLogger: (reponseDto: TransformDto) => Promise<void> | void
-) => {
+const getTransformedCorrectResponse = (resp: MarketFetchResponse) => {
   const transformedResponse = mergeResponse(resp);
   const responseDto = transformDto(transformedResponse);
-  await actionCorrectLogger(responseDto);
   return responseDto;
 };
 

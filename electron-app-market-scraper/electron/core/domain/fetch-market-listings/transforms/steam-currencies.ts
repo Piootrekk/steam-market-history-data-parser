@@ -48,7 +48,7 @@ const CURRENCIES: Record<string, string> = {
   "2047": "RON",
 } as const;
 
-const getCurrencyISO = (currencyMarketId: `${number}` | number): string => {
+const getCurrencyISO = (currencyMarketId: string | number): string => {
   const convertedToString = currencyMarketId.toString();
   const currency = CURRENCIES[convertedToString];
   if (currency === undefined) throw new Error("Invalid currency");
@@ -57,8 +57,8 @@ const getCurrencyISO = (currencyMarketId: `${number}` | number): string => {
 
 const getSelectedCurrecyISO = (
   eventType: number,
-  currencyId: `${number}`,
-  recievedCurrency: `${number}`
+  currencyId: string,
+  recievedCurrency: string
 ) => {
   if (eventType === 3) return getCurrencyISO(recievedCurrency);
   else if (eventType === 4) return getCurrencyISO(currencyId);

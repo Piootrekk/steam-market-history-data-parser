@@ -19,7 +19,7 @@ interface Window {
     ) => Promise<{ jobId: string }>;
     progressFetchingAll: (
       callback: (
-        status: "success" | "error" | "warning",
+        status: "success" | "error" | "warning" | "info",
         timestamp: number,
         message?: string
       ) => void

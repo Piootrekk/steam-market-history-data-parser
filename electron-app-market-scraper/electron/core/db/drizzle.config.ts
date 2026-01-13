@@ -6,6 +6,6 @@ export default {
   schema: "./electron/core/db/schema.ts",
   out: "./electron/core/db/migrations",
   dbCredentials: {
-    url: getDbPath(),
+    url: `file:${getDbPath()}`,
   },
 } satisfies Config;

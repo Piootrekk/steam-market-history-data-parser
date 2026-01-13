@@ -34,9 +34,14 @@ const insertNewSnapshot = async (
 
 const insertBulkNewListings = async (
   db: Db | DbTransaction,
-  newListings: NewListingModel[]
+  newListings: Omit<NewListingModel, "snapshotId">[],
+  snapshotId: number
 ) => {
-  await db.insert(listingsTable).values(newListings);
-};
+  const listingsWithSnapshot = newListings.map((listing) => ({
+    ...listing,
+    snapshotId,
+  }));
 
+  await db.insert(listingsTable).values(listingsWithSnapshot);
+};
 export { insertNewAccount, insertNewSnapshot, insertBulkNewListings };
