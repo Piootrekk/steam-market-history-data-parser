@@ -12,7 +12,8 @@ const router = createHashRouter([
     path: ROUTE_PATHS.root,
     element: <MainWithNavLayout />,
     loader: usersNavLoader,
-    shouldRevalidate: () => false,
+    shouldRevalidate: ({ formAction }) =>
+      formAction === ROUTE_PATHS.downloadAll,
     children: [
       {
         index: true,

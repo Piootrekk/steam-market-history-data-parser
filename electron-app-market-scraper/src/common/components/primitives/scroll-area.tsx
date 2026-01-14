@@ -6,7 +6,7 @@ const ScrollContainer = ({ className, children }: ScrollContainerProps) => {
   return (
     <div
       className={cn(
-        "h-[calc(95vh-(var(--spacing)*12))]  w-full focus-visible:ring-2 ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-ring focus-visible:ring-offset-1",
+        "h-[calc(95vh-(var(--spacing)*12))]  w-full focus-visible:ring-2 ring-offset-background focus-visible:outline-none focus-visible:ring-ring focus-visible:ring-offset-1",
         className
       )}
     >
