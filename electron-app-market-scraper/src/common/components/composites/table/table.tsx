@@ -5,14 +5,14 @@ import {
   TableHeader,
   TableRow,
 } from "./table-elements";
-type Columns<T> = {
+type Column<T> = {
   key: keyof T;
   header: string;
   render: (item: T) => React.ReactNode;
 };
 
 type DataTable<T> = {
-  columns: Columns<T>[];
+  columns: Column<T>[];
   data: T[];
 };
 
@@ -47,3 +47,4 @@ const DataTable = <T extends Record<string, unknown>>({
 };
 
 export default DataTable;
+export type { Column, DataTable };

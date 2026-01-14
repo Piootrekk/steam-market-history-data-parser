@@ -5,7 +5,9 @@ contextBridge.exposeInMainWorld("electronAPI", {
   setupCheck: (callback) =>
     ipcRendererAdapter.once("init:setup-check", callback),
   getAllUsers: () => ipcRendererAdapter.invoke("db:users:all"),
-  startFetchingAll: (steamId: string, cookies: string) =>
+  getListingsFromSteamId: (steamId, start, limit) =>
+    ipcRendererAdapter.invoke("db:user:listings", steamId, start, limit),
+  startFetchingAll: (steamId, cookies) =>
     ipcRendererAdapter.invoke("fetch:all:start", steamId, cookies),
   progressFetchingAll: (callback) =>
     ipcRendererAdapter.on("fetch:all:progress", callback),
