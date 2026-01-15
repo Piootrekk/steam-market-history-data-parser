@@ -1,8 +1,8 @@
 import type { Db } from "..";
 import { accountTable, listingsTable, snapshotsTable } from "../schema";
-import { desc, eq, getTableColumns } from "drizzle-orm";
+import { count, desc, eq, getTableColumns } from "drizzle-orm";
 
-const getAllSteamIdsFromAccounts = async (db: Db) => {
+const getAllSteamIdsFromAccount = async (db: Db) => {
   const steamIds = await db
     .select({ steamid: accountTable.steamId })
     .from(accountTable);
@@ -29,4 +29,21 @@ const getListingsForCurrentAccountSteamId = async (
   return response;
 };
 
-export { getAllSteamIdsFromAccounts, getListingsForCurrentAccountSteamId };
+const getCountIdsFromAccount = async (db: Db, steamId: string) => {
+  const response = await db
+    .select({
+      count: count(),
+    })
+    .from(listingsTable)
+    .innerJoin(snapshotsTable, eq(listingsTable.snapshotId, snapshotsTable.id))
+    .innerJoin(accountTable, eq(snapshotsTable.accountId, accountTable.id))
+    .where(eq(accountTable.steamId, steamId))
+    .get();
+  return response?.count ?? 0;
+};
+
+export {
+  getAllSteamIdsFromAccount,
+  getListingsForCurrentAccountSteamId,
+  getCountIdsFromAccount,
+};

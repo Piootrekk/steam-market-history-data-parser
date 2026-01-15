@@ -16,18 +16,18 @@ const ScrollContainer = ({ className, children }: ScrollContainerProps) => {
 };
 
 type ScrollAreaProps = {
-  direction?: keyof typeof directionStyles;
+  direction: keyof typeof directionStyles;
 } & React.ComponentProps<"div">;
 
 const directionStyles = {
-  vertical: "scroll-area overflow-x-auto overflow-y-hidden whitespace-nowrap",
-  horizontal: "scroll-area overflow-y-auto overflow-x-hidden",
+  horizontal: "scroll-area overflow-x-auto overflow-y-hidden whitespace-nowrap",
+  vertical: "scroll-area overflow-y-auto overflow-x-hidden",
 } as const;
 
 const ScrollArea = ({
   className = "",
   children,
-  direction = "horizontal",
+  direction,
   "aria-label": ariaLabel = "Scroll area",
   ...rest
 }: ScrollAreaProps) => {
@@ -51,13 +51,14 @@ const ScrollArea = ({
 const ScrollAreaContainer = ({
   className,
   children,
-  direction = "horizontal",
+  direction,
   "aria-label": ariaLabel = "Scroll area",
   ...rest
 }: ScrollAreaProps) => {
   return (
     <ScrollContainer>
       <ScrollArea
+        direction={direction}
         className={cn(directionStyles[direction], className)}
         {...rest}
       >

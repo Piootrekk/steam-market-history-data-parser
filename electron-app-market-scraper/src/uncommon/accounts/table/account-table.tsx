@@ -10,6 +10,11 @@ import { useAccountTableInvoices } from "./accout-table.loader";
 
 const ListingsColumns: Column<Listings>[] = [
   {
+    key: "eventAction",
+    header: "Event",
+    render: (item) => item.eventAction,
+  },
+  {
     key: "marketHashName",
     header: "Market Hash Name",
     render: (item) => item.marketHashName,
@@ -24,6 +29,16 @@ const ListingsColumns: Column<Listings>[] = [
     header: "Price",
     render: (item) => `${item.price} ${item.currency}`,
   },
+  {
+    key: "originalAmount",
+    header: "Amount",
+    render: (item) => `${item.originalAmount}`,
+  },
+  {
+    key: "timeEvent",
+    header: "Amount",
+    render: (item) => new Date(item.timeEvent * 1000).toLocaleString("en-GB"),
+  },
 ];
 
 const AccountTable = () => {
@@ -31,7 +46,7 @@ const AccountTable = () => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Actions Activity</CardTitle>
+        <CardTitle>Listings</CardTitle>
       </CardHeader>
       <CardContent>
         <DataTable columns={ListingsColumns} data={listings} />

@@ -10,7 +10,10 @@ const MainWithNavLayout = () => {
       <div className="flex-1 flex flex-col min-w-0">
         <main className="flex-1 p-8 overflow-auto">
           <BasicPageWrapper>
-            <ScrollAreaContainer className="space-y-6 flex flex-col pr-2">
+            <ScrollAreaContainer
+              direction="vertical"
+              className="space-y-6 flex flex-col pr-2"
+            >
               <Outlet />
             </ScrollAreaContainer>
           </BasicPageWrapper>

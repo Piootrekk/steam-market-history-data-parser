@@ -3,6 +3,7 @@ import {
   TableBody,
   TableCell,
   TableHeader,
+  TableHeaderRow,
   TableRow,
 } from "./table-elements";
 type Column<T> = {
@@ -27,7 +28,9 @@ const DataTable = <T extends Record<string, unknown>>({
       <TableHeader>
         <TableRow>
           {columns.map((column) => (
-            <TableHeader key={String(column.key)}>{column.header}</TableHeader>
+            <TableHeaderRow key={String(column.key)}>
+              {column.header}
+            </TableHeaderRow>
           ))}
         </TableRow>
       </TableHeader>

@@ -65,7 +65,7 @@ const Sidebar = () => {
       )}
     >
       <ScrollContainer className="h-[calc(95vh-(var(--spacing)*4))]">
-        <ScrollArea>
+        <ScrollArea direction="vertical">
           {isCollabsed ? (
             <SidebarHeaderCollapsed
               onToggle={() => setIsCollabsed(!isCollabsed)}
