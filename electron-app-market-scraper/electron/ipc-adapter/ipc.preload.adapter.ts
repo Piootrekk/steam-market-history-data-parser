@@ -1,5 +1,10 @@
 import { ipcRenderer } from "electron";
-import type { ChannelValue, HandlerArgs, HandlerFn } from "./ipc.types";
+import type {
+  ChannelValue,
+  HandlerArgs,
+  HandlerFn,
+  HandlerResponse,
+} from "./ipc.types";
 
 const ipcRendererAdapter = {
   once<K extends ChannelValue>(channel: K, callback: HandlerFn<K>): void {
@@ -8,7 +13,10 @@ const ipcRendererAdapter = {
     });
   },
 
-  invoke<K extends ChannelValue>(channel: K, ...args: HandlerArgs<K>) {
+  invoke<K extends ChannelValue>(
+    channel: K,
+    ...args: HandlerArgs<K>
+  ): Promise<Awaited<HandlerResponse<K>>> {
     return ipcRenderer.invoke(channel, ...args);
   },
 

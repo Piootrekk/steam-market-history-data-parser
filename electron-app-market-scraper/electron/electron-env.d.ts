@@ -9,6 +9,13 @@ declare namespace NodeJS {
   }
 }
 
+type ValidationReturn<T> =
+  | ({ ok: true } & T)
+  | {
+      ok: false;
+      error: string;
+    };
+
 type Listings = {
   appId: number;
   backgroundColor: string;
@@ -31,10 +38,19 @@ type Listings = {
   urlIcon: string;
 };
 
+type ListingsCount = {
+  countListings: number;
+  pageAmount: number;
+};
+
 interface Window {
   electronAPI: {
     setupCheck: (callback: (value: string) => void) => void;
     getAllUsers: () => Promise<string[]>;
+    getCountListingsFromSteamId: (
+      steamId: string,
+      limit: number
+    ) => Promise<ValidationReturn<ListingsCount>>;
     getListingsFromSteamId: (
       steamId: string,
       start: number,

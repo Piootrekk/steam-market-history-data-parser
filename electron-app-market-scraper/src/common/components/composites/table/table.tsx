@@ -36,7 +36,7 @@ const DataTable = <T extends Record<string, unknown>>({
       </TableHeader>
       <TableBody>
         {data.map((item, index) => (
-          <TableRow key={index}>
+          <TableRow key={index} className="hover:bg-muted/50">
             {columns.map((column) => (
               <TableCell key={String(column.key)}>
                 {column.render(item)}

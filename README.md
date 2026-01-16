@@ -1,3 +1,6 @@
+
+### Desktop app in progress 🔨
+
 # Market history data parser
 
 Simple full-stack application (react, fastify, mongodb) to parse and store market history personal data from steam market. It allows to filter, search and display data without waiting for steam to load it.

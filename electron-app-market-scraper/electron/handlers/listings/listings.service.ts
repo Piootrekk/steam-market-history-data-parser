@@ -1,7 +1,7 @@
 import { listingsDto } from "./listings.dto";
 import { listingsRepostiory } from "./listings.repository";
 
-const ListingsService = async (
+const listingsService = async (
   steamId: string,
   start: number,
   limit: number
@@ -11,4 +11,4 @@ const ListingsService = async (
   return transformListings;
 };
 
-export { ListingsService };
+export { listingsService };

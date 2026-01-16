@@ -39,7 +39,7 @@ const getCountIdsFromAccount = async (db: Db, steamId: string) => {
     .innerJoin(accountTable, eq(snapshotsTable.accountId, accountTable.id))
     .where(eq(accountTable.steamId, steamId))
     .get();
-  return response?.count ?? 0;
+  return response;
 };
 
 export {

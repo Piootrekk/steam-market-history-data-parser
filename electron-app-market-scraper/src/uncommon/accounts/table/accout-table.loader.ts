@@ -8,7 +8,12 @@ const accountTableLoader = async ({ params, request }: LoaderFunctionArgs) => {
   const url = new URL(request.url);
   const start = Number(url.searchParams.get("start") ?? 0);
   const limit = Number(url.searchParams.get("limit") ?? 25);
-
+  const listings = await window.electronAPI.getCountListingsFromSteamId(
+    accountId,
+    limit
+  );
+  if (!listings.ok) throw new Response("Not Found", { status: 404 });
+  console.log(listings.pageAmount, listings.countListings);
   const resp = await window.electronAPI.getListingsFromSteamId(
     accountId,
     start,

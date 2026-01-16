@@ -48,7 +48,7 @@ const AccountTable = () => {
       <CardHeader>
         <CardTitle>Listings</CardTitle>
       </CardHeader>
-      <CardContent>
+      <CardContent className="px-0 pb-0">
         <DataTable columns={ListingsColumns} data={listings} />
       </CardContent>
     </Card>
