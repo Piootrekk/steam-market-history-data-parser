@@ -7,7 +7,7 @@ const ScrollContainer = ({ className, children }: ScrollContainerProps) => {
     <div
       className={cn(
         "h-[calc(95vh-(var(--spacing)*12))]  w-full focus-visible:ring-2 ring-offset-background focus-visible:outline-none focus-visible:ring-ring focus-visible:ring-offset-1",
-        className
+        className,
       )}
     >
       {children}
@@ -39,7 +39,7 @@ const ScrollArea = ({
       className={cn(
         directionStyles[direction],
         "h-full w-full overscroll-contain focus:outline-none  disabled:cursor-not-allowed disabled:opacity-50",
-        className
+        className,
       )}
       {...rest}
     >

@@ -182,6 +182,7 @@
     -webkit-overflow-scrolling: auto;
     scrollbar-width: thin;
     scrollbar-color: transparent transparent;
+    scrollbar-gutter: stable;
   }
 
   .scroll-area:hover,

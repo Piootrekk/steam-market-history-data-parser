@@ -8,12 +8,14 @@ import AccountsLayout from "./uncommon/accounts/accounts.layout";
 import { fetchAllHistortyAction } from "./uncommon/fetch-all/download.action";
 import AccountTable from "./uncommon/accounts/table/account-table";
 import { accountTableLoader } from "./uncommon/accounts/table/accout-table.loader";
+import ErrorPage from "./uncommon/error/error.page";
 
 const router = createHashRouter([
   {
     path: ROUTE_PATHS.root,
     element: <MainWithNavLayout />,
     loader: usersNavLoader,
+    errorElement: <ErrorPage />,
     shouldRevalidate: ({ formAction }) =>
       formAction === ROUTE_PATHS.downloadAll,
     children: [
