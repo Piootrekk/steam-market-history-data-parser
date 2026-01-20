@@ -61,7 +61,7 @@ const Sidebar = () => {
     <aside
       className={cn(
         "h-full border-r border-sidebar-border bg-sidebar transition-all duration-100 flex flex-col",
-        isCollabsed ? "w-16" : "w-64"
+        isCollabsed ? "w-16" : "w-64",
       )}
     >
       <ScrollContainer className="h-[calc(95vh-(var(--spacing)*4))]">

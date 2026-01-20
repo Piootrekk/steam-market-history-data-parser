@@ -4,10 +4,9 @@ import { listingsCountService } from "./listings-count.service";
 const listingsCountController = async (
   _event: Electron.IpcMainInvokeEvent,
   steamId: string,
-  limit: number
 ): Promise<ValidationReturn<ListingsCount>> => {
   try {
-    return await listingsCountService(steamId, limit);
+    return await listingsCountService(steamId);
   } catch (err) {
     const sanitized = sanitizeError(err);
     return { ok: false, error: sanitized.message };

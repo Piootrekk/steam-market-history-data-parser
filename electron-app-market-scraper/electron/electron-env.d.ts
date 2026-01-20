@@ -40,7 +40,6 @@ type Listings = {
 
 type ListingsCount = {
   countListings: number;
-  pageAmount: number;
 };
 
 interface Window {
@@ -49,23 +48,22 @@ interface Window {
     getAllUsers: () => Promise<string[]>;
     getCountListingsFromSteamId: (
       steamId: string,
-      limit: number
     ) => Promise<ValidationReturn<ListingsCount>>;
     getListingsFromSteamId: (
       steamId: string,
       start: number,
-      limit: number
+      limit: number,
     ) => Promise<Listings[]>;
     startFetchingAll: (
       steamId: string,
-      cookies: string
+      cookies: string,
     ) => Promise<{ jobId: string }>;
     progressFetchingAll: (
       callback: (
         status: "success" | "error" | "warning" | "info",
         timestamp: number,
-        message?: string
-      ) => void
+        message?: string,
+      ) => void,
     ) => () => void;
   };
 }
