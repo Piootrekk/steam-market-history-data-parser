@@ -1,12 +1,23 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import NavLink from "../../primitives/navlink";
+import { Link } from "../../primitives/navlink";
 import Button from "../../primitives/button";
 import { cn } from "src/common/utils/merge-styles";
 
-type PaginationProps = {
-  currentPage: number;
+type PaginationRightProps = {
+  page: number;
   maxPage: number;
   to: string;
+};
+
+type PaginationLeftProps = {
+  page: number;
+  to: string;
+};
+
+type CurrentPageProps = {
+  page: number;
+  to: string;
+  isCurrentPage?: boolean;
 };
 
 type PaginationWrapperProps = React.ComponentProps<"div">;
@@ -28,41 +39,43 @@ const Pagination = ({
   );
 };
 
-const ChevronLeftPagination = ({ currentPage, to }: PaginationProps) => {
-  const isDisabled = currentPage === 1;
+const ChevronLeftPagination = ({ page, to }: PaginationLeftProps) => {
+  const isDisabled = page === 1;
   if (isDisabled)
     return (
-      <Button disabled size="icon">
-        <ChevronLeft className="h-4 w-4" />
+      <Button disabled size="icon" variant="outline">
+        <ChevronLeft />
       </Button>
     );
   return (
-    <NavLink to={to} size="icon" className="h-8 w-8">
-      <ChevronLeft className="h-4 w-4" />
-    </NavLink>
+    <Link variant="outline" to={to} size="icon">
+      <ChevronLeft />
+    </Link>
   );
 };
 
-const CurrentPagePagination = ({ to, currentPage }: PaginationProps) => (
-  <NavLink to={to}>{currentPage}</NavLink>
+const PagePagination = ({ page, to, isCurrentPage }: CurrentPageProps) => (
+  <Link to={to} variant={isCurrentPage ? "default" : "outline"}>
+    {page}
+  </Link>
 );
 
 const ChevronRightPagination = ({
   to,
-  currentPage,
+  page,
   maxPage,
-}: PaginationProps) => {
-  const isDisabled = currentPage === maxPage;
+}: PaginationRightProps) => {
+  const isDisabled = page === maxPage;
   if (isDisabled)
     return (
-      <Button disabled size="icon">
-        <ChevronRight className="h-4 w-4" />
+      <Button disabled size="icon" variant="outline">
+        <ChevronRight />
       </Button>
     );
   return (
-    <NavLink to={to} size="icon" className="h-8 w-8">
-      <ChevronRight className="h-4 w-4" />
-    </NavLink>
+    <Link to={to} size="icon" variant="outline">
+      <ChevronRight />
+    </Link>
   );
 };
 
@@ -76,7 +89,7 @@ const Ellipsis = () => {
 
 export {
   Ellipsis,
-  CurrentPagePagination,
+  PagePagination,
   ChevronLeftPagination,
   ChevronRightPagination,
   Pagination,

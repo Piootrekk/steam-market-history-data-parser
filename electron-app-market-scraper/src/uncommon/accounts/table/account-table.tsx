@@ -7,12 +7,8 @@ import {
 import { type Column } from "../../../common/components/composites/table/table";
 import DataTable from "../../../common/components/composites/table/table";
 import { useAccountTableInvoices } from "./accout-table.loader";
-import {
-  Input,
-  InputContainer,
-  InputLabel,
-} from "src/common/components/primitives/input";
-import { Search } from "lucide-react";
+import AccountTablePagination from "./account-pagination";
+import AccountTableFilters from "./account-filters";
 
 const ListingsColumns: Column<Listings>[] = [
   {
@@ -49,23 +45,25 @@ const ListingsColumns: Column<Listings>[] = [
 
 const AccountTable = () => {
   const listings = useAccountTableInvoices();
+
   return (
     <Card>
       <CardHeader className="space-y-6">
         <CardTitle>
           <p>Listings</p>
         </CardTitle>
-        <InputContainer>
-          <InputLabel>Search Query</InputLabel>
-          <Input
-            type="text"
-            leftIcon={<Search size={20} className="shrink-0" />}
-            placeholder={"Search hash name..."}
-          />
-        </InputContainer>
+        <AccountTableFilters
+          searchParam={undefined}
+          onSearch={(searchTerm) => console.log(searchTerm)}
+        />
       </CardHeader>
       <CardContent className="px-0 pb-0">
-        <DataTable columns={ListingsColumns} data={listings} />
+        <DataTable columns={ListingsColumns} data={listings.listings} />
+        <AccountTablePagination
+          startParam={0}
+          limit={50}
+          totalCount={listings.listingsCount}
+        />
       </CardContent>
     </Card>
   );

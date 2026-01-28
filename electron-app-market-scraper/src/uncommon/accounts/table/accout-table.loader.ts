@@ -8,16 +8,15 @@ const accountTableLoader = async ({ params, request }: LoaderFunctionArgs) => {
   const url = new URL(request.url);
   const start = Number(url.searchParams.get("start") ?? 0);
   const limit = Number(url.searchParams.get("limit") ?? 25);
-  const listings =
+  const listingsCount =
     await window.electronAPI.getCountListingsFromSteamId(accountId);
-  if (!listings.ok) throw new Response("Not Found", { status: 404 });
-  console.log(listings.countListings);
-  const resp = await window.electronAPI.getListingsFromSteamId(
+  if (!listingsCount.ok) throw new Response("Not Found", { status: 404 });
+  const listings = await window.electronAPI.getListingsFromSteamId(
     accountId,
     start,
     limit,
   );
-  return resp;
+  return { listings, listingsCount: listingsCount.countListings };
 };
 
 const useAccountTableInvoices = () => {

@@ -13,7 +13,7 @@ const getListingsForCurrentAccountSteamId = async (
   db: Db,
   steamId: string,
   start: number,
-  limit: number
+  limit: number,
 ) => {
   const response = await db
     .select({
@@ -42,8 +42,15 @@ const getCountIdsFromAccount = async (db: Db, steamId: string) => {
   return response;
 };
 
+const getListingsColumnsNames = () => {
+  const listingsObject = getTableColumns(listingsTable);
+  const listingsNames = Object.keys(listingsObject);
+  return listingsNames;
+};
+
 export {
   getAllSteamIdsFromAccount,
   getListingsForCurrentAccountSteamId,
   getCountIdsFromAccount,
+  getListingsColumnsNames,
 };
