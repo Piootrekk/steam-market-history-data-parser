@@ -13,7 +13,7 @@ import {
 
 const firstListingsFetch = async (
   cookies: string,
-  logCallback: (message: string, status: "warning" | "success") => void
+  logCallback: (message: string, status: "warning" | "success") => void,
 ) => {
   const fetchConfig = {
     start: 0,
@@ -23,7 +23,7 @@ const firstListingsFetch = async (
   const firstResponse = await retryFetchAttemptsIfFailed(
     fetchConfig,
     BASE_CONFIG,
-    logCallback
+    logCallback,
   );
   const transformedFirstResponse = getTransformedCorrectResponse(firstResponse);
   logCallback("First inital fetch complated", "success");
@@ -35,21 +35,34 @@ const firstListingsFetch = async (
 
 const getBatches = (
   totalCount: number,
-  logCallback: (message: string, status: "info") => void
+  logCallback: (message: string, status: "info") => void,
 ) => {
   const calculateFetches = calculateRestBatches(
     BASE_CONFIG.maxCount,
-    totalCount
+    totalCount,
   );
   logCallback(`Remaning fetches: ${calculateFetches.length}`, "info");
-  return calculateFetches.length;
+  return calculateFetches;
+};
+
+const detectAnomalyMissmatchTotalCount = (
+  totalCountOrigin: number,
+  totalCountCurrent: number,
+  logCallback: (message: string, status: "warning") => void,
+) => {
+  if (totalCountOrigin !== totalCountCurrent)
+    logCallback(
+      `Anomaly detection, missing some listings totalCount from initial fetch: ${totalCountOrigin}, current fetch: ${totalCountCurrent}.`,
+      "warning",
+    );
 };
 
 const otherListingsFetches = async (
+  totalCount: number,
   cookies: string,
   fetchesCalc: FetchIteration[],
   logCallback: (message: string, status: "warning" | "success") => void,
-  listingsCallback: (listings: TransformDto) => void | Promise<void>
+  listingsCallback: (listings: TransformDto) => void | Promise<void>,
 ) => {
   for (const fetchCalcEl of fetchesCalc) {
     await sleep(BASE_CONFIG.retrySleepMs);
@@ -61,17 +74,21 @@ const otherListingsFetches = async (
     const anotherResponse = await retryFetchAttemptsIfFailed(
       fetchesConfig,
       BASE_CONFIG,
-      logCallback
+      logCallback,
     );
     const transformedAnotherResponse =
       getTransformedCorrectResponse(anotherResponse);
-
+    detectAnomalyMissmatchTotalCount(
+      totalCount,
+      anotherResponse.total_count,
+      logCallback,
+    );
     listingsCallback(transformedAnotherResponse);
     logCallback(
       `Fetch complated ${fetchCalcEl.min} - ${
         fetchCalcEl.count + fetchCalcEl.min
       }, ${fetchCalcEl.index + 1}/${fetchesCalc.length}`,
-      "success"
+      "success",
     );
   }
 };

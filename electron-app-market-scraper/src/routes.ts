@@ -15,11 +15,17 @@ const ROUTE_PATHS = {
   accountConfig: "config",
 } as const satisfies Record<string, string>;
 
+const TABLE_PARAMS = {
+  start: "start",
+  limit: "limit",
+  query: "query",
+} as const satisfies Record<string, string>;
+
 type NavRoutes = {
   path: string;
   label: string;
   Icon: React.ElementType;
 };
 
-export { ROUTE_PATHS };
+export { ROUTE_PATHS, TABLE_PARAMS };
 export type { NavRoutes };

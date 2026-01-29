@@ -20,6 +20,7 @@ const AccountTableFilters = ({
   const [inputValue, setInputValue] = useState<string | null>(searchParam);
 
   useEffect(() => {
+    if (inputValue === null) return;
     const debauncer = setTimeout(() => {
       onSearch(inputValue);
     }, defaultTimeout);

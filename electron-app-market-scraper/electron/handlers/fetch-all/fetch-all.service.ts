@@ -20,7 +20,7 @@ import {
 const progressAllService = async (
   webContents: Electron.WebContents,
   steamid: string,
-  cookies: string
+  cookies: string,
 ) => {
   const db = getDbInstance();
   await transactionSession(db, async (tx) => {
@@ -31,7 +31,7 @@ const progressAllService = async (
     const { totalCount, listings } = await firstListingsFetch(
       cookies,
       (message, status) =>
-        sendMessageFromFetchQueue(webContents, message, status)
+        sendMessageFromFetchQueue(webContents, message, status),
     );
 
     const newSnapshot = await insertNewSnapshot(tx, {
@@ -43,9 +43,10 @@ const progressAllService = async (
     sendDbInsertCorrecty(webContents, listings.length);
 
     const batches = getBatches(totalCount, (message, status) =>
-      sendMessageFromFetchQueue(webContents, message, status)
+      sendMessageFromFetchQueue(webContents, message, status),
     );
     await otherListingsFetches(
+      totalCount,
       cookies,
       batches,
       (message, status) =>
@@ -53,7 +54,7 @@ const progressAllService = async (
       async (otherListings) => {
         await insertBulkNewListings(tx, otherListings, newSnapshot.id);
         sendDbInsertCorrecty(webContents, otherListings.length);
-      }
+      },
     );
   });
 };

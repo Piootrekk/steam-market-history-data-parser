@@ -5,6 +5,7 @@ import {
   Ellipsis,
   Pagination,
 } from "src/common/components/composites/table/table-pagination";
+import { TABLE_PARAMS } from "src/routes";
 
 type AccountPaginationProps = {
   urlSearchParams: URLSearchParams;
@@ -24,8 +25,8 @@ const getStartParam = (page: number, limit: number) => {
 };
 
 const getParamsFromURLSearchParams = (urlSearchParams: URLSearchParams) => {
-  const startParam = Number(urlSearchParams.get("start") ?? 0);
-  const limit = Number(urlSearchParams.get("limit") ?? 50);
+  const startParam = Number(urlSearchParams.get(TABLE_PARAMS.start) ?? 0);
+  const limit = Number(urlSearchParams.get(TABLE_PARAMS.limit) ?? 50);
   return { startParam, limit };
 };
 
@@ -46,6 +47,7 @@ const AccountTablePagination = ({
   totalCount,
 }: AccountPaginationProps) => {
   const { startParam, limit } = getParamsFromURLSearchParams(params);
+  if (totalCount <= limit) return null;
   const totalPages = getPageCount(totalCount, limit);
   const currentPage = getCurrentPage(startParam, limit);
   const showLeftEllipsis = currentPage > 3;

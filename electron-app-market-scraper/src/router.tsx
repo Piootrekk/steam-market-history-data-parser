@@ -17,7 +17,7 @@ const router = createHashRouter([
     loader: usersNavLoader,
     errorElement: <ErrorPage />,
     shouldRevalidate: ({ formAction }) =>
-      formAction === ROUTE_PATHS.downloadAll,
+      formAction === `/${ROUTE_PATHS.downloadAll}`,
     children: [
       {
         index: true,
