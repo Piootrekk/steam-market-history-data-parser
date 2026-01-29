@@ -7,8 +7,8 @@ import {
 } from "src/common/components/primitives/input";
 
 type AccountTableFiltersProps = {
-  searchParam?: string;
-  onSearch: (searchTerm: string) => void;
+  searchParam: string | null;
+  onSearch: (searchTerm: string | null) => void;
 };
 
 const defaultTimeout = 500;
@@ -17,7 +17,7 @@ const AccountTableFilters = ({
   searchParam,
   onSearch,
 }: AccountTableFiltersProps) => {
-  const [inputValue, setInputValue] = useState<string>(searchParam ?? "");
+  const [inputValue, setInputValue] = useState<string | null>(searchParam);
 
   useEffect(() => {
     const debauncer = setTimeout(() => {
@@ -25,7 +25,7 @@ const AccountTableFilters = ({
     }, defaultTimeout);
 
     return () => clearTimeout(debauncer);
-  }, [inputValue]);
+  }, [inputValue, onSearch]);
 
   return (
     <InputContainer>
@@ -34,7 +34,7 @@ const AccountTableFilters = ({
         type="text"
         leftIcon={<Search size={20} className="shrink-0" />}
         placeholder={"Search hash name..."}
-        value={inputValue}
+        value={inputValue ?? ""}
         onChange={(e) => setInputValue(e.target.value)}
       />
     </InputContainer>

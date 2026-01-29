@@ -9,6 +9,8 @@ import DataTable from "../../../common/components/composites/table/table";
 import { useAccountTableInvoices } from "./accout-table.loader";
 import AccountTablePagination from "./account-pagination";
 import AccountTableFilters from "./account-filters";
+import { useSearchParams } from "react-router-dom";
+import { useCallback } from "react";
 
 const ListingsColumns: Column<Listings>[] = [
   {
@@ -44,7 +46,31 @@ const ListingsColumns: Column<Listings>[] = [
 ];
 
 const AccountTable = () => {
+  const [searchParam, setSearchParams] = useSearchParams();
   const listings = useAccountTableInvoices();
+
+  const getSearchTerm = () => {
+    const searchQuery = searchParam.get("query");
+    return searchQuery;
+  };
+
+  const setSearchTerm = (searchTerm: string | null) => {
+    setSearchParams((prev) => {
+      const next = new URLSearchParams(prev);
+      if (searchTerm) next.set("query", searchTerm);
+      else next.delete("query");
+
+      next.delete("start");
+      next.delete("limit");
+
+      return next;
+    });
+  };
+
+  const handleSearch = useCallback((searchTerm: string | null) => {
+    setSearchTerm(searchTerm);
+    console.log(searchTerm);
+  }, []);
 
   return (
     <Card>
@@ -53,16 +79,15 @@ const AccountTable = () => {
           <p>Listings</p>
         </CardTitle>
         <AccountTableFilters
-          searchParam={undefined}
-          onSearch={(searchTerm) => console.log(searchTerm)}
+          searchParam={getSearchTerm()}
+          onSearch={handleSearch}
         />
       </CardHeader>
       <CardContent className="px-0 pb-0">
         <DataTable columns={ListingsColumns} data={listings.listings} />
         <AccountTablePagination
-          startParam={0}
-          limit={50}
           totalCount={listings.listingsCount}
+          urlSearchParams={searchParam}
         />
       </CardContent>
     </Card>

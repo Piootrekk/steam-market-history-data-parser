@@ -40,7 +40,7 @@ const Pagination = ({
 };
 
 const ChevronLeftPagination = ({ page, to }: PaginationLeftProps) => {
-  const isDisabled = page === 1;
+  const isDisabled = page <= 0;
   if (isDisabled)
     return (
       <Button disabled size="icon" variant="outline">
@@ -65,7 +65,7 @@ const ChevronRightPagination = ({
   page,
   maxPage,
 }: PaginationRightProps) => {
-  const isDisabled = page === maxPage;
+  const isDisabled = page >= maxPage;
   if (isDisabled)
     return (
       <Button disabled size="icon" variant="outline">

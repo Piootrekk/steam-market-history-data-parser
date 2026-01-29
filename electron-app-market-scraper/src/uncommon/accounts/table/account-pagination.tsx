@@ -7,8 +7,7 @@ import {
 } from "src/common/components/composites/table/table-pagination";
 
 type AccountPaginationProps = {
-  startParam: number;
-  limit: number;
+  urlSearchParams: URLSearchParams;
   totalCount: number;
 };
 
@@ -20,11 +19,33 @@ const getCurrentPage = (startParam: number, limit: number) => {
   return Math.ceil(startParam / limit + 1);
 };
 
+const getStartParam = (page: number, limit: number) => {
+  return (page - 1) * limit;
+};
+
+const getParamsFromURLSearchParams = (urlSearchParams: URLSearchParams) => {
+  const startParam = Number(urlSearchParams.get("start") ?? 0);
+  const limit = Number(urlSearchParams.get("limit") ?? 50);
+  return { startParam, limit };
+};
+
+const getPathParams = (
+  urlSearchParams: URLSearchParams,
+  newPage: number,
+  limit: number,
+) => {
+  const startParam = getStartParam(newPage, limit);
+  const params = new URLSearchParams(urlSearchParams);
+  params.set("start", startParam.toString());
+  params.set("limit", limit.toString());
+  return params.toString();
+};
+
 const AccountTablePagination = ({
-  startParam,
-  limit,
+  urlSearchParams: params,
   totalCount,
 }: AccountPaginationProps) => {
+  const { startParam, limit } = getParamsFromURLSearchParams(params);
   const totalPages = getPageCount(totalCount, limit);
   const currentPage = getCurrentPage(startParam, limit);
   const showLeftEllipsis = currentPage > 3;
@@ -33,25 +54,46 @@ const AccountTablePagination = ({
   const nextPage = currentPage + 1;
   return (
     <Pagination>
-      <ChevronLeftPagination to="" page={currentPage} />
-      <PagePagination to="" page={1} isCurrentPage={currentPage === 1} />
+      <ChevronLeftPagination
+        to={`?${getPathParams(params, prevPage, limit)}`}
+        page={prevPage}
+      />
+      <PagePagination
+        to={`?${getPathParams(params, 1, limit)}`}
+        page={1}
+        isCurrentPage={currentPage === 1}
+      />
       {showLeftEllipsis && <Ellipsis />}
-      {prevPage > 1 && <PagePagination page={prevPage} to={"#"} />}
+      {prevPage > 1 && (
+        <PagePagination
+          page={prevPage}
+          to={`?${getPathParams(params, prevPage, limit)}`}
+        />
+      )}
       {currentPage !== 1 && currentPage < totalPages && (
         <PagePagination
           page={currentPage}
-          to={"#"}
+          to={`?${getPathParams(params, currentPage, limit)}`}
           isCurrentPage={currentPage !== 1 && currentPage !== totalPages}
         />
       )}
-      {nextPage < totalPages && <PagePagination page={nextPage} to={"#"} />}
+      {nextPage < totalPages && (
+        <PagePagination
+          page={nextPage}
+          to={`?${getPathParams(params, nextPage, limit)}`}
+        />
+      )}
       {showRightEllipsis && <Ellipsis />}
       <PagePagination
-        to=""
+        to={`?${getPathParams(params, totalPages, limit)}`}
         page={totalPages}
         isCurrentPage={currentPage === totalPages}
       />
-      <ChevronRightPagination to="" page={currentPage} maxPage={totalPages} />
+      <ChevronRightPagination
+        to={`?${getPathParams(params, nextPage, limit)}`}
+        page={nextPage}
+        maxPage={totalPages}
+      />
     </Pagination>
   );
 };
