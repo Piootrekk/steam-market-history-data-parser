@@ -1,8 +1,25 @@
 import { ipcWebContentsAdapter } from "../../ipc-adapter/ipc.main.adapter";
+import { getCommonProgressEmits } from "../common/send-progress.emits";
+
+type ProgressEmitter = ReturnType<typeof getProgressEmitter>;
+
+const getProgressEmitter = (webContents: Electron.WebContents) => {
+  return {
+    sendAccountCreated: (steamid: string) =>
+      sendAccountCreated(webContents, steamid),
+    sendMessageFromFetchQueue: (
+      message: string,
+      status: "warning" | "success" | "info",
+    ) => sendMessageFromFetchQueue(webContents, message, status),
+    sendDbInsertCorrectly: (listingsAmount: number) =>
+      sendDbInsertCorrectly(webContents, listingsAmount),
+    ...getCommonProgressEmits(webContents),
+  };
+};
 
 const sendAccountCreated = (
   webContents: Electron.WebContents,
-  steamid: string
+  steamid: string,
 ) => {
   const dateNow = Date.now();
   ipcWebContentsAdapter.send(
@@ -10,14 +27,14 @@ const sendAccountCreated = (
     "fetch:all:progress",
     "success",
     dateNow,
-    `${steamid} inserted successfully.`
+    `${steamid} inserted successfully.`,
   );
 };
 
 const sendMessageFromFetchQueue = (
   webContents: Electron.WebContents,
   message: string,
-  status: "warning" | "success" | "info"
+  status: "warning" | "success" | "info",
 ) => {
   const dateNow = Date.now();
   ipcWebContentsAdapter.send(
@@ -25,13 +42,13 @@ const sendMessageFromFetchQueue = (
     "fetch:all:progress",
     status,
     dateNow,
-    message
+    message,
   );
 };
 
-const sendDbInsertCorrecty = (
+const sendDbInsertCorrectly = (
   webContents: Electron.WebContents,
-  listingsAmount: number
+  listingsAmount: number,
 ) => {
   const dateNow = Date.now();
   ipcWebContentsAdapter.send(
@@ -39,8 +56,9 @@ const sendDbInsertCorrecty = (
     "fetch:all:progress",
     "success",
     dateNow,
-    `Listings: ${listingsAmount} inserted succesfully into db.`
+    `Listings: ${listingsAmount} inserted succesfully into db.`,
   );
 };
 
-export { sendAccountCreated, sendMessageFromFetchQueue, sendDbInsertCorrecty };
+export { getProgressEmitter };
+export type { ProgressEmitter };

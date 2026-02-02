@@ -1,6 +1,6 @@
 import { fetchAllService } from "./fetch-all.service";
 import { sanitizeError } from "../../error";
-import { sendErrorProgress } from "../common/send-progress.emit";
+import { getProgressEmitter } from "./fetch-all.emits";
 
 const fetchAllController = async (
   event: Electron.IpcMainInvokeEvent,
@@ -8,11 +8,12 @@ const fetchAllController = async (
   cookies: string,
 ) => {
   const webContents = event.sender;
+  const progressEmitter = getProgressEmitter(webContents);
   try {
-    await fetchAllService(webContents, steamid, cookies);
+    await fetchAllService(progressEmitter, steamid, cookies);
   } catch (error) {
     const err = sanitizeError(error);
-    sendErrorProgress(webContents, err);
+    progressEmitter.sendErrorProgress(err);
   }
 };
 

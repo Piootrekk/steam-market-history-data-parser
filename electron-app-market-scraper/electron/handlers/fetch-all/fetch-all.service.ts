@@ -5,33 +5,29 @@ import {
   insertNewSnapshot,
   transactionSession,
 } from "./fetch-all.repository";
-import { sendStartProgress } from "../common/send-progress.emit";
-import {
-  sendAccountCreated,
-  sendDbInsertCorrecty,
-  sendMessageFromFetchQueue,
-} from "./fetch-all.emits";
+
 import {
   firstListingsFetch,
   getBatches,
   otherListingsFetches,
 } from "../../core/domain/fetch-market-listings/fetch-queue";
+import type { ProgressEmitter } from "./fetch-all.emits";
 
 const fetchAllService = async (
-  webContents: Electron.WebContents,
+  progressEmitter: ProgressEmitter,
   steamid: string,
   cookies: string,
 ) => {
   const db = getDbInstance();
   await transactionSession(db, async (tx) => {
-    sendStartProgress(webContents);
+    progressEmitter.sendStartProgress();
     const accountId = await insertNewAccount(tx, { steamId: steamid });
-    sendAccountCreated(webContents, steamid);
+    progressEmitter.sendAccountCreated(steamid);
 
     const { totalCount, listings } = await firstListingsFetch(
       cookies,
       (message, status) =>
-        sendMessageFromFetchQueue(webContents, message, status),
+        progressEmitter.sendMessageFromFetchQueue(message, status),
     );
 
     const newSnapshot = await insertNewSnapshot(tx, {
@@ -40,20 +36,20 @@ const fetchAllService = async (
     });
 
     await insertBulkNewListings(tx, listings, newSnapshot.id);
-    sendDbInsertCorrecty(webContents, listings.length);
+    progressEmitter.sendDbInsertCorrectly(listings.length);
 
     const batches = getBatches(totalCount, (message, status) =>
-      sendMessageFromFetchQueue(webContents, message, status),
+      progressEmitter.sendMessageFromFetchQueue(message, status),
     );
     await otherListingsFetches(
       totalCount,
       cookies,
       batches,
       (message, status) =>
-        sendMessageFromFetchQueue(webContents, message, status),
+        progressEmitter.sendMessageFromFetchQueue(message, status),
       async (otherListings) => {
         await insertBulkNewListings(tx, otherListings, newSnapshot.id);
-        sendDbInsertCorrecty(webContents, otherListings.length);
+        progressEmitter.sendDbInsertCorrectly(otherListings.length);
       },
     );
   });

@@ -28,7 +28,7 @@ const AccountsLayout = () => {
     <>
       <BasicPageInfo
         name={"Saved items from DB"}
-        desc={`Current account data from market history fetch, 
+        desc={`Fetch the whole steam market history. 
         Can display items in table, synchronize new items, 
         display, manipulate snapshots nodes.`}
         Icon={Database}
