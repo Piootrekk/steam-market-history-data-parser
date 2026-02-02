@@ -83,7 +83,7 @@ const otherListingsFetches = async (
       anotherResponse.total_count,
       logCallback,
     );
-    listingsCallback(transformedAnotherResponse);
+    await listingsCallback(transformedAnotherResponse);
     logCallback(
       `Fetch complated ${fetchCalcEl.min} - ${
         fetchCalcEl.count + fetchCalcEl.min

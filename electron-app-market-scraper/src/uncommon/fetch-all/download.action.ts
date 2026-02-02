@@ -9,14 +9,7 @@ const fetchAllHistortyAction = async ({ request }: ActionFunctionArgs) => {
   const val = getErrorValidationCheck(steamId, steamCookies);
 
   if (!val.ok) return { error: val.error };
-  const jobId = await window.electronAPI.startFetchingAll(
-    val.steamId,
-    val.steamCookies
-  );
-
-  return {
-    jobId: jobId.jobId,
-  };
+  await window.electronAPI.startFetchingAll(val.steamId, val.steamCookies);
 };
 
 export { fetchAllHistortyAction };

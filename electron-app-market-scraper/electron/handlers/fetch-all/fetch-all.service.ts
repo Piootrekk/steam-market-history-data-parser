@@ -17,7 +17,7 @@ import {
   otherListingsFetches,
 } from "../../core/domain/fetch-market-listings/fetch-queue";
 
-const progressAllService = async (
+const fetchAllService = async (
   webContents: Electron.WebContents,
   steamid: string,
   cookies: string,
@@ -59,4 +59,4 @@ const progressAllService = async (
   });
 };
 
-export { progressAllService };
+export { fetchAllService };

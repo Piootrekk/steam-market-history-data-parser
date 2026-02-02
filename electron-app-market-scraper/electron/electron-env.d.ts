@@ -54,10 +54,7 @@ interface Window {
       start: number,
       limit: number,
     ) => Promise<Listings[]>;
-    startFetchingAll: (
-      steamId: string,
-      cookies: string,
-    ) => Promise<{ jobId: string }>;
+    startFetchingAll: (steamId: string, cookies: string) => Promise<void>;
     progressFetchingAll: (
       callback: (
         status: "success" | "error" | "warning" | "info",

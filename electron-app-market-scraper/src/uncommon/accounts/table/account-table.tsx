@@ -40,7 +40,7 @@ const ListingsColumns: Column<Listings>[] = [
   },
   {
     key: "timeEvent",
-    header: "Amount",
+    header: "Time",
     render: (item) => new Date(item.timeEvent * 1000).toLocaleString("en-GB"),
   },
 ];

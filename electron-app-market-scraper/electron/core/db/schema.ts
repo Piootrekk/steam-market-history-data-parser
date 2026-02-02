@@ -1,13 +1,23 @@
 import { relations, sql } from "drizzle-orm";
-import { integer, real, sqliteTable, text } from "drizzle-orm/sqlite-core";
+import {
+  check,
+  integer,
+  real,
+  sqliteTable,
+  text,
+} from "drizzle-orm/sqlite-core";
 
-const accountTable = sqliteTable("accounts", {
-  id: integer("id").primaryKey({ autoIncrement: true }),
-  createdAt: integer("time_event")
-    .notNull()
-    .default(sql`(strftime('%s', 'now'))`),
-  steamId: text("steam_id").notNull().unique(),
-});
+const accountTable = sqliteTable(
+  "accounts",
+  {
+    id: integer("id").primaryKey({ autoIncrement: true }),
+    createdAt: integer("time_event")
+      .notNull()
+      .default(sql`(strftime('%s', 'now'))`),
+    steamId: text("steam_id").notNull().unique(),
+  },
+  (t) => [check("check_steam_id", sql`${t.steamId} GLOB '[A-Za-z0-9_]*'`)],
+);
 
 const snapshotsTable = sqliteTable("snapshots", {
   id: integer("id").primaryKey({ autoIncrement: true }),
