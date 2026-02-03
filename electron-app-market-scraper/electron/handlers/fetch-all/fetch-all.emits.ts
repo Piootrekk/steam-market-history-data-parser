@@ -5,6 +5,7 @@ type ProgressEmitter = ReturnType<typeof getProgressEmitter>;
 
 const getProgressEmitter = (webContents: Electron.WebContents) => {
   return {
+    ...getCommonProgressEmits(webContents),
     sendAccountCreated: (steamid: string) =>
       sendAccountCreated(webContents, steamid),
     sendMessageFromFetchQueue: (
@@ -13,7 +14,6 @@ const getProgressEmitter = (webContents: Electron.WebContents) => {
     ) => sendMessageFromFetchQueue(webContents, message, status),
     sendDbInsertCorrectly: (listingsAmount: number) =>
       sendDbInsertCorrectly(webContents, listingsAmount),
-    ...getCommonProgressEmits(webContents),
   };
 };
 
@@ -24,7 +24,7 @@ const sendAccountCreated = (
   const dateNow = Date.now();
   ipcWebContentsAdapter.send(
     webContents,
-    "fetch:all:progress",
+    "fetch:progress",
     "success",
     dateNow,
     `${steamid} inserted successfully.`,
@@ -39,7 +39,7 @@ const sendMessageFromFetchQueue = (
   const dateNow = Date.now();
   ipcWebContentsAdapter.send(
     webContents,
-    "fetch:all:progress",
+    "fetch:progress",
     status,
     dateNow,
     message,
@@ -53,7 +53,7 @@ const sendDbInsertCorrectly = (
   const dateNow = Date.now();
   ipcWebContentsAdapter.send(
     webContents,
-    "fetch:all:progress",
+    "fetch:progress",
     "success",
     dateNow,
     `Listings: ${listingsAmount} inserted succesfully into db.`,

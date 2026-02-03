@@ -52,6 +52,7 @@ const fetchAllService = async (
         progressEmitter.sendDbInsertCorrectly(otherListings.length);
       },
     );
+    progressEmitter.sendFinishProgress();
   });
 };
 

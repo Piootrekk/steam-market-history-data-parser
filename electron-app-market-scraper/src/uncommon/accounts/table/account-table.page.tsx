@@ -45,7 +45,7 @@ const ListingsColumns: Column<Listings>[] = [
   },
 ];
 
-const AccountTable = () => {
+const AccountTablePage = () => {
   const [searchParam, setSearchParams] = useSearchParams();
   const listings = useAccountTableInvoices();
 
@@ -94,4 +94,4 @@ const AccountTable = () => {
   );
 };
 
-export default AccountTable;
+export default AccountTablePage;

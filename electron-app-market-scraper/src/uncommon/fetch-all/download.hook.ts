@@ -14,10 +14,10 @@ const useJobId = () => {
   const [logs, setLogs] = useState<FetchProgress[]>([]);
 
   useEffect(() => {
-    const removeListener = window.electronAPI.progressFetchingAll(
+    const removeListener = window.electronAPI.progressFetching(
       (status, timestamp, message) => {
         setLogs((prev) => [{ status, timestamp, message }, ...prev]);
-      }
+      },
     );
     return () => {
       removeListener();

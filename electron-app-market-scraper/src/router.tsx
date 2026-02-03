@@ -6,7 +6,7 @@ import DownloadAllPage from "./uncommon/fetch-all/download.page";
 import { ROUTE_PATHS } from "./routes";
 import AccountsLayout from "./uncommon/accounts/accounts.layout";
 import { fetchAllHistortyAction } from "./uncommon/fetch-all/download.action";
-import AccountTable from "./uncommon/accounts/table/account-table";
+import AccountTablePage from "./uncommon/accounts/table/account-table.page";
 import { accountTableLoader } from "./uncommon/accounts/table/accout-table.loader";
 import ErrorPage from "./uncommon/error/error.page";
 
@@ -55,7 +55,7 @@ const router = createHashRouter([
               {
                 index: true,
                 path: ROUTE_PATHS.accountTable,
-                element: <AccountTable />,
+                element: <AccountTablePage />,
                 loader: accountTableLoader,
               },
               { path: ROUTE_PATHS.accountSync, element: <></> },

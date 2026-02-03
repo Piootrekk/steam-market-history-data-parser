@@ -16,6 +16,9 @@ contextBridge.exposeInMainWorld("electronAPI", {
   startFetchingAll: (steamId, cookies) =>
     ipcRendererAdapter.invoke("fetch:all:start", steamId, cookies),
 
-  progressFetchingAll: (callback) =>
-    ipcRendererAdapter.on("fetch:all:progress", callback),
+  startFetchingSync: (steamId, cookies) =>
+    ipcRendererAdapter.invoke("fetch:sync:start", steamId, cookies),
+
+  progressFetching: (callback) =>
+    ipcRendererAdapter.on("fetch:progress", callback),
 } satisfies Window["electronAPI"]);
