@@ -48,9 +48,19 @@ const getListingsColumnsNames = () => {
   return listingsNames;
 };
 
+const getAccountIdBySteamId = async (db: Db, steamid: string) => {
+  const response = await db
+    .select({ accountId: accountTable.id })
+    .from(accountTable)
+    .where(eq(accountTable.steamId, steamid))
+    .get();
+  return response;
+};
+
 export {
   getAllSteamIdsFromAccount,
   getListingsForCurrentAccountSteamId,
   getCountIdsFromAccount,
   getListingsColumnsNames,
+  getAccountIdBySteamId,
 };

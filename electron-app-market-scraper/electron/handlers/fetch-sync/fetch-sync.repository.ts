@@ -1,4 +1,7 @@
 import { transactionSession } from "../../core/db/queries/transaction";
-import { getCountIdsFromAccount } from "../../core/db/queries/get";
+import {
+  getCountIdsFromAccount,
+  getAccountIdBySteamId,
+} from "../../core/db/queries/get";
 
-export { getCountIdsFromAccount, transactionSession };
+export { getCountIdsFromAccount, transactionSession, getAccountIdBySteamId };

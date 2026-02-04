@@ -1,4 +1,4 @@
-type ValidationFetchAll = ValidationReturn<{
+type ValidationSync = ValidationReturn<{
   steamId: string;
   steamCookies: string;
 }>;
@@ -6,11 +6,8 @@ type ValidationFetchAll = ValidationReturn<{
 const getErrorValidationCheck = (
   steamId?: string,
   steamCookies?: string,
-): ValidationFetchAll => {
-  if (!steamId) {
-    return { ok: false, error: "Missing steamId" };
-  }
-
+): ValidationSync => {
+  if (!steamId) throw new Error("Current steamId as param not exist");
   if (!steamCookies) {
     return {
       ok: false,
@@ -40,4 +37,4 @@ const isCookiesCorrect = (steamCookies: string): boolean => {
   return steamCookies.match(regex) !== null;
 };
 
-export { getErrorValidationCheck, isCookiesCorrect };
+export { getErrorValidationCheck };

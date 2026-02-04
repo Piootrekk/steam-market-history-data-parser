@@ -1,9 +1,9 @@
 import { Outlet } from "react-router-dom";
-import Sidebar from "./sidebar";
+import Sidebar from "./navbar/sidebar";
 import { ScrollAreaContainer } from "src/common/components/primitives/scroll-area";
 import BasicPageWrapper from "src/common/components/composites/base-page-wrapper";
 
-const MainWithNavLayout = () => {
+const RootWithNavLayout = () => {
   return (
     <div className="h-screen flex bg-background">
       <Sidebar />
@@ -23,4 +23,4 @@ const MainWithNavLayout = () => {
   );
 };
 
-export default MainWithNavLayout;
+export default RootWithNavLayout;

@@ -1,23 +1,25 @@
 import { createHashRouter, RouterProvider } from "react-router-dom";
-import MainWithNavLayout from "./uncommon/navbar/sidebar.layout";
-import { usersNavLoader } from "./uncommon/navbar/sidebar.loader";
 import DashboardPage from "./uncommon/dashboard/dashboard.page";
 import DownloadAllPage from "./uncommon/fetch-all/download.page";
+import RootWithNavLayout from "./uncommon/root/root-with-nav.layout";
+import { usersNavLoader } from "./uncommon/root/navbar/sidebar.loader";
 import { ROUTE_PATHS } from "./routes";
 import AccountsLayout from "./uncommon/accounts/accounts.layout";
 import { fetchAllHistortyAction } from "./uncommon/fetch-all/download.action";
 import AccountTablePage from "./uncommon/accounts/table/account-table.page";
 import { accountTableLoader } from "./uncommon/accounts/table/accout-table.loader";
 import ErrorPage from "./uncommon/error/error.page";
+import { shouldRevalidateRoot } from "./uncommon/root/root.revalidation";
+import SyncListingsPage from "./uncommon/accounts/sync/sync-listings.page";
+import { syncFetchAction } from "./uncommon/accounts/sync/sync-listings.action";
 
 const router = createHashRouter([
   {
     path: ROUTE_PATHS.root,
-    element: <MainWithNavLayout />,
+    element: <RootWithNavLayout />,
     loader: usersNavLoader,
     errorElement: <ErrorPage />,
-    shouldRevalidate: ({ formAction }) =>
-      formAction === `/${ROUTE_PATHS.downloadAll}`,
+    shouldRevalidate: shouldRevalidateRoot,
     children: [
       {
         index: true,
@@ -58,7 +60,11 @@ const router = createHashRouter([
                 element: <AccountTablePage />,
                 loader: accountTableLoader,
               },
-              { path: ROUTE_PATHS.accountSync, element: <></> },
+              {
+                path: ROUTE_PATHS.accountSync,
+                element: <SyncListingsPage />,
+                action: syncFetchAction,
+              },
               { path: ROUTE_PATHS.accountConfig, element: <></> },
             ],
           },

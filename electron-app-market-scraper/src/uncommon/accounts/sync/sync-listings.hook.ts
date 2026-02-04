@@ -1,9 +1,9 @@
 import { useActionData, useNavigation } from "react-router-dom";
-import type { fetchAllHistortyAction } from "./download.action";
 import {
   useProgressEvent,
   type FetchProgress,
 } from "src/common/hooks/progress.hook";
+import type { syncFetchAction } from "./sync-listings.action";
 
 type FetchAll = {
   loading: boolean;
@@ -11,8 +11,8 @@ type FetchAll = {
   logs: FetchProgress[];
 };
 
-const useFetchAllHistoryAction = (): FetchAll => {
-  const actionData = useActionData<typeof fetchAllHistortyAction>();
+const useSyncAction = (): FetchAll => {
+  const actionData = useActionData<typeof syncFetchAction>();
   const navigation = useNavigation();
   const { logs } = useProgressEvent();
 
@@ -25,4 +25,4 @@ const useFetchAllHistoryAction = (): FetchAll => {
   };
 };
 
-export { useFetchAllHistoryAction };
+export { useSyncAction };
