@@ -26,7 +26,7 @@ const firstListingsFetch = async (
     logCallback,
   );
   const transformedFirstResponse = getTransformedCorrectResponse(firstResponse);
-  logCallback("First inital fetch complated", "success");
+  logCallback("First inital fetch complated.", "success");
   return {
     totalCount: firstResponse.total_count,
     listings: transformedFirstResponse,

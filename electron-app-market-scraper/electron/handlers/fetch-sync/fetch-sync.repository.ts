@@ -4,4 +4,11 @@ import {
   getAccountIdBySteamId,
 } from "../../core/db/queries/get";
 
-export { getCountIdsFromAccount, transactionSession, getAccountIdBySteamId };
+import { insertBulkNewListings } from "../fetch-all/fetch-all.repository";
+
+export {
+  getCountIdsFromAccount,
+  transactionSession,
+  getAccountIdBySteamId,
+  insertBulkNewListings,
+};

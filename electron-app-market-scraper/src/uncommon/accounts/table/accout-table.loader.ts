@@ -2,9 +2,9 @@ import { useLoaderData, type LoaderFunctionArgs } from "react-router-dom";
 import { TABLE_PARAMS } from "src/routes";
 
 const accountTableLoader = async ({ params, request }: LoaderFunctionArgs) => {
-  const { accountId } = params;
-  if (!accountId) {
-    throw new Response("Missing accountId", { status: 400 });
+  const { steamId } = params;
+  if (!steamId) {
+    throw new Response("Missing steamId", { status: 400 });
   }
   const url = new URL(request.url);
   const start = Number(url.searchParams.get(TABLE_PARAMS.start) ?? 0);
@@ -13,10 +13,10 @@ const accountTableLoader = async ({ params, request }: LoaderFunctionArgs) => {
     throw new Error("Param start & number should be a number!");
 
   const listingsCount =
-    await window.electronAPI.getCountListingsFromSteamId(accountId);
+    await window.electronAPI.getCountListingsFromSteamId(steamId);
   if (!listingsCount.ok) throw new Response("Not Found", { status: 404 });
   const listings = await window.electronAPI.getListingsFromSteamId(
-    accountId,
+    steamId,
     start,
     limit,
   );

@@ -4,8 +4,8 @@ import { getErrorValidationCheck } from "./sync-listings.validation";
 const syncFetchAction = async ({ request, params }: ActionFunctionArgs) => {
   const formData = await request.formData();
   const steamCookies = formData.get("cookies")?.toString();
-  const { accountId } = params;
-  const val = getErrorValidationCheck(accountId, steamCookies);
+  const { steamId } = params;
+  const val = getErrorValidationCheck(steamId, steamCookies);
 
   if (!val.ok) return { error: val.error };
 

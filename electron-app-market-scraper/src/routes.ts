@@ -8,7 +8,7 @@ const ROUTE_PATHS = {
 
   accounts: "accounts",
   accountsAll: "all",
-  account: ":accountId",
+  account: ":steamId",
 
   accountTable: "",
   accountSync: "sync",
