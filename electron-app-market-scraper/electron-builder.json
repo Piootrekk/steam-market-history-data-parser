@@ -1,0 +1,21 @@
+{
+  "appId": "com.piootreek.marketscraper",
+  "productName": "Steam market scraper",
+  "files": ["dist/**/*", "dist-electron/**/*", "assets/**"],
+  "asar": true,
+  "directories": {
+    "buildResources": "assets",
+    "output": "release"
+  },
+  "win": {
+    "icon": "assets/1123123123.ico",
+    "target": ["portable", "msi"]
+  },
+  "mac": {
+    "target": "dmg"
+  },
+  "linux": {
+    "target": "AppImage",
+    "category": "Utility"
+  }
+}

@@ -16,7 +16,6 @@ const createWindow = () => {
       preload: PRELOAD_PATH,
       nodeIntegration: false,
       contextIsolation: true,
-      sandbox: true,
     },
   });
   setupRenderer(mainWindow);
@@ -29,8 +28,9 @@ const createWindow = () => {
 const setupRenderer = (mainWindow: BrowserWindow) => {
   if (VITE_DEV_SERVER_URL) {
     mainWindow.loadURL(VITE_DEV_SERVER_URL);
-    mainWindow.webContents.openDevTools();
+    mainWindow.webContents.openDevTools({ mode: "detach" });
   } else {
+    mainWindow.webContents.openDevTools({ mode: "detach" });
     mainWindow.loadFile(path.join(RENDERER_DIST, "index.html"));
   }
 };

@@ -3,7 +3,7 @@
 
 node_modules/
 dist/
-
+release/
 *.log
 *.gz
 *.log

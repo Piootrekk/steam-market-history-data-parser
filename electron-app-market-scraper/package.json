@@ -10,7 +10,15 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "db:rebuild:electron": "electron-rebuild -f -w better-sqlite3",
+    "build": "vite build",
+    "pack": "npm run build && electron-builder --dir",
+    "pack:win": "npm run build && electron-builder --win --dir",
+    "pack:mac": "npm run build && electron-builder --mac --dir",
+    "pack:linux": "npm run build && electron-builder --linux --dir",
+    "dist": "npm run build && electron-builder",
+    "dist:win": "npm run build && electron-builder --win",
+    "dist:mac": "npm run build && electron-builder --mac",
+    "dist:linux": "npm run build && electron-builder --linux",
     "db:rebuild:node": "npm rebuild",
     "db:generate": "drizzle-kit generate --config electron/core/db/drizzle.config.ts",
     "db:push": "drizzle-kit push --config electron/core/db/drizzle.config.ts",
@@ -28,18 +36,19 @@
     "tailwind-merge": "^3.4.0"
   },
   "devDependencies": {
-    "@electron/rebuild": "^4.0.2",
     "@tailwindcss/vite": "^4.1.18",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^5.1.2",
     "drizzle-kit": "^0.31.8",
     "electron": "^39.2.6",
+    "electron-builder": "^26.7.0",
     "tailwindcss": "^4.1.16",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3",
     "vite": "^7.2.7",
     "vite-plugin-electron": "^0.29.0",
+    "vite-plugin-static-copy": "^3.2.0",
     "vite-tsconfig-paths": "^5.1.4"
   },
   "overrides": {
