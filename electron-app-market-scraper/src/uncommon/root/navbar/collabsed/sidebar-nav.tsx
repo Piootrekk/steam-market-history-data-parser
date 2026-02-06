@@ -1,4 +1,4 @@
-import NavLink from "src/common/components/primitives/navlink";
+import { NavButton } from "src/common/components/primitives/navlink";
 import ToolTip from "src/common/components/primitives/tooltip";
 import { Users2 } from "lucide-react";
 import SideBarSubCategoryCollabsed from "./sub-category";
@@ -45,13 +45,13 @@ type CurrentSideBarProps = NavRoutes;
 
 const CurrentSideBar = ({ path, Icon, label }: CurrentSideBarProps) => {
   return (
-    <NavLink
+    <NavButton
       to={path}
       key={label}
       className={"w-full gap-3 h-10 justify-center px-0"}
     >
       <Icon className="h-5 w-5 shrink-0" />
-    </NavLink>
+    </NavButton>
   );
 };
 

@@ -1,4 +1,4 @@
-import NavLinkProps from "src/common/components/primitives/navlink";
+import { NavButton } from "src/common/components/primitives/navlink";
 import SideBarSubCategoryExpended from "./sub-category";
 import { Users2 } from "lucide-react";
 import type { NavRoutes } from "src/routes";
@@ -29,14 +29,14 @@ type CurrentSideBarProps = NavRoutes;
 
 const CurrentSideBar = ({ path, Icon, label }: CurrentSideBarProps) => {
   return (
-    <NavLinkProps
+    <NavButton
       to={path}
       key={label}
       className={"w-full justify-start gap-3 h-10"}
     >
       <Icon className="h-5 w-5 shrink-0" />
       <span className="truncate">{label}</span>
-    </NavLinkProps>
+    </NavButton>
   );
 };
 

@@ -1,6 +1,9 @@
 import {
   NavLink as NavRouterLink,
   Link as RouterLink,
+  useMatch,
+  useNavigate,
+  useResolvedPath,
   type NavLinkProps as NavRouterLinkProps,
   type LinkProps as RouterLinkProps,
 } from "react-router-dom";
@@ -14,7 +17,11 @@ import { cn } from "../../utils/merge-styles";
 
 type NavLinkProps = NavRouterLinkProps & BaseStylesProps;
 type LinkProps = RouterLinkProps & BaseStylesProps;
-
+type NavButtonProps = React.ComponentProps<"button"> &
+  BaseStylesProps & {
+    to: string;
+    end?: boolean;
+  };
 const NavLink = ({ className, size = "default", ...props }: NavLinkProps) => {
   return (
     <NavRouterLink
@@ -42,5 +49,37 @@ const Link = ({
   );
 };
 
+const NavButton = ({
+  className,
+  size = "default",
+  to,
+  end,
+  ...props
+}: NavButtonProps) => {
+  const navigate = useNavigate();
+  console.log(location.pathname, to);
+  const resolved = useResolvedPath(to);
+
+  const match = useMatch({
+    path: resolved.pathname,
+    end,
+  });
+
+  const isActive = match !== null;
+  console.log(isActive);
+
+  return (
+    <button
+      {...props}
+      className={
+        isActive
+          ? cn(baseStyles, variants.default, sizes[size], className)
+          : cn(baseStyles, variants.ghost, sizes[size], className)
+      }
+      onClick={() => navigate(to)}
+    />
+  );
+};
+
 export default NavLink;
-export { Link };
+export { Link, NavButton };
