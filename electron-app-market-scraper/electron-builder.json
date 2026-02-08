@@ -8,8 +8,8 @@
     "output": "release"
   },
   "win": {
-    "icon": "assets/1123123123.ico",
-    "target": ["portable", "msi"]
+    "icon": "assets/test.png",
+    "target": ["portable"]
   },
   "mac": {
     "target": "dmg"

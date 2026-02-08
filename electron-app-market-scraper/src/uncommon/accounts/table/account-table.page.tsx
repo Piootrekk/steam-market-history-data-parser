@@ -69,7 +69,6 @@ const AccountTablePage = () => {
 
   const handleSearch = useCallback((searchTerm: string | null) => {
     setSearchTerm(searchTerm);
-    console.log(searchTerm);
   }, []);
 
   return (

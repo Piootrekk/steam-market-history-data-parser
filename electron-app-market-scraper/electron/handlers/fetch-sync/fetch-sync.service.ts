@@ -69,7 +69,6 @@ const fetchSyncService = async (
       );
       progressEmitter.sendFinishProgress();
     }
-    console.log(accountId);
   });
 };
 

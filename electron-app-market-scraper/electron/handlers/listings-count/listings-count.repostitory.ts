@@ -1,7 +1,4 @@
-import {
-  getCountIdsFromAccount,
-  getListingsColumnsNames,
-} from "../../core/db/queries/get";
+import { getCountIdsFromAccount } from "../../core/db/queries/get";
 import { getDbInstance } from "../../db.config";
 
 const listingsCountRepository = async (steamId: string) => {
@@ -10,9 +7,4 @@ const listingsCountRepository = async (steamId: string) => {
   return listingsCount;
 };
 
-const listingsPropsRepository = () => {
-  const props = getListingsColumnsNames();
-  return props;
-};
-
-export { listingsCountRepository, listingsPropsRepository };
+export { listingsCountRepository };

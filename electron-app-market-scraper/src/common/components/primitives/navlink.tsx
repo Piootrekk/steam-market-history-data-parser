@@ -57,7 +57,6 @@ const NavButton = ({
   ...props
 }: NavButtonProps) => {
   const navigate = useNavigate();
-  console.log(location.pathname, to);
   const resolved = useResolvedPath(to);
 
   const match = useMatch({
@@ -66,7 +65,6 @@ const NavButton = ({
   });
 
   const isActive = match !== null;
-  console.log(isActive);
 
   return (
     <button
