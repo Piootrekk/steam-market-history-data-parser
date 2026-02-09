@@ -9,7 +9,7 @@ const validateEventFrame = (frame: WebFrameMain) => {
     frame.url !==
     pathToFileURL(path.join(RENDERER_DIST, "index.html")).toString()
   )
-    throw new Error("Malicious activity ");
+    throw new Error("Malicious activity.");
 };
 
 export { validateEventFrame };

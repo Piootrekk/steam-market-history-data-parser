@@ -4,14 +4,16 @@ import { getDbInstance } from "../../db.config";
 const listingsRepostiory = async (
   steamId: string,
   start: number,
-  limit: number
+  limit: number,
+  query?: string,
 ) => {
   const db = getDbInstance();
   const listings = await getListingsForCurrentAccountSteamId(
     db,
     steamId,
     start,
-    limit
+    limit,
+    query,
   );
   return listings;
 };

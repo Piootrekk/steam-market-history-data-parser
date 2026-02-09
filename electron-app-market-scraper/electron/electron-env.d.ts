@@ -53,6 +53,7 @@ interface Window {
       steamId: string,
       start: number,
       limit: number,
+      query?: string,
     ) => Promise<Listings[]>;
     startFetchingAll: (steamId: string, cookies: string) => Promise<void>;
     startFetchingSync: (steamId: string, cookies: string) => Promise<void>;

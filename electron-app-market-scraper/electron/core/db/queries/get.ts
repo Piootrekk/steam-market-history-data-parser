@@ -1,6 +1,6 @@
 import type { Db } from "..";
 import { accountTable, listingsTable, snapshotsTable } from "../schema";
-import { count, desc, eq, getTableColumns } from "drizzle-orm";
+import { and, count, desc, eq, getTableColumns, like } from "drizzle-orm";
 
 const getAllSteamIdsFromAccount = async (db: Db) => {
   const steamIds = await db
@@ -14,7 +14,13 @@ const getListingsForCurrentAccountSteamId = async (
   steamId: string,
   start: number,
   limit: number,
+  query?: string,
 ) => {
+  const whereClause = and(
+    eq(accountTable.steamId, steamId),
+    query ? like(listingsTable.marketHashName, `%${query}%`) : undefined,
+  );
+
   const response = await db
     .select({
       ...getTableColumns(listingsTable),
@@ -22,7 +28,7 @@ const getListingsForCurrentAccountSteamId = async (
     .from(listingsTable)
     .innerJoin(snapshotsTable, eq(listingsTable.snapshotId, snapshotsTable.id))
     .innerJoin(accountTable, eq(snapshotsTable.accountId, accountTable.id))
-    .where(eq(accountTable.steamId, steamId))
+    .where(whereClause)
     .orderBy(desc(listingsTable.timeEvent))
     .limit(limit)
     .offset(start);

@@ -233,4 +233,7 @@
     color: var(--color-foreground) !important;
     caret-color: var(--color-foreground);
   }
+  /* a {
+    -webkit-user-drag: none;
+  } */
 }

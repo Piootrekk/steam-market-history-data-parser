@@ -1,7 +1,7 @@
 import type { listingsRepostiory } from "./listings.repository";
 
 const listingsDto = (
-  repoResponse: Awaited<ReturnType<typeof listingsRepostiory>>
+  repoResponse: Awaited<ReturnType<typeof listingsRepostiory>>,
 ) => {
   const responseDto = repoResponse.map((repo) => {
     return {

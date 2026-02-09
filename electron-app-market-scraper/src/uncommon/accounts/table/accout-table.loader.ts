@@ -9,6 +9,8 @@ const accountTableLoader = async ({ params, request }: LoaderFunctionArgs) => {
   const url = new URL(request.url);
   const start = Number(url.searchParams.get(TABLE_PARAMS.start) ?? 0);
   const limit = Number(url.searchParams.get(TABLE_PARAMS.limit) ?? 50);
+  const query = url.searchParams.get(TABLE_PARAMS.query) ?? undefined;
+
   if (Number.isNaN(start) || Number.isNaN(limit))
     throw new Error("Param start & number should be a number!");
 
@@ -19,6 +21,7 @@ const accountTableLoader = async ({ params, request }: LoaderFunctionArgs) => {
     steamId,
     start,
     limit,
+    query,
   );
   return { listings, listingsCount: listingsCount.countListings };
 };

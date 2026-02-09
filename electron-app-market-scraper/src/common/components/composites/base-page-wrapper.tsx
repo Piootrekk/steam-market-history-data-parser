@@ -11,7 +11,7 @@ const BasicPageWrapper = ({
     <div
       className={cn(
         "max-w-7xl mx-auto h-full overflow-hidden flex flex-col",
-        className
+        className,
       )}
       {...rest}
     >

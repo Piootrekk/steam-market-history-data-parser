@@ -49,6 +49,23 @@ const Link = ({
   );
 };
 
+const LinkButton = ({
+  className,
+  size = "default",
+  variant = "default",
+  to,
+  ...props
+}: NavButtonProps) => {
+  const navigate = useNavigate();
+  return (
+    <button
+      onClick={() => navigate(to)}
+      className={cn(baseStyles, variants[variant], sizes[size], className)}
+      {...props}
+    />
+  );
+};
+
 const NavButton = ({
   className,
   size = "default",
@@ -79,5 +96,4 @@ const NavButton = ({
   );
 };
 
-export default NavLink;
-export { Link, NavButton };
+export { Link, NavButton, LinkButton, NavLink };
