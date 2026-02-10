@@ -35,7 +35,7 @@ const TableFooter = ({ className, ...others }: TableFooterProps) => {
     <tfoot
       className={cn(
         "border-t bg-muted/50 font-medium [&>tr]:last:border-b-0",
-        className
+        className,
       )}
       {...others}
     />
@@ -50,7 +50,7 @@ const TableHeaderRow = ({ className, ...others }: TableHeaderRowProps) => (
   <th
     className={cn(
       "h-12 px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0",
-      className
+      className,
     )}
     {...others}
   />
@@ -61,7 +61,7 @@ const TableCell = ({ className, ...others }: TableCellProps) => {
     <td
       className={cn(
         "p-4 align-middle [&:has([role=checkbox])]:pr-0",
-        className
+        className,
       )}
       {...others}
     />

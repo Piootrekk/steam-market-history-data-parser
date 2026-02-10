@@ -1,16 +1,16 @@
 import { cn } from "../../utils/merge-styles";
 
-type BasePageWrapperProps = React.ComponentProps<"div">;
+type RootPageWrapperProps = React.ComponentProps<"div">;
 
-const BasicPageWrapper = ({
+const RootPageWrapper = ({
   children,
   className,
   ...rest
-}: BasePageWrapperProps) => {
+}: RootPageWrapperProps) => {
   return (
     <div
       className={cn(
-        "max-w-7xl mx-auto h-full overflow-hidden flex flex-col",
+        "max-w-7xl mx-auto h-full overflow-hidden flex flex-col ",
         className,
       )}
       {...rest}
@@ -20,4 +20,4 @@ const BasicPageWrapper = ({
   );
 };
 
-export default BasicPageWrapper;
+export default RootPageWrapper;

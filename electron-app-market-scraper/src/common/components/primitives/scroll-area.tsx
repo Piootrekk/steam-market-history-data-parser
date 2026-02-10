@@ -1,46 +1,67 @@
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { cn } from "../../utils/merge-styles";
-
-type ScrollContainerProps = React.ComponentProps<"div">;
-
-const ScrollContainer = ({ className, children }: ScrollContainerProps) => {
-  return (
-    <div
-      className={cn(
-        "h-[calc(95vh-(var(--spacing)*12))]  w-full focus-visible:ring-2 ring-offset-background focus-visible:outline-none focus-visible:ring-ring focus-visible:ring-offset-1",
-        className,
-      )}
-    >
-      {children}
-    </div>
-  );
-};
 
 type ScrollAreaProps = {
   direction: keyof typeof directionStyles;
 } & React.ComponentProps<"div">;
 
 const directionStyles = {
-  horizontal: "scroll-area overflow-x-auto overflow-y-hidden whitespace-nowrap",
-  vertical: "scroll-area overflow-y-auto overflow-x-hidden",
-} as const;
+  vertical: " overflow-y-auto overflow-x-hidden",
+  horizontal: " overflow-x-auto overflow-y-hidden",
+} as const satisfies Record<string, string>;
 
 const ScrollArea = ({
-  className = "",
-  children,
   direction,
-  "aria-label": ariaLabel = "Scroll area",
+  className,
+  children,
   ...rest
 }: ScrollAreaProps) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [size, setSize] = useState(0);
+  useEffect(() => {
+    const updateSize = () => {
+      if (!containerRef.current) return;
+      console.log("Recalc");
+      const rect = containerRef.current.getBoundingClientRect();
+      const computedStyle = window.getComputedStyle(containerRef.current);
+      if (direction === "vertical") {
+        const marginBottom = parseFloat(computedStyle.marginBottom) || 0;
+        const availableHeight = window.innerHeight - rect.top - marginBottom;
+        setSize(Math.max(0, availableHeight));
+      } else {
+        const marginRight = parseFloat(computedStyle.marginRight) || 0;
+        const availableWidth = window.innerWidth - rect.left - marginRight;
+        setSize(Math.max(0, availableWidth));
+      }
+    };
+
+    window.addEventListener("resize", updateSize);
+    const resizeObserver = new ResizeObserver(() => {
+      updateSize();
+    });
+
+    if (containerRef.current) {
+      resizeObserver.observe(containerRef.current);
+    }
+    updateSize();
+    return () => {
+      window.removeEventListener("resize", updateSize);
+      resizeObserver.disconnect();
+    };
+  }, [direction]);
+
+  const sizeStyles = {
+    vertical: { height: size > 0 ? `${size}px` : "auto" },
+    horizontal: { width: size > 0 ? `${size}px` : "auto" },
+  } satisfies Record<string, CSSProperties>;
+
   return (
     <div
       role="region"
-      aria-label={ariaLabel}
-      tabIndex={0}
-      className={cn(
-        directionStyles[direction],
-        "h-full w-full overscroll-contain focus:outline-none  disabled:cursor-not-allowed disabled:opacity-50",
-        className,
-      )}
+      ref={containerRef}
+      tabIndex={direction === "vertical" ? 0 : undefined}
+      className={cn(directionStyles[direction], "scroll-area", className)}
+      style={sizeStyles[direction]}
       {...rest}
     >
       {children}
@@ -48,23 +69,4 @@ const ScrollArea = ({
   );
 };
 
-const ScrollAreaContainer = ({
-  className,
-  children,
-  direction,
-  "aria-label": ariaLabel = "Scroll area",
-  ...rest
-}: ScrollAreaProps) => {
-  return (
-    <ScrollContainer>
-      <ScrollArea
-        direction={direction}
-        className={cn(directionStyles[direction], className)}
-        {...rest}
-      >
-        {children}
-      </ScrollArea>
-    </ScrollContainer>
-  );
-};
-export { ScrollAreaContainer, ScrollArea, ScrollContainer };
+export { ScrollArea };

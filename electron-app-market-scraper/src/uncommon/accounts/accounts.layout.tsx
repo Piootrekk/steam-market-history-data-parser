@@ -3,7 +3,6 @@ import BasicPageInfo from "src/common/components/composites/basic-page-info";
 import TabNav from "./tab-nav";
 import { Database, RefreshCw, Table } from "lucide-react";
 import { ROUTE_PATHS, type NavRoutes } from "src/routes";
-
 const subtabs = [
   {
     path: ROUTE_PATHS.accountTable,
@@ -33,7 +32,9 @@ const AccountsLayout = () => {
         display, manipulate snapshots nodes.`}
         Icon={Database}
       />
+
       <TabNav subtabs={subtabs} />
+
       <Outlet />
     </>
   );

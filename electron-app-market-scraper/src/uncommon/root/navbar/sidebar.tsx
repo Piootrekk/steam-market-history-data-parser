@@ -3,10 +3,7 @@ import SidebarHeaderCollapsed from "./collabsed/sidebar-header";
 import SidebarHeaderExtended from "./expended/sidebar-header";
 import SideBarNavCollabsed from "./collabsed/sidebar-nav";
 import SideBarNavExtended from "./expended/sidebar-nav";
-import {
-  ScrollArea,
-  ScrollContainer,
-} from "src/common/components/primitives/scroll-area";
+import { ScrollArea } from "src/common/components/primitives/scroll-area";
 import { ROUTE_PATHS, type NavRoutes } from "src/routes";
 import { File, Files, Info, LayoutDashboard, User, Users } from "lucide-react";
 import { useUserNavInvoices } from "./sidebar.loader";
@@ -60,29 +57,27 @@ const Sidebar = () => {
   return (
     <aside
       className={cn(
-        "h-full border-r border-sidebar-border bg-sidebar transition-all duration-100 flex flex-col",
+        "h-full pb-8 border-r border-sidebar-border bg-sidebar transition-all duration-100 flex flex-col",
         isCollabsed ? "w-16" : "w-64",
       )}
     >
-      <ScrollContainer className="h-[calc(95vh-(var(--spacing)*4))]">
-        <ScrollArea direction="vertical">
-          {isCollabsed ? (
-            <SidebarHeaderCollapsed
-              onToggle={() => setIsCollabsed(!isCollabsed)}
-            />
-          ) : (
-            <SidebarHeaderExtended
-              title={appTitle}
-              onToggle={() => setIsCollabsed(!isCollabsed)}
-            />
-          )}
-          {isCollabsed ? (
-            <SideBarNavCollabsed routes={navItems} accounts={accountsNav} />
-          ) : (
-            <SideBarNavExtended routes={navItems} accounts={accountsNav} />
-          )}
-        </ScrollArea>
-      </ScrollContainer>
+      <ScrollArea direction="vertical">
+        {isCollabsed ? (
+          <SidebarHeaderCollapsed
+            onToggle={() => setIsCollabsed(!isCollabsed)}
+          />
+        ) : (
+          <SidebarHeaderExtended
+            title={appTitle}
+            onToggle={() => setIsCollabsed(!isCollabsed)}
+          />
+        )}
+        {isCollabsed ? (
+          <SideBarNavCollabsed routes={navItems} accounts={accountsNav} />
+        ) : (
+          <SideBarNavExtended routes={navItems} accounts={accountsNav} />
+        )}
+      </ScrollArea>
     </aside>
   );
 };

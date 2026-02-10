@@ -11,7 +11,7 @@ import {
 import { Link } from "src/common/components/primitives/navlink";
 import { isRouteErrorResponse, useRouteError } from "react-router";
 import { InputContainer } from "src/common/components/primitives/input";
-import { ScrollAreaContainer } from "src/common/components/primitives/scroll-area";
+import { ScrollArea } from "src/common/components/primitives/scroll-area";
 
 type ErrorBoundy = {
   status: number;
@@ -70,7 +70,7 @@ const ErrorPage = () => {
   return (
     <BasicPageWrapper className="flex min-h-screen items-center justify-center">
       <Card className="mx-6">
-        <ScrollAreaContainer direction={"vertical"}>
+        <ScrollArea direction="vertical">
           <CardHeader>
             <CardTitle className="text-destructive">
               <div className="flex items-center gap-3">
@@ -112,7 +112,7 @@ const ErrorPage = () => {
               </p>
             </main>
           </CardContent>
-        </ScrollAreaContainer>
+        </ScrollArea>
       </Card>
     </BasicPageWrapper>
   );
