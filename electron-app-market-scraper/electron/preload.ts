@@ -7,8 +7,8 @@ contextBridge.exposeInMainWorld("electronAPI", {
 
   getAllUsers: () => ipcRendererAdapter.invoke("db:users:all"),
 
-  getCountListingsFromSteamId: (steamId) =>
-    ipcRendererAdapter.invoke("db:user:listings:count", steamId),
+  getCountListingsFromSteamId: (steamId, query) =>
+    ipcRendererAdapter.invoke("db:user:listings:count", steamId, query),
 
   getListingsFromSteamId: (steamId, start, limit, query) =>
     ipcRendererAdapter.invoke("db:user:listings", steamId, start, limit, query),

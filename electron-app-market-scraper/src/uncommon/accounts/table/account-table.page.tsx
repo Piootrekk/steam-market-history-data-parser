@@ -11,6 +11,7 @@ import AccountTablePagination from "./account-pagination";
 import AccountTableFilters from "./account-filters";
 import { useSearchParams } from "react-router-dom";
 import { useCallback } from "react";
+import { TABLE_PARAMS } from "src/routes";
 
 const ListingsColumns: Column<Listings>[] = [
   {
@@ -50,18 +51,18 @@ const AccountTablePage = () => {
   const listings = useAccountTableInvoices();
 
   const getSearchTerm = () => {
-    const searchQuery = searchParam.get("query");
+    const searchQuery = searchParam.get(TABLE_PARAMS.query);
     return searchQuery;
   };
 
   const setSearchTerm = (searchTerm: string | null) => {
     setSearchParams((prev) => {
       const next = new URLSearchParams(prev);
-      if (searchTerm) next.set("query", searchTerm);
-      else next.delete("query");
+      if (searchTerm) next.set(TABLE_PARAMS.query, searchTerm);
+      else next.delete(TABLE_PARAMS.query);
 
-      next.delete("start");
-      next.delete("limit");
+      next.delete(TABLE_PARAMS.start);
+      next.delete(TABLE_PARAMS.limit);
 
       return next;
     });

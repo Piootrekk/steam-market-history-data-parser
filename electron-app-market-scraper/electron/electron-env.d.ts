@@ -48,6 +48,7 @@ interface Window {
     getAllUsers: () => Promise<string[]>;
     getCountListingsFromSteamId: (
       steamId: string,
+      query?: string,
     ) => Promise<ValidationReturn<ListingsCount>>;
     getListingsFromSteamId: (
       steamId: string,

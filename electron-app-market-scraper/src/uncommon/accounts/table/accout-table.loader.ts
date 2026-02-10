@@ -14,8 +14,10 @@ const accountTableLoader = async ({ params, request }: LoaderFunctionArgs) => {
   if (Number.isNaN(start) || Number.isNaN(limit))
     throw new Error("Param start & number should be a number!");
 
-  const listingsCount =
-    await window.electronAPI.getCountListingsFromSteamId(steamId);
+  const listingsCount = await window.electronAPI.getCountListingsFromSteamId(
+    steamId,
+    query,
+  );
   if (!listingsCount.ok) throw new Response("Not Found", { status: 404 });
   const listings = await window.electronAPI.getListingsFromSteamId(
     steamId,

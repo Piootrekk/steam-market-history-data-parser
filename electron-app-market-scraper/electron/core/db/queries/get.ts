@@ -18,7 +18,7 @@ const getListingsForCurrentAccountSteamId = async (
 ) => {
   const whereClause = and(
     eq(accountTable.steamId, steamId),
-    query ? like(listingsTable.marketHashName, `%${query}%`) : undefined,
+    query ? like(listingsTable.marketHashName, `%${query.trim()}%`) : undefined,
   );
 
   const response = await db
@@ -35,7 +35,15 @@ const getListingsForCurrentAccountSteamId = async (
   return response;
 };
 
-const getCountIdsFromAccount = async (db: Db, steamId: string) => {
+const getCountIdsFromAccount = async (
+  db: Db,
+  steamId: string,
+  query?: string,
+) => {
+  const whereClause = and(
+    eq(accountTable.steamId, steamId),
+    query ? like(listingsTable.marketHashName, `%${query.trim()}%`) : undefined,
+  );
   const response = await db
     .select({
       count: count(),
@@ -43,7 +51,7 @@ const getCountIdsFromAccount = async (db: Db, steamId: string) => {
     .from(listingsTable)
     .innerJoin(snapshotsTable, eq(listingsTable.snapshotId, snapshotsTable.id))
     .innerJoin(accountTable, eq(snapshotsTable.accountId, accountTable.id))
-    .where(eq(accountTable.steamId, steamId))
+    .where(whereClause)
     .get();
   return response;
 };
