@@ -29,7 +29,10 @@ const Pagination = ({
   return (
     <div className="px-4 pb-4">
       <div
-        className={cn("flex items-center justify-center gap-1", className)}
+        className={cn(
+          "flex flex-wrap items-center justify-center gap-1",
+          className,
+        )}
         {...props}
       >
         {children}

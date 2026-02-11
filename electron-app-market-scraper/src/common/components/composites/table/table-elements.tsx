@@ -8,65 +8,56 @@ type TableRowProps = React.ComponentProps<"tr">;
 type TableHeaderRowProps = React.ComponentProps<"th">;
 type TableCellProps = React.ComponentProps<"td">;
 
-const Table = ({ className, ...others }: TableProps) => {
-  return (
+const Table = ({ className, ...others }: TableProps) => (
+  <div className="w-full overflow-x-auto scroll-area">
     <table
       className={cn("w-full caption-bottom text-sm", className)}
       {...others}
     />
-  );
-};
-
-const TableHeader = ({ className, ...others }: TableHeaderProps) => {
-  return <thead className={cn("[&_tr]:border-b", className)} {...others} />;
-};
-
-const TableBody = ({ className, ...others }: TableBodyProps) => {
-  return (
-    <tbody
-      className={cn("[&_tr:last-child]:border-0", className)}
-      {...others}
-    />
-  );
-};
-
-const TableFooter = ({ className, ...others }: TableFooterProps) => {
-  return (
-    <tfoot
-      className={cn(
-        "border-t bg-muted/50 font-medium [&>tr]:last:border-b-0",
-        className,
-      )}
-      {...others}
-    />
-  );
-};
-
-const TableRow = ({ className, ...others }: TableRowProps) => (
-  <tr className={cn("border-b", className)} {...others} />
+  </div>
 );
 
-const TableHeaderRow = ({ className, ...others }: TableHeaderRowProps) => (
-  <th
+const TableHeader = ({ className, ...others }: TableHeaderProps) => (
+  <thead className={cn("[&_tr]:border-b", className)} {...others} />
+);
+
+const TableBody = ({ className, ...others }: TableBodyProps) => (
+  <tbody className={cn("[&_tr:last-child]:border-0", className)} {...others} />
+);
+
+const TableFooter = ({ className, ...others }: TableFooterProps) => (
+  <tfoot
     className={cn(
-      "h-12 px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0",
+      "border-t bg-muted/50 font-medium [&>tr]:last:border-b-0",
       className,
     )}
     {...others}
   />
 );
 
-const TableCell = ({ className, ...others }: TableCellProps) => {
-  return (
-    <td
-      className={cn(
-        "p-4 align-middle [&:has([role=checkbox])]:pr-0",
-        className,
-      )}
-      {...others}
-    />
-  );
-};
+const TableRow = ({ className, ...others }: TableRowProps) => (
+  <tr className={cn("border-b transition-colors", className)} {...others} />
+);
+
+const TableHeaderRow = ({ className, ...others }: TableHeaderRowProps) => (
+  <th
+    className={cn(
+      "h-12 px-4 text-left align-middle font-medium text-muted-foreground whitespace-nowrap [&:has([role=checkbox])]:pr-0",
+      className,
+    )}
+    {...others}
+  />
+);
+
+const TableCell = ({ className, ...others }: TableCellProps) => (
+  <td
+    className={cn(
+      "p-4 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0",
+      className,
+    )}
+    {...others}
+  />
+);
 
 export {
   Table,

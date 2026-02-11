@@ -1,4 +1,3 @@
-import { useState } from "react";
 import SidebarHeaderCollapsed from "./collabsed/sidebar-header";
 import SidebarHeaderExtended from "./expended/sidebar-header";
 import SideBarNavCollabsed from "./collabsed/sidebar-nav";
@@ -10,6 +9,7 @@ import { useUserNavInvoices } from "./sidebar.loader";
 import { generatePath } from "react-router-dom";
 import { useAccountSubRoute } from "./nav-tab-selected.hook";
 import { cn } from "src/common/utils/merge-styles";
+import { useLocalStorage } from "src/common/hooks/local-storage.hook";
 
 const appTitle = "Market History Manager";
 const navItems = [
@@ -32,7 +32,7 @@ const navItems = [
 ] as const satisfies NavRoutes[];
 
 const Sidebar = () => {
-  const [isCollabsed, setIsCollabsed] = useState(false);
+  const [storedValue, setValue] = useLocalStorage("isCollabsed", false);
   const accounts = useUserNavInvoices();
   const subRoute = useAccountSubRoute();
 
@@ -58,21 +58,19 @@ const Sidebar = () => {
     <aside
       className={cn(
         "h-full pb-8 border-r border-sidebar-border bg-sidebar transition-all duration-100 flex flex-col",
-        isCollabsed ? "w-16" : "w-64",
+        storedValue ? "w-16" : "w-64",
       )}
     >
       <ScrollArea direction="vertical">
-        {isCollabsed ? (
-          <SidebarHeaderCollapsed
-            onToggle={() => setIsCollabsed(!isCollabsed)}
-          />
+        {storedValue ? (
+          <SidebarHeaderCollapsed onToggle={() => setValue(!storedValue)} />
         ) : (
           <SidebarHeaderExtended
             title={appTitle}
-            onToggle={() => setIsCollabsed(!isCollabsed)}
+            onToggle={() => setValue(!storedValue)}
           />
         )}
-        {isCollabsed ? (
+        {storedValue ? (
           <SideBarNavCollabsed routes={navItems} accounts={accountsNav} />
         ) : (
           <SideBarNavExtended routes={navItems} accounts={accountsNav} />
