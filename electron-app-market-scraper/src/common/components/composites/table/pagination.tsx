@@ -7,7 +7,7 @@ import {
 } from "src/common/components/composites/table/table-pagination";
 import { TABLE_PARAMS } from "src/routes";
 
-type AccountPaginationProps = {
+type PaginationProps = {
   urlSearchParams: URLSearchParams;
   totalCount: number;
 };
@@ -42,10 +42,10 @@ const getPathParams = (
   return params.toString();
 };
 
-const AccountTablePagination = ({
+const TablePagination = ({
   urlSearchParams: params,
   totalCount,
-}: AccountPaginationProps) => {
+}: PaginationProps) => {
   const { startParam, limit } = getParamsFromURLSearchParams(params);
   if (totalCount <= limit) return null;
   const totalPages = getPageCount(totalCount, limit);
@@ -100,4 +100,4 @@ const AccountTablePagination = ({
   );
 };
 
-export default AccountTablePagination;
+export default TablePagination;

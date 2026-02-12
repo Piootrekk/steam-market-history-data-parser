@@ -1,5 +1,8 @@
 import { sanitizeError } from "../../error";
-import { listingsCountService } from "./listings-count.service";
+import {
+  listingsCountAllService,
+  listingsCountService,
+} from "./listings-count.service";
 
 const listingsCountController = async (
   _event: Electron.IpcMainInvokeEvent,
@@ -14,4 +17,16 @@ const listingsCountController = async (
   }
 };
 
-export { listingsCountController };
+const listingsCountAllController = async (
+  _event: Electron.IpcMainInvokeEvent,
+  query?: string,
+): Promise<ValidationReturn<ListingsCount>> => {
+  try {
+    return await listingsCountAllService(query);
+  } catch (err) {
+    const sanitized = sanitizeError(err);
+    return { ok: false, error: sanitized.message };
+  }
+};
+
+export { listingsCountController, listingsCountAllController };

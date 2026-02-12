@@ -62,7 +62,7 @@ const ChevronRightPagination = ({
   page,
   maxPage,
 }: PaginationRightProps) => {
-  const isDisabled = page >= maxPage;
+  const isDisabled = page > maxPage;
 
   return (
     <LinkButton disabled={isDisabled} to={to} size="icon" variant="outline">

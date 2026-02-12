@@ -12,6 +12,8 @@ import ErrorPage from "./uncommon/error/error.page";
 import { shouldRevalidateRoot } from "./uncommon/root/root.revalidation";
 import SyncListingsPage from "./uncommon/accounts/sync/sync-listings.page";
 import { syncFetchAction } from "./uncommon/accounts/sync/sync-listings.action";
+import AccountAllPage from "./uncommon/account-all/account-all.page";
+import { allTableLoader } from "./uncommon/account-all/account-all.loader";
 
 const router = createHashRouter([
   {
@@ -48,7 +50,8 @@ const router = createHashRouter([
         children: [
           {
             path: ROUTE_PATHS.accountsAll,
-            element: <></>,
+            element: <AccountAllPage />,
+            loader: allTableLoader,
           },
           {
             path: ROUTE_PATHS.account,

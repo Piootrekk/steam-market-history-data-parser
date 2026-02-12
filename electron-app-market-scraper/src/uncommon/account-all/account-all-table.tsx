@@ -1,10 +1,10 @@
-import { type Column } from "../../../common/components/composites/table/table";
-import DataTable from "../../../common/components/composites/table/table";
-import { useAccountTableInvoices } from "./accout-table.loader";
-
 import { TableListingsPage } from "src/common/components/composites/table-listings-page";
+import DataTable, {
+  type Column,
+} from "src/common/components/composites/table/table";
+import { useAllListingsInvoices } from "./account-all.loader";
 
-const ListingsColumns: Column<Listings>[] = [
+const ListingsAllColumns: Column<ListingsAll>[] = [
   {
     key: "eventAction",
     header: "Event",
@@ -35,16 +35,20 @@ const ListingsColumns: Column<Listings>[] = [
     header: "Time",
     render: (item) => new Date(item.timeEvent * 1000).toLocaleString("en-GB"),
   },
+  {
+    key: "steamid",
+    header: "Steam Id",
+    render: (item) => item.steamid,
+  },
 ];
 
-const AccountTablePage = () => {
-  const { listings, listingsCount } = useAccountTableInvoices();
-
+const AccoutAllTable = () => {
+  const { listings, listingsCount } = useAllListingsInvoices();
   return (
     <TableListingsPage listingsCount={listingsCount}>
-      <DataTable columns={ListingsColumns} data={listings} />
+      <DataTable columns={ListingsAllColumns} data={listings} />
     </TableListingsPage>
   );
 };
 
-export default AccountTablePage;
+export default AccoutAllTable;

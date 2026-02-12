@@ -16,7 +16,8 @@ const useFetchAllHistoryAction = (): FetchAll => {
   const navigation = useNavigation();
   const { logs } = useProgressEvent();
 
-  const loading = navigation.state !== "idle";
+  const loading =
+    navigation.state !== "idle" && navigation.formAction ? true : false;
 
   return {
     loading,

@@ -1,13 +1,13 @@
 import { transactionSession } from "../../core/db/queries/transaction";
 import {
-  getCountIdsFromAccount,
+  getListingsCountFromAccount,
   getAccountIdBySteamId,
 } from "../../core/db/queries/get";
 
 import { insertBulkNewListings } from "../fetch-all/fetch-all.repository";
 
 export {
-  getCountIdsFromAccount,
+  getListingsCountFromAccount as getCountIdsFromAccount,
   transactionSession,
   getAccountIdBySteamId,
   insertBulkNewListings,

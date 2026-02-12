@@ -7,7 +7,7 @@ import { registerAllHandlers } from "./handlers";
 
 const createWindow = () => {
   const mainWindow = new BrowserWindow({
-    width: 900,
+    width: 1125,
     height: 670,
     minWidth: 600,
     minHeight: 400,

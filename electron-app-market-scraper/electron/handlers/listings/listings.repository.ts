@@ -1,4 +1,7 @@
-import { getListingsForCurrentAccountSteamId } from "../../core/db/queries/get";
+import {
+  getListingsForCurrentAccountSteamId,
+  getAllListings,
+} from "../../core/db/queries/get";
 import { getDbInstance } from "../../db.config";
 
 const listingsRepostiory = async (
@@ -18,4 +21,14 @@ const listingsRepostiory = async (
   return listings;
 };
 
-export { listingsRepostiory };
+const listingsAllRepostiory = async (
+  start: number,
+  limit: number,
+  query?: string,
+) => {
+  const db = getDbInstance();
+  const listings = await getAllListings(db, start, limit, query);
+  return listings;
+};
+
+export { listingsRepostiory, listingsAllRepostiory };

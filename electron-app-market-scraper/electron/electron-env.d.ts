@@ -38,6 +38,8 @@ type Listings = {
   urlIcon: string;
 };
 
+type ListingsAll = Listings & { steamid: string };
+
 type ListingsCount = {
   countListings: number;
 };
@@ -50,12 +52,20 @@ interface Window {
       steamId: string,
       query?: string,
     ) => Promise<ValidationReturn<ListingsCount>>;
+    getCountAllListings: (
+      query?: string,
+    ) => Promise<ValidationReturn<ListingsCount>>;
     getListingsFromSteamId: (
       steamId: string,
       start: number,
       limit: number,
       query?: string,
     ) => Promise<Listings[]>;
+    getListingsAll: (
+      start: number,
+      limit: number,
+      query?: string,
+    ) => Promise<ListingsAll[]>;
     startFetchingAll: (steamId: string, cookies: string) => Promise<void>;
     startFetchingSync: (steamId: string, cookies: string) => Promise<void>;
     progressFetching: (

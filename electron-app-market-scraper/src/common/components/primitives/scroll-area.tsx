@@ -21,7 +21,6 @@ const ScrollArea = ({
   useEffect(() => {
     const updateSize = () => {
       if (!containerRef.current) return;
-      console.log("Recalc");
       const rect = containerRef.current.getBoundingClientRect();
       const computedStyle = window.getComputedStyle(containerRef.current);
       if (direction === "vertical") {

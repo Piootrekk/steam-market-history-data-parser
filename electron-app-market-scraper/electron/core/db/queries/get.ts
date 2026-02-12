@@ -35,7 +35,7 @@ const getListingsForCurrentAccountSteamId = async (
   return response;
 };
 
-const getCountIdsFromAccount = async (
+const getListingsCountFromAccount = async (
   db: Db,
   steamId: string,
   query?: string,
@@ -71,10 +71,54 @@ const getAccountIdBySteamId = async (db: Db, steamid: string) => {
   return response;
 };
 
+const getAllListingsCount = async (db: Db, query?: string) => {
+  const result = await db
+    .select({
+      count: count(),
+    })
+    .from(listingsTable)
+    .where(
+      query
+        ? like(listingsTable.marketHashName, `%${query.trim()}%`)
+        : undefined,
+    )
+    .get();
+
+  return result;
+};
+
+const getAllListings = async (
+  db: Db,
+  start: number,
+  limit: number,
+  query?: string,
+) => {
+  return db.query.listingsTable.findMany({
+    with: {
+      snapshot: {
+        with: {
+          account: {
+            columns: {
+              steamId: true,
+            },
+          },
+        },
+      },
+    },
+    where: (listing, { like }) =>
+      query ? like(listing.marketHashName, `%${query.trim()}%`) : undefined,
+    orderBy: (listing) => [desc(listing.timeEvent)],
+    limit,
+    offset: start,
+  });
+};
+
 export {
   getAllSteamIdsFromAccount,
   getListingsForCurrentAccountSteamId,
-  getCountIdsFromAccount,
+  getListingsCountFromAccount,
   getListingsColumnsNames,
   getAccountIdBySteamId,
+  getAllListings,
+  getAllListingsCount,
 };

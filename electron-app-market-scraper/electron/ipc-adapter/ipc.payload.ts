@@ -6,6 +6,8 @@ const channels = {
   progressFetching: "fetch:progress",
   getListingsFromSteamId: "db:user:listings",
   getCountListingsFromSteamId: "db:user:listings:count",
+  getCountAllListings: "db:all:listings:count",
+  getListingsAll: "db:all:listings",
 } as const satisfies Record<keyof Window["electronAPI"], string>;
 
 export { channels };

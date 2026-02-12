@@ -1,5 +1,8 @@
-import { listingsDto } from "./listings.dto";
-import { listingsRepostiory } from "./listings.repository";
+import { listingsAllDto, listingsDto } from "./listings.dto";
+import {
+  listingsAllRepostiory,
+  listingsRepostiory,
+} from "./listings.repository";
 
 const listingsService = async (
   steamId: string,
@@ -12,4 +15,14 @@ const listingsService = async (
   return transformListings;
 };
 
-export { listingsService };
+const listingsAllService = async (
+  start: number,
+  limit: number,
+  query?: string,
+) => {
+  const listings = await listingsAllRepostiory(start, limit, query);
+  const transformListings = listingsAllDto(listings);
+  return transformListings;
+};
+
+export { listingsService, listingsAllService };

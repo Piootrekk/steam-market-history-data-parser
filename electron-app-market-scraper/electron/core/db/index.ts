@@ -3,7 +3,7 @@ import { migrate } from "drizzle-orm/libsql/migrator";
 import { createClient, type Client } from "@libsql/client";
 import * as schema from "./schema";
 
-type Db = ReturnType<typeof drizzle>;
+type Db = ReturnType<typeof drizzle<typeof schema>>;
 
 const getClientInit = (userDataPath: string): Client => {
   if (!userDataPath) {

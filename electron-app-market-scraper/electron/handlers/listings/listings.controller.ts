@@ -1,4 +1,4 @@
-import { listingsService } from "./listings.service";
+import { listingsAllService, listingsService } from "./listings.service";
 
 const listingsController = async (
   _event: Electron.IpcMainInvokeEvent,
@@ -10,4 +10,13 @@ const listingsController = async (
   return await listingsService(steamId, start, limit, query);
 };
 
-export { listingsController };
+const listingsAllController = async (
+  _event: Electron.IpcMainInvokeEvent,
+  start: number,
+  limit: number,
+  query?: string,
+) => {
+  return await listingsAllService(start, limit, query);
+};
+
+export { listingsController, listingsAllController };
