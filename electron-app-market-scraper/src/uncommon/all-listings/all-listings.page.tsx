@@ -1,8 +1,8 @@
 import { Database } from "lucide-react";
 import BasicPageInfo from "src/common/components/composites/basic-page-info";
-import AccoutAllTable from "./account-all-table";
+import AccoutAllTable from "./all-lisitngs-table";
 
-const AccountAllPage = () => {
+const AllListingsPage = () => {
   return (
     <>
       <BasicPageInfo
@@ -15,4 +15,4 @@ const AccountAllPage = () => {
   );
 };
 
-export default AccountAllPage;
+export default AllListingsPage;

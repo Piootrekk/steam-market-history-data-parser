@@ -1,7 +1,10 @@
 import { useLoaderData, type LoaderFunctionArgs } from "react-router-dom";
 import { TABLE_PARAMS } from "src/routes";
 
-const accountTableLoader = async ({ params, request }: LoaderFunctionArgs) => {
+const accountListingsLoader = async ({
+  params,
+  request,
+}: LoaderFunctionArgs) => {
   const { steamId } = params;
   if (!steamId) {
     throw new Response("Missing steamId", { status: 400 });
@@ -29,8 +32,8 @@ const accountTableLoader = async ({ params, request }: LoaderFunctionArgs) => {
 };
 
 const useAccountTableInvoices = () => {
-  const listings = useLoaderData<typeof accountTableLoader>();
+  const listings = useLoaderData<typeof accountListingsLoader>();
   return listings;
 };
 
-export { accountTableLoader, useAccountTableInvoices };
+export { accountListingsLoader, useAccountTableInvoices };

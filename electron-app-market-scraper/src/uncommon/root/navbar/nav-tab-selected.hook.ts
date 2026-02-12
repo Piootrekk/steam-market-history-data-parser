@@ -9,7 +9,6 @@ const useAccountSubRoute = () => {
 
   if (isSync) return ROUTE_PATHS.accountSync;
   if (isConfig) return ROUTE_PATHS.accountConfig;
-
   return "";
 };
 

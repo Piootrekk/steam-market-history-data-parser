@@ -1,7 +1,7 @@
 import { useLoaderData, type LoaderFunctionArgs } from "react-router-dom";
 import { TABLE_PARAMS } from "src/routes";
 
-const allTableLoader = async ({ request }: LoaderFunctionArgs) => {
+const allListingsLoader = async ({ request }: LoaderFunctionArgs) => {
   const url = new URL(request.url);
 
   const start = Number(url.searchParams.get(TABLE_PARAMS.start) ?? 0);
@@ -18,8 +18,8 @@ const allTableLoader = async ({ request }: LoaderFunctionArgs) => {
 };
 
 const useAllListingsInvoices = () => {
-  const listings = useLoaderData<typeof allTableLoader>();
+  const listings = useLoaderData<typeof allListingsLoader>();
   return listings;
 };
 
-export { allTableLoader, useAllListingsInvoices };
+export { allListingsLoader, useAllListingsInvoices };

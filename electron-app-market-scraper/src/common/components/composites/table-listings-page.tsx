@@ -1,9 +1,9 @@
 import { useCallback, type PropsWithChildren } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import { TABLE_PARAMS } from "src/routes";
 import { Card, CardContent, CardHeader, CardTitle } from "../primitives/card";
-import AccountTableFilters from "src/uncommon/accounts/table/account-filters";
 import TablePagination from "./table/pagination";
+import AccountTableFilters from "src/uncommon/accounts/table/account-filters";
 
 type TableListingsPageProps = PropsWithChildren & {
   listingsCount: number;
@@ -13,7 +13,7 @@ const TableListingsPage = ({
   listingsCount,
 }: TableListingsPageProps) => {
   const [searchParam, setSearchParams] = useSearchParams();
-
+  const { steamId } = useParams();
   const getSearchTerm = () => {
     const searchQuery = searchParam.get(TABLE_PARAMS.query);
     return searchQuery;
@@ -43,6 +43,7 @@ const TableListingsPage = ({
           <p>Listings</p>
         </CardTitle>
         <AccountTableFilters
+          key={steamId}
           searchParam={getSearchTerm()}
           onSearch={handleSearch}
         />

@@ -22,7 +22,7 @@ const subtabs = [
   },
 ] satisfies NavRoutes[];
 
-const AccountsLayout = () => {
+const AccountListingsLayout = () => {
   return (
     <>
       <BasicPageInfo
@@ -40,4 +40,4 @@ const AccountsLayout = () => {
   );
 };
 
-export default AccountsLayout;
+export default AccountListingsLayout;

@@ -4,16 +4,16 @@ import DownloadAllPage from "./uncommon/fetch-all/download.page";
 import RootWithNavLayout from "./uncommon/root/root-with-nav.layout";
 import { usersNavLoader } from "./uncommon/root/navbar/sidebar.loader";
 import { ROUTE_PATHS } from "./routes";
-import AccountsLayout from "./uncommon/accounts/accounts.layout";
+import AccountListingsLayout from "./uncommon/account-listings/account-listings.layout";
 import { fetchAllHistortyAction } from "./uncommon/fetch-all/download.action";
-import AccountTablePage from "./uncommon/accounts/table/account-table.page";
-import { accountTableLoader } from "./uncommon/accounts/table/accout-table.loader";
+import AccountTablePage from "./uncommon/account-listings/table/account-table.page";
+import { accountListingsLoader } from "./uncommon/account-listings/table/accout-table.loader";
 import ErrorPage from "./uncommon/error/error.page";
 import { shouldRevalidateRoot } from "./uncommon/root/root.revalidation";
-import SyncListingsPage from "./uncommon/accounts/sync/sync-listings.page";
-import { syncFetchAction } from "./uncommon/accounts/sync/sync-listings.action";
-import AccountAllPage from "./uncommon/account-all/account-all.page";
-import { allTableLoader } from "./uncommon/account-all/account-all.loader";
+import SyncListingsPage from "./uncommon/account-listings/sync/sync-listings.page";
+import { syncFetchAction } from "./uncommon/account-listings/sync/sync-listings.action";
+import AllListingsPage from "./uncommon/all-listings/all-listings.page";
+import { allListingsLoader } from "./uncommon/all-listings/all-listings.loader";
 
 const router = createHashRouter([
   {
@@ -50,18 +50,18 @@ const router = createHashRouter([
         children: [
           {
             path: ROUTE_PATHS.accountsAll,
-            element: <AccountAllPage />,
-            loader: allTableLoader,
+            element: <AllListingsPage />,
+            loader: allListingsLoader,
           },
           {
             path: ROUTE_PATHS.account,
-            element: <AccountsLayout />,
+            element: <AccountListingsLayout />,
             children: [
               {
                 index: true,
                 path: ROUTE_PATHS.accountTable,
                 element: <AccountTablePage />,
-                loader: accountTableLoader,
+                loader: accountListingsLoader,
               },
               {
                 path: ROUTE_PATHS.accountSync,
