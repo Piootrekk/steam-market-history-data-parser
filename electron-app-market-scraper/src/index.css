@@ -177,35 +177,43 @@
   }
 }
 
-@layer components {
-  .scroll-area {
-    -webkit-overflow-scrolling: auto;
-    scrollbar-width: thin;
-    scrollbar-color: transparent transparent;
-    scrollbar-gutter: stable;
-  }
+@utility scroll-area {
+  -webkit-overflow-scrolling: auto;
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+  scrollbar-gutter: stable;
 
-  .scroll-area:hover,
-  .scroll-area:focus-within {
+  &:hover,
+  &:focus-within {
     scrollbar-color: var(--color-muted-foreground) transparent;
   }
 
-  .scroll-area::-webkit-scrollbar {
+  &::-webkit-scrollbar {
     width: 8px;
     height: 8px;
   }
 
-  .scroll-area::-webkit-scrollbar-track {
+  &::-webkit-scrollbar-track {
     background: transparent;
   }
 
-  .scroll-area::-webkit-scrollbar-thumb {
+  &::-webkit-scrollbar-thumb {
     background: transparent;
   }
 
-  .scroll-area:hover::-webkit-scrollbar-thumb,
-  .scroll-area:focus-within::-webkit-scrollbar-thumb {
+  &:hover::-webkit-scrollbar-thumb,
+  &:focus-within::-webkit-scrollbar-thumb {
     background: var(--color-muted-foreground);
+  }
+}
+
+@utility app-image {
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+
+  &:focus-visible {
+    outline: 2px solid var(--color-ring);
   }
 }
 

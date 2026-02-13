@@ -4,6 +4,7 @@ import { PRELOAD_PATH, RENDERER_DIST, VITE_DEV_SERVER_URL } from "./env";
 import { ipcMainAdapter } from "./ipc-adapter/ipc.main.adapter";
 import { connectDb } from "./db.config";
 import { registerAllHandlers } from "./handlers";
+import { registerAllProtocols } from "./protocols";
 
 const createWindow = () => {
   const mainWindow = new BrowserWindow({
@@ -30,6 +31,7 @@ const setupRenderer = (mainWindow: BrowserWindow) => {
     mainWindow.loadURL(VITE_DEV_SERVER_URL);
     mainWindow.webContents.openDevTools({ mode: "detach" });
   } else {
+    mainWindow.webContents.openDevTools({ mode: "detach" });
     mainWindow.loadFile(path.join(RENDERER_DIST, "index.html"));
   }
 };
@@ -50,6 +52,7 @@ app.whenReady().then(async () => {
   try {
     await connectDb();
     registerAllHandlers();
+    registerAllProtocols();
     createWindow();
   } catch (err) {
     console.error("App launching error: ", err);
