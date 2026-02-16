@@ -6,6 +6,7 @@ declare namespace NodeJS {
     VITE_PUBLIC: string;
     DB_PATH: string;
     MIGRATION_PATH: string;
+    IMAGE_STORAGE_PATH: string;
   }
 }
 
@@ -43,6 +44,8 @@ type ListingsAll = Listings & { steamid: string };
 type ListingsCount = {
   countListings: number;
 };
+
+/// <reference path="./types/index.ts" />
 
 interface Window {
   electronAPI: {

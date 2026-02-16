@@ -11,19 +11,23 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "db:generate": "drizzle-kit generate --config electron/core/db/drizzle.config.ts",
+    "db:push": "drizzle-kit push --config electron/core/db/drizzle.config.ts",
+    "db:migrate": "drizzle-kit migrate --config electron/core/db/drizzle.config.ts",
+    "db:studio": "drizzle-kit studio --port=5001 --config electron/core/db/drizzle.config.ts",
     "pack": "npm run build && electron-builder --dir",
     "pack:win": "npm run build && electron-builder --win --dir",
     "pack:mac": "npm run build && electron-builder --mac --dir",
     "pack:linux": "npm run build && electron-builder --linux --dir",
     "dist": "npm run build && electron-builder",
     "dist:win": "npm run build && electron-builder --win",
+    "dist:win:nsis": "npm run build && electron-builder --win nsis",
+    "dist:win:portable": "npm run build && electron-builder --win portable",
+    "dist:win:msi": "npm run build && electron-builder --win portable",
     "dist:mac": "npm run build && electron-builder --mac",
+    "dist:mac:dmg": "npm run build && electron-builder --mac dmg",
     "dist:linux": "npm run build && electron-builder --linux",
-    "db:rebuild:node": "npm rebuild",
-    "db:generate": "drizzle-kit generate --config electron/core/db/drizzle.config.ts",
-    "db:push": "drizzle-kit push --config electron/core/db/drizzle.config.ts",
-    "db:migrate": "drizzle-kit migrate --config electron/core/db/drizzle.config.ts",
-    "db:studio": "drizzle-kit studio --port=5001 --config electron/core/db/drizzle.config.ts"
+    "dist:linux:appimage": "npm run build && electron-builder --linux AppImage"
   },
   "dependencies": {
     "@libsql/client": "^0.17.0",

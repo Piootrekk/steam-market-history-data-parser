@@ -3,19 +3,23 @@
   "productName": "Steam market scraper",
   "files": ["dist/**/*", "dist-electron/**/*", "assets/**"],
   "asar": true,
-  "directories": {
-    "buildResources": "assets",
-    "output": "release"
-  },
+  "directories": { "buildResources": "assets", "output": "release-portable" },
   "win": {
     "icon": "assets/test.png",
-    "target": ["portable"]
+    "target": [
+      { "target": "nsis", "arch": ["x64"] },
+      { "target": "portable", "arch": ["x64"] },
+      { "target": "msi", "arch": ["x64"] }
+    ]
   },
   "mac": {
-    "target": "dmg"
+    "icon": "assets/test.png",
+    "target": [{ "target": "dmg", "arch": ["x64", "arm64"] }]
   },
   "linux": {
-    "target": "AppImage",
+    "icon": "assets/test.png",
+    "target": [{ "target": "AppImage", "arch": ["x64"] }],
     "category": "Utility"
-  }
+  },
+  "portable": { "artifactName": "${productName}-${version}-portable.${ext}" }
 }

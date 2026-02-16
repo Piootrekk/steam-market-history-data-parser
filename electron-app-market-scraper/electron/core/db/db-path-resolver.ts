@@ -12,7 +12,9 @@ const getAppdataPath = () => {
     case "linux":
       return path.join(home, ".config");
     default:
-      throw new Error("Invalid config of appdata path");
+      throw new Error(
+        "Invalid config of appdata path or system not supported.",
+      );
   }
 };
 

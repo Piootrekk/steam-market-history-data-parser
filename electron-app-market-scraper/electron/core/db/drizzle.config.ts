@@ -1,5 +1,5 @@
 import type { Config } from "drizzle-kit";
-import { getDbPath } from "./utils";
+import { getDbPath } from "./db-path-resolver";
 
 export default {
   dialect: "sqlite",

@@ -1,4 +1,3 @@
-import { app } from "electron";
 import path from "path";
 import fs from "fs/promises";
 
@@ -8,7 +7,7 @@ const appImagesHandler = async (request: Request): Promise<Response> => {
   if (fileName.includes("..")) {
     return new Response("Forbidden", { status: 403 });
   }
-  const filePath = path.join(app.getPath("userData"), "images", fileName);
+  const filePath = path.join(process.env.IMAGE_STORAGE_PATH, fileName);
   try {
     const data = await fs.readFile(filePath);
     return new Response(data);

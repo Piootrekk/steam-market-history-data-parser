@@ -68,3 +68,4 @@ market-history*.json
 mongodb-data
 dev-mongodb-data
 database.db
+release*/
