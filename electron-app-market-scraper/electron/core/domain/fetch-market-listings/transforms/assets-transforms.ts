@@ -8,7 +8,7 @@ const getAllCurrentAssets = (assets: Assets) => {
       const records = assets[game][currentversion];
       return { ...acc, ...records };
     },
-    {}
+    {},
   );
   return assetRecords;
 };

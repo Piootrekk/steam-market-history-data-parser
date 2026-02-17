@@ -1,17 +1,17 @@
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 import { app } from "electron";
-import { getPortablePath, isPortable } from "./portable";
+import { getOperationalPath, isPortable } from "./portable";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 process.env.APP_ROOT = path.join(__dirname, "..");
 process.env.DB_PATH = !isPortable()
   ? path.join(app.getPath("userData"), "database.db")
-  : path.join(getPortablePath(), "data", "database.db");
+  : path.join(getOperationalPath(), "database.db");
 process.env.IMAGE_STORAGE_PATH = !isPortable()
   ? path.join(app.getPath("userData"), "images")
-  : path.join(getPortablePath(), "data", "images");
+  : path.join(getOperationalPath(), "images");
 
 process.env.MIGRATION_PATH = process.env.VITE_DEV_SERVER_URL
   ? path.join(__dirname, "../electron/core/db//migrations")

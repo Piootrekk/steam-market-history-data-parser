@@ -6,7 +6,7 @@ type MergeResponse = ReturnType<typeof mergeResponse>;
 const mergeResponse = (response: MarketFetchResponse) => {
   const assets = getAllCurrentAssets(response.assets);
   const connectedMarketData = response.events.map((event) => {
-    const currentPurchaseProp: `${number}_${number}` = `${event.listingid}_${event.purchaseid}`;
+    const currentPurchaseProp = `${event.listingid}_${event.purchaseid}`;
     const currentPurchase = response.purchases[currentPurchaseProp];
     const currentListing = response.listings[event.listingid];
     const currentAsset = assets[currentListing.asset.id];

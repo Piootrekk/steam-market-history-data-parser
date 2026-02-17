@@ -1,0 +1,18 @@
+import { Database } from "lucide-react";
+import BasicPageInfo from "@renderer/common/components/composites/basic-page-info";
+import AccoutAllTable from "./all-lisitngs-table";
+
+const AllListingsPage = () => {
+  return (
+    <>
+      <BasicPageInfo
+        name={"All your saved listings from DB."}
+        desc={`Display, search whole listings in table.`}
+        Icon={Database}
+      />
+      <AccoutAllTable />
+    </>
+  );
+};
+
+export default AllListingsPage;

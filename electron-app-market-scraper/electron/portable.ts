@@ -1,9 +1,9 @@
 import { app } from "electron";
-
+import fs from "fs";
+import path from "path";
 //TODO add linux mac support in the future
 
 const isPortable = () => {
-  console.log(process.env.PORTABLE_EXECUTABLE_DIR);
   if (!app.isPackaged) {
     return false;
   }
@@ -17,9 +17,23 @@ const isPortable = () => {
 
 const getPortablePath = () => {
   if (process.env.PORTABLE_EXECUTABLE_DIR) {
-    console.log(process.env.PORTABLE_EXECUTABLE_DIR);
     return process.env.PORTABLE_EXECUTABLE_DIR;
   } else throw new Error("Portable not supported yet.");
 };
 
-export { isPortable, getPortablePath };
+const ensureDirExists = (path: string) => {
+  if (!fs.existsSync(path)) {
+    fs.mkdirSync(path, { recursive: true });
+  }
+};
+
+const getOperationalPath = () => {
+  if (!isPortable) throw new Error("Invalid config for not portable build.");
+  const operationalFolderName = "data";
+  const portablePath = getPortablePath();
+  const operationalPath = path.join(portablePath, operationalFolderName);
+  ensureDirExists(operationalPath);
+  return operationalPath;
+};
+
+export { isPortable, getPortablePath, ensureDirExists, getOperationalPath };

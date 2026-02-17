@@ -14,7 +14,10 @@
     "skipLibCheck": true,
     "strict": true,
     "noUnusedLocals": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "paths": {
+      "@renderer/*": ["renderer/*"]
+    }
   },
-  "include": ["src", "electron"]
+  "include": ["renderer", "electron"]
 }

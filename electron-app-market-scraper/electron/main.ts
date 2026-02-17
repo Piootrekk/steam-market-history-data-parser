@@ -5,6 +5,7 @@ import { ipcMainAdapter } from "./ipc-adapter/ipc.main.adapter";
 import { connectDb } from "./db.config";
 import { registerAllHandlers } from "./handlers";
 import { registerAllProtocols } from "./protocols";
+import { Menu } from "electron";
 
 const createWindow = () => {
   const mainWindow = new BrowserWindow({
@@ -31,7 +32,7 @@ const setupRenderer = (mainWindow: BrowserWindow) => {
     mainWindow.loadURL(VITE_DEV_SERVER_URL);
     mainWindow.webContents.openDevTools({ mode: "detach" });
   } else {
-    mainWindow.webContents.openDevTools({ mode: "detach" });
+    Menu.setApplicationMenu(null);
     mainWindow.loadFile(path.join(RENDERER_DIST, "index.html"));
   }
 };

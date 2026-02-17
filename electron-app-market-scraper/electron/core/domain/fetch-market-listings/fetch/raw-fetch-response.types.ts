@@ -83,7 +83,7 @@ type Event = {
   date_event: string;
 };
 
-type Purchases = Record<`${number}_${number}`, CurrentPurchase>;
+type Purchases = Record<`${number}_${number}` | string, CurrentPurchase>;
 type CurrentPurchase = {
   listingid: string;
   purchaseid: string;
