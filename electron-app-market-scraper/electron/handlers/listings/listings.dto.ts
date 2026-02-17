@@ -62,4 +62,8 @@ const listingsAllDto = (
   return responseDto;
 };
 
+type ListingsDto = ReturnType<typeof listingsDto>[number];
+type ListingsAllDto = ReturnType<typeof listingsAllDto>[number];
+
 export { listingsDto, listingsAllDto };
+export type { ListingsAllDto, ListingsDto };

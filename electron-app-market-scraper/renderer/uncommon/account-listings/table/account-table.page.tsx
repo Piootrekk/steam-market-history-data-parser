@@ -1,6 +1,7 @@
-import { type Column } from "../../../common/components/composites/table/table";
-import DataTable from "../../../common/components/composites/table/table";
-import { useAccountTableInvoices } from "./accout-table.loader";
+import DataTable, {
+  type Column,
+} from "@renderer/common/components/composites/table/table";
+import { useAccountTableInvoices, type Listings } from "./accout-table.loader";
 
 import { TableListingsPage } from "@renderer/common/components/composites/table-listings-page";
 

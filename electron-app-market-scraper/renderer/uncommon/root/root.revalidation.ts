@@ -7,9 +7,7 @@ const shouldRevalidateRoot = ({
 }: ShouldRevalidateFunctionArgs): boolean => {
   const isCorrectPathAction = formAction === `/${ROUTE_PATHS.downloadAll}`;
   if (!isCorrectPathAction) return false;
-  if (actionResult?.error) {
-    return false;
-  }
+  if (actionResult?.error) return false;
   return true;
 };
 

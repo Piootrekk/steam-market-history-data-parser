@@ -1,7 +1,6 @@
-import { getDbInstance } from "../../db.config";
 import {
   getAccountIdBySteamId,
-  getCountIdsFromAccount,
+  getListingsCountFromAccount,
   insertBulkNewListings,
   transactionSession,
 } from "./fetch-sync.repository";
@@ -13,6 +12,7 @@ import {
 import type { ProgressEmitter } from "./fetch-sync.emits";
 import { BASE_CONFIG } from "../../core/domain/fetch-market-listings/base.config";
 import { insertNewSnapshot } from "../fetch-all/fetch-all.repository";
+import { getDbInstance } from "@electron/db.config";
 
 const fetchSyncService = async (
   progressEmitter: ProgressEmitter,
@@ -20,7 +20,7 @@ const fetchSyncService = async (
   cookies: string,
 ) => {
   const db = getDbInstance();
-  const listingsAmount = await getCountIdsFromAccount(db, steamid);
+  const listingsAmount = await getListingsCountFromAccount(db, steamid);
   const accountId = await getAccountIdBySteamId(db, steamid);
 
   if (!listingsAmount || !accountId)

@@ -3,7 +3,7 @@ import { useParams, useSearchParams } from "react-router-dom";
 import { TABLE_PARAMS } from "@renderer/routes";
 import { Card, CardContent, CardHeader, CardTitle } from "../primitives/card";
 import TablePagination from "./table/pagination";
-import AccountTableFilters from "@renderer/uncommon/accounts/table/account-filters";
+import AccountTableFilters from "@renderer/common/components/composites/table/account-filters";
 
 type TableListingsPageProps = PropsWithChildren & {
   listingsCount: number;

@@ -1,6 +1,10 @@
 import { useLoaderData, type LoaderFunctionArgs } from "react-router-dom";
 import { TABLE_PARAMS } from "@renderer/routes";
 
+type Listings = Awaited<
+  ReturnType<typeof window.electronAPI.getListingsFromSteamId>
+>[number];
+
 const accountListingsLoader = async ({
   params,
   request,
@@ -37,3 +41,4 @@ const useAccountTableInvoices = () => {
 };
 
 export { accountListingsLoader, useAccountTableInvoices };
+export type { Listings };

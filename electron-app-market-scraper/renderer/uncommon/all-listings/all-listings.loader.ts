@@ -1,6 +1,10 @@
 import { useLoaderData, type LoaderFunctionArgs } from "react-router-dom";
 import { TABLE_PARAMS } from "@renderer/routes";
 
+type ListingsAll = Awaited<
+  ReturnType<typeof window.electronAPI.getListingsAll>
+>[number];
+
 const allListingsLoader = async ({ request }: LoaderFunctionArgs) => {
   const url = new URL(request.url);
 
@@ -23,3 +27,4 @@ const useAllListingsInvoices = () => {
 };
 
 export { allListingsLoader, useAllListingsInvoices };
+export type { ListingsAll };

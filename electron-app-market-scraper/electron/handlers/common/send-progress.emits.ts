@@ -1,4 +1,4 @@
-import { ipcWebContentsAdapter } from "../../ipc-adapter/ipc.main.adapter";
+import { ipcWebContentsAdapter } from "@electron/ipc-adapter/ipc.main.adapter";
 
 type CommonProgressEmitter = ReturnType<typeof getCommonProgressEmits>;
 

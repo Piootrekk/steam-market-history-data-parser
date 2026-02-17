@@ -2,7 +2,10 @@ import { TableListingsPage } from "@renderer/common/components/composites/table-
 import DataTable, {
   type Column,
 } from "@renderer/common/components/composites/table/table";
-import { useAllListingsInvoices } from "./all-listings.loader";
+import {
+  useAllListingsInvoices,
+  type ListingsAll,
+} from "./all-listings.loader";
 
 const ListingsAllColumns: Column<ListingsAll>[] = [
   {

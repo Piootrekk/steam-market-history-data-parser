@@ -1,13 +1,12 @@
-import { transactionSession } from "../../core/db/queries/transaction";
 import {
-  getListingsCountFromAccount,
   getAccountIdBySteamId,
-} from "../../core/db/queries/get";
-
+  getListingsCountFromAccount,
+} from "@electron/core/db/queries/get";
+import { transactionSession } from "@electron/core/db/queries/transaction";
 import { insertBulkNewListings } from "../fetch-all/fetch-all.repository";
 
 export {
-  getListingsCountFromAccount as getCountIdsFromAccount,
+  getListingsCountFromAccount,
   transactionSession,
   getAccountIdBySteamId,
   insertBulkNewListings,

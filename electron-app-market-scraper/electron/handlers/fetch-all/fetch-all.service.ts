@@ -1,4 +1,3 @@
-import { getDbInstance } from "../../db.config";
 import {
   insertBulkNewListings,
   insertNewAccount,
@@ -12,6 +11,7 @@ import {
   otherListingsFetches,
 } from "../../core/domain/fetch-market-listings/fetch-queue";
 import type { ProgressEmitter } from "./fetch-all.emits";
+import { getDbInstance } from "@electron/db.config";
 
 const fetchAllService = async (
   progressEmitter: ProgressEmitter,

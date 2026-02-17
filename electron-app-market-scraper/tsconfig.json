@@ -16,7 +16,8 @@
     "noUnusedLocals": true,
     "isolatedModules": true,
     "paths": {
-      "@renderer/*": ["renderer/*"]
+      "@renderer/*": ["renderer/*"],
+      "@electron/*": ["electron/*"]
     }
   },
   "include": ["renderer", "electron"]

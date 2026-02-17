@@ -1,4 +1,4 @@
-import { sanitizeError } from "../../error";
+import { sanitizeError } from "@electron/error";
 import { getProgressEmitter } from "./fetch-sync.emits";
 import { fetchSyncService } from "./fetch-sync.service";
 
