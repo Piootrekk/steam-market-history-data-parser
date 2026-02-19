@@ -1,24 +1,43 @@
 import { useState } from "react";
 
-const useLocalStorage = <T>(
-  key: string,
-  initialValue: T,
-): [T, (value: T) => void, () => void] => {
-  const [storedValue, setStoredValue] = useState<T>(() => {
-    const item = window.localStorage.getItem(key);
-    return item ? JSON.parse(item) : initialValue;
-  });
+type LocalStorageSchema = typeof INIT_LOCAL_STORAGE;
 
-  const setValue = (valueToStore: T) => {
-    setStoredValue(valueToStore);
-    window.localStorage.setItem(key, JSON.stringify(valueToStore));
-  };
+const INIT_LOCAL_STORAGE = {
+  "ui-config": {
+    isCollapsed: false,
+    isSubCollapsed: false,
+    theme: "",
+  },
+} satisfies Record<string, Record<string, unknown>>;
 
-  const removeValue = () => {
-    setStoredValue(initialValue);
-    window.localStorage.removeItem(key);
-  };
-  return [storedValue, setValue, removeValue];
+const initLocalStorage = <K extends keyof LocalStorageSchema>(key: K): void => {
+  const item = window.localStorage.getItem(key);
+  if (item !== null) return;
+  window.localStorage.setItem(key, JSON.stringify(INIT_LOCAL_STORAGE[key]));
 };
 
-export { useLocalStorage };
+const useLocalStoredValue = <K extends keyof LocalStorageSchema>(key: K) => {
+  const [storedValue, setStoredValue] = useState<LocalStorageSchema[K]>(() => {
+    const item = window.localStorage.getItem(key);
+    if (item === null) throw new Error("Should initialize first.");
+    return JSON.parse(item);
+  });
+
+  const setValue: React.Dispatch<
+    React.SetStateAction<LocalStorageSchema[K]>
+  > = (valueOrUpdater) => {
+    setStoredValue((prev) => {
+      const valueToStore =
+        valueOrUpdater instanceof Function
+          ? valueOrUpdater(prev)
+          : valueOrUpdater;
+
+      window.localStorage.setItem(key, JSON.stringify(valueToStore));
+      return valueToStore;
+    });
+  };
+
+  return [storedValue, setValue] as const;
+};
+
+export { useLocalStoredValue, initLocalStorage };

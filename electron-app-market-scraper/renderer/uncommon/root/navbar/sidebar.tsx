@@ -9,7 +9,7 @@ import { useUserNavInvoices } from "./sidebar.loader";
 import { generatePath } from "react-router-dom";
 import { useAccountSubRoute } from "./nav-tab-selected.hook";
 import { cn } from "@renderer/common/utils/merge-styles";
-import { useLocalStorage } from "@renderer/common/hooks/local-storage.hook";
+import { useLocalStoredValue } from "@renderer/common/hooks/local-storage.hook";
 
 const appTitle = "Market History Manager";
 const navItems = [
@@ -32,7 +32,7 @@ const navItems = [
 ] as const satisfies NavRoutes[];
 
 const Sidebar = () => {
-  const [storedValue, setValue] = useLocalStorage("isCollabsed", false);
+  const [storedValue, setValue] = useLocalStoredValue("ui-config");
   const accounts = useUserNavInvoices();
   const subRoute = useAccountSubRoute();
 
@@ -58,19 +58,31 @@ const Sidebar = () => {
     <aside
       className={cn(
         "h-full pb-8 border-r border-sidebar-border bg-sidebar transition-all duration-100 flex flex-col",
-        storedValue ? "w-16" : "w-64",
+        storedValue.isCollapsed ? "w-16" : "w-64",
       )}
     >
       <ScrollArea direction="vertical">
-        {storedValue ? (
-          <SidebarHeaderCollapsed onToggle={() => setValue(!storedValue)} />
+        {storedValue.isCollapsed ? (
+          <SidebarHeaderCollapsed
+            onToggle={() =>
+              setValue((prev) => ({
+                ...prev,
+                isCollapsed: !prev.isCollapsed,
+              }))
+            }
+          />
         ) : (
           <SidebarHeaderExtended
             title={appTitle}
-            onToggle={() => setValue(!storedValue)}
+            onToggle={() =>
+              setValue((prev) => ({
+                ...prev,
+                isCollapsed: !prev.isCollapsed,
+              }))
+            }
           />
         )}
-        {storedValue ? (
+        {storedValue.isCollapsed ? (
           <SideBarNavCollabsed routes={navItems} accounts={accountsNav} />
         ) : (
           <SideBarNavExtended routes={navItems} accounts={accountsNav} />
