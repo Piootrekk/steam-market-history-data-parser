@@ -34,6 +34,7 @@ const router = createHashRouter([
         element: <DownloadAllPage />,
         action: fetchAllHistortyAction,
       },
+      { path: ROUTE_PATHS.downlaodQrCode, element: <></> },
       {
         path: ROUTE_PATHS.downloadAmount,
         element: <DownloadAllPage />,

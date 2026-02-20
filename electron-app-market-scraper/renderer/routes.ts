@@ -3,6 +3,7 @@ const ROUTE_PATHS = {
   dashboard: "",
   downloadAll: "download/all",
   downloadAmount: "download/amount",
+  downlaodQrCode: "download/qr",
   about: "about",
   settings: "settings",
 

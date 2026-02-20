@@ -7,7 +7,7 @@ import {
   text,
 } from "drizzle-orm/sqlite-core";
 
-// TODO changes relations to defineRelations if 1.0 drizzle release https://orm.drizzle.team/docs/relations-v2
+// TODO changes relations to defineRelations if 1.0 drizzle release https://orm.drizzle.team/docs/relations-v2, https://orm.drizzle.team/docs/relations-v1-v2
 
 const accountTable = sqliteTable(
   "accounts",

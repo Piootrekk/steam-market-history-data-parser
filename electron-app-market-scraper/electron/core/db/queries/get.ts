@@ -113,6 +113,15 @@ const getAllListings = async (
   });
 };
 
+const getImgIdsFromCurrentSnapshot = (db: Db, snapshotId: number) => {
+  return db.query.listingsTable.findMany({
+    columns: {
+      urlIcon: true,
+    },
+    where: (listing, { eq }) => eq(listing.snapshotId, snapshotId),
+  });
+};
+
 export {
   getAllSteamIdsFromAccount,
   getListingsForCurrentAccountSteamId,
@@ -121,4 +130,5 @@ export {
   getAccountIdBySteamId,
   getAllListings,
   getAllListingsCount,
+  getImgIdsFromCurrentSnapshot,
 };

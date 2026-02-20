@@ -4,7 +4,15 @@ import SideBarNavCollabsed from "./collabsed/sidebar-nav";
 import SideBarNavExtended from "./expended/sidebar-nav";
 import { ScrollArea } from "@renderer/common/components/primitives/scroll-area";
 import { ROUTE_PATHS, type NavRoutes } from "@renderer/routes";
-import { File, Files, Info, LayoutDashboard, User, Users } from "lucide-react";
+import {
+  File,
+  Files,
+  Info,
+  LayoutDashboard,
+  QrCode,
+  User,
+  Users,
+} from "lucide-react";
 import { useUserNavInvoices } from "./sidebar.loader";
 import { generatePath } from "react-router-dom";
 import { useAccountSubRoute } from "./nav-tab-selected.hook";
@@ -18,6 +26,11 @@ const navItems = [
     path: ROUTE_PATHS.downloadAll,
     label: "Download All",
     Icon: Files,
+  },
+  {
+    path: ROUTE_PATHS.downlaodQrCode,
+    label: "Sync/Download via QR",
+    Icon: QrCode,
   },
   {
     path: ROUTE_PATHS.downloadAmount,

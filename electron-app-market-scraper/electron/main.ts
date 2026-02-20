@@ -6,6 +6,7 @@ import { connectDb } from "./db.config";
 import { registerAllHandlers } from "./handlers";
 import { registerAllProtocols } from "./protocols";
 import { Menu } from "electron";
+import { getListIconIdFromDir } from "./core/domain/images-downloader/compare";
 
 const createWindow = () => {
   const mainWindow = new BrowserWindow({
@@ -55,6 +56,8 @@ app.whenReady().then(async () => {
     registerAllHandlers();
     registerAllProtocols();
     createWindow();
+    const id = await getListIconIdFromDir(process.env.IMAGE_STORAGE_PATH);
+    console.log(id);
   } catch (err) {
     console.error("App launching error: ", err);
     app.quit();
