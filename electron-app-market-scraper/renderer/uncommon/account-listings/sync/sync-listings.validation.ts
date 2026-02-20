@@ -1,3 +1,5 @@
+import type { ValidationReturn } from "@renderer/common/types/common.types";
+
 type ValidationSync = ValidationReturn<{
   steamId: string;
   steamCookies: string;

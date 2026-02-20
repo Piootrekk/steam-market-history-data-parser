@@ -1,10 +1,13 @@
-import type { channels } from "./ipc.payload";
+export interface IpcChannels {
+  __error?: "ERROR: You must register channels via module augmentation";
+}
+type RegisteredChannels = Omit<IpcChannels, "__error">;
 
-type ChannelKey = keyof typeof channels;
-type ChannelValue = (typeof channels)[keyof typeof channels];
+type ChannelKey = keyof RegisteredChannels;
+type ChannelValue = RegisteredChannels[ChannelKey];
 
 type Channel<V extends ChannelValue> = {
-  [K in ChannelKey]: (typeof channels)[K] extends V ? K : never;
+  [K in ChannelKey]: RegisteredChannels[K] extends V ? K : never;
 }[ChannelKey];
 
 type MethodOrCallbackResponse<T> = T extends (

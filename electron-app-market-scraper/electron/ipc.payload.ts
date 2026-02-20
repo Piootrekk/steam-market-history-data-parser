@@ -10,4 +10,9 @@ const channels = {
   getListingsAll: "db:all:listings",
 } as const satisfies Record<keyof Window["electronAPI"], string>;
 
+type Channels = typeof channels;
+declare module "./ipc-adapter/ipc.types" {
+  interface IpcChannels extends Channels {}
+}
+
 export { channels };

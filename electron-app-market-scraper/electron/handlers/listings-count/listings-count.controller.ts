@@ -1,4 +1,6 @@
 import { sanitizeError } from "../../error";
+import type { ValidationReturn } from "../common/common.types";
+import type { ListingsCountDto } from "./listings-count.dto";
 import {
   listingsCountAllService,
   listingsCountService,
@@ -8,7 +10,7 @@ const listingsCountController = async (
   _event: Electron.IpcMainInvokeEvent,
   steamId: string,
   query?: string,
-): Promise<ValidationReturn<ListingsCount>> => {
+): Promise<ValidationReturn<ListingsCountDto>> => {
   try {
     return await listingsCountService(steamId, query);
   } catch (err) {
@@ -20,7 +22,7 @@ const listingsCountController = async (
 const listingsCountAllController = async (
   _event: Electron.IpcMainInvokeEvent,
   query?: string,
-): Promise<ValidationReturn<ListingsCount>> => {
+): Promise<ValidationReturn<ListingsCountDto>> => {
   try {
     return await listingsCountAllService(query);
   } catch (err) {

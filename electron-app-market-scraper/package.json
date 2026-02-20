@@ -11,6 +11,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "ts:check": "npx tsc --noEmit",
     "db:generate": "drizzle-kit generate --config electron/core/db/drizzle.config.ts",
     "db:push": "drizzle-kit push --config electron/core/db/drizzle.config.ts",
     "db:migrate": "drizzle-kit migrate --config electron/core/db/drizzle.config.ts",
@@ -23,7 +24,7 @@
     "dist:win": "npm run build && electron-builder --win",
     "dist:win:nsis": "npm run build && electron-builder --win nsis",
     "dist:win:portable": "npm run build && electron-builder --win portable",
-    "dist:win:msi": "npm run build && electron-builder --win portable",
+    "dist:win:msi": "npm run build && electron-builder --win msi",
     "dist:mac": "npm run build && electron-builder --mac",
     "dist:mac:dmg": "npm run build && electron-builder --mac dmg",
     "dist:linux": "npm run build && electron-builder --linux",
