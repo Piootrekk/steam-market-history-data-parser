@@ -2,7 +2,7 @@ import { app } from "electron";
 import fs from "fs";
 import path from "path";
 
-//TODO add linux mac support in the future
+//TODO add linux mac portable support in the future
 
 const isPortable = () => {
   if (!app.isPackaged) {
