@@ -63,9 +63,7 @@ dist-electron
 *.njsproj
 *.sln
 *.sw?
-test*.json
-market-history*.json
-mongodb-data
-dev-mongodb-data
 database.db
 release*/
+priv.txt
+mocks
