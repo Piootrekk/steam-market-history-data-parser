@@ -33,7 +33,11 @@ const setIconIdToBaseUrl = (
   baseSize: `${number}fx${number}f` = BASE_SIZE,
 ) => `${BASE_URL}/${imageId}/${baseSize}`;
 
-const streamIconToFile = async (imageId: string, outputDir: string) => {
+const streamIconToFile = async (
+  imageId: string,
+  imageName: string,
+  outputDir: string,
+) => {
   const url = setIconIdToBaseUrl(imageId);
   const response = await fetch(url, {
     headers: STEAM_HEADERS,
@@ -53,7 +57,7 @@ const streamIconToFile = async (imageId: string, outputDir: string) => {
   const ext = getAllowedExtension(contentType);
   if (!ext) throw new Error(`Failed: ${imageId}: extension not supported.`);
 
-  const fileName = `${imageId}${ext}`;
+  const fileName = `${imageName}${ext}`;
   const outputPath = path.join(outputDir, fileName);
   const tempPath = `${outputPath}.tmp`;
   const fileStream = createWriteStream(tempPath);
@@ -69,29 +73,23 @@ const streamIconToFile = async (imageId: string, outputDir: string) => {
   }
 };
 
-const sleep = (ms: number) =>
-  new Promise<void>((resolve) => setTimeout(resolve, ms));
-
 const worker = async (
-  iconIds: string[],
+  icons: { urlIcon: string; iconHashStorage: string }[],
   outputDir: string,
   getNext: () => number | null,
   logs: string[],
 ): Promise<void> => {
   let index: number | null;
   while ((index = getNext()) !== null) {
-    const iconId = iconIds[index];
+    const iconId = icons[index].urlIcon;
+    const hashStorage = icons[index].iconHashStorage;
     try {
-      await streamIconToFile(iconId, outputDir);
-      logs[index] = `SUCCESS: downloaded ${iconId}`;
-      console.log(`[${index + 1}/${iconIds.length}] Downloaded ${iconId}`);
+      await streamIconToFile(iconId, hashStorage, outputDir);
     } catch (err: unknown) {
       const message =
         err instanceof Error ? err.message : "Unknown error occurred";
       logs[index] = `ERROR: ${iconId} -> ${message}`;
-      console.log(`[${index + 1}/${iconIds.length}] ERROR ${iconId}`);
     }
-    await sleep(5000);
   }
 };
 
@@ -102,7 +100,7 @@ const createIndexScheduler = (size: number) => {
 };
 
 const getAllIcons = async (
-  iconIds: string[],
+  icons: { urlIcon: string; iconHashStorage: string }[],
   outputDir: string,
   limit = CONCURRENCY_LIMIT,
 ) => {
@@ -110,10 +108,10 @@ const getAllIcons = async (
   const logs: string[] = [];
   await mkdir(outputDir, { recursive: true });
 
-  const getNext = createIndexScheduler(iconIds.length);
+  const getNext = createIndexScheduler(icons.length);
 
-  const workers = Array.from({ length: Math.min(limit, iconIds.length) }, () =>
-    worker(iconIds, outputDir, getNext, logs),
+  const workers = Array.from({ length: Math.min(limit, icons.length) }, () =>
+    worker(icons, outputDir, getNext, logs),
   );
 
   await Promise.all(workers);

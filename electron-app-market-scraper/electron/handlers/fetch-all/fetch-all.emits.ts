@@ -14,6 +14,8 @@ const getProgressEmitter = (webContents: Electron.WebContents) => {
     ) => sendMessageFromFetchQueue(webContents, message, status),
     sendDbInsertCorrectly: (listingsAmount: number) =>
       sendDbInsertCorrectly(webContents, listingsAmount),
+    sendDownloadNewIcons: (newIcons: number) =>
+      sendDownloadNewIcons(webContents, newIcons),
   };
 };
 
@@ -57,6 +59,22 @@ const sendDbInsertCorrectly = (
     "success",
     dateNow,
     `Listings: ${listingsAmount} inserted succesfully into db.`,
+  );
+};
+
+const sendDownloadNewIcons = (
+  webContents: Electron.WebContents,
+  newIconsCount: number,
+) => {
+  const dateNow = Date.now();
+  ipcWebContentsAdapter.send(
+    webContents,
+    "fetch:progress",
+    "info",
+    dateNow,
+    newIconsCount
+      ? `New ${newIconsCount} icons found.`
+      : "No need download icons.",
   );
 };
 

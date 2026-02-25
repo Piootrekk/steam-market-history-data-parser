@@ -9,10 +9,15 @@ const removeLastExtension = (filename: string): string => {
   return filename.replace(/\.[^.]+$/, "");
 };
 
-const getNewIconIds = (selectedIconIds: string[], dirIconIds: string[]) => {
+const getNewIconIds = (
+  dbIconsIds: { urlIcon: string; iconHashStorage: string }[],
+  dirIconIds: string[],
+) => {
   const dirIconsSet = new Set(dirIconIds);
-  const results = selectedIconIds.filter((iconId) => !dirIconsSet.has(iconId));
+  const results = dbIconsIds.filter(
+    ({ iconHashStorage }) => !dirIconsSet.has(iconHashStorage),
+  );
   return results;
 };
 
-export { getListIconIdFromDir, getNewIconIds, removeLastExtension };
+export { getNewIconIds, removeLastExtension, getListIconIdFromDir };

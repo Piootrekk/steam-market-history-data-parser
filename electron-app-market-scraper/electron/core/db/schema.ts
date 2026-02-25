@@ -63,6 +63,9 @@ const listingsTable = sqliteTable("listings", {
   nameColor: text("name_color").notNull(),
   marketHashName: text("market_hash_name").notNull(),
   steamidActor: text("steam_id_actor"),
+  oldAssetId: text("old_asset_id").notNull(),
+  newAssetId: text("new_asset_id").notNull(),
+  iconHashStorage: text("icon_hash_storage").notNull(),
   snapshotId: integer("snapshot_id")
     .notNull()
     .references(() => snapshotsTable.id, { onDelete: "cascade" }),

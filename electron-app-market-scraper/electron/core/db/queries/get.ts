@@ -113,13 +113,14 @@ const getAllListings = async (
   });
 };
 
-const getImgIdsFromCurrentSnapshot = (db: Db, snapshotId: number) => {
-  return db.query.listingsTable.findMany({
-    columns: {
-      urlIcon: true,
-    },
-    where: (listing, { eq }) => eq(listing.snapshotId, snapshotId),
-  });
+const getImgIdsFromCurrentSnapshot = async (db: Db, snapshotId: number) => {
+  return db
+    .selectDistinct({
+      urlIcon: listingsTable.urlIcon,
+      iconHashStorage: listingsTable.iconHashStorage,
+    })
+    .from(listingsTable)
+    .where(eq(listingsTable.snapshotId, snapshotId));
 };
 
 export {
