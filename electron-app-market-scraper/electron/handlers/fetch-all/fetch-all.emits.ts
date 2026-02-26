@@ -1,11 +1,13 @@
 import { ipcWebContentsAdapter } from "@electron/ipc-adapter/ipc.main.adapter";
 import { getCommonProgressEmits } from "../common/send-progress.emits";
+import { getIconDownloaderEmitter } from "../common/icon-downloader/icon-downloader.emits";
 
 type ProgressEmitter = ReturnType<typeof getProgressEmitter>;
 
 const getProgressEmitter = (webContents: Electron.WebContents) => {
   return {
     ...getCommonProgressEmits(webContents),
+    ...getIconDownloaderEmitter(webContents),
     sendAccountCreated: (steamid: string) =>
       sendAccountCreated(webContents, steamid),
     sendMessageFromFetchQueue: (

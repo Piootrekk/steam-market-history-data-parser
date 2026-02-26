@@ -13,6 +13,7 @@ import type { ProgressEmitter } from "./fetch-sync.emits";
 import { BASE_CONFIG } from "../../core/domain/fetch-market-listings/base.config";
 import { insertNewSnapshot } from "../fetch-all/fetch-all.repository";
 import { getDbInstance } from "@electron/db.config";
+import { iconDownloaderService } from "../common/icon-downloader/icon-downloader.service";
 
 const fetchSyncService = async (
   progressEmitter: ProgressEmitter,
@@ -42,7 +43,7 @@ const fetchSyncService = async (
     throw new Error(
       "Data in desync, delete and refetch all again. Or incorrect cookies to account.",
     );
-  transactionSession(db, async (tx) => {
+  const snapshotId = await transactionSession(db, async (tx) => {
     progressEmitter.newLitsings(countDiff);
     const newSnapshot = await insertNewSnapshot(tx, {
       totalCount,
@@ -67,9 +68,11 @@ const fetchSyncService = async (
           progressEmitter.sendDbInsertCorrectly(otherListings.length);
         },
       );
-      progressEmitter.sendFinishProgress();
     }
+    return newSnapshot.id;
   });
+  await iconDownloaderService(snapshotId, progressEmitter);
+  progressEmitter.sendFinishProgress();
 };
 
 export { fetchSyncService };

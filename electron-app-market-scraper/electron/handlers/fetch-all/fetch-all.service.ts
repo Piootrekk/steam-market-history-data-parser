@@ -1,5 +1,4 @@
 import {
-  getImgIdsFromCurrentSnapshot,
   insertBulkNewListings,
   insertNewAccount,
   insertNewSnapshot,
@@ -13,11 +12,7 @@ import {
 } from "../../core/domain/fetch-market-listings/fetch-queue";
 import type { ProgressEmitter } from "./fetch-all.emits";
 import { getDbInstance } from "@electron/db.config";
-import {
-  getListIconIdFromDir,
-  getNewIconIds,
-} from "@electron/core/domain/images-downloader/compare";
-import { getAllIcons } from "@electron/core/domain/images-downloader/download";
+import { iconDownloaderService } from "../common/icon-downloader/icon-downloader.service";
 
 const fetchAllService = async (
   progressEmitter: ProgressEmitter,
@@ -60,19 +55,8 @@ const fetchAllService = async (
     );
     return newSnapshot.id;
   });
+  await iconDownloaderService(snapshotId, progressEmitter);
   progressEmitter.sendFinishProgress();
-  const [imagesDir, snapshotImages] = await Promise.all([
-    getListIconIdFromDir(process.env.IMAGE_STORAGE_PATH),
-    getImgIdsFromCurrentSnapshot(db, snapshotId),
-  ]);
-
-  const newImages = getNewIconIds(snapshotImages, imagesDir);
-  progressEmitter.sendDownloadNewIcons(newImages.length);
-  const logs = await getAllIcons(newImages, process.env.IMAGE_STORAGE_PATH);
-  progressEmitter.sendMessage(
-    logs.length ? `Logs: ${logs.toString()}` : "All images are synchronized.",
-    "success",
-  );
 };
 
 export { fetchAllService };
