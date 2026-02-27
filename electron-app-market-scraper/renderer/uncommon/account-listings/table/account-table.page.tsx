@@ -4,12 +4,20 @@ import DataTable, {
 import { useAccountTableInvoices, type Listings } from "./accout-table.loader";
 
 import { TableListingsPage } from "@renderer/common/components/composites/table-listings-page";
+import SmartImg from "@renderer/common/components/primitives/smart-img/smart-img";
 
 const ListingsColumns: Column<Listings>[] = [
   {
     key: "eventAction",
     header: "Event",
     render: (item) => item.eventAction,
+  },
+  {
+    key: "iconHashStorage",
+    header: "Icon",
+    render: (item) => (
+      <SmartImg src={item.iconHashStorage} alt={item.marketHashName} />
+    ),
   },
   {
     key: "marketHashName",

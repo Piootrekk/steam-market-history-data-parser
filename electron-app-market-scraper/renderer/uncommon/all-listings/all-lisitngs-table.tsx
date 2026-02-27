@@ -7,12 +7,20 @@ import {
   type ListingsAll,
 } from "./all-listings.loader";
 import AllListingsEmpty from "./all-listing-empty";
+import SmartImg from "@renderer/common/components/primitives/smart-img/smart-img";
 
 const ListingsAllColumns: Column<ListingsAll>[] = [
   {
     key: "eventAction",
     header: "Event",
     render: (item) => item.eventAction,
+  },
+  {
+    key: "iconHashStorage",
+    header: "Icon",
+    render: (item) => (
+      <SmartImg src={item.iconHashStorage} alt={item.marketHashName} />
+    ),
   },
   {
     key: "marketHashName",

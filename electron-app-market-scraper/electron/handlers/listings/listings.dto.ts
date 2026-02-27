@@ -27,6 +27,9 @@ const listingsDto = (
       steamidActor: repo.steamidActor,
       timeEvent: repo.timeEvent,
       urlIcon: repo.urlIcon,
+      newAssetId: repo.newAssetId,
+      oldAssetId: repo.oldAssetId,
+      iconHashStorage: repo.iconHashStorage,
     };
   });
   return responseDto;
@@ -57,6 +60,9 @@ const listingsAllDto = (
       timeEvent: repo.timeEvent,
       urlIcon: repo.urlIcon,
       steamid: repo.snapshot.account.steamId,
+      newAssetId: repo.newAssetId,
+      oldAssetId: repo.oldAssetId,
+      iconHashStorage: repo.iconHashStorage,
     };
   });
   return responseDto;

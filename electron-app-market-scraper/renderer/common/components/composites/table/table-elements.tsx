@@ -52,7 +52,7 @@ const TableHeaderRow = ({ className, ...others }: TableHeaderRowProps) => (
 const TableCell = ({ className, ...others }: TableCellProps) => (
   <td
     className={cn(
-      "p-4 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0",
+      " px-4 py-3 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0",
       className,
     )}
     {...others}

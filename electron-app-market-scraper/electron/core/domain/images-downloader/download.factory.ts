@@ -42,9 +42,9 @@ const createDownloader = ({
     const normalized = contentType.toLowerCase().split(";")[0].trim();
     const map: Record<string, string> = {
       "image/png": ".png",
-      "image/jpeg": ".jpg",
-      "image/webp": ".webp",
       "image/gif": ".gif",
+      "image/webp": ".webp",
+      "image/jpeg": ".jpg",
     };
     return map[normalized] ?? undefined;
   };

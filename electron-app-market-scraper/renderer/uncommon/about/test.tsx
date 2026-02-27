@@ -1,11 +1,7 @@
 const Test = () => {
   return (
     <div>
-      <img
-        src="app-images://test.png"
-        draggable={false}
-        className="app-image"
-      />
+      <img src="app-images://test" draggable={false} className="app-image" />
     </div>
   );
 };
