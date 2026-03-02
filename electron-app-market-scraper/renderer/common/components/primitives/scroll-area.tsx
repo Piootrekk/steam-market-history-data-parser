@@ -6,8 +6,8 @@ type ScrollAreaProps = {
 } & React.ComponentProps<"div">;
 
 const directionStyles = {
-  vertical: " overflow-y-auto overflow-x-hidden",
-  horizontal: " overflow-x-auto overflow-y-hidden",
+  vertical: " overflow-y-auto overflow-x-hidden scrollbar-stable",
+  horizontal: " overflow-x-auto overflow-y-hidden scrollbar-auto",
 } as const satisfies Record<string, string>;
 
 const ScrollArea = ({

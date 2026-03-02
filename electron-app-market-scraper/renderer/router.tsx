@@ -14,7 +14,6 @@ import SyncListingsPage from "./uncommon/account-listings/sync/sync-listings.pag
 import { syncFetchAction } from "./uncommon/account-listings/sync/sync-listings.action";
 import AllListingsPage from "./uncommon/all-listings/all-listings.page";
 import { allListingsLoader } from "./uncommon/all-listings/all-listings.loader";
-import Test from "./uncommon/about/test";
 
 const router = createHashRouter([
   {
@@ -37,7 +36,7 @@ const router = createHashRouter([
       { path: ROUTE_PATHS.downlaodQrCode, element: <></> },
       {
         path: ROUTE_PATHS.downloadAmount,
-        element: <DownloadAllPage />,
+        element: <></>,
       },
       {
         path: ROUTE_PATHS.settings,
@@ -45,7 +44,7 @@ const router = createHashRouter([
       },
       {
         path: ROUTE_PATHS.about,
-        element: <Test />,
+        element: <></>,
       },
       {
         path: ROUTE_PATHS.accounts,
