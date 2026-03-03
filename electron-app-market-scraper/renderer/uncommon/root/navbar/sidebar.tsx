@@ -49,10 +49,10 @@ const Sidebar = () => {
   const accounts = useUserNavInvoices();
   const subRoute = useAccountSubRoute();
 
-  const accountsNavWithoutAll = accounts.map((steamId) => ({
-    label: steamId,
-    path: generatePath("/accounts/:steamId/:tab?", {
-      steamId,
+  const accountsNavWithoutAll = accounts.map((account) => ({
+    label: account.steamid,
+    path: generatePath(`/accounts/:accountId/:tab?`, {
+      accountId: account.id.toString(),
       tab: subRoute || null,
     }),
     Icon: User,

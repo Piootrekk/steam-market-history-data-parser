@@ -1,6 +1,6 @@
-import { allUsersService } from "./user-all.service";
+import { userAllService } from "./user-all.service";
 
 const userAllController = () => {
-  return allUsersService();
+  return userAllService();
 };
 export { userAllController };

@@ -43,11 +43,11 @@ const sendErrorLogs = (webContents: Electron.WebContents, logs: string[]) => {
   ipcWebContentsAdapter.send(
     webContents,
     "fetch:progress",
-    logs.length > 0 ? "success" : "warning",
+    logs.length > 0 ? "warning" : "success",
     dateNow,
     logs.length > 0
-      ? `All images downloaded successfully.`
-      : `Invalid attempts download images: ${logs.toString()}.`,
+      ? `Invalid attempts download images: ${logs.toString()}.`
+      : `All images downloaded successfully.`,
   );
 };
 

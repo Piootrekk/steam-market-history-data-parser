@@ -4,12 +4,12 @@ import { getErrorValidationCheck } from "./sync-listings.validation";
 const syncFetchAction = async ({ request, params }: ActionFunctionArgs) => {
   const formData = await request.formData();
   const steamCookies = formData.get("cookies")?.toString();
-  const { steamId } = params;
-  const val = getErrorValidationCheck(steamId, steamCookies);
+  const { accountId } = params;
+  const val = getErrorValidationCheck(accountId, steamCookies);
 
   if (!val.ok) return { error: val.error };
 
-  await window.electronAPI.startFetchingSync(val.steamId, val.steamCookies);
+  await window.electronAPI.startFetchingSync(val.accountId, val.steamCookies);
 };
 
 export { syncFetchAction };

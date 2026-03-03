@@ -9,25 +9,30 @@ const accountListingsLoader = async ({
   params,
   request,
 }: LoaderFunctionArgs) => {
-  const { steamId } = params;
-  if (!steamId) {
-    throw new Response("Missing steamId", { status: 400 });
+  const { accountId } = params;
+  if (!accountId) {
+    throw new Response("Missing accountId", { status: 400 });
   }
+  const numericAccountId = Number(accountId);
   const url = new URL(request.url);
   const start = Number(url.searchParams.get(TABLE_PARAMS.start) ?? 0);
   const limit = Number(url.searchParams.get(TABLE_PARAMS.limit) ?? 50);
   const query = url.searchParams.get(TABLE_PARAMS.query) ?? undefined;
 
-  if (Number.isNaN(start) || Number.isNaN(limit))
+  if (
+    Number.isNaN(start) ||
+    Number.isNaN(limit) ||
+    Number.isNaN(numericAccountId)
+  )
     throw new Error("Param start & number should be a number!");
 
   const listingsCount = await window.electronAPI.getCountListingsFromSteamId(
-    steamId,
+    numericAccountId,
     query,
   );
   if (!listingsCount.ok) throw new Response("Not Found", { status: 404 });
   const listings = await window.electronAPI.getListingsFromSteamId(
-    steamId,
+    numericAccountId,
     start,
     limit,
     query,

@@ -1,8 +1,7 @@
-import { getAllUsersRepostiory } from "./user-all.repository";
+import { userAllRepository } from "./user-all.repository";
 
-const allUsersService = async () => {
-  const accounts = await getAllUsersRepostiory();
-  const steamIds = accounts.map((account) => account.steamid);
-  return steamIds;
+const userAllService = async () => {
+  const accounts = await userAllRepository();
+  return accounts;
 };
-export { allUsersService };
+export { userAllService };

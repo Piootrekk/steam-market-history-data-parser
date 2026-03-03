@@ -4,20 +4,20 @@ import { and, count, desc, eq, getTableColumns, like } from "drizzle-orm";
 
 const getAllSteamIdsFromAccount = async (db: Db) => {
   const steamIds = await db
-    .select({ steamid: accountTable.steamId })
+    .select({ steamid: accountTable.steamId, id: accountTable.id })
     .from(accountTable);
   return steamIds;
 };
 
-const getListingsForCurrentAccountSteamId = async (
+const getListingsForCurrentAccount = async (
   db: Db,
-  steamId: string,
+  accountId: number,
   start: number,
   limit: number,
   query?: string,
 ) => {
   const whereClause = and(
-    eq(accountTable.steamId, steamId),
+    eq(snapshotsTable.accountId, accountId),
     query ? like(listingsTable.marketHashName, `%${query.trim()}%`) : undefined,
   );
 
@@ -27,7 +27,7 @@ const getListingsForCurrentAccountSteamId = async (
     })
     .from(listingsTable)
     .innerJoin(snapshotsTable, eq(listingsTable.snapshotId, snapshotsTable.id))
-    .innerJoin(accountTable, eq(snapshotsTable.accountId, accountTable.id))
+
     .where(whereClause)
     .orderBy(desc(listingsTable.timeEvent))
     .limit(limit)
@@ -37,11 +37,11 @@ const getListingsForCurrentAccountSteamId = async (
 
 const getListingsCountFromAccount = async (
   db: Db,
-  steamId: string,
+  accountId: number,
   query?: string,
 ) => {
   const whereClause = and(
-    eq(accountTable.steamId, steamId),
+    eq(snapshotsTable.accountId, accountId),
     query ? like(listingsTable.marketHashName, `%${query.trim()}%`) : undefined,
   );
   const response = await db
@@ -50,7 +50,6 @@ const getListingsCountFromAccount = async (
     })
     .from(listingsTable)
     .innerJoin(snapshotsTable, eq(listingsTable.snapshotId, snapshotsTable.id))
-    .innerJoin(accountTable, eq(snapshotsTable.accountId, accountTable.id))
     .where(whereClause)
     .get();
   return response;
@@ -60,15 +59,6 @@ const getListingsColumnsNames = () => {
   const listingsObject = getTableColumns(listingsTable);
   const listingsNames = Object.keys(listingsObject);
   return listingsNames;
-};
-
-const getAccountIdBySteamId = async (db: Db, steamid: string) => {
-  const response = await db
-    .select({ accountId: accountTable.id })
-    .from(accountTable)
-    .where(eq(accountTable.steamId, steamid))
-    .get();
-  return response;
 };
 
 const getAllListingsCount = async (db: Db, query?: string) => {
@@ -125,10 +115,9 @@ const getImgIdsFromCurrentSnapshot = async (db: Db, snapshotId: number) => {
 
 export {
   getAllSteamIdsFromAccount,
-  getListingsForCurrentAccountSteamId,
+  getListingsForCurrentAccount,
   getListingsCountFromAccount,
   getListingsColumnsNames,
-  getAccountIdBySteamId,
   getAllListings,
   getAllListingsCount,
   getImgIdsFromCurrentSnapshot,

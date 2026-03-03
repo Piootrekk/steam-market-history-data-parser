@@ -1,19 +1,19 @@
 import {
-  getListingsForCurrentAccountSteamId,
+  getListingsForCurrentAccount,
   getAllListings,
 } from "@electron/core/db/queries/get";
 import { getDbInstance } from "@electron/db.config";
 
 const listingsRepostiory = async (
-  steamId: string,
+  accountId: number,
   start: number,
   limit: number,
   query?: string,
 ) => {
   const db = getDbInstance();
-  const listings = await getListingsForCurrentAccountSteamId(
+  const listings = await getListingsForCurrentAccount(
     db,
-    steamId,
+    accountId,
     start,
     limit,
     query,

@@ -1,25 +1,15 @@
 import { relations, sql } from "drizzle-orm";
-import {
-  check,
-  integer,
-  real,
-  sqliteTable,
-  text,
-} from "drizzle-orm/sqlite-core";
+import { integer, real, sqliteTable, text } from "drizzle-orm/sqlite-core";
 
 // TODO changes relations to defineRelations if 1.0 drizzle release https://orm.drizzle.team/docs/relations-v2, https://orm.drizzle.team/docs/relations-v1-v2
 
-const accountTable = sqliteTable(
-  "accounts",
-  {
-    id: integer("id").primaryKey({ autoIncrement: true }),
-    createdAt: integer("time_event")
-      .notNull()
-      .default(sql`(strftime('%s', 'now'))`),
-    steamId: text("steam_id").notNull().unique(),
-  },
-  (t) => [check("check_steam_id", sql`${t.steamId} GLOB '[A-Za-z0-9_]*'`)],
-);
+const accountTable = sqliteTable("accounts", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  createdAt: integer("time_event")
+    .notNull()
+    .default(sql`(strftime('%s', 'now'))`),
+  steamId: text("steam_id").notNull().unique(),
+});
 
 const snapshotsTable = sqliteTable("snapshots", {
   id: integer("id").primaryKey({ autoIncrement: true }),

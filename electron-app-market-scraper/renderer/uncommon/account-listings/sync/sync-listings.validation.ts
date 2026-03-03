@@ -1,15 +1,15 @@
 import type { ValidationReturn } from "@renderer/common/types/common.types";
 
 type ValidationSync = ValidationReturn<{
-  steamId: string;
+  accountId: number;
   steamCookies: string;
 }>;
 
 const getErrorValidationCheck = (
-  steamId?: string,
+  accountId?: string,
   steamCookies?: string,
 ): ValidationSync => {
-  if (!steamId) throw new Error("Current steamId as param not exist");
+  if (!accountId) throw new Error("Current steamId as param not exist");
   if (!steamCookies) {
     return {
       ok: false,
@@ -27,7 +27,7 @@ const getErrorValidationCheck = (
 
   return {
     ok: true,
-    steamId,
+    accountId: Number(accountId),
     steamCookies,
   };
 };

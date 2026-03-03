@@ -5,12 +5,12 @@ import {
 } from "./listings.repository";
 
 const listingsService = async (
-  steamId: string,
+  accountId: number,
   start: number,
   limit: number,
   query?: string,
 ) => {
-  const listings = await listingsRepostiory(steamId, start, limit, query);
+  const listings = await listingsRepostiory(accountId, start, limit, query);
   const transformListings = listingsDto(listings);
   return transformListings;
 };

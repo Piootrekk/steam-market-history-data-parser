@@ -4,9 +4,9 @@ import {
 } from "../../core/db/queries/get";
 import { getDbInstance } from "../../db.config";
 
-const listingsCountRepository = async (steamId: string, query?: string) => {
+const listingsCountRepository = async (accountId: number, query?: string) => {
   const db = getDbInstance();
-  const listingsCount = await getListingsCountFromAccount(db, steamId, query);
+  const listingsCount = await getListingsCountFromAccount(db, accountId, query);
   return listingsCount;
 };
 

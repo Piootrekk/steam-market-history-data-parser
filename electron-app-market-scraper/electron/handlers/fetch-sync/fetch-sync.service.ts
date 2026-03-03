@@ -1,5 +1,4 @@
 import {
-  getAccountIdBySteamId,
   getListingsCountFromAccount,
   insertBulkNewListings,
   transactionSession,
@@ -17,14 +16,13 @@ import { iconDownloaderService } from "../common/icon-downloader/icon-downloader
 
 const fetchSyncService = async (
   progressEmitter: ProgressEmitter,
-  steamid: string,
+  accountId: number,
   cookies: string,
 ) => {
   const db = getDbInstance();
-  const listingsAmount = await getListingsCountFromAccount(db, steamid);
-  const accountId = await getAccountIdBySteamId(db, steamid);
+  const listingsAmount = await getListingsCountFromAccount(db, accountId);
 
-  if (!listingsAmount || !accountId)
+  if (!listingsAmount)
     throw new Error("Invalid accountId or listings lenght equal 0");
 
   const listingsLengthDb = listingsAmount.count;
@@ -47,7 +45,7 @@ const fetchSyncService = async (
     progressEmitter.newLitsings(countDiff);
     const newSnapshot = await insertNewSnapshot(tx, {
       totalCount,
-      accountId: accountId.accountId,
+      accountId: accountId,
     });
 
     if (countDiff <= BASE_CONFIG.maxCount) {

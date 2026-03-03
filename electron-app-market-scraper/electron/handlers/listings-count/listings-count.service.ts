@@ -6,10 +6,10 @@ import {
 } from "./listings-count.repostitory";
 
 const listingsCountService = async (
-  steamId: string,
+  accountId: number,
   query?: string,
 ): Promise<ValidationReturn<ListingsCountDto>> => {
-  const listings = await listingsCountRepository(steamId, query);
+  const listings = await listingsCountRepository(accountId, query);
   if (listings === undefined) throw new Error("Invalid count amount");
   return {
     ok: true,

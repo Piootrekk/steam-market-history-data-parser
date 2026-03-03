@@ -8,11 +8,11 @@ import {
 
 const listingsCountController = async (
   _event: Electron.IpcMainInvokeEvent,
-  steamId: string,
+  accountId: number,
   query?: string,
 ): Promise<ValidationReturn<ListingsCountDto>> => {
   try {
-    return await listingsCountService(steamId, query);
+    return await listingsCountService(accountId, query);
   } catch (err) {
     const sanitized = sanitizeError(err);
     return { ok: false, error: sanitized.message };

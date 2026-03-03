@@ -17,7 +17,7 @@ type FetchRetryParams = {
 const retryFetchAttemptsIfFailed = async (
   fetchConfig: FetchParams,
   retryConfig: FetchRetryParams,
-  actionFailedLogger: (message: string, status: "warning" | "success") => void
+  actionFailedLogger: (message: string, status: "warning" | "success") => void,
 ) => {
   const { retryAttempts, retrySleepMs, sleepMs429 } = retryConfig;
   let lastError: unknown;
@@ -32,7 +32,7 @@ const retryFetchAttemptsIfFailed = async (
           `fetching chunk error 429: ${standarizedError.message} - ${
             attempt + 1
           }/ ${retryAttempts}`,
-          "warning"
+          "warning",
         );
         await sleep(sleepMs429 || retryAttempts);
       } else if (attempt < retryAttempts - 1) {
@@ -40,7 +40,7 @@ const retryFetchAttemptsIfFailed = async (
           `fetching chunk error: ${standarizedError.message} - ${
             attempt + 1
           }/ ${retryAttempts}`,
-          "warning"
+          "warning",
         );
         await sleep(retrySleepMs);
       }

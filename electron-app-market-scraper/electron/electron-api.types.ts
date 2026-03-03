@@ -4,19 +4,20 @@ import type {
   ListingsAllDto,
   ListingsDto,
 } from "./handlers/listings/listings.dto";
+import { UserAllDto } from "./handlers/user-all/user-all.dto";
 
 type ElectronAPI = {
   setupCheck: (callback: (value: string) => void) => void;
-  getAllUsers: () => Promise<string[]>;
+  getAllUsers: () => Promise<UserAllDto[]>;
   getCountListingsFromSteamId: (
-    steamId: string,
+    accountId: number,
     query?: string,
   ) => Promise<ValidationReturn<ListingsCountDto>>;
   getCountAllListings: (
     query?: string,
   ) => Promise<ValidationReturn<ListingsCountDto>>;
   getListingsFromSteamId: (
-    steamId: string,
+    accountId: number,
     start: number,
     limit: number,
     query?: string,
@@ -27,7 +28,7 @@ type ElectronAPI = {
     query?: string,
   ) => Promise<ListingsAllDto[]>;
   startFetchingAll: (steamId: string, cookies: string) => Promise<void>;
-  startFetchingSync: (steamId: string, cookies: string) => Promise<void>;
+  startFetchingSync: (accountId: number, cookies: string) => Promise<void>;
   progressFetching: (
     callback: (
       status: "success" | "error" | "warning" | "info",
