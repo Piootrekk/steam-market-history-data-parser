@@ -17,7 +17,10 @@ type FetchRetryParams = {
 const retryFetchAttemptsIfFailed = async (
   fetchConfig: FetchParams,
   retryConfig: FetchRetryParams,
-  actionFailedLogger: (message: string, status: "warning" | "success") => void,
+  actionFailedLogger: (
+    message: string,
+    status: "warning" | "success" | "info",
+  ) => void,
 ) => {
   const { retryAttempts, retrySleepMs, sleepMs429 } = retryConfig;
   let lastError: unknown;

@@ -5,11 +5,7 @@ import {
   transactionSession,
 } from "./fetch-all.repository";
 
-import {
-  firstListingsFetch,
-  getBatches,
-  otherListingsFetches,
-} from "../../core/domain/fetch-market-listings/fetch-queue";
+import { createListingsFetcher } from "../../core/domain/fetch-market-listings/listings-fetcher.factory";
 import type { ProgressEmitter } from "./fetch-all.emits";
 import { getDbInstance } from "@electron/db.config";
 import { iconDownloaderService } from "../common/icon-downloader/icon-downloader.service";
@@ -20,16 +16,16 @@ const fetchAllService = async (
   cookies: string,
 ) => {
   const db = getDbInstance();
+  const fetcher = createListingsFetcher({
+    cookies,
+    logCallback: progressEmitter.sendMessage,
+  });
   const snapshotId = await transactionSession(db, async (tx) => {
     progressEmitter.sendStartProgress();
     const accountId = await insertNewAccount(tx, { steamId: steamid });
     progressEmitter.sendAccountCreated(steamid);
 
-    const { totalCount, listings } = await firstListingsFetch(
-      cookies,
-      (message, status) =>
-        progressEmitter.sendMessageFromFetchQueue(message, status),
-    );
+    const { totalCount, listings } = await fetcher.firstListingsFetch();
 
     const newSnapshot = await insertNewSnapshot(tx, {
       totalCount: totalCount,
@@ -39,15 +35,11 @@ const fetchAllService = async (
     await insertBulkNewListings(tx, listings, newSnapshot.id);
     progressEmitter.sendDbInsertCorrectly(listings.length);
 
-    const batches = getBatches(totalCount, (message, status) =>
-      progressEmitter.sendMessageFromFetchQueue(message, status),
-    );
-    await otherListingsFetches(
+    const batches = fetcher.getBatches(totalCount);
+
+    await fetcher.otherListingsFetches(
       totalCount,
-      cookies,
       batches,
-      (message, status) =>
-        progressEmitter.sendMessageFromFetchQueue(message, status),
       async (otherListings) => {
         await insertBulkNewListings(tx, otherListings, newSnapshot.id);
         progressEmitter.sendDbInsertCorrectly(otherListings.length);

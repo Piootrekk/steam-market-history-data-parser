@@ -7,11 +7,7 @@ import { rename, unlink } from "fs/promises";
 
 type IconDownloaderConfig = {
   storagePath: string;
-  baseUrl?: string;
-  baseSize?: `${number}fx${number}f`;
-  maxSize?: number;
-  concurrencyLimit?: number;
-};
+} & Partial<typeof BASE_CONFIG>;
 
 type Icon = {
   urlIcon: string;
@@ -29,7 +25,7 @@ const BASE_CONFIG = {
   baseSize: "64fx64f",
   maxSize: 1 * 1024 * 1024,
   concurrencyLimit: 30,
-} satisfies Omit<IconDownloaderConfig, "storagePath">;
+} as const;
 
 const createDownloader = ({
   baseUrl = BASE_CONFIG.baseUrl,
