@@ -1,6 +1,8 @@
+import { getActionsLinks } from "../transforms/actions-links-transform";
 import { getTransformedEvent } from "../transforms/event-transform";
 import { getGameFromAppId } from "../transforms/game-transform";
 import { hashUrlIconToFileName } from "../transforms/hash-storage";
+import { setupMarketLink } from "../transforms/market-link";
 import { getSelectedCurrecyISO } from "../transforms/steam-currencies";
 import { getPrice } from "../transforms/steam-price";
 import type { MergeResponse } from "../transforms/summary-all-transforms";
@@ -9,6 +11,7 @@ type TransformDto = ReturnType<typeof transformDto>;
 
 const transformDto = (response: MergeResponse) => {
   return response.map((resp) => {
+    const actions = getActionsLinks(resp.actions);
     return {
       listingId: resp.listingid,
       purchaseId: resp.purchaseid,
@@ -36,9 +39,15 @@ const transformDto = (response: MergeResponse) => {
       urlIcon: resp.icon_url,
       nameColor: resp.name_color,
       marketHashName: resp.market_hash_name,
+      marketName: resp.market_name,
       oldAssetId: resp.asset.id,
       newAssetId: resp.asset.new_id,
       iconHashStorage: hashUrlIconToFileName(resp.icon_url),
+      urlPageMarket: setupMarketLink(resp.appid, resp.market_hash_name),
+      urlPageWorkshop: actions.workshopLink,
+      urlPageInspect: actions.inspectLink,
+      urlPageWiki: actions.workshopLink,
+      itemType: resp.type,
     };
   });
 };

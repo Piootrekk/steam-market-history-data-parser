@@ -10,10 +10,7 @@ const getProgressEmitter = (webContents: Electron.WebContents) => {
     ...getIconDownloaderEmitter(webContents),
     sendAccountCreated: (steamid: string) =>
       sendAccountCreated(webContents, steamid),
-    sendMessageFromFetchQueue: (
-      message: string,
-      status: "warning" | "success" | "info",
-    ) => sendMessageFromFetchQueue(webContents, message, status),
+
     sendDbInsertCorrectly: (listingsAmount: number) =>
       sendDbInsertCorrectly(webContents, listingsAmount),
     sendDownloadNewIcons: (newIcons: number) =>
@@ -32,21 +29,6 @@ const sendAccountCreated = (
     "success",
     dateNow,
     `${steamid} inserted successfully.`,
-  );
-};
-
-const sendMessageFromFetchQueue = (
-  webContents: Electron.WebContents,
-  message: string,
-  status: "warning" | "success" | "info",
-) => {
-  const dateNow = Date.now();
-  ipcWebContentsAdapter.send(
-    webContents,
-    "fetch:progress",
-    status,
-    dateNow,
-    message,
   );
 };
 

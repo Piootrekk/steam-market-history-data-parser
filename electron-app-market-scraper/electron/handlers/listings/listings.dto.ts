@@ -19,6 +19,7 @@ const listingsDto = (
       instanceId: repo.instanceId,
       listingId: repo.listingId,
       marketHashName: repo.marketHashName,
+      marketName: repo.marketName,
       nameColor: repo.nameColor,
       originalAmount: repo.originalAmount,
       price: repo.price,
@@ -30,6 +31,11 @@ const listingsDto = (
       newAssetId: repo.newAssetId,
       oldAssetId: repo.oldAssetId,
       iconHashStorage: repo.iconHashStorage,
+      urlPageMarket: repo.urlPageMarket,
+      urlPageWorkshop: repo.urlPageWorkshop,
+      urlPageInspect: repo.urlPageInspect,
+      urlPageWiki: repo.urlPageWiki,
+      itemType: repo.itemType,
     };
   });
   return responseDto;

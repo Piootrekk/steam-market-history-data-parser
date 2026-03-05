@@ -51,7 +51,7 @@ type CurrentAsset = {
   type: string;
   market_name: string;
   market_hash_name: string;
-  market_actions: AssetAction[];
+  market_actions?: AssetAction[];
   commodity: number;
   market_tradable_restriction: number;
   market_marketable_restriction: number;
@@ -144,4 +144,5 @@ export type {
   Assets,
   CurrentAsset,
   MarketRawResponse,
+  AssetAction,
 };

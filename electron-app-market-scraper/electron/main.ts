@@ -1,5 +1,5 @@
 import path from "node:path";
-import { app, BrowserWindow } from "electron";
+import { app, BrowserWindow, shell } from "electron";
 import { PRELOAD_PATH, RENDERER_DIST, VITE_DEV_SERVER_URL } from "./env";
 import { ipcMainAdapter } from "./ipc-adapter/ipc.main.adapter";
 import { connectDb } from "./db.config";
@@ -21,6 +21,7 @@ const createWindow = () => {
     },
   });
   setupRenderer(mainWindow);
+  setupExternalWindowOpenHanlder(mainWindow);
 
   mainWindow.webContents.on("did-finish-load", () => {
     initConnectionCheck(mainWindow);
@@ -35,6 +36,13 @@ const setupRenderer = (mainWindow: BrowserWindow) => {
     Menu.setApplicationMenu(null);
     mainWindow.loadFile(path.join(RENDERER_DIST, "index.html"));
   }
+};
+
+const setupExternalWindowOpenHanlder = (mainWindow: BrowserWindow) => {
+  mainWindow.webContents.setWindowOpenHandler(({ url }) => {
+    shell.openExternal(url);
+    return { action: "deny" };
+  });
 };
 
 app.on("window-all-closed", () => {
@@ -52,8 +60,8 @@ app.on("activate", () => {
 app.whenReady().then(async () => {
   try {
     await connectDb();
-    registerAllHandlers();
     registerAllProtocols();
+    registerAllHandlers();
     createWindow();
   } catch (err) {
     console.error("App launching error: ", err);
