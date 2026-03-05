@@ -19,7 +19,7 @@ const InputLabel = ({ className, ...rest }: React.ComponentProps<"label">) => {
     <label
       className={cn(
         "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70",
-        className
+        className,
       )}
       {...rest}
     />
@@ -60,15 +60,18 @@ const Input = ({
       <input
         id={id}
         className={cn(
-          "flex w-full rounded-md border border-input bg-background px-3 py-2  ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
+          "peer flex w-full rounded-md border border-input bg-background px-3 py-2  ring-offset-background \
+           file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground \
+            placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 \
+             focus-visible:ring-ring focus-visible:ring-offset-0 disabled:cursor-not-allowed disabled:opacity-50",
           leftIcon ? "pl-12" : "pl-4",
           rightIcon ? "pr-12" : "pr-4",
-          className
+          className,
         )}
         {...rest}
       />
       {leftIcon && (
-        <div className="absolute left-3 top-1/2 transform -translate-y-1/2">
+        <div className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground peer-focus:text-ring">
           {onLeftIconClick ? (
             <IconLabel onClick={onLeftIconClick} ariaLabel="left icon">
               {leftIcon}
@@ -80,7 +83,7 @@ const Input = ({
       )}
 
       {rightIcon && (
-        <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
+        <div className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground peer-focus:text-ring">
           {onRightIconClick ? (
             <IconLabel onClick={onRightIconClick} ariaLabel="right icon">
               {rightIcon}

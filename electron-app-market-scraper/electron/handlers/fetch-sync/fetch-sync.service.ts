@@ -3,9 +3,11 @@ import {
   insertBulkNewListings,
   transactionSession,
 } from "./fetch-sync.repository";
-import { createListingsFetcher } from "../../core/domain/fetch-market-listings/listings-fetcher.factory";
+import {
+  BASE_CONFIG,
+  createListingsFetcher,
+} from "../../core/domain/fetch-market-listings/listings-fetcher.factory";
 import type { ProgressEmitter } from "./fetch-sync.emits";
-import { BASE_CONFIG } from "../../core/domain/fetch-market-listings/base.config";
 import { insertNewSnapshot } from "../fetch-all/fetch-all.repository";
 import { getDbInstance } from "@electron/db.config";
 import { iconDownloaderService } from "../common/icon-downloader/icon-downloader.service";

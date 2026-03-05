@@ -218,12 +218,16 @@
   pointer-events: none;
   user-select: none;
   -webkit-user-drag: none;
+}
 
-  &:focus-visible {
+@layer base {
+  :focus-visible {
     outline: 2px solid var(--color-ring);
+    outline-offset: 1px;
   }
 }
 
+/* AUTOFILL INPUT STYLES ATTEMPTS  (PASSMANAGER ETC.) */
 @layer base {
   input:-webkit-autofill,
   input:-webkit-autofill:hover,
@@ -249,3 +253,4 @@
     caret-color: var(--color-foreground);
   }
 }
+

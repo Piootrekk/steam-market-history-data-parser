@@ -46,7 +46,7 @@ const transformDto = (response: MergeResponse) => {
       urlPageMarket: setupMarketLink(resp.appid, resp.market_hash_name),
       urlPageWorkshop: actions.workshopLink,
       urlPageInspect: actions.inspectLink,
-      urlPageWiki: actions.workshopLink,
+      urlPageWiki: actions.wikiLink,
       itemType: resp.type,
     };
   });

@@ -1,11 +1,17 @@
 import path from "node:path";
 import { app, BrowserWindow, shell } from "electron";
-import { PRELOAD_PATH, RENDERER_DIST, VITE_DEV_SERVER_URL } from "./env";
+import {
+  IMAGE_STORAGE_PATH,
+  PRELOAD_PATH,
+  RENDERER_DIST,
+  VITE_DEV_SERVER_URL,
+} from "./env";
 import { ipcMainAdapter } from "./ipc-adapter/ipc.main.adapter";
 import { connectDb } from "./db.config";
 import { registerAllHandlers } from "./handlers";
 import { registerAllProtocols } from "./protocols";
 import { Menu } from "electron";
+import { ensureDirExists } from "./dir-setup";
 
 const createWindow = () => {
   const mainWindow = new BrowserWindow({
@@ -62,6 +68,7 @@ app.whenReady().then(async () => {
     await connectDb();
     registerAllProtocols();
     registerAllHandlers();
+    ensureDirExists(IMAGE_STORAGE_PATH);
     createWindow();
   } catch (err) {
     console.error("App launching error: ", err);

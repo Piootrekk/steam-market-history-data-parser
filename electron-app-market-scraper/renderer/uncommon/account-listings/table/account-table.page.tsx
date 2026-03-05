@@ -5,6 +5,7 @@ import { useAccountTableInvoices, type Listings } from "./accout-table.loader";
 
 import { TableListingsPage } from "@renderer/common/components/composites/table-listings-page";
 import SmartImg from "@renderer/common/components/primitives/smart-img/smart-img";
+import ExternalLinks from "@renderer/common/components/composites/table/external-links";
 
 const ListingsColumns: Column<Listings>[] = [
   {
@@ -21,8 +22,8 @@ const ListingsColumns: Column<Listings>[] = [
   },
   {
     key: "marketHashName",
-    header: "Market Hash Name",
-    render: (item) => item.marketHashName,
+    header: "Market Name",
+    render: (item) => item.marketName,
   },
   {
     key: "game",
@@ -38,6 +39,11 @@ const ListingsColumns: Column<Listings>[] = [
     key: "originalAmount",
     header: "Amount",
     render: (item) => `${item.originalAmount}`,
+  },
+  {
+    key: "urlPageInspect",
+    header: "External Links",
+    render: (item) => <ExternalLinks {...item} />,
   },
   {
     key: "timeEvent",

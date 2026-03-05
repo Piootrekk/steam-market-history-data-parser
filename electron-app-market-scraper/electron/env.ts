@@ -21,5 +21,12 @@ const PRELOAD_PATH = path.join(__dirname, "preload.mjs");
 const VITE_DEV_SERVER_URL = process.env["VITE_DEV_SERVER_URL"];
 const MAIN_DIST = path.join(process.env.APP_ROOT, "dist-electron");
 const RENDERER_DIST = path.join(process.env.APP_ROOT, "dist");
+const IMAGE_STORAGE_PATH = process.env.IMAGE_STORAGE_PATH;
 
-export { VITE_DEV_SERVER_URL, MAIN_DIST, RENDERER_DIST, PRELOAD_PATH };
+export {
+  VITE_DEV_SERVER_URL,
+  MAIN_DIST,
+  RENDERER_DIST,
+  PRELOAD_PATH,
+  IMAGE_STORAGE_PATH,
+};

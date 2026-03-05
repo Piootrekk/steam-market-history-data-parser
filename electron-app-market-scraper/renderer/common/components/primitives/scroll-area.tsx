@@ -59,7 +59,11 @@ const ScrollArea = ({
       role="region"
       ref={containerRef}
       tabIndex={direction === "vertical" ? 0 : undefined}
-      className={cn(directionStyles[direction], "scroll-area", className)}
+      className={cn(
+        directionStyles[direction],
+        "scroll-area focus-visible:outline-2 focus-visible:outline-ring focus-visible:-outline-offset-2",
+        className,
+      )}
       style={sizeStyles[direction]}
       {...rest}
     >

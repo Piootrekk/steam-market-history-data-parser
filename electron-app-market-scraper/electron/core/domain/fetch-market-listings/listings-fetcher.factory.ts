@@ -115,4 +115,4 @@ const createListingsFetcher = ({
   };
 };
 
-export { createListingsFetcher };
+export { createListingsFetcher, BASE_CONFIG };
