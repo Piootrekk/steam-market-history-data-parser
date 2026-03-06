@@ -1,3 +1,4 @@
+import QueryListingsEmpty from "@renderer/common/components/composites/table/table-empty";
 import {
   Table,
   TableBody,
@@ -23,6 +24,7 @@ const DataTable = <T extends Record<string, unknown>>({
   columns,
   data,
 }: DataTableProps<T>) => {
+  if (data.length === 0) return <QueryListingsEmpty />;
   return (
     <Table>
       <TableHeader>

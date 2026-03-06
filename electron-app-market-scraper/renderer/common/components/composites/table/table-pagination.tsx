@@ -19,6 +19,12 @@ type CurrentPageProps = {
   isCurrentPage?: boolean;
 };
 
+type SumaryProps = {
+  start: number;
+  limit: number;
+  totalCount: number;
+};
+
 type PaginationWrapperProps = React.ComponentProps<"div">;
 
 const Pagination = ({
@@ -79,10 +85,21 @@ const Ellipsis = () => {
   );
 };
 
+const Summary = ({ start, totalCount, limit }: SumaryProps) => {
+  const firstElement = start + 1;
+  const lastElement = start + limit < totalCount ? start + limit : totalCount;
+  return (
+    <span className="px-4 text-sm  text-muted-foreground">
+      Showing {firstElement}-{lastElement} of {totalCount} listings.
+    </span>
+  );
+};
+
 export {
   Ellipsis,
   PagePagination,
   ChevronLeftPagination,
   ChevronRightPagination,
   Pagination,
+  Summary,
 };

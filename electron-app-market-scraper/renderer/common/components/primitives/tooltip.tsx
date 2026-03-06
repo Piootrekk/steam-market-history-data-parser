@@ -47,7 +47,13 @@ const ToolTip = ({
   ...props
 }: ToolTipProps) => {
   const [isVisible, setIsVisible] = useState(false);
-  const [position, setPosition] = useState({ top: 0, left: 0 });
+  const [position, setPosition] = useState<
+    | {
+        top: number;
+        left: number;
+      }
+    | undefined
+  >(undefined);
   const triggerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -97,8 +103,8 @@ const ToolTip = ({
       {...props}
       style={{
         position: "absolute",
-        top: `${position.top}px`,
-        left: `${position.left}px`,
+        top: position !== undefined ? `${position.top}px` : undefined,
+        left: position !== undefined ? `${position.left}px` : undefined,
         zIndex: 9999,
       }}
       className={cn(

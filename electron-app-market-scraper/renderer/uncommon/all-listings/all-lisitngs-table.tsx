@@ -6,7 +6,6 @@ import {
   useAllListingsInvoices,
   type ListingsAll,
 } from "./all-listings.loader";
-import AllListingsEmpty from "./all-listing-empty";
 import SmartImg from "@renderer/common/components/primitives/smart-img/smart-img";
 
 const ListingsAllColumns: Column<ListingsAll>[] = [
@@ -56,7 +55,6 @@ const ListingsAllColumns: Column<ListingsAll>[] = [
 
 const AccoutAllTable = () => {
   const { listings, listingsCount } = useAllListingsInvoices();
-  if (listings.length === 0) return <AllListingsEmpty />;
   return (
     <TableListingsPage listingsCount={listingsCount}>
       <DataTable columns={ListingsAllColumns} data={listings} />

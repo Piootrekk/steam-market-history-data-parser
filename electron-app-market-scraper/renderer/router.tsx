@@ -3,7 +3,7 @@ import DashboardPage from "./uncommon/dashboard/dashboard.page";
 import DownloadAllPage from "./uncommon/fetch-all/download.page";
 import RootWithNavLayout from "./uncommon/root/root-with-nav.layout";
 import { usersNavLoader } from "./uncommon/root/navbar/sidebar.loader";
-import { ROUTE_PATHS } from "./routes";
+import { ROUTE_ID, ROUTE_PATHS } from "./routes";
 import AccountListingsLayout from "./uncommon/account-listings/account-listings.layout";
 import { fetchAllHistortyAction } from "./uncommon/fetch-all/download.action";
 import AccountTablePage from "./uncommon/account-listings/table/account-table.page";
@@ -17,6 +17,7 @@ import { allListingsLoader } from "./uncommon/all-listings/all-listings.loader";
 
 const router = createHashRouter([
   {
+    id: ROUTE_ID.root,
     path: ROUTE_PATHS.root,
     element: <RootWithNavLayout />,
     loader: usersNavLoader,

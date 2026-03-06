@@ -4,6 +4,7 @@ import {
   PagePagination,
   Ellipsis,
   Pagination,
+  Summary,
 } from "@renderer/common/components/composites/table/table-pagination";
 import { TABLE_PARAMS } from "@renderer/routes";
 
@@ -55,48 +56,51 @@ const TablePagination = ({
   const prevPage = currentPage - 1;
   const nextPage = currentPage + 1;
   return (
-    <Pagination>
-      <ChevronLeftPagination
-        to={`?${getPathParams(params, prevPage, limit)}`}
-        page={prevPage}
-      />
-      <PagePagination
-        to={`?${getPathParams(params, 1, limit)}`}
-        page={1}
-        isCurrentPage={currentPage === 1}
-      />
-      {showLeftEllipsis && <Ellipsis />}
-      {prevPage > 1 && (
-        <PagePagination
-          page={prevPage}
+    <>
+      <Summary start={startParam} limit={limit} totalCount={totalCount} />
+      <Pagination>
+        <ChevronLeftPagination
           to={`?${getPathParams(params, prevPage, limit)}`}
+          page={prevPage}
         />
-      )}
-      {currentPage !== 1 && currentPage < totalPages && (
         <PagePagination
-          page={currentPage}
-          to={`?${getPathParams(params, currentPage, limit)}`}
-          isCurrentPage={currentPage !== 1 && currentPage !== totalPages}
+          to={`?${getPathParams(params, 1, limit)}`}
+          page={1}
+          isCurrentPage={currentPage === 1}
         />
-      )}
-      {nextPage < totalPages && (
+        {showLeftEllipsis && <Ellipsis />}
+        {prevPage > 1 && (
+          <PagePagination
+            page={prevPage}
+            to={`?${getPathParams(params, prevPage, limit)}`}
+          />
+        )}
+        {currentPage !== 1 && currentPage < totalPages && (
+          <PagePagination
+            page={currentPage}
+            to={`?${getPathParams(params, currentPage, limit)}`}
+            isCurrentPage={currentPage !== 1 && currentPage !== totalPages}
+          />
+        )}
+        {nextPage < totalPages && (
+          <PagePagination
+            page={nextPage}
+            to={`?${getPathParams(params, nextPage, limit)}`}
+          />
+        )}
+        {showRightEllipsis && <Ellipsis />}
         <PagePagination
-          page={nextPage}
+          to={`?${getPathParams(params, totalPages, limit)}`}
+          page={totalPages}
+          isCurrentPage={currentPage === totalPages}
+        />
+        <ChevronRightPagination
           to={`?${getPathParams(params, nextPage, limit)}`}
+          page={nextPage}
+          maxPage={totalPages}
         />
-      )}
-      {showRightEllipsis && <Ellipsis />}
-      <PagePagination
-        to={`?${getPathParams(params, totalPages, limit)}`}
-        page={totalPages}
-        isCurrentPage={currentPage === totalPages}
-      />
-      <ChevronRightPagination
-        to={`?${getPathParams(params, nextPage, limit)}`}
-        page={nextPage}
-        maxPage={totalPages}
-      />
-    </Pagination>
+      </Pagination>
+    </>
   );
 };
 
