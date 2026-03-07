@@ -1,0 +1,188 @@
+{
+  "success": true,
+  "pagesize": 1,
+  "total_count": 82681,
+  "start": 0,
+  "assets": {
+    "730": {
+      "2": {
+        "41133374281": {
+          "currency": 0,
+          "appid": 730,
+          "contextid": "2",
+          "id": "41133374281",
+          "classid": "7993039381",
+          "instanceid": "188530248",
+          "amount": "0",
+          "status": 4,
+          "original_amount": "1",
+          "unowned_id": "41133374281",
+          "unowned_contextid": "2",
+          "background_color": "2d3042",
+          "icon_url": "i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL0kp_0-B1f-vOiV6ZoMvWHGmaD_uJzpOloQxa0hxQpjDCAnobsLGXGaAAiDsB4QeBbsxO7m9yyZe3i5wWK2I8WxST9jSpI6C5jtu0GVaMl5OSJ2Fp7bfMj",
+          "descriptions": [
+            {
+              "type": "html",
+              "value": "Exterior: Field-Tested",
+              "name": "exterior_wear"
+            },
+            {
+              "type": "html",
+              "value": " ",
+              "name": "blank"
+            },
+            {
+              "type": "html",
+              "value": "This item features StatTrak™ technology, which tracks certain statistics when equipped by its owner.",
+              "color": "99ccff",
+              "name": "stattrak_type"
+            },
+            {
+              "type": "html",
+              "value": " ",
+              "name": "blank"
+            },
+            {
+              "type": "html",
+              "value": "StatTrak™ Confirmed Kills: 5",
+              "color": "CF6A32",
+              "name": "stattrak_score"
+            },
+            {
+              "type": "html",
+              "value": "*Stats for this item will reset when used in Steam Trading or Community Market",
+              "color": "ff4040",
+              "name": "stattrak_warn"
+            },
+            {
+              "type": "html",
+              "value": " ",
+              "name": "blank"
+            },
+            {
+              "type": "html",
+              "value": "Firing two large-mag Berettas at once will lower accuracy and increase load times. On the bright side, you'll get to fire two large-mag Berettas at once. It has been custom painted with a multicolored design.\n\n<i>Step right up, don't be shy</i>",
+              "name": "description"
+            },
+            {
+              "type": "html",
+              "value": " ",
+              "name": "blank"
+            },
+            {
+              "type": "html",
+              "value": "The Kilowatt Collection",
+              "color": "9da1a9",
+              "name": "itemset_name"
+            },
+            {
+              "type": "html",
+              "value": " ",
+              "name": "blank"
+            }
+          ],
+          "tradable": 1,
+          "actions": [
+            {
+              "link": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20M804591727239134291A%assetid%D12586508238427695124",
+              "name": "Inspect in Game..."
+            }
+          ],
+          "name": "StatTrak™ Dual Berettas | Hideout",
+          "name_color": "4b69ff",
+          "type": "StatTrak™ Mil-Spec Grade Pistol",
+          "market_name": "StatTrak™ Dual Berettas | Hideout (Field-Tested)",
+          "market_hash_name": "StatTrak™ Dual Berettas | Hideout (Field-Tested)",
+          "market_actions": [
+            {
+              "link": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20M804591727239134291A%assetid%D12586508238427695124",
+              "name": "Inspect in Game..."
+            }
+          ],
+          "commodity": 0,
+          "market_tradable_restriction": 7,
+          "market_marketable_restriction": 7,
+          "marketable": 1,
+          "sealed": 0,
+          "market_bucket_group_name": "Dual Berettas | Hideout",
+          "market_bucket_group_id": "G18022091093004",
+          "sealed_type": 0,
+          "asset_properties": [],
+          "app_icon": "https://cdn.fastly.steamstatic.com/steamcommunity/public/images/apps/730/8dbc71957312bbd3baea65848b545be9eae2a355.jpg",
+          "owner": 0
+        }
+      }
+    }
+  },
+  "events": [
+    {
+      "listingid": "804591727239134291",
+      "purchaseid": "804591727239138506",
+      "event_type": 4,
+      "time_event": 1771878509,
+      "time_event_fraction": 677000000,
+      "steamid_actor": "76561197960287930",
+      "date_event": "23 Feb"
+    }
+  ],
+  "purchases": {
+    "804591727239134291_804591727239138506": {
+      "listingid": "804591727239134291",
+      "purchaseid": "804591727239138506",
+      "time_sold": 1771878509,
+      "steamid_purchaser": "76561197960287930",
+      "needs_rollback": 0,
+      "failed": 0,
+      "asset": {
+        "currency": 0,
+        "appid": 730,
+        "contextid": "2",
+        "id": "41133374281",
+        "classid": "7993039381",
+        "instanceid": "188530248",
+        "amount": "1",
+        "status": 4,
+        "new_id": "49874853412",
+        "new_contextid": "2"
+      },
+      "paid_amount": 4,
+      "paid_fee": 8,
+      "currencyid": "2006",
+      "steam_fee": 4,
+      "publisher_fee": 4,
+      "publisher_fee_percent": "0.100000001490116119",
+      "publisher_fee_app": 730,
+      "received_amount": 549,
+      "received_currencyid": "2037",
+      "funds_held": 1,
+      "time_funds_held_until": 1771986509,
+      "funds_revoked": 0,
+      "funds_returned": 0,
+      "added_tax": 0
+    }
+  },
+  "listings": {
+    "804591727239134291": {
+      "listingid": "804591727239134291",
+      "price": 0,
+      "fee": 0,
+      "publisher_fee_app": 730,
+      "publisher_fee_percent": "0.100000001490116119",
+      "currencyid": 2037,
+      "asset": {
+        "currency": 0,
+        "appid": 730,
+        "contextid": "2",
+        "id": "41133374281",
+        "amount": "0",
+        "market_actions": [
+          {
+            "link": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20M%listingid%A%assetid%D12586508238427695124",
+            "name": "Inspect in Game..."
+          }
+        ]
+      },
+      "original_price": 500
+    }
+  }
+}

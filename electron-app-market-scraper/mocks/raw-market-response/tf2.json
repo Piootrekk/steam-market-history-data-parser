@@ -1,0 +1,264 @@
+{
+  "success": true,
+  "pagesize": 1,
+  "total_count": 82681,
+  "start": 3,
+  "assets": {
+    "440": {
+      "2": {
+        "16691758221": {
+          "currency": 0,
+          "appid": 440,
+          "contextid": "2",
+          "id": "16691758221",
+          "classid": "7823195540",
+          "instanceid": "11042935",
+          "amount": "0",
+          "status": 4,
+          "original_amount": "1",
+          "unowned_id": "16782490213",
+          "unowned_contextid": "2",
+          "background_color": "3C352E",
+          "icon_url": "fWFc82js0fmoRAP-qOIPu5THSWqfSmTELLqcUywGkijVjZULUrsm1j-9xgEPaQRDCCTxuypWivf1Gf2BGOUSiOU55IJS3Hg_wlJ6YLqxZGNlIVSWVvBdDKFioli-XiNhvJU6BNKwp-1QKAu5tIbBLfByZ7XqfMY-",
+          "icon_url_large": "fWFc82js0fmoRAP-qOIPu5THSWqfSmTELLqcUywGkijVjZULUrsm1j-9xgEPaQRDCCTxuypWivf1Gf2BGOUSiOU55IJS3Hg_wlJ6YLqxZGNlIVSWVvBdDKFioli-XiNhvJU6BNKwp-1QKAu5tIbBLfByZ7XqfMY-",
+          "descriptions": [
+            {
+              "value": "Mercenary Grade Pants",
+              "color": "4b69ff",
+              "name": "attribute"
+            },
+            {
+              "value": " ",
+              "name": "attribute"
+            },
+            {
+              "value": " ",
+              "name": "attribute"
+            },
+            {
+              "value": "Winter 2025 Cosmetics Collection",
+              "name": "attribute"
+            },
+            {
+              "value": "    The Old Days Devotion",
+              "color": "eb4b4b",
+              "name": "attribute"
+            },
+            {
+              "value": "    Veteran's Visor",
+              "color": "d32ce6",
+              "name": "attribute"
+            },
+            {
+              "value": "    Willis' Warmer",
+              "color": "d32ce6",
+              "name": "attribute"
+            },
+            {
+              "value": "    Cardiologist's Cardigan",
+              "color": "d32ce6",
+              "name": "attribute"
+            },
+            {
+              "value": "    Blizzard Bonnet",
+              "color": "d32ce6",
+              "name": "attribute"
+            },
+            {
+              "value": "    Scrooge McCrocket",
+              "color": "8847ff",
+              "name": "attribute"
+            },
+            {
+              "value": "    Chill-Seeker",
+              "color": "8847ff",
+              "name": "attribute"
+            },
+            {
+              "value": "    Festive Fleece",
+              "color": "8847ff",
+              "name": "attribute"
+            },
+            {
+              "value": "    Commonwealth Commander",
+              "color": "8847ff",
+              "name": "attribute"
+            },
+            {
+              "value": "    The Sole Providers",
+              "color": "8847ff",
+              "name": "attribute"
+            },
+            {
+              "value": "    Flatline Flatcap",
+              "color": "8847ff",
+              "name": "attribute"
+            },
+            {
+              "value": "    Alpine Hawk",
+              "color": "8847ff",
+              "name": "attribute"
+            },
+            {
+              "value": "    Aristocravat",
+              "color": "8847ff",
+              "name": "attribute"
+            },
+            {
+              "value": "    Snow Merc",
+              "color": "4b69ff",
+              "name": "attribute"
+            },
+            {
+              "value": "    Lazer Gazers",
+              "color": "4b69ff",
+              "name": "attribute"
+            },
+            {
+              "value": "    Puncher's Polar Puffer",
+              "color": "4b69ff",
+              "name": "attribute"
+            },
+            {
+              "value": "    Air Head",
+              "color": "4b69ff",
+              "name": "attribute"
+            },
+            {
+              "value": "    Deserter's Duster",
+              "color": "4b69ff",
+              "name": "attribute"
+            },
+            {
+              "value": "    Epilogue Locks",
+              "color": "4b69ff",
+              "name": "attribute"
+            },
+            {
+              "value": "✔ Scrub Stompers",
+              "color": "4b69ff",
+              "name": "attribute"
+            },
+            {
+              "value": "    Alpine Apparel",
+              "color": "4b69ff",
+              "name": "attribute"
+            },
+            {
+              "value": "    Black Tie Affair",
+              "color": "4b69ff",
+              "name": "attribute"
+            },
+            {
+              "value": "    Sydney Shearling",
+              "color": "4b69ff",
+              "name": "attribute"
+            }
+          ],
+          "tradable": 1,
+          "actions": [
+            {
+              "link": "http://wiki.teamfortress.com/scripts/itemredirect.php?id=31601&lang=en_US",
+              "name": "Item Wiki Page..."
+            },
+            {
+              "link": "steam://rungame/440/76561202255233023/+tf_econ_item_preview%20M791918274820473262A%assetid%D5463271462766070863",
+              "name": "Inspect in Game..."
+            }
+          ],
+          "name": "Scrub Stompers",
+          "name_color": "7D6D00",
+          "type": "Level 96 Pants",
+          "market_name": "Scrub Stompers",
+          "market_hash_name": "Scrub Stompers",
+          "market_actions": [
+            {
+              "link": "steam://rungame/440/76561202255233023/+tf_econ_item_preview%20M791918274820473262A%assetid%D5463271462766070863",
+              "name": "Inspect in Game..."
+            }
+          ],
+          "commodity": 0,
+          "market_tradable_restriction": 7,
+          "market_marketable_restriction": 0,
+          "marketable": 1,
+          "sealed": 0,
+          "sealed_type": 0,
+          "asset_properties": [],
+          "app_icon": "https://cdn.fastly.steamstatic.com/steamcommunity/public/images/apps/440/f568912870a4684f9ec76277a1a404dda6bab213.jpg",
+          "owner": 0
+        }
+      }
+    }
+  },
+  "events": [
+    {
+      "listingid": "791918274820473262",
+      "purchaseid": "791918274820473263",
+      "event_type": 4,
+      "time_event": 1771835662,
+      "time_event_fraction": 593000000,
+      "steamid_actor": "76561199164281358",
+      "date_event": "23 Feb"
+    }
+  ],
+  "purchases": {
+    "791918274820473262_791918274820473263": {
+      "listingid": "791918274820473262",
+      "purchaseid": "791918274820473263",
+      "time_sold": 1771835662,
+      "steamid_purchaser": "76561199164281358",
+      "needs_rollback": 0,
+      "failed": 0,
+      "asset": {
+        "currency": 0,
+        "appid": 440,
+        "contextid": "2",
+        "id": "16691758221",
+        "classid": "7823195540",
+        "instanceid": "11042935",
+        "amount": "1",
+        "status": 4,
+        "new_id": "16791892736",
+        "new_contextid": "2"
+      },
+      "paid_amount": 24,
+      "paid_fee": 8,
+      "currencyid": "2006",
+      "steam_fee": 4,
+      "publisher_fee": 4,
+      "publisher_fee_percent": "0.100000001490116119",
+      "publisher_fee_app": 440,
+      "received_amount": 512,
+      "received_currencyid": "2005",
+      "funds_held": 1,
+      "time_funds_held_until": 1771943662,
+      "funds_revoked": 0,
+      "funds_returned": 0,
+      "added_tax": 0
+    }
+  },
+  "listings": {
+    "791918274820473262": {
+      "listingid": "791918274820473262",
+      "price": 0,
+      "fee": 0,
+      "publisher_fee_app": 440,
+      "publisher_fee_percent": "0.100000001490116119",
+      "currencyid": 2005,
+      "asset": {
+        "currency": 0,
+        "appid": 440,
+        "contextid": "2",
+        "id": "16691758221",
+        "amount": "0",
+        "market_actions": [
+          {
+            "link": "steam://rungame/440/76561202255233023/+tf_econ_item_preview%20M%listingid%A%assetid%D5463271462766070863",
+            "name": "Inspect in Game..."
+          }
+        ]
+      },
+      "original_price": 500
+    }
+  }
+}

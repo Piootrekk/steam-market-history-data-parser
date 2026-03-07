@@ -1,0 +1,107 @@
+{
+  "success": true,
+  "pagesize": 1,
+  "total_count": 1943,
+  "start": 1,
+  "assets": {
+    "570": {
+      "2": {
+        "28747786540": {
+          "currency": 0,
+          "appid": 570,
+          "contextid": "2",
+          "id": "28747786540",
+          "classid": "5651492733",
+          "instanceid": "948149725",
+          "amount": "0",
+          "status": 4,
+          "original_amount": "1",
+          "unowned_id": "28747786540",
+          "unowned_contextid": "2",
+          "background_color": "",
+          "icon_url": "i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttydbPaERSR0WqmutOwwRXICkyAS1U_na_MOsNHyS9hlz5ojn_lDxVA7OzMayrm1d_f29fK17NePBXjXD_u15v-pgShagkBg1_W2EzIz8eXzGZgcmCJV0Q-UDskXpxtWzMO-27wDZ39oRzi__hypI6n11o7FVFywW-Ck",
+          "tradable": 1,
+          "name": "Frostivus 2023 Sticker - Cookie Seer",
+          "name_color": "D2D2D2",
+          "type": "Rare Sticker",
+          "market_name": "Frostivus 2023 Sticker - Cookie Seer",
+          "market_hash_name": "Frostivus 2023 Sticker - Cookie Seer",
+          "commodity": 1,
+          "market_tradable_restriction": 7,
+          "market_marketable_restriction": 7,
+          "marketable": 1,
+          "sealed": 0,
+          "sealed_type": 0,
+          "asset_properties": [],
+          "app_icon": "https://cdn.fastly.steamstatic.com/steamcommunity/public/images/apps/570/0bbb630d63262dd66d2fdd0f7d37e8661a410075.jpg",
+          "owner": 0
+        }
+      }
+    }
+  },
+  "events": [
+    {
+      "listingid": "635693420377571942",
+      "purchaseid": "635693420377576318",
+      "event_type": 4,
+      "time_event": 1772722439,
+      "time_event_fraction": 650000000,
+      "steamid_actor": "76561197960287930",
+      "date_event": "5 Mar"
+    }
+  ],
+  "purchases": {
+    "635693420377571942_635693420377576318": {
+      "listingid": "635693420377571942",
+      "purchaseid": "635693420377576318",
+      "time_sold": 1772722439,
+      "steamid_purchaser": "76561197960287930",
+      "needs_rollback": 0,
+      "failed": 0,
+      "asset": {
+        "currency": 0,
+        "appid": 570,
+        "contextid": "2",
+        "id": "28747786540",
+        "classid": "5651492733",
+        "instanceid": "948149725",
+        "amount": "1",
+        "status": 4,
+        "new_id": "34899831467",
+        "new_contextid": "2"
+      },
+      "paid_amount": 4,
+      "paid_fee": 8,
+      "currencyid": "2006",
+      "steam_fee": 4,
+      "publisher_fee": 4,
+      "publisher_fee_percent": "0.100000001490116119",
+      "publisher_fee_app": 570,
+      "received_amount": 1,
+      "received_currencyid": "2001",
+      "funds_held": 0,
+      "time_funds_held_until": 0,
+      "funds_revoked": 0,
+      "funds_returned": 0,
+      "added_tax": 0
+    }
+  },
+  "listings": {
+    "635693420377571942": {
+      "listingid": "635693420377571942",
+      "price": 0,
+      "fee": 0,
+      "publisher_fee_app": 570,
+      "publisher_fee_percent": "0.100000001490116119",
+      "currencyid": 2001,
+      "asset": {
+        "currency": 0,
+        "appid": 570,
+        "contextid": "2",
+        "id": "28747786540",
+        "amount": "0"
+      },
+      "original_price": 1
+    }
+  }
+}

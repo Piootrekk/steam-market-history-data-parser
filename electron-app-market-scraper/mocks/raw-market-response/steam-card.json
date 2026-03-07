@@ -1,0 +1,123 @@
+{
+  "success": true,
+  "pagesize": 1,
+  "total_count": 1940,
+  "start": 1,
+  "assets": {
+    "753": {
+      "6": {
+        "36691827405": {
+          "currency": 0,
+          "appid": 753,
+          "contextid": "6",
+          "id": "36691827405",
+          "classid": "1639720548",
+          "instanceid": "0",
+          "amount": "0",
+          "status": 4,
+          "original_amount": "1",
+          "unowned_id": "37759421036",
+          "unowned_contextid": "6",
+          "background_color": "",
+          "icon_url": "IzMF03bk9WpSBq-S-ekoE33L-iLqGFHVaU25ZzQNQcXdA3g5gMEPvUZZEfSMJ6dESN8p_2SVTY7V2N0MwncEmChCIzb02ClPZOZ4PdnPwU7JruGGGWCxYTrFKCSETAg9SuBXN26L_WCg4--RSzGfEul-SggDeqYD9jFAOM2KORJvgIFeryuyh0M7HBk6dsBUTwa2y3MWbO98znhGc55WmXb3d8XYhwowbEVpCL_iULvCa4SjxX11D0s1TPUbYtmL-Hu77tH8aKUNfaQo",
+          "icon_url_large": "IzMF03bk9WpSBq-S-ekoE33L-iLqGFHVaU25ZzQNQcXdA3g5gMEPvUZZEfSMJ6dESN8p_2SVTY7V2N0MwncEmChCIzb02ClPZOZ4PdnPwU7JruGGGWCxYTrFKCSETAg9SuBXN26L_WCg4--RSzGfEul-SggDeqYD9jFAOM2KORJvgIFeryuyh0M7HBk6dsBUTwa2y3MWbO98znhGc55WmXb3d8XYhwowbEVpCL_iULvCa4SjxX11D0s1TPUbYtmL-Hu77tH8aKUNfaQo",
+          "descriptions": [
+            {
+              "value": "Become the predator to hunt down those who dare to challenge that which is at the core of all life!"
+            }
+          ],
+          "tradable": 1,
+          "owner_actions": [
+            {
+              "link": "https://steamcommunity.com/my/gamecards/436480/",
+              "name": "View badge progress"
+            },
+            {
+              "link": "javascript:GetGooValue( '%contextid%', '%assetid%', 436480, 10, 0 )",
+              "name": "Turn into Gems..."
+            }
+          ],
+          "name": "Bacteria Rocket",
+          "type": "Soup Trading Card",
+          "market_name": "Bacteria Rocket",
+          "market_hash_name": "436480-Bacteria Rocket",
+          "market_fee_app": 436480,
+          "commodity": 1,
+          "market_tradable_restriction": 7,
+          "market_marketable_restriction": 7,
+          "marketable": 1,
+          "sealed": 0,
+          "sealed_type": 0,
+          "asset_properties": [],
+          "app_icon": "https://cdn.fastly.steamstatic.com/steamcommunity/public/images/apps/753/1d0167575d746dadea7706685c0f3c01c8aeb6d8.jpg",
+          "owner": 0
+        }
+      }
+    }
+  },
+  "events": [
+    {
+      "listingid": "777918406522473119",
+      "purchaseid": "777918406522473120",
+      "event_type": 4,
+      "time_event": 1772659459,
+      "time_event_fraction": 200000000,
+      "steamid_actor": "76561199164281358",
+      "date_event": "4 Mar"
+    }
+  ],
+  "purchases": {
+    "777918406522473119_777918406522473120": {
+      "listingid": "777918406522473119",
+      "purchaseid": "777918406522473120",
+      "time_sold": 1772659459,
+      "steamid_purchaser": "76561199164281358",
+      "needs_rollback": 0,
+      "failed": 0,
+      "asset": {
+        "currency": 0,
+        "appid": 753,
+        "contextid": "6",
+        "id": "37759421036",
+        "classid": "1639720548",
+        "instanceid": "0",
+        "amount": "1",
+        "status": 4,
+        "new_id": "37759421036",
+        "new_contextid": "6"
+      },
+      "paid_amount": 8,
+      "paid_fee": 8,
+      "currencyid": "2006",
+      "steam_fee": 4,
+      "publisher_fee": 4,
+      "publisher_fee_percent": "0.100000001490116119",
+      "publisher_fee_app": 436480,
+      "received_amount": 2,
+      "received_currencyid": "2001",
+      "funds_held": 0,
+      "time_funds_held_until": 0,
+      "funds_revoked": 0,
+      "funds_returned": 0,
+      "added_tax": 0
+    }
+  },
+  "listings": {
+    "777918406522473119": {
+      "listingid": "777918406522473119",
+      "price": 0,
+      "fee": 0,
+      "publisher_fee_app": 436480,
+      "publisher_fee_percent": "0.100000001490116119",
+      "currencyid": 2001,
+      "asset": {
+        "currency": 0,
+        "appid": 753,
+        "contextid": "6",
+        "id": "36691827405",
+        "amount": "0"
+      },
+      "original_price": 2
+    }
+  }
+}

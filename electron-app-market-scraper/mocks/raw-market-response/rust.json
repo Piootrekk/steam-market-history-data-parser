@@ -1,0 +1,120 @@
+{
+  "success": true,
+  "pagesize": 1,
+  "total_count": 82681,
+  "start": 7,
+  "assets": {
+    "252490": {
+      "2": {
+        "612774903518442691": {
+          "currency": 0,
+          "appid": 252490,
+          "contextid": "2",
+          "id": "612774903518442691",
+          "classid": "5471712392",
+          "instanceid": "0",
+          "amount": "0",
+          "status": 4,
+          "original_amount": "1",
+          "unowned_id": "606982417349221804",
+          "unowned_contextid": "2",
+          "background_color": "42413e",
+          "icon_url": "6TMcQ7eX6E0EZl2byXi7vaVKyDk_zQLX05x6eLCFM9neAckxGDf7qU2e2gu64OnAeQ7835Za4mLBfCk4nReh8DEiv5dbMK8_pLMxQ_C3H6tm9Ss",
+          "icon_url_large": "6TMcQ7eX6E0EZl2byXi7vaVKyDk_zQLX05x6eLCFM9neAckxGDf7qU2e2gu64OnAeQ7835Za4mLBfDY0jhyo8DEiv5dbMK8_pLMxQ_C3acDQd8M",
+          "descriptions": [
+            {
+              "type": "html",
+              "value": "\u003Cspan style=\"color: #FF9800\"\u003EThis is a skin for the \u003Cspan style=\"color: #ffdba5\"\u003EPump Shotgun\u003C/span\u003E item. You will be able to apply this skin at a repair bench or when you craft the item in game.\u003C/span\u003E\u003Cbr\u003E\u003Cbr\u003E\u003Cspan style=\"color: #5098ce\"\u003EBreaks down into \u003Cspan style=\"color: #ffffff\"\u003E1 x Metal\u003C/span\u003E\u003C/span\u003E"
+            }
+          ],
+          "tradable": 1,
+          "actions": [
+            {
+              "link": "https://steamcommunity.com/sharedfiles/filedetails/?id=3012899930",
+              "name": "View Workshop Item"
+            }
+          ],
+          "name": "No Mercy Shotgun",
+          "name_color": "f15840",
+          "type": "Workshop Item",
+          "market_name": "No Mercy Shotgun",
+          "market_hash_name": "No Mercy Shotgun",
+          "commodity": 1,
+          "market_tradable_restriction": 7,
+          "market_marketable_restriction": 7,
+          "marketable": 1,
+          "sealed": 0,
+          "sealed_type": 0,
+          "asset_properties": [],
+          "app_icon": "https://cdn.fastly.steamstatic.com/steamcommunity/public/images/apps/252490/820be4782639f9c4b64fa3ca7e6c26a95ae4fd1c.jpg",
+          "owner": 0
+        }
+      }
+    }
+  },
+  "events": [
+    {
+      "listingid": "786991552814730642",
+      "purchaseid": "786991552814730643",
+      "event_type": 4,
+      "time_event": 1771799167,
+      "time_event_fraction": 263000000,
+      "steamid_actor": "76561199143857264",
+      "date_event": "22 Feb"
+    }
+  ],
+  "purchases": {
+    "786991552814730642_786991552814730643": {
+      "listingid": "786991552814730642",
+      "purchaseid": "786991552814730643",
+      "time_sold": 1771799167,
+      "steamid_purchaser": "76561199143857264",
+      "needs_rollback": 0,
+      "failed": 0,
+      "asset": {
+        "currency": 0,
+        "appid": 252490,
+        "contextid": "2",
+        "id": "606982417349221804",
+        "classid": "5471712392",
+        "instanceid": "0",
+        "amount": "1",
+        "status": 4,
+        "new_id": "611483207956318447",
+        "new_contextid": "2"
+      },
+      "paid_amount": 426,
+      "paid_fee": 63,
+      "currencyid": "2006",
+      "steam_fee": 21,
+      "publisher_fee": 42,
+      "publisher_fee_percent": "0.100000001490116119",
+      "publisher_fee_app": 252490,
+      "received_amount": 88,
+      "received_currencyid": "2002",
+      "funds_held": 1,
+      "time_funds_held_until": 1771907167,
+      "funds_revoked": 0,
+      "funds_returned": 0,
+      "added_tax": 0
+    }
+  },
+  "listings": {
+    "786991552814730642": {
+      "listingid": "786991552814730642",
+      "price": 0,
+      "fee": 0,
+      "publisher_fee_app": 252490,
+      "publisher_fee_percent": "0.100000001490116119",
+      "currencyid": 2002,
+      "asset": {
+        "currency": 0,
+        "appid": 252490,
+        "contextid": "2",
+        "id": "612774903518442691",
+        "amount": "0"
+      },
+      "original_price": 88
+    }
+  }
+}

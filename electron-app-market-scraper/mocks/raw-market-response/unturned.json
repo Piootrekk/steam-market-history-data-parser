@@ -1,0 +1,114 @@
+{
+  "success": true,
+  "pagesize": 1,
+  "total_count": 1943,
+  "start": 2,
+  "assets": {
+    "304930": {
+      "2": {
+        "1629182736453729183": {
+          "currency": 0,
+          "appid": 304930,
+          "contextid": "2",
+          "id": "1629182736453729183",
+          "classid": "1680343777",
+          "instanceid": "0",
+          "amount": "0",
+          "status": 4,
+          "original_amount": "1",
+          "unowned_id": "724015928371982734",
+          "unowned_contextid": "2",
+          "background_color": "",
+          "icon_url": "383p-cH7EYzaIvmhGOBG7SfaWoB5HXcIam49xBCuFXINlSQPUDgVlIZWMwRH8v-Hs6qh3-ZRpz6SaYAg5kRnwRZ-4byz1Wn_N3vgNoXkW69OnGbBqFe9FLG1LSWzeWLQXlBl1P_GAwANJvyQlD2rYNDhupC2NmI",
+          "icon_url_large": "383p-cH7EYzaIvmhGOBG7SfaWoB5HXcIam49xBCuFXINlSQPUDgVlIZWMwRH8v-Hs6qh3-ZRpz6SaYAg5kRnwRZ-4byz1Wn_MzuqNIX_UeYYmDqXpVG4QrPmKyu2djHSXlVihvyQBlMKI_vCwjqwJpD22EF0XPJ3lA",
+          "descriptions": [
+            {
+              "type": "html",
+              "value": "Plaid button-up shirt.\u003Cbr\u003E\u003Cbr\u003EWhen equipped this applies the cosmetic \u003Cspan style=\"color: #ffffff\"\u003ERed Plaid Shirt\u003C/span\u003E to your character in-game."
+            }
+          ],
+          "tradable": 1,
+          "name": "Red Plaid Shirt",
+          "name_color": "ffffff",
+          "type": "Common Shirt",
+          "market_name": "Red Plaid Shirt",
+          "market_hash_name": "Red Plaid Shirt",
+          "commodity": 1,
+          "market_tradable_restriction": 7,
+          "market_marketable_restriction": 7,
+          "marketable": 1,
+          "sealed": 0,
+          "sealed_type": 0,
+          "asset_properties": [],
+          "app_icon": "https://cdn.fastly.steamstatic.com/steamcommunity/public/images/apps/304930/e18009fb628b35953826efe47dc3be556b689f4c.jpg",
+          "owner": 0
+        }
+      }
+    }
+  },
+  "events": [
+    {
+      "listingid": "748918273645372917",
+      "purchaseid": "748918273645372918",
+      "event_type": 4,
+      "time_event": 1772722419,
+      "time_event_fraction": 610000000,
+      "steamid_actor": "76561199164281358",
+      "date_event": "5 Mar"
+    }
+  ],
+  "purchases": {
+    "748918273645372917_748918273645372918": {
+      "listingid": "748918273645372917",
+      "purchaseid": "748918273645372918",
+      "time_sold": 1772722419,
+      "steamid_purchaser": "76561199164281358",
+      "needs_rollback": 0,
+      "failed": 0,
+      "asset": {
+        "currency": 0,
+        "appid": 304930,
+        "contextid": "2",
+        "id": "724015928371982734",
+        "classid": "1680343777",
+        "instanceid": "0",
+        "amount": "1",
+        "status": 4,
+        "new_id": "594918273645372916",
+        "new_contextid": "2"
+      },
+      "paid_amount": 4,
+      "paid_fee": 8,
+      "currencyid": "2006",
+      "steam_fee": 4,
+      "publisher_fee": 4,
+      "publisher_fee_percent": "0.100000001490116119",
+      "publisher_fee_app": 304930,
+      "received_amount": 4,
+      "received_currencyid": "2006",
+      "funds_held": 0,
+      "time_funds_held_until": 0,
+      "funds_revoked": 0,
+      "funds_returned": 0,
+      "added_tax": 0
+    }
+  },
+  "listings": {
+    "748918273645372917": {
+      "listingid": "748918273645372917",
+      "price": 0,
+      "fee": 0,
+      "publisher_fee_app": 304930,
+      "publisher_fee_percent": "0.100000001490116119",
+      "currencyid": 2006,
+      "asset": {
+        "currency": 0,
+        "appid": 304930,
+        "contextid": "2",
+        "id": "1629182736453729183",
+        "amount": "0"
+      },
+      "original_price": 4
+    }
+  }
+}

@@ -66,4 +66,4 @@ dist-electron
 database.db
 release*/
 priv.txt
-mocks
+private-raw-market-response

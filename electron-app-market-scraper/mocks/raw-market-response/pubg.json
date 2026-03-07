@@ -1,0 +1,107 @@
+{
+  "success": true,
+  "pagesize": 1,
+  "total_count": 1943,
+  "start": 0,
+  "assets": {
+    "578080": {
+      "2": {
+        "1918846627054139275": {
+          "currency": 0,
+          "appid": 578080,
+          "contextid": "2",
+          "id": "1918846627054139275",
+          "classid": "2662539749",
+          "instanceid": "0",
+          "amount": "0",
+          "status": 4,
+          "original_amount": "1",
+          "unowned_id": "711447286509118732",
+          "unowned_contextid": "2",
+          "background_color": "",
+          "icon_url": "-8zOYQcPJoBYU7uKzjw0RZajjFiA_AojfFoacglhStOfdn6gbpcbDuuPIxAIsohHfCnyq89XR3ZYQqutoVKgD88oPo-2Hp-eECOLH98ZFw",
+          "icon_url_large": "-8zOYQcPJoBYU7uKzjw0RZajjFiA_AojfFoacglhStOfdn6gbpcbDuuPIxAIsohHfCnyq89XR3ZdQLakt1KgD88oPo-2Hp-eECP4IHCfcQ",
+          "tradable": 0,
+          "name": "Skinny Jeans (Pink)",
+          "type": "",
+          "market_name": "Skinny Jeans (Pink)",
+          "market_hash_name": "Skinny Jeans (Pink)",
+          "commodity": 1,
+          "market_tradable_restriction": -1,
+          "market_marketable_restriction": 7,
+          "marketable": 1,
+          "sealed": 0,
+          "sealed_type": 0,
+          "asset_properties": [],
+          "app_icon": "https://cdn.fastly.steamstatic.com/steamcommunity/public/images/apps/578080/609f27278aa70697c13bf99f32c5a0248c381f9d.jpg",
+          "owner": 0
+        }
+      }
+    }
+  },
+  "events": [
+    {
+      "listingid": "743982441620518376",
+      "purchaseid": "743982441620518377",
+      "event_type": 4,
+      "time_event": 1772722450,
+      "time_event_fraction": 750000000,
+      "steamid_actor": "76561199719463218",
+      "date_event": "5 Mar"
+    }
+  ],
+  "purchases": {
+    "743982441620518376_743982441620518377": {
+      "listingid": "743982441620518376",
+      "purchaseid": "743982441620518377",
+      "time_sold": 1772722450,
+      "steamid_purchaser": "76561199719463218",
+      "needs_rollback": 0,
+      "failed": 0,
+      "asset": {
+        "currency": 0,
+        "appid": 578080,
+        "contextid": "2",
+        "id": "711447286509118732",
+        "classid": "2662539749",
+        "instanceid": "0",
+        "amount": "1",
+        "status": 4,
+        "new_id": "594388720415906321",
+        "new_contextid": "2"
+      },
+      "paid_amount": 4,
+      "paid_fee": 8,
+      "currencyid": "2006",
+      "steam_fee": 4,
+      "publisher_fee": 4,
+      "publisher_fee_percent": "0.100000001490116119",
+      "publisher_fee_app": 578080,
+      "received_amount": 4,
+      "received_currencyid": "2006",
+      "funds_held": 0,
+      "time_funds_held_until": 0,
+      "funds_revoked": 0,
+      "funds_returned": 0,
+      "added_tax": 0
+    }
+  },
+  "listings": {
+    "743982441620518376": {
+      "listingid": "743982441620518376",
+      "price": 0,
+      "fee": 0,
+      "publisher_fee_app": 578080,
+      "publisher_fee_percent": "0.100000001490116119",
+      "currencyid": 2006,
+      "asset": {
+        "currency": 0,
+        "appid": 578080,
+        "contextid": "2",
+        "id": "1918846627054139275",
+        "amount": "0"
+      },
+      "original_price": 4
+    }
+  }
+}
