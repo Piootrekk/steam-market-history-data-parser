@@ -1,40 +1,40 @@
-import { useCallback, type PropsWithChildren } from "react";
-import { useParams, useSearchParams } from "react-router-dom";
+import AccountTableFilters from "@renderer/common/components/composites/table/account-filters";
 import { TABLE_PARAMS } from "@renderer/routes";
+import { type PropsWithChildren, useCallback } from "react";
+import { useParams, useSearchParams } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "../primitives/card";
 import TablePagination from "./table/pagination";
-import AccountTableFilters from "@renderer/common/components/composites/table/account-filters";
 
 type TableListingsPageProps = PropsWithChildren & {
   listingsCount: number;
 };
+
 const TableListingsPage = ({
   children,
   listingsCount,
 }: TableListingsPageProps) => {
   const [searchParam, setSearchParams] = useSearchParams();
   const { steamId } = useParams();
+
   const getSearchTerm = () => {
-    const searchQuery = searchParam.get(TABLE_PARAMS.query);
-    return searchQuery;
+    return searchParam.get(TABLE_PARAMS.query);
   };
 
-  const setSearchTerm = (searchTerm: string | null) => {
-    setSearchParams((prev) => {
-      const next = new URLSearchParams(prev);
-      if (searchTerm) next.set(TABLE_PARAMS.query, searchTerm);
-      else next.delete(TABLE_PARAMS.query);
+  const handleSearch = useCallback(
+    (searchTerm: string | null) => {
+      setSearchParams((prev) => {
+        const next = new URLSearchParams(prev);
+        if (searchTerm) next.set(TABLE_PARAMS.query, searchTerm);
+        else next.delete(TABLE_PARAMS.query);
 
-      next.delete(TABLE_PARAMS.start);
-      next.delete(TABLE_PARAMS.limit);
+        next.delete(TABLE_PARAMS.start);
+        next.delete(TABLE_PARAMS.limit);
 
-      return next;
-    });
-  };
-
-  const handleSearch = useCallback((searchTerm: string | null) => {
-    setSearchTerm(searchTerm);
-  }, []);
+        return next;
+      });
+    },
+    [setSearchParams],
+  );
 
   return (
     <Card>

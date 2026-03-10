@@ -1,5 +1,5 @@
-import { useMatch } from "react-router-dom";
 import { ROUTE_PATHS } from "@renderer/routes";
+import { useMatch } from "react-router-dom";
 
 const useAccountSubRoute = () => {
   const baseAccount = `/${ROUTE_PATHS.accounts}/${ROUTE_PATHS.account}`;

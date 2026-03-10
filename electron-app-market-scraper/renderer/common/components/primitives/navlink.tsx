@@ -1,19 +1,19 @@
 import {
   NavLink as NavRouterLink,
+  type NavLinkProps as NavRouterLinkProps,
   Link as RouterLink,
+  type LinkProps as RouterLinkProps,
   useMatch,
   useNavigate,
   useResolvedPath,
-  type NavLinkProps as NavRouterLinkProps,
-  type LinkProps as RouterLinkProps,
 } from "react-router-dom";
+import { cn } from "../../utils/merge-styles";
 import {
+  type BaseStylesProps,
   baseStyles,
   sizes,
   variants,
-  type BaseStylesProps,
 } from "./base-styles";
-import { cn } from "../../utils/merge-styles";
 
 type NavLinkProps = NavRouterLinkProps & BaseStylesProps;
 type LinkProps = RouterLinkProps & BaseStylesProps;

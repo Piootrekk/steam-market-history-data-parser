@@ -1,6 +1,6 @@
 import { ipcWebContentsAdapter } from "@electron/ipc-adapter/ipc.main.adapter";
-import { getCommonProgressEmits } from "../common/send-progress.emits";
 import { getIconDownloaderEmitter } from "../common/icon-downloader/icon-downloader.emits";
+import { getCommonProgressEmits } from "../common/send-progress.emits";
 
 type ProgressEmitter = ReturnType<typeof getProgressEmitter>;
 

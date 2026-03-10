@@ -1,5 +1,5 @@
-import { LayoutDashboard } from "lucide-react";
 import BasicPageInfo from "@renderer/common/components/composites/basic-page-info";
+import { LayoutDashboard } from "lucide-react";
 
 const DashboardPage = () => {
   return (

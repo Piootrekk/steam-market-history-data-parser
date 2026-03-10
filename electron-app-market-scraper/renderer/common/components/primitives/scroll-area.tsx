@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type CSSProperties } from "react";
+import { type CSSProperties, useEffect, useRef, useState } from "react";
 import { cn } from "../../utils/merge-styles";
 
 type ScrollAreaProps = {
@@ -55,8 +55,7 @@ const ScrollArea = ({
   } satisfies Record<string, CSSProperties>;
 
   return (
-    <div
-      role="region"
+    <section
       ref={containerRef}
       tabIndex={direction === "vertical" ? 0 : undefined}
       className={cn(
@@ -68,7 +67,7 @@ const ScrollArea = ({
       {...rest}
     >
       {children}
-    </div>
+    </section>
   );
 };
 

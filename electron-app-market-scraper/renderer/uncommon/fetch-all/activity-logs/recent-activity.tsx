@@ -1,12 +1,12 @@
-import { CheckCircle2, Info, TriangleAlert } from "lucide-react";
 import {
   Card,
+  CardContent,
   CardHeader,
   CardTitle,
-  CardContent,
 } from "@renderer/common/components/primitives/card";
-import RecentActivitySection from "./recent-activity-section";
 import type { FetchProgress } from "@renderer/common/hooks/progress.hook";
+import { CheckCircle2, Info, TriangleAlert } from "lucide-react";
+import RecentActivitySection from "./recent-activity-section";
 
 const defaultIcons: Record<string, React.ElementType> = {
   success: CheckCircle2,
@@ -38,12 +38,10 @@ const RecentActivity = ({ activities }: RecentActivityProps) => {
         <div className="pr-2">
           <div className="space-y-4">
             {activities.length > 0 &&
-              activitiesLogs.map((activity, index) => (
-                <RecentActivitySection
-                  key={`${activity.timestamp}-${index}`}
-                  {...activity}
-                />
-              ))}
+              activitiesLogs.map((activity, index) => {
+                const key = `${activity.timestamp}-${index}`;
+                return <RecentActivitySection key={key} {...activity} />;
+              })}
             {activities.length === 0 && (
               <p className="text-sm text-muted-foreground">
                 There's no recent activities.

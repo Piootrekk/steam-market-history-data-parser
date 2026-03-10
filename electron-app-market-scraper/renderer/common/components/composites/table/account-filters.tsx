@@ -1,10 +1,10 @@
-import { Search } from "lucide-react";
-import { useEffect, useState } from "react";
 import {
   Input,
   InputContainer,
   InputLabel,
 } from "@renderer/common/components/primitives/input";
+import { Search } from "lucide-react";
+import { useEffect, useState } from "react";
 
 type AccountTableFiltersProps = {
   searchParam: string | null;

@@ -11,8 +11,9 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "ts:check": "npx tsc --noEmit --extendedDiagnostics ",
-    "tsgo:check": "npx tsgo --noEmit --extendedDiagnostics ",
+    "lint": "biome check --write",
+    "ts:check": "npx tsc --noEmit --extendedDiagnostics",
+    "tsgo:check": "npx tsgo --noEmit --extendedDiagnostics",
     "db:generate": "drizzle-kit generate --config electron/core/db/drizzle.config.ts",
     "db:push": "drizzle-kit push --config electron/core/db/drizzle.config.ts",
     "db:migrate": "drizzle-kit migrate --config electron/core/db/drizzle.config.ts",
@@ -42,6 +43,7 @@
     "tailwind-merge": "^3.5.0"
   },
   "devDependencies": {
+    "@biomejs/biome": "2.4.6",
     "@tailwindcss/vite": "^4.2.0",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
@@ -60,8 +62,7 @@
   },
   "overrides": {
     "esbuild": "^0.27.3",
-    "esm-loader": "tsx@^4.21.0",
-    "minimatch": "10.2.2"
+    "esm-loader": "tsx@^4.21.0"
   },
   "packageManager": "npm@11.6.2"
 }

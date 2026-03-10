@@ -1,4 +1,3 @@
-import { AlertCircle } from "lucide-react";
 import BasicPageWrapper from "@renderer/common/components/composites/base-page-wrapper";
 import Button from "@renderer/common/components/primitives/button";
 import {
@@ -8,10 +7,11 @@ import {
   CardHeader,
   CardTitle,
 } from "@renderer/common/components/primitives/card";
-import { Link } from "@renderer/common/components/primitives/navlink";
-import { isRouteErrorResponse, useRouteError } from "react-router";
 import { InputContainer } from "@renderer/common/components/primitives/input";
+import { Link } from "@renderer/common/components/primitives/navlink";
 import { ScrollArea } from "@renderer/common/components/primitives/scroll-area";
+import { AlertCircle } from "lucide-react";
+import { isRouteErrorResponse, useRouteError } from "react-router";
 
 type ErrorBoundy = {
   status: number;

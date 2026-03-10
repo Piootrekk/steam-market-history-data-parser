@@ -1,6 +1,6 @@
 import {
-  getListingsCountFromAccount,
   getAllListingsCount,
+  getListingsCountFromAccount,
 } from "../../core/db/queries/get";
 import { getDbInstance } from "../../db.config";
 

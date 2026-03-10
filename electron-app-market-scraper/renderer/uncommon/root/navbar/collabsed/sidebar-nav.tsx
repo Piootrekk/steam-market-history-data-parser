@@ -1,8 +1,8 @@
 import { NavButton } from "@renderer/common/components/primitives/navlink";
 import ToolTip from "@renderer/common/components/primitives/tooltip";
+import type { NavRoutes } from "@renderer/routes";
 import { Users2 } from "lucide-react";
 import SideBarSubCategoryCollabsed from "./sub-category";
-import type { NavRoutes } from "@renderer/routes";
 
 type SideBarNavCollabsedProps = {
   routes: NavRoutes[];
@@ -15,20 +15,16 @@ const SideBarNavCollabsed = ({
 }: SideBarNavCollabsedProps) => {
   return (
     <nav className="flex-1 p-2 space-y-1">
-      {routes.map((route, index) => (
-        <ToolTip
-          key={`${route.label}-${index}`}
-          side="right"
-          message={route.label}
-        >
+      {routes.map((route) => (
+        <ToolTip key={`${route.path}`} side="right" message={route.label}>
           <CurrentSideBar {...route} />
         </ToolTip>
       ))}
       {accounts.length > 0 && (
         <SideBarSubCategoryCollabsed icon={Users2}>
-          {accounts.map((account, index) => (
+          {accounts.map((account) => (
             <ToolTip
-              key={`${account}-${index}`}
+              key={`${account.path}`}
               side="right"
               message={account.label}
             >

@@ -1,4 +1,4 @@
-import { BrowserWindow, ipcMain, type WebContents } from "electron";
+import { type BrowserWindow, ipcMain, type WebContents } from "electron";
 import type {
   ChannelValue,
   HandlerArgs,
@@ -17,7 +17,7 @@ const ipcMainAdapter = {
 
   handle<K extends ChannelValue>(
     channel: K,
-    callback: HandlerFnWithEvent<K>
+    callback: HandlerFnWithEvent<K>,
   ): void {
     ipcMain.handle(channel, (event, ...args: HandlerArgs<K>) => {
       return callback(event, ...args);

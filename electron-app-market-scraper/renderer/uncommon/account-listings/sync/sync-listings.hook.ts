@@ -1,8 +1,8 @@
-import { useActionData, useNavigation } from "react-router-dom";
 import {
-  useProgressEvent,
   type FetchProgress,
+  useProgressEvent,
 } from "@renderer/common/hooks/progress.hook";
+import { useActionData, useNavigation } from "react-router-dom";
 import type { syncFetchAction } from "./sync-listings.action";
 
 type FetchAll = {
@@ -16,8 +16,7 @@ const useSyncAction = (): FetchAll => {
   const navigation = useNavigation();
   const { logs } = useProgressEvent();
 
-  const loading =
-    navigation.state !== "idle" && navigation.formAction ? true : false;
+  const loading = !!(navigation.state !== "idle" && navigation.formAction);
 
   return {
     loading,

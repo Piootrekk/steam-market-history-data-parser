@@ -1,8 +1,8 @@
-import type { ClassValue } from "clsx";
 import { cn } from "@renderer/common/utils/merge-styles";
-import { Card } from "./card";
-import { createPortal } from "react-dom";
+import type { ClassValue } from "clsx";
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
+import { Card } from "./card";
 
 type ToolTipProps = {
   side?: "left" | "right" | "top" | "bottom";
@@ -60,7 +60,8 @@ const ToolTip = ({
     if (!isVisible || !triggerRef.current) return;
 
     const updatePosition = () => {
-      const rect = triggerRef.current!.getBoundingClientRect();
+      if (!triggerRef.current) return;
+      const rect = triggerRef.current.getBoundingClientRect();
       const spacing = 1;
 
       let top = 0;
@@ -130,6 +131,7 @@ const ToolTip = ({
     <>
       <div
         ref={triggerRef}
+        role="tooltip"
         onMouseEnter={() => setIsVisible(true)}
         onMouseLeave={() => setIsVisible(false)}
         onFocus={() => setIsVisible(true)}

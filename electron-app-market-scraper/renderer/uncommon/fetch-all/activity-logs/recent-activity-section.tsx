@@ -1,6 +1,6 @@
-import { Info } from "lucide-react";
 import Badge from "@renderer/common/components/primitives/badge";
 import { cn } from "@renderer/common/utils/merge-styles";
+import { Info } from "lucide-react";
 
 type RecentActivitySectionProps = {
   activityStyle: string;

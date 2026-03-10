@@ -1,7 +1,5 @@
-import { AlertTriangle, Cookie, Files, User } from "lucide-react";
 import BasicPageInfo from "@renderer/common/components/composites/basic-page-info";
 import Button from "@renderer/common/components/primitives/button";
-import RecentActivity from "./activity-logs/recent-activity";
 import {
   Card,
   CardContent,
@@ -13,7 +11,9 @@ import {
   InputContainer,
   InputLabel,
 } from "@renderer/common/components/primitives/input";
+import { AlertTriangle, Cookie, Files, User } from "lucide-react";
 import { Form } from "react-router-dom";
+import RecentActivity from "./activity-logs/recent-activity";
 import { useFetchAllHistoryAction } from "./download.hook";
 
 const DownloadAllPage = () => {

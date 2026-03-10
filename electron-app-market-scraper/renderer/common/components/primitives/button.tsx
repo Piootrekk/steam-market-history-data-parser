@@ -1,9 +1,9 @@
 import { cn } from "../../utils/merge-styles";
 import {
+  type BaseStylesProps,
   baseStyles,
   sizes,
   variants,
-  type BaseStylesProps,
 } from "./base-styles";
 
 type ButtonProps = React.ComponentProps<"button"> & BaseStylesProps;

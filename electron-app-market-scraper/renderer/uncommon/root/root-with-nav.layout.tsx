@@ -1,7 +1,7 @@
+import RootPageWrapper from "@renderer/common/components/composites/base-page-wrapper";
+import { ScrollArea } from "@renderer/common/components/primitives/scroll-area";
 import { Outlet } from "react-router-dom";
 import Sidebar from "./navbar/sidebar";
-import { ScrollArea } from "@renderer/common/components/primitives/scroll-area";
-import RootPageWrapper from "@renderer/common/components/composites/base-page-wrapper";
 
 const RootWithNavLayout = () => {
   return (

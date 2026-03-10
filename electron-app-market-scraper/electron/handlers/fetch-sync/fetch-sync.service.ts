@@ -1,16 +1,16 @@
+import { getDbInstance } from "@electron/db.config";
+import {
+  BASE_CONFIG,
+  createListingsFetcher,
+} from "../../core/domain/fetch-market-listings/listings-fetcher.factory";
+import { iconDownloaderService } from "../common/icon-downloader/icon-downloader.service";
+import { insertNewSnapshot } from "../fetch-all/fetch-all.repository";
+import type { ProgressEmitter } from "./fetch-sync.emits";
 import {
   getListingsCountFromAccount,
   insertBulkNewListings,
   transactionSession,
 } from "./fetch-sync.repository";
-import {
-  BASE_CONFIG,
-  createListingsFetcher,
-} from "../../core/domain/fetch-market-listings/listings-fetcher.factory";
-import type { ProgressEmitter } from "./fetch-sync.emits";
-import { insertNewSnapshot } from "../fetch-all/fetch-all.repository";
-import { getDbInstance } from "@electron/db.config";
-import { iconDownloaderService } from "../common/icon-downloader/icon-downloader.service";
 
 const fetchSyncService = async (
   progressEmitter: ProgressEmitter,

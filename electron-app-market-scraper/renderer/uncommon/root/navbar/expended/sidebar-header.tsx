@@ -1,6 +1,6 @@
-import { ChevronLeft } from "lucide-react";
 import Button from "@renderer/common/components/primitives/button";
 import { cn } from "@renderer/common/utils/merge-styles";
+import { ChevronLeft } from "lucide-react";
 
 type SidebarHeaderExtendedProps = {
   title: string;

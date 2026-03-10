@@ -1,4 +1,4 @@
-import { PluginOption } from "vite";
+import type { PluginOption } from "vite";
 import { viteStaticCopy } from "vite-plugin-static-copy";
 
 const staticCopyPlugin = () =>

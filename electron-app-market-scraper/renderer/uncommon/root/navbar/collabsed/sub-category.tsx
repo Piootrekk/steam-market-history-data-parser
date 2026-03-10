@@ -1,6 +1,6 @@
-import { ChevronDown, ChevronUp } from "lucide-react";
 import Button from "@renderer/common/components/primitives/button";
 import { useLocalStoredValue } from "@renderer/common/hooks/local-storage.hook";
+import { ChevronDown, ChevronUp } from "lucide-react";
 
 type SideBarSubCategoryCollabsedProsp = {
   children: React.ReactNode;

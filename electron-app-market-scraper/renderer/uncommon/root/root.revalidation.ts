@@ -1,5 +1,5 @@
-import type { ShouldRevalidateFunctionArgs } from "react-router-dom";
 import { ROUTE_PATHS } from "@renderer/routes";
+import type { ShouldRevalidateFunctionArgs } from "react-router-dom";
 
 const shouldRevalidateRoot = ({
   actionResult,

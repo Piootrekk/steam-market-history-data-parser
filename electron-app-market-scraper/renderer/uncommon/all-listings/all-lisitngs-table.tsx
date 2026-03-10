@@ -1,12 +1,12 @@
-import { TableListingsPage } from "@renderer/common/components/composites/table-listings-page";
 import DataTable, {
   type Column,
 } from "@renderer/common/components/composites/table/table";
-import {
-  useAllListingsInvoices,
-  type ListingsAll,
-} from "./all-listings.loader";
+import { TableListingsPage } from "@renderer/common/components/composites/table-listings-page";
 import SmartImg from "@renderer/common/components/primitives/smart-img/smart-img";
+import {
+  type ListingsAll,
+  useAllListingsInvoices,
+} from "./all-listings.loader";
 
 const ListingsAllColumns: Column<ListingsAll>[] = [
   {

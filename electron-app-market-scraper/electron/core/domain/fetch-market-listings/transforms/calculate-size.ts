@@ -8,7 +8,7 @@ type FetchIteration = {
 
 const ReduceSizeDto = (
   responseDto: TransformDto,
-  expectedSize: number
+  expectedSize: number,
 ): TransformDto => {
   return responseDto.slice(0, expectedSize);
 };
@@ -22,7 +22,7 @@ const calculateRestBatches = (count: number, totalCount: number) => {
         index,
         min: index * count + count,
         count,
-      } satisfies FetchIteration)
+      }) satisfies FetchIteration,
   );
   return fetchesCalc;
 };

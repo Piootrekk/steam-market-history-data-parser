@@ -1,10 +1,10 @@
 import type { ValidationReturn } from "./handlers/common/common.types";
-import type { ListingsCountDto } from "./handlers/listings-count/listings-count.dto";
 import type {
   ListingsAllDto,
   ListingsDto,
 } from "./handlers/listings/listings.dto";
-import { UserAllDto } from "./handlers/user-all/user-all.dto";
+import type { ListingsCountDto } from "./handlers/listings-count/listings-count.dto";
+import type { UserAllDto } from "./handlers/user-all/user-all.dto";
 
 type ElectronAPI = {
   setupCheck: (callback: (value: string) => void) => void;

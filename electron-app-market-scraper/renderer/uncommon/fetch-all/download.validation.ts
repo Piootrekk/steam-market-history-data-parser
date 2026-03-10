@@ -36,10 +36,9 @@ const getErrorValidationCheck = (
 };
 
 const isCookiesCorrect = (steamCookies: string): boolean => {
-  const regex = new RegExp(
-    "(steamLoginSecure=[^]*.*sessionid=[^]*)|(sessionid=[^]*.*steamLoginSecure=[^]*)",
-  );
-  return steamCookies.match(regex) !== null;
+  const regex =
+    /(steamLoginSecure=.*sessionid=.*)|(sessionid=.*steamLoginSecure=.*)/;
+  return regex.test(steamCookies);
 };
 
 export { getErrorValidationCheck, isCookiesCorrect };

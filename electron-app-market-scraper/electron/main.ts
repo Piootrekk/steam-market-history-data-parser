@@ -1,17 +1,16 @@
 import path from "node:path";
-import { app, BrowserWindow, shell } from "electron";
+import { app, BrowserWindow, Menu, shell } from "electron";
+import { connectDb } from "./db.config";
+import { ensureDirExists } from "./dir-setup";
 import {
   IMAGE_STORAGE_PATH,
   PRELOAD_PATH,
   RENDERER_DIST,
   VITE_DEV_SERVER_URL,
 } from "./env";
-import { ipcMainAdapter } from "./ipc-adapter/ipc.main.adapter";
-import { connectDb } from "./db.config";
 import { registerAllHandlers } from "./handlers";
+import { ipcMainAdapter } from "./ipc-adapter/ipc.main.adapter";
 import { registerAllProtocols } from "./protocols";
-import { Menu } from "electron";
-import { ensureDirExists } from "./dir-setup";
 
 const createWindow = () => {
   const mainWindow = new BrowserWindow({

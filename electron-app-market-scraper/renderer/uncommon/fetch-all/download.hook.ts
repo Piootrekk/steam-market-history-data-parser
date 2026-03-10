@@ -1,9 +1,9 @@
+import {
+  type FetchProgress,
+  useProgressEvent,
+} from "@renderer/common/hooks/progress.hook";
 import { useActionData, useNavigation } from "react-router-dom";
 import type { fetchAllHistortyAction } from "./download.action";
-import {
-  useProgressEvent,
-  type FetchProgress,
-} from "@renderer/common/hooks/progress.hook";
 
 type FetchAll = {
   loading: boolean;
@@ -16,8 +16,7 @@ const useFetchAllHistoryAction = (): FetchAll => {
   const navigation = useNavigation();
   const { logs } = useProgressEvent();
 
-  const loading =
-    navigation.state !== "idle" && navigation.formAction ? true : false;
+  const loading = !!(navigation.state !== "idle" && navigation.formAction);
 
   return {
     loading,

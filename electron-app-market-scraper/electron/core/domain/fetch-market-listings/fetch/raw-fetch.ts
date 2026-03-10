@@ -25,7 +25,7 @@ const fetchMarketHistory = async (fetchConfig: FetchParams) => {
 };
 
 const isIncorrectResponse = (
-  data: MarketRawResponse
+  data: MarketRawResponse,
 ): data is IncorrectMarketFetchResponse => {
   return (
     data.total_count === 0 &&

@@ -1,9 +1,9 @@
-import path from "path";
-import { createWriteStream } from "fs";
-import { pipeline } from "stream/promises";
-import { Readable } from "stream";
-import type { ReadableStream } from "stream/web";
-import { rename, unlink } from "fs/promises";
+import { createWriteStream } from "node:fs";
+import { rename, unlink } from "node:fs/promises";
+import path from "node:path";
+import { Readable } from "node:stream";
+import { pipeline } from "node:stream/promises";
+import type { ReadableStream } from "node:stream/web";
 
 type IconDownloaderConfig = {
   storagePath: string;

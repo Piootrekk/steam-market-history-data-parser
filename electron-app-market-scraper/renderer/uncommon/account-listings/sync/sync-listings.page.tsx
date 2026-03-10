@@ -1,5 +1,3 @@
-import { AlertTriangle, Cookie } from "lucide-react";
-import { Form } from "react-router-dom";
 import Button from "@renderer/common/components/primitives/button";
 import {
   Card,
@@ -9,12 +7,14 @@ import {
   CardTitle,
 } from "@renderer/common/components/primitives/card";
 import {
+  Input,
   InputContainer,
   InputLabel,
-  Input,
 } from "@renderer/common/components/primitives/input";
-import { useSyncAction } from "./sync-listings.hook";
 import RecentActivity from "@renderer/uncommon/fetch-all/activity-logs/recent-activity";
+import { AlertTriangle, Cookie } from "lucide-react";
+import { Form } from "react-router-dom";
+import { useSyncAction } from "./sync-listings.hook";
 
 const SyncListingsPage = () => {
   const { logs, error, loading } = useSyncAction();

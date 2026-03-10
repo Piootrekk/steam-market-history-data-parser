@@ -1,11 +1,11 @@
+import ExternalLinks from "@renderer/common/components/composites/table/external-links";
 import DataTable, {
   type Column,
 } from "@renderer/common/components/composites/table/table";
-import { useAccountTableInvoices, type Listings } from "./accout-table.loader";
 
 import { TableListingsPage } from "@renderer/common/components/composites/table-listings-page";
 import SmartImg from "@renderer/common/components/primitives/smart-img/smart-img";
-import ExternalLinks from "@renderer/common/components/composites/table/external-links";
+import { type Listings, useAccountTableInvoices } from "./accout-table.loader";
 
 const ListingsColumns: Column<Listings>[] = [
   {

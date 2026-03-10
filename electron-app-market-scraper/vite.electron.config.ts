@@ -10,6 +10,7 @@ const electronPlugin = () =>
       vite: {
         plugins: [tsconfigPaths()],
         build: {
+          minify: "esbuild",
           rollupOptions: {
             external: ["@libsql/client", "drizzle-orm-sqlite", "drizzle-orm"],
           },
@@ -18,6 +19,11 @@ const electronPlugin = () =>
     },
     preload: {
       input: path.join(__dirname, "electron/preload.ts"),
+      vite: {
+        build: {
+          minify: "esbuild",
+        },
+      },
     },
   }) satisfies PluginOption;
 

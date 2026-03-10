@@ -2,7 +2,7 @@ const getSelectedPrice = (
   eventType: number,
   paidAmount: number,
   paidFee: number,
-  receivedAmount: number
+  receivedAmount: number,
 ) => {
   if (eventType === 3) return receivedAmount;
   else if (eventType === 4) return paidAmount + paidFee;
@@ -17,13 +17,13 @@ const getPrice = (
   eventType: number,
   paidAmount: number,
   paidFee: number,
-  receivedAmount: number
+  receivedAmount: number,
 ) => {
   const selectedPrice = getSelectedPrice(
     eventType,
     paidAmount,
     paidFee,
-    receivedAmount
+    receivedAmount,
   );
   const finalPrice = sanitizePrice(selectedPrice);
   return finalPrice;

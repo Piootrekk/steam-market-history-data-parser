@@ -1,4 +1,4 @@
-import { type TransformDto } from "./fetch/listing.dto";
+import type { TransformDto } from "./fetch/listing.dto";
 import type { FetchParams } from "./fetch/raw-fetch";
 import {
   getTransformedCorrectResponse,

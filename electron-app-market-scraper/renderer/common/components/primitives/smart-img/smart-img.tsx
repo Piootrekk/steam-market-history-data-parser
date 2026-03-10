@@ -17,6 +17,7 @@ const SmartImg = ({
   return (
     <img
       src={url.href}
+      alt={src}
       className={cn("w-9 h-9 object-contain app-image", className)}
       {...props}
       onError={(e) => {

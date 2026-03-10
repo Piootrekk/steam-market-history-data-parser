@@ -1,5 +1,5 @@
+import path from "node:path";
 import { app } from "electron";
-import path from "path";
 
 //TODO add linux mac portable support in the future
 

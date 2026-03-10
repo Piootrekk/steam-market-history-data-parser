@@ -228,6 +228,7 @@
 }
 
 /* AUTOFILL INPUT STYLES ATTEMPTS  (PASSMANAGER ETC.) */
+
 @layer base {
   input:-webkit-autofill,
   input:-webkit-autofill:hover,
@@ -240,6 +241,7 @@
     box-shadow: 0 0 0px 1000px var(--color-background) inset;
     transition: background-color 9999s ease-in-out 0s;
     caret-color: var(--color-foreground);
+    /* biome-ignore lint/complexity/noImportantStyles: <autofill input restyle> */
     color: fieldtext !important;
   }
 }
@@ -248,9 +250,10 @@
   input:-moz-autofill,
   textarea:-moz-autofill,
   select:-moz-autofill {
+    /* biome-ignore lint/complexity/noImportantStyles: <autofill input restyle mozilla> */
     background-color: var(--color-background) !important;
+    /* biome-ignore lint/complexity/noImportantStyles: <autofill input restyle mozilla> */
     color: var(--color-foreground) !important;
     caret-color: var(--color-foreground);
   }
 }
-

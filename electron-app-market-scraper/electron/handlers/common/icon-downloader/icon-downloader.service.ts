@@ -1,11 +1,11 @@
-import { getDbInstance } from "@electron/db.config";
-import { getImgIdsFromCurrentSnapshot } from "./icon-downloader.repository";
 import {
   getListIconIdFromDir,
   getNewIconIds,
 } from "@electron/core/domain/images-downloader/compare";
 import { createDownloader } from "@electron/core/domain/images-downloader/download.factory";
-import { DownloadEmitter } from "./icon-downloader.emits";
+import { getDbInstance } from "@electron/db.config";
+import type { DownloadEmitter } from "./icon-downloader.emits";
+import { getImgIdsFromCurrentSnapshot } from "./icon-downloader.repository";
 
 const iconDownloaderService = async (
   snapshotId: number,

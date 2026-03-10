@@ -58,7 +58,7 @@ const getCurrencyISO = (currencyMarketId: string | number): string => {
 const getSelectedCurrecyISO = (
   eventType: number,
   currencyId: string,
-  recievedCurrency: string
+  recievedCurrency: string,
 ) => {
   if (eventType === 3) return getCurrencyISO(recievedCurrency);
   else if (eventType === 4) return getCurrencyISO(currencyId);

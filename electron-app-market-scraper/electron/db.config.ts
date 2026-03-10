@@ -1,10 +1,10 @@
 import {
+  type Client,
   closeDbConnection,
+  type Db,
   getClientInit,
   getDatabaseInit,
   runMigrate,
-  type Client,
-  type Db,
 } from "./core/db";
 
 let client: Client | null = null;

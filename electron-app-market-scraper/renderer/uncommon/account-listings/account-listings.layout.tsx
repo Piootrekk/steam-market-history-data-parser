@@ -1,8 +1,9 @@
-import { Outlet } from "react-router-dom";
 import BasicPageInfo from "@renderer/common/components/composites/basic-page-info";
-import TabNav from "./tab-nav";
+import { type NavRoutes, ROUTE_PATHS } from "@renderer/routes";
 import { Database, RefreshCw, Table } from "lucide-react";
-import { ROUTE_PATHS, type NavRoutes } from "@renderer/routes";
+import { Outlet } from "react-router-dom";
+import TabNav from "./tab-nav";
+
 const subtabs = [
   {
     path: ROUTE_PATHS.accountTable,

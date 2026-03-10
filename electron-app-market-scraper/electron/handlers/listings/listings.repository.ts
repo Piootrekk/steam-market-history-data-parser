@@ -1,6 +1,6 @@
 import {
-  getListingsForCurrentAccount,
   getAllListings,
+  getListingsForCurrentAccount,
 } from "@electron/core/db/queries/get";
 import { getDbInstance } from "@electron/db.config";
 

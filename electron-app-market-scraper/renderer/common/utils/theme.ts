@@ -4,9 +4,9 @@ const themes = {
 } as const;
 
 const getBasePrefersColorSchema = () => {
-  const isDarkTheme =
-    window.matchMedia &&
-    window.matchMedia(`(prefers-color-scheme: ${themes.dark})`).matches;
+  const isDarkTheme = window.matchMedia?.(
+    `(prefers-color-scheme: ${themes.dark})`,
+  ).matches;
   if (isDarkTheme) return themes.dark;
   return themes.light;
 };

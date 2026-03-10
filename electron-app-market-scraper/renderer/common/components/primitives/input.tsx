@@ -14,9 +14,9 @@ const InputContainer = ({
   return <div className={cn("space-y-2 flex flex-col", className)} {...rest} />;
 };
 
-const InputLabel = ({ className, ...rest }: React.ComponentProps<"label">) => {
+const InputLabel = ({ className, ...rest }: React.ComponentProps<"span">) => {
   return (
-    <label
+    <span
       className={cn(
         "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70",
         className,
@@ -36,6 +36,7 @@ const IconLabel = ({
   children?: React.ReactNode;
   className?: string;
   ariaLabel?: string;
+  htmlFor?: string;
 }) => (
   <InputLabel
     onClick={onClick}
@@ -73,7 +74,11 @@ const Input = ({
       {leftIcon && (
         <div className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground peer-focus:text-ring">
           {onLeftIconClick ? (
-            <IconLabel onClick={onLeftIconClick} ariaLabel="left icon">
+            <IconLabel
+              htmlFor={id}
+              onClick={onLeftIconClick}
+              ariaLabel="left icon"
+            >
               {leftIcon}
             </IconLabel>
           ) : (
@@ -85,7 +90,11 @@ const Input = ({
       {rightIcon && (
         <div className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground peer-focus:text-ring">
           {onRightIconClick ? (
-            <IconLabel onClick={onRightIconClick} ariaLabel="right icon">
+            <IconLabel
+              htmlFor={id}
+              onClick={onRightIconClick}
+              ariaLabel="right icon"
+            >
               {rightIcon}
             </IconLabel>
           ) : (

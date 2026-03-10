@@ -1,4 +1,4 @@
-import fs from "fs";
+import fs from "node:fs";
 
 const ensureDirExists = (path: string) => {
   if (!fs.existsSync(path)) {

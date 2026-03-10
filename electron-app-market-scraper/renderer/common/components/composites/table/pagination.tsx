@@ -1,8 +1,8 @@
 import {
   ChevronLeftPagination,
   ChevronRightPagination,
-  PagePagination,
   Ellipsis,
+  PagePagination,
   Pagination,
   Summary,
 } from "@renderer/common/components/composites/table/table-pagination";

@@ -1,6 +1,6 @@
+import { and, count, desc, eq, getTableColumns, like } from "drizzle-orm";
 import type { Db } from "..";
 import { accountTable, listingsTable, snapshotsTable } from "../schema";
-import { and, count, desc, eq, getTableColumns, like } from "drizzle-orm";
 
 const getAllSteamIdsFromAccount = async (db: Db) => {
   const steamIds = await db

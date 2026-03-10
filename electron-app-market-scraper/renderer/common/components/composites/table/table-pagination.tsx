@@ -1,6 +1,6 @@
+import { cn } from "@renderer/common/utils/merge-styles";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { LinkButton } from "../../../../common/components/primitives/navlink";
-import { cn } from "@renderer/common/utils/merge-styles";
 
 type PaginationRightProps = {
   page: number;

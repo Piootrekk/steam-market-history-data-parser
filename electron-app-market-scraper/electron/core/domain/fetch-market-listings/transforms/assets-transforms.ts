@@ -2,11 +2,14 @@ import type { Assets, CurrentAsset } from "../fetch/raw-fetch-response.types";
 
 const getAllCurrentAssets = (assets: Assets) => {
   const games = getCurrentGamesFromAssets(assets);
+
   const assetRecords = games.reduce<Record<string, CurrentAsset>>(
     (acc, game) => {
-      const currentversion = getFirstVersion(assets[game]);
-      const records = assets[game][currentversion];
-      return { ...acc, ...records };
+      const currentVersion = getFirstVersion(assets[game]);
+      const records = assets[game][currentVersion];
+
+      Object.assign(acc, records);
+      return acc;
     },
     {},
   );

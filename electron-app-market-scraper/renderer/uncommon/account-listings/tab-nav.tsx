@@ -10,9 +10,9 @@ const TabNav = ({ subtabs }: TabNavProps) => {
     <div className="w-full">
       <div className="flex items-center gap-4">
         <div className="flex-1 flex bg-muted/50 rounded-md p-1">
-          {subtabs.map((subtab, id) => (
+          {subtabs.map((subtab) => (
             <NavButton
-              key={`${subtab.path}-${id}`}
+              key={`${subtab.path}`}
               to={subtab.path}
               className={`
                 px-1

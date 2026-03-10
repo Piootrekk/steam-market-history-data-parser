@@ -1,5 +1,5 @@
-import { ChevronRight } from "lucide-react";
 import Button from "@renderer/common/components/primitives/button";
+import { ChevronRight } from "lucide-react";
 
 type SidebarHeaderCollapsedProps = {
   onToggle: () => void;

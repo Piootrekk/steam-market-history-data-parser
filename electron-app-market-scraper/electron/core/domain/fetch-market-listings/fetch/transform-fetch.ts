@@ -1,8 +1,8 @@
 import { getFetchError } from "../fetch-error/custom-error";
-import { type FetchParams, fetchMarketHistory } from "./raw-fetch";
-import type { MarketFetchResponse } from "./raw-fetch-response.types";
 import { mergeResponse } from "../transforms/summary-all-transforms";
 import { transformDto } from "./listing.dto";
+import { type FetchParams, fetchMarketHistory } from "./raw-fetch";
+import type { MarketFetchResponse } from "./raw-fetch-response.types";
 
 const sleep = async (timeMs: number): Promise<void> => {
   return new Promise((resolve) => setTimeout(resolve, timeMs));

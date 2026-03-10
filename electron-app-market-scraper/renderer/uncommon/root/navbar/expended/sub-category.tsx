@@ -1,8 +1,8 @@
-import { ChevronDown, ChevronUp } from "lucide-react";
 import Button from "@renderer/common/components/primitives/button";
 import { useLocalStoredValue } from "@renderer/common/hooks/local-storage.hook";
+import { ChevronDown, ChevronUp } from "lucide-react";
 
-type SideBarSubCategoryExpendedProsp = {
+type SideBarSubCategoryExpendedProps = {
   children: React.ReactNode;
   icon: React.ElementType;
   name: string;
@@ -12,7 +12,7 @@ const SideBarSubCategoryExpended = ({
   children,
   icon: Icon,
   name,
-}: SideBarSubCategoryExpendedProsp) => {
+}: SideBarSubCategoryExpendedProps) => {
   const [isOpen, setIsOpen] = useLocalStoredValue("ui-config");
   return (
     <div>

@@ -1,4 +1,4 @@
-import { AssetAction } from "../fetch/raw-fetch-response.types";
+import type { AssetAction } from "../fetch/raw-fetch-response.types";
 
 type ReturnActions = {
   workshopLink?: string;

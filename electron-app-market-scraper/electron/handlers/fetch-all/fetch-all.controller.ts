@@ -1,6 +1,6 @@
-import { fetchAllService } from "./fetch-all.service";
-import { getProgressEmitter } from "./fetch-all.emits";
 import { sanitizeError } from "@electron/error";
+import { getProgressEmitter } from "./fetch-all.emits";
+import { fetchAllService } from "./fetch-all.service";
 
 const fetchAllController = async (
   event: Electron.IpcMainInvokeEvent,

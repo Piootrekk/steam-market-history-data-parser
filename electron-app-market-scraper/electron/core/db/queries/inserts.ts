@@ -9,7 +9,7 @@ import type { DbTransaction } from "./transaction";
 
 const insertNewAccount = async (
   db: DbTransaction,
-  newAccount: NewAccountModel
+  newAccount: NewAccountModel,
 ) => {
   const insertResult = await db
     .insert(accountTable)
@@ -22,7 +22,7 @@ const insertNewAccount = async (
 
 const insertNewSnapshot = async (
   db: Db | DbTransaction,
-  newSnapshot: NewSnapshotModel
+  newSnapshot: NewSnapshotModel,
 ) => {
   const insertedSnapshot = await db
     .insert(snapshotsTable)
@@ -35,7 +35,7 @@ const insertNewSnapshot = async (
 const insertBulkNewListings = async (
   db: Db | DbTransaction,
   newListings: Omit<NewListingModel, "snapshotId">[],
-  snapshotId: number
+  snapshotId: number,
 ) => {
   const listingsWithSnapshot = newListings.map((listing) => ({
     ...listing,

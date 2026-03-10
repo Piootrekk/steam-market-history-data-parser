@@ -1,5 +1,5 @@
-import { useLoaderData, type LoaderFunctionArgs } from "react-router-dom";
 import { TABLE_PARAMS } from "@renderer/routes";
+import { type LoaderFunctionArgs, useLoaderData } from "react-router-dom";
 
 type ListingsAll = Awaited<
   ReturnType<typeof window.electronAPI.getListingsAll>

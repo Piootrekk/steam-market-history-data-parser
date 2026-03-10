@@ -1,7 +1,7 @@
 import { NavButton } from "@renderer/common/components/primitives/navlink";
-import SideBarSubCategoryExpended from "./sub-category";
-import { Users2 } from "lucide-react";
 import type { NavRoutes } from "@renderer/routes";
+import { Users2 } from "lucide-react";
+import SideBarSubCategoryExpended from "./sub-category";
 
 type SideBarNavExtendedProps = {
   routes: NavRoutes[];
@@ -16,8 +16,8 @@ const SideBarNavExtended = ({ routes, accounts }: SideBarNavExtendedProps) => {
       ))}
       {accounts.length > 0 && (
         <SideBarSubCategoryExpended icon={Users2} name={"Users"}>
-          {accounts.map((account, index) => (
-            <CurrentSideBar key={`${account}-${index}`} {...account} />
+          {accounts.map((account) => (
+            <CurrentSideBar key={`${account.path}`} {...account} />
           ))}
         </SideBarSubCategoryExpended>
       )}

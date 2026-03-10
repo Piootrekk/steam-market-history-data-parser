@@ -1,4 +1,4 @@
-import { type ActionFunctionArgs } from "react-router-dom";
+import type { ActionFunctionArgs } from "react-router-dom";
 import { getErrorValidationCheck } from "./download.validation";
 
 const fetchAllHistortyAction = async ({ request }: ActionFunctionArgs) => {

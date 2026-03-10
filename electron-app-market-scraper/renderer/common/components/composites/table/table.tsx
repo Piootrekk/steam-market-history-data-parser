@@ -7,6 +7,7 @@ import {
   TableHeaderRow,
   TableRow,
 } from "./table-elements";
+
 type Column<T> = {
   key: keyof T;
   header: string;
@@ -37,8 +38,8 @@ const DataTable = <T extends Record<string, unknown>>({
         </TableRow>
       </TableHeader>
       <TableBody>
-        {data.map((item, index) => (
-          <TableRow key={index} className="hover:bg-muted/50">
+        {data.map((item) => (
+          <TableRow key={String(item.id)} className="hover:bg-muted/50">
             {columns.map((column) => (
               <TableCell key={String(column.key)}>
                 {column.render(item)}

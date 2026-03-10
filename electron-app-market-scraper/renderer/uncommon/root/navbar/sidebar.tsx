@@ -1,9 +1,7 @@
-import SidebarHeaderCollapsed from "./collabsed/sidebar-header";
-import SidebarHeaderExtended from "./expended/sidebar-header";
-import SideBarNavCollabsed from "./collabsed/sidebar-nav";
-import SideBarNavExtended from "./expended/sidebar-nav";
 import { ScrollArea } from "@renderer/common/components/primitives/scroll-area";
-import { ROUTE_PATHS, type NavRoutes } from "@renderer/routes";
+import { useLocalStoredValue } from "@renderer/common/hooks/local-storage.hook";
+import { cn } from "@renderer/common/utils/merge-styles";
+import { type NavRoutes, ROUTE_PATHS } from "@renderer/routes";
 import {
   File,
   Files,
@@ -13,11 +11,13 @@ import {
   User,
   Users,
 } from "lucide-react";
-import { useUserNavInvoices } from "./sidebar.loader";
 import { generatePath } from "react-router-dom";
+import SidebarHeaderCollapsed from "./collabsed/sidebar-header";
+import SideBarNavCollabsed from "./collabsed/sidebar-nav";
+import SidebarHeaderExtended from "./expended/sidebar-header";
+import SideBarNavExtended from "./expended/sidebar-nav";
 import { useAccountSubRoute } from "./nav-tab-selected.hook";
-import { cn } from "@renderer/common/utils/merge-styles";
-import { useLocalStoredValue } from "@renderer/common/hooks/local-storage.hook";
+import { useUserNavInvoices } from "./sidebar.loader";
 
 const appTitle = "Market History Manager";
 const navItems = [
