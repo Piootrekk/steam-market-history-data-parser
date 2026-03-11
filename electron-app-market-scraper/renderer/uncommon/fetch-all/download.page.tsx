@@ -37,6 +37,7 @@ const DownloadAllPage = () => {
               <InputContainer className="min-w-full flex-1 space-y-2 md:min-w-0">
                 <InputLabel htmlFor="steamId">Steam ID / Name / ID</InputLabel>
                 <Input
+                  id="steamId"
                   name="steamId"
                   type="text"
                   placeholder="Enter your Steam ID, name, or fetch identity"
@@ -46,6 +47,7 @@ const DownloadAllPage = () => {
               <InputContainer className="min-w-full flex-1 space-y-2 md:min-w-0">
                 <InputLabel htmlFor="cookies">Cookies</InputLabel>
                 <Input
+                  id="cookies"
                   name="cookies"
                   type="password"
                   placeholder="Enter your cookies"

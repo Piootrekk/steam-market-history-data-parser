@@ -31,8 +31,9 @@ const SyncListingsPage = () => {
         <CardContent>
           <Form method="post" className="space-y-4">
             <InputContainer>
-              <InputLabel>Cookies</InputLabel>
+              <InputLabel htmlFor="cookies">Cookies</InputLabel>
               <Input
+                id="cookies"
                 name="cookies"
                 type="password"
                 placeholder="Enter your cookies"

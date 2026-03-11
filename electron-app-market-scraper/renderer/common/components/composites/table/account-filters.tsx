@@ -30,8 +30,9 @@ const AccountTableFilters = ({
 
   return (
     <InputContainer>
-      <InputLabel>Search Query</InputLabel>
+      <InputLabel htmlFor="search-query">Search Query</InputLabel>
       <Input
+        id="search-query"
         type="text"
         leftIcon={<Search size={20} className="shrink-0" />}
         placeholder={"Search hash name..."}

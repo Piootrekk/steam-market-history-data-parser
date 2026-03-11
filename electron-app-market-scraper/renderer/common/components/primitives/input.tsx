@@ -1,8 +1,10 @@
 import { cn } from "../../utils/merge-styles";
 
 type InputProps = React.ComponentProps<"input"> & {
+  id: string;
   rightIcon?: React.ReactNode;
   leftIcon?: React.ReactNode;
+  isLabel?: boolean;
   onRightIconClick?: () => void;
   onLeftIconClick?: () => void;
 };
@@ -32,8 +34,8 @@ const IconSpan = ({
   className,
   ariaLabel,
 }: {
-  onClick?: () => void;
-  children?: React.ReactNode;
+  onClick: () => void;
+  children: React.ReactNode;
   className?: string;
   ariaLabel?: string;
 }) => (
@@ -46,9 +48,34 @@ const IconSpan = ({
   </SpanLabel>
 );
 
+type InputLabelProps = React.ComponentProps<"label"> & {
+  htmlFor: string;
+};
+
+const InputLabel = ({
+  className,
+  htmlFor,
+  children,
+  ...rest
+}: InputLabelProps) => {
+  return (
+    <label
+      htmlFor={htmlFor}
+      className={cn(
+        "font-medium text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70",
+        className,
+      )}
+      {...rest}
+    >
+      {children}
+    </label>
+  );
+};
+
 const Input = ({
   rightIcon,
   leftIcon,
+  isLabel,
   onRightIconClick,
   onLeftIconClick,
   className,
@@ -74,7 +101,9 @@ const Input = ({
               {leftIcon}
             </IconSpan>
           ) : (
-            <span aria-hidden>{leftIcon}</span>
+            <label htmlFor={id} aria-hidden>
+              {leftIcon}
+            </label>
           )}
         </div>
       )}
@@ -86,7 +115,9 @@ const Input = ({
               {rightIcon}
             </IconSpan>
           ) : (
-            <span aria-hidden>{rightIcon}</span>
+            <label htmlFor={id} aria-hidden>
+              {leftIcon}
+            </label>
           )}
         </div>
       )}
@@ -94,4 +125,4 @@ const Input = ({
   );
 };
 
-export { Input, InputContainer, SpanLabel as InputLabel };
+export { Input, InputContainer, SpanLabel, InputLabel };
