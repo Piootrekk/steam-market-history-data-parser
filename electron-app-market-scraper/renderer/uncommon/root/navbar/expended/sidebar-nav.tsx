@@ -10,7 +10,7 @@ type SideBarNavExtendedProps = {
 
 const SideBarNavExtended = ({ routes, accounts }: SideBarNavExtendedProps) => {
   return (
-    <nav className="flex-1 p-2 space-y-1">
+    <nav className="flex-1 space-y-1 p-2">
       {routes.map((route) => (
         <CurrentSideBar key={route.path} {...route} />
       ))}
@@ -32,7 +32,7 @@ const CurrentSideBar = ({ path, Icon, label }: CurrentSideBarProps) => {
     <NavButton
       to={path}
       key={label}
-      className={"w-full justify-start gap-3 h-10"}
+      className={"h-10 w-full justify-start gap-3"}
     >
       <Icon className="h-5 w-5 shrink-0" />
       <span className="truncate">{label}</span>

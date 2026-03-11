@@ -18,7 +18,7 @@ const SmartImg = ({
     <img
       src={url.href}
       alt={src}
-      className={cn("w-9 h-9 object-contain app-image", className)}
+      className={cn("app-image h-9 w-9 object-contain", className)}
       {...props}
       onError={(e) => {
         e.currentTarget.src = fallbackPath;

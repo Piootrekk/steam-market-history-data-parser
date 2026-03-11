@@ -9,21 +9,15 @@ const TabNav = ({ subtabs }: TabNavProps) => {
   return (
     <div className="w-full">
       <div className="flex items-center gap-4">
-        <div className="flex-1 flex bg-muted/50 rounded-md p-1">
+        <div className="flex flex-1 rounded-md bg-muted/50 p-1">
           {subtabs.map((subtab) => (
             <NavButton
               key={`${subtab.path}`}
               to={subtab.path}
-              className={`
-                px-1
-                flex-1 flex items-center justify-center gap-1 sm:gap-2
-              text-xs sm:text-md font-medium
-                rounded-md transition-all
-                min-w-0
-              `}
+              className={`flex min-w-0 flex-1 items-center justify-center gap-1 rounded-md px-1 font-medium text-xs transition-all sm:gap-2 sm:text-md`}
             >
               <subtab.Icon className="h-4 w-4 shrink-0" />
-              <span className="hidden sm:block truncate">{subtab.label}</span>
+              <span className="hidden truncate sm:block">{subtab.label}</span>
             </NavButton>
           ))}
         </div>

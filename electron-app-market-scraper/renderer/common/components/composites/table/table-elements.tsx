@@ -9,7 +9,7 @@ type TableHeaderRowProps = React.ComponentProps<"th">;
 type TableCellProps = React.ComponentProps<"td">;
 
 const Table = ({ className, ...others }: TableProps) => (
-  <div className="w-full overflow-x-auto scroll-area">
+  <div className="scroll-area w-full overflow-x-auto">
     <table
       className={cn("w-full caption-bottom text-sm", className)}
       {...others}
@@ -42,7 +42,7 @@ const TableRow = ({ className, ...others }: TableRowProps) => (
 const TableHeaderRow = ({ className, ...others }: TableHeaderRowProps) => (
   <th
     className={cn(
-      "h-12 px-4 text-left align-middle font-medium text-muted-foreground whitespace-nowrap [&:has([role=checkbox])]:pr-0",
+      "h-12 whitespace-nowrap px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0",
       className,
     )}
     {...others}
@@ -52,7 +52,7 @@ const TableHeaderRow = ({ className, ...others }: TableHeaderRowProps) => (
 const TableCell = ({ className, ...others }: TableCellProps) => (
   <td
     className={cn(
-      " px-4 py-3 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0",
+      "whitespace-nowrap px-4 py-3 align-middle [&:has([role=checkbox])]:pr-0",
       className,
     )}
     {...others}

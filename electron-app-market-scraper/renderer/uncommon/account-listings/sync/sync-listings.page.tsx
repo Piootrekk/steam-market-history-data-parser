@@ -31,7 +31,7 @@ const SyncListingsPage = () => {
         <CardContent>
           <Form method="post" className="space-y-4">
             <InputContainer>
-              <InputLabel htmlFor="cookies">Cookies</InputLabel>
+              <InputLabel>Cookies</InputLabel>
               <Input
                 name="cookies"
                 type="password"
@@ -39,12 +39,12 @@ const SyncListingsPage = () => {
                 leftIcon={<Cookie size={20} className="shrink-0" />}
               />
             </InputContainer>
-            <div className="flex flex-wrap gap-4 items-center">
+            <div className="flex flex-wrap items-center gap-4">
               <Button disabled={loading} type="submit" className="min-w-30">
                 {loading ? "Fetching... " : "Start Fetching"}
               </Button>
               {error && (
-                <p className="text-destructive flex flex-row gap-2 break-all items-center">
+                <p className="flex flex-row items-center gap-2 break-all text-destructive">
                   <AlertTriangle size={22} className="shrink-0" />
                   {error}
                 </p>

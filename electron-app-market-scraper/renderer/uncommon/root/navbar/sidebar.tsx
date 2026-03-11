@@ -70,7 +70,7 @@ const Sidebar = () => {
   return (
     <aside
       className={cn(
-        "h-full pb-8 border-r border-sidebar-border bg-sidebar transition-all duration-100 flex flex-col",
+        "flex h-full flex-col border-sidebar-border border-r bg-sidebar pb-8 transition-all duration-100",
         storedValue.isCollapsed ? "w-16" : "w-64",
       )}
     >

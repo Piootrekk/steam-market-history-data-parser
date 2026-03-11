@@ -4,7 +4,7 @@ const ExternalLink = ({ ...props }: ExternalLinkProps) => {
   return (
     <a
       {...props}
-      className="underline cursor-pointer focus:text-ring focus-visible:outline-none"
+      className="cursor-pointer underline focus:text-ring focus-visible:outline-none"
     />
   );
 };

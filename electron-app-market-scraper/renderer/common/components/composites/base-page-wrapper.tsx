@@ -10,7 +10,7 @@ const RootPageWrapper = ({
   return (
     <div
       className={cn(
-        "max-w-7xl mx-auto h-full overflow-hidden flex flex-col ",
+        "mx-auto flex h-full max-w-7xl flex-col overflow-hidden",
         className,
       )}
       {...rest}

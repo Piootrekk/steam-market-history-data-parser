@@ -7,7 +7,7 @@ type SidebarHeaderCollapsedProps = {
 
 const SidebarHeaderCollapsed = ({ onToggle }: SidebarHeaderCollapsedProps) => {
   return (
-    <div className="flex h-16 items-center justify-between border-b border-sidebar-border px-4">
+    <div className="flex h-16 items-center justify-between border-sidebar-border border-b px-4">
       <Button
         onClick={onToggle}
         variant="ghost"

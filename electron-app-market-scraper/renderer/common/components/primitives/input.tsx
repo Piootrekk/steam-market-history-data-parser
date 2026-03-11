@@ -11,14 +11,14 @@ const InputContainer = ({
   className,
   ...rest
 }: React.ComponentProps<"input">) => {
-  return <div className={cn("space-y-2 flex flex-col", className)} {...rest} />;
+  return <div className={cn("flex flex-col space-y-2", className)} {...rest} />;
 };
 
-const InputLabel = ({ className, ...rest }: React.ComponentProps<"span">) => {
+const SpanLabel = ({ className, ...rest }: React.ComponentProps<"span">) => {
   return (
     <span
       className={cn(
-        "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70",
+        "font-medium text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70",
         className,
       )}
       {...rest}
@@ -26,7 +26,7 @@ const InputLabel = ({ className, ...rest }: React.ComponentProps<"span">) => {
   );
 };
 
-const IconLabel = ({
+const IconSpan = ({
   onClick,
   children,
   className,
@@ -36,15 +36,14 @@ const IconLabel = ({
   children?: React.ReactNode;
   className?: string;
   ariaLabel?: string;
-  htmlFor?: string;
 }) => (
-  <InputLabel
+  <SpanLabel
     onClick={onClick}
     aria-label={ariaLabel}
-    className={cn("focus:outline-none rounded-full p-1", className)}
+    className={cn("rounded-full p-1 focus:outline-none", className)}
   >
     {children}
-  </InputLabel>
+  </SpanLabel>
 );
 
 const Input = ({
@@ -61,10 +60,7 @@ const Input = ({
       <input
         id={id}
         className={cn(
-          "peer flex w-full rounded-md border border-input bg-background px-3 py-2  ring-offset-background \
-           file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground \
-            placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 \
-             focus-visible:ring-ring focus-visible:ring-offset-0 disabled:cursor-not-allowed disabled:opacity-50",
+          "peer flex w-full rounded-md border border-input bg-background px-3 py-2 ring-offset-background file:border-0 file:bg-transparent file:font-medium file:text-foreground file:text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0 disabled:cursor-not-allowed disabled:opacity-50",
           leftIcon ? "pl-12" : "pl-4",
           rightIcon ? "pr-12" : "pr-4",
           className,
@@ -72,15 +68,11 @@ const Input = ({
         {...rest}
       />
       {leftIcon && (
-        <div className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground peer-focus:text-ring">
+        <div className="absolute top-1/2 left-3 -translate-y-1/2 transform text-muted-foreground peer-focus:text-ring">
           {onLeftIconClick ? (
-            <IconLabel
-              htmlFor={id}
-              onClick={onLeftIconClick}
-              ariaLabel="left icon"
-            >
+            <IconSpan onClick={onLeftIconClick} ariaLabel="left icon">
               {leftIcon}
-            </IconLabel>
+            </IconSpan>
           ) : (
             <span aria-hidden>{leftIcon}</span>
           )}
@@ -88,15 +80,11 @@ const Input = ({
       )}
 
       {rightIcon && (
-        <div className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground peer-focus:text-ring">
+        <div className="absolute top-1/2 right-3 -translate-y-1/2 transform text-muted-foreground peer-focus:text-ring">
           {onRightIconClick ? (
-            <IconLabel
-              htmlFor={id}
-              onClick={onRightIconClick}
-              ariaLabel="right icon"
-            >
+            <IconSpan onClick={onRightIconClick} ariaLabel="right icon">
               {rightIcon}
-            </IconLabel>
+            </IconSpan>
           ) : (
             <span aria-hidden>{rightIcon}</span>
           )}
@@ -106,4 +94,4 @@ const Input = ({
   );
 };
 
-export { Input, InputContainer, InputLabel };
+export { Input, InputContainer, SpanLabel as InputLabel };

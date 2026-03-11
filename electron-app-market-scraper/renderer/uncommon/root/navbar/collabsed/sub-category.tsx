@@ -22,9 +22,9 @@ const SideBarSubCategoryCollabsed = ({
             isSubCollapsed: !prev.isSubCollapsed,
           }))
         }
-        className="w-full justify-center px-0 flex-col gap-1.5 text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+        className="w-full flex-col justify-center gap-1.5 px-0 text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
       >
-        <div className="flex items-center flex-col">
+        <div className="flex flex-col items-center">
           <Icon className="h-5 w-5 shrink-0" />
         </div>
         {isOpen.isSubCollapsed ? (
@@ -34,7 +34,7 @@ const SideBarSubCategoryCollabsed = ({
         )}
       </Button>
       {isOpen.isSubCollapsed && (
-        <div className="mt-1 space-y-0.5 w-full px-1">{children}</div>
+        <div className="mt-1 w-full space-y-0.5 px-1">{children}</div>
       )}
     </div>
   );

@@ -34,7 +34,7 @@ const DownloadAllPage = () => {
         <CardContent>
           <Form method="post" className="space-y-4">
             <div className="flex flex-wrap gap-4">
-              <InputContainer className="flex-1 min-w-full md:min-w-0 space-y-2">
+              <InputContainer className="min-w-full flex-1 space-y-2 md:min-w-0">
                 <InputLabel htmlFor="steamId">Steam ID / Name / ID</InputLabel>
                 <Input
                   name="steamId"
@@ -43,7 +43,7 @@ const DownloadAllPage = () => {
                   leftIcon={<User size={20} className="shrink-0" />}
                 />
               </InputContainer>
-              <InputContainer className="flex-1 min-w-full md:min-w-0 space-y-2">
+              <InputContainer className="min-w-full flex-1 space-y-2 md:min-w-0">
                 <InputLabel htmlFor="cookies">Cookies</InputLabel>
                 <Input
                   name="cookies"
@@ -53,12 +53,12 @@ const DownloadAllPage = () => {
                 />
               </InputContainer>
             </div>
-            <div className="flex flex-wrap gap-4 items-center">
+            <div className="flex flex-wrap items-center gap-4">
               <Button disabled={loading} type="submit" className="min-w-30">
                 {loading ? "Fetching... " : "Start Fetching"}
               </Button>
               {error && (
-                <p className="text-destructive flex flex-row gap-2 break-all items-center">
+                <p className="flex flex-row items-center gap-2 break-all text-destructive">
                   <AlertTriangle size={22} className="shrink-0" />
                   {error}
                 </p>

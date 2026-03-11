@@ -12,11 +12,11 @@ const SidebarHeaderExtended = ({
   onToggle,
 }: SidebarHeaderExtendedProps) => {
   return (
-    <div className="flex h-16 items-center justify-between border-b border-sidebar-border px-4">
+    <div className="flex h-16 items-center justify-between border-sidebar-border border-b px-4">
       <div className="flex items-center gap-2">
         <span
           className={cn(
-            "font-semibold text-sidebar-foreground whitespace-nowrap",
+            "whitespace-nowrap font-semibold text-sidebar-foreground",
           )}
         >
           {title}

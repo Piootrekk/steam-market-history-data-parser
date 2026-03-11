@@ -109,7 +109,7 @@ const ToolTip = ({
         zIndex: 9999,
       }}
       className={cn(
-        "px-3 py-1.5 text-sm rounded-md whitespace-nowrap",
+        "whitespace-nowrap rounded-md px-3 py-1.5 text-sm",
         "transition-opacity duration-150",
         positionClasses[side],
         className,
@@ -119,9 +119,9 @@ const ToolTip = ({
 
       <span className={caretWrapperClasses[side]}>
         <span
-          className={cn("relative block w-0 h-0", caretBorderClasses[side])}
+          className={cn("relative block h-0 w-0", caretBorderClasses[side])}
         >
-          <span className={cn("block w-0 h-0", caretInnerClasses[side])} />
+          <span className={cn("block h-0 w-0", caretInnerClasses[side])} />
         </span>
       </span>
     </Card>

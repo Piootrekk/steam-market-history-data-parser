@@ -45,27 +45,27 @@ const RecentActivitySection = ({
   message,
 }: RecentActivitySectionProps) => {
   return (
-    <div className="flex gap-4  p-4 rounded-lg border border-border/50 bg-background/50 ">
+    <div className="flex gap-4 rounded-lg border border-border/50 bg-background/50 p-4">
       <div
         className={cn(
-          "p-2.5 rounded-full shrink-0 h-fit",
+          "h-fit shrink-0 rounded-full p-2.5",
           activityStyles[activityStyle] ?? activityStyles.info,
         )}
       >
         <Icon className="h-5 w-5" />
       </div>
 
-      <div className="flex-1 min-w-0 space-y-1.5">
+      <div className="min-w-0 flex-1 space-y-1.5">
         <div className="flex flex-wrap items-center justify-between gap-3">
-          <div className="flex items-center gap-2 min-w-0 flex-wrap">
-            <span className="text-sm font-semibold text-foreground uppercase truncate">
+          <div className="flex min-w-0 flex-wrap items-center gap-2">
+            <span className="truncate font-semibold text-foreground text-sm uppercase">
               {title}
             </span>
 
             <Badge
               variant="outline"
               className={cn(
-                "text-xs px-2.5 py-0.5",
+                "px-2.5 py-0.5 text-xs",
                 activityStyles[activityStyle],
               )}
             >
@@ -73,13 +73,13 @@ const RecentActivitySection = ({
             </Badge>
           </div>
           <p
-            className="text-xs text-muted-foreground whitespace-nowrap"
+            className="whitespace-nowrap text-muted-foreground text-xs"
             title={getconvertedDate(timestamp)}
           >
             {getTimeAgo(timestamp)}
           </p>
         </div>
-        <p className="text-sm text-muted-foreground leading-relaxed">
+        <p className="text-muted-foreground text-sm leading-relaxed">
           {message}
         </p>
       </div>

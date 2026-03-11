@@ -14,7 +14,7 @@ const SideBarNavCollabsed = ({
   accounts,
 }: SideBarNavCollabsedProps) => {
   return (
-    <nav className="flex-1 p-2 space-y-1">
+    <nav className="flex-1 space-y-1 p-2">
       {routes.map((route) => (
         <ToolTip key={`${route.path}`} side="right" message={route.label}>
           <CurrentSideBar {...route} />
@@ -44,7 +44,7 @@ const CurrentSideBar = ({ path, Icon, label }: CurrentSideBarProps) => {
     <NavButton
       to={path}
       key={label}
-      className={"w-full gap-3 h-10 justify-center px-0"}
+      className={"h-10 w-full justify-center gap-3 px-0"}
     >
       <Icon className="h-5 w-5 shrink-0" />
     </NavButton>

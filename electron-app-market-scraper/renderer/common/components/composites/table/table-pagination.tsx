@@ -89,7 +89,7 @@ const Summary = ({ start, totalCount, limit }: SumaryProps) => {
   const firstElement = start + 1;
   const lastElement = start + limit < totalCount ? start + limit : totalCount;
   return (
-    <span className="px-4 text-sm  text-muted-foreground">
+    <span className="px-4 text-muted-foreground text-sm">
       Showing {firstElement}-{lastElement} of {totalCount} listings.
     </span>
   );

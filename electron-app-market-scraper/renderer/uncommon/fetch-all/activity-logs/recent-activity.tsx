@@ -43,7 +43,7 @@ const RecentActivity = ({ activities }: RecentActivityProps) => {
                 return <RecentActivitySection key={key} {...activity} />;
               })}
             {activities.length === 0 && (
-              <p className="text-sm text-muted-foreground">
+              <p className="text-muted-foreground text-sm">
                 There's no recent activities.
               </p>
             )}
