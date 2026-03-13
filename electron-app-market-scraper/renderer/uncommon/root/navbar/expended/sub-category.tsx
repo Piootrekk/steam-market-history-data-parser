@@ -31,9 +31,9 @@ const SideBarSubCategoryExpended = ({
           <span className="truncate">{name}</span>
         </div>
         {isOpen.isSubCollapsed ? (
-          <ChevronUp className="hrink-0 ml-auto h-4 w-4" />
+          <ChevronUp className="ml-auto h-4 w-4 shrink-0" />
         ) : (
-          <ChevronDown className="hrink-0 ml-auto h-4 w-4" />
+          <ChevronDown className="ml-auto h-4 w-4 shrink-0" />
         )}
       </Button>
       {isOpen.isSubCollapsed && (

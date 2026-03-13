@@ -5,7 +5,7 @@ import { integer, real, sqliteTable, text } from "drizzle-orm/sqlite-core";
 
 const accountTable = sqliteTable("accounts", {
   id: integer("id").primaryKey({ autoIncrement: true }),
-  createdAt: integer("time_event")
+  createdAt: integer("time_event", { mode: "timestamp" })
     .notNull()
     .default(sql`(strftime('%s', 'now'))`),
   steamId: text("steam_id").notNull().unique(),
@@ -16,7 +16,7 @@ const snapshotsTable = sqliteTable("snapshots", {
   createdAt: integer("time_event")
     .notNull()
     .default(sql`(strftime('%s', 'now'))`),
-  totalCount: integer("total_count").notNull(),
+  totalCount: integer("total_count", { mode: "timestamp" }).notNull(),
   accountId: integer("account_id")
     .notNull()
     .references(() => accountTable.id, { onDelete: "cascade" }),
@@ -36,11 +36,11 @@ const logsTable = sqliteTable("logs_snapshot", {
 
 const listingsTable = sqliteTable("listings", {
   id: integer("id").primaryKey({ autoIncrement: true }),
-  listingId: text("listing_id"),
-  purchaseId: text("purchase_id"),
+  listingId: text("listing_id").notNull(),
+  purchaseId: text("purchase_id").notNull(),
   eventType: integer("event_type").notNull(),
   eventAction: text("event_action").notNull(),
-  timeEvent: integer("time_event").notNull(),
+  timeEvent: integer("time_event", { mode: "timestamp" }).notNull(),
   appId: integer("app_id").notNull(),
   game: text("game").notNull(),
   price: real("price").notNull(),
@@ -50,7 +50,7 @@ const listingsTable = sqliteTable("listings", {
   originalAmount: text("original_amount").notNull(),
   backgroundColor: text("background_color"),
   itemType: text("item_type").notNull(),
-  urlIcon: text("url_icon"),
+  urlIcon: text("url_icon").notNull(),
   urlPageMarket: text("url_page_market").notNull(),
   urlPageWiki: text("url_page_wiki"),
   urlPageInspect: text("url_page_inspect"),

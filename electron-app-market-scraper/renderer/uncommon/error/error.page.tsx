@@ -1,4 +1,4 @@
-import BasicPageWrapper from "@renderer/common/components/composites/base-page-wrapper";
+import RootPageWrapper from "@renderer/common/components/composites/base-page-wrapper";
 import Button from "@renderer/common/components/primitives/button";
 import {
   Card,
@@ -68,53 +68,63 @@ const ErrorPage = () => {
   const error = useRouteError();
   const correctError = getError(error);
   return (
-    <BasicPageWrapper className="flex min-h-screen items-center justify-center">
-      <Card className="mx-6">
-        <ScrollArea direction="vertical">
-          <CardHeader>
-            <CardTitle className="text-destructive">
-              <div className="flex items-center gap-3">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border-destructive/20 text-destructive">
-                  <AlertCircle className="h-8 w-8 shrink-0" />
-                </div>
-                <h1 className="font-bold text-3xl">Error Page</h1>
-              </div>
-            </CardTitle>
-            <CardDescription>Something went wrong....</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <main className="max-w-2xl space-y-4">
-              <div className="flex flex-wrap gap-4">
-                <InputContainer className="min-w-full flex-1 space-y-2 md:min-w-0">
-                  <Button
-                    variant="default"
-                    className="w-full"
-                    onClick={onReloadClick}
-                  >
-                    Refresh app
-                  </Button>
-                </InputContainer>
-                <InputContainer className="min-w-full flex-1 space-y-2 md:min-w-0">
-                  <Link to="/" variant="default" className="w-full">
-                    Home page
-                  </Link>
-                </InputContainer>
-              </div>
-              <h1 className="text-xl">
-                {correctError.message} - {correctError.status}
-              </h1>
-              <p className="flex w-full flex-col overflow-x-auto break-all p-4 lg:break-normal">
-                {correctError.stack && <code>Stack: {correctError.stack}</code>}
-                <code>FromRoute: {correctError.fromRoute ? `YES` : `NO`}</code>
-                {correctError.StringifiedData && (
-                  <code>Data: {correctError.StringifiedData}</code>
-                )}
-              </p>
-            </main>
-          </CardContent>
-        </ScrollArea>
-      </Card>
-    </BasicPageWrapper>
+    <div className="flex h-screen bg-background">
+      <div className="flex min-w-0 flex-1 flex-col">
+        <main className="flex-1 overflow-auto p-8">
+          <RootPageWrapper className="flex items-center justify-center">
+            <ScrollArea direction="vertical">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-destructive">
+                    <div className="flex items-center gap-3">
+                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border-destructive/20 text-destructive">
+                        <AlertCircle className="h-8 w-8 shrink-0" />
+                      </div>
+                      <h1 className="font-bold text-3xl">Error Page</h1>
+                    </div>
+                  </CardTitle>
+                  <CardDescription>Something went wrong....</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <main className="max-w-2xl space-y-4">
+                    <div className="flex flex-wrap gap-4">
+                      <InputContainer className="min-w-full flex-1 space-y-2 md:min-w-0">
+                        <Button
+                          variant="default"
+                          className="w-full"
+                          onClick={onReloadClick}
+                        >
+                          Refresh app
+                        </Button>
+                      </InputContainer>
+                      <InputContainer className="min-w-full flex-1 space-y-2 md:min-w-0">
+                        <Link to="/" variant="default" className="w-full">
+                          Home page
+                        </Link>
+                      </InputContainer>
+                    </div>
+                    <h1 className="text-xl">
+                      {correctError.message} - {correctError.status}
+                    </h1>
+                    <p className="flex w-full flex-col overflow-x-auto break-all p-4 lg:break-normal">
+                      {correctError.stack && (
+                        <code>Stack: {correctError.stack}</code>
+                      )}
+                      <code>
+                        FromRoute: {correctError.fromRoute ? `YES` : `NO`}
+                      </code>
+                      {correctError.StringifiedData && (
+                        <code>Data: {correctError.StringifiedData}</code>
+                      )}
+                    </p>
+                  </main>
+                </CardContent>
+              </Card>
+            </ScrollArea>
+          </RootPageWrapper>
+        </main>
+      </div>
+    </div>
   );
 };
 

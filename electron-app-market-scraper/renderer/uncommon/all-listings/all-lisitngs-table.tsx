@@ -44,7 +44,7 @@ const ListingsAllColumns: Column<ListingsAll>[] = [
   {
     key: "timeEvent",
     header: "Time",
-    render: (item) => new Date(item.timeEvent * 1000).toLocaleString("en-GB"),
+    render: (item) => item.timeEvent.toLocaleString("en-GB"),
   },
   {
     key: "steamid",

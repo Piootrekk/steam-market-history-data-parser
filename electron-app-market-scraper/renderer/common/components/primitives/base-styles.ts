@@ -18,7 +18,7 @@ const variants = {
     "bg-destructive text-destructive-foreground hover:bg-destructive/90 focus-visible:ring-offset-0",
 
   outline:
-    "border border-input bg-background hover:bg-accent hover:text-accent-foreground focus-visible:ring-offset-0",
+    "border border-input  hover:bg-accent hover:text-accent-foreground focus-visible:ring-offset-0",
 
   secondary:
     "bg-secondary text-secondary-foreground hover:bg-secondary/80 focus-visible:ring-offset-0",

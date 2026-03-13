@@ -55,10 +55,9 @@ const getListingsCountFromAccount = async (
   return response;
 };
 
-const getListingsColumnsNames = () => {
-  const listingsObject = getTableColumns(listingsTable);
-  const listingsNames = Object.keys(listingsObject);
-  return listingsNames;
+const getListingsColumnsMetadata = () => {
+  const columnsMetadata = getTableColumns(listingsTable);
+  return columnsMetadata;
 };
 
 const getAllListingsCount = async (db: Db, query?: string) => {
@@ -117,8 +116,8 @@ export {
   getAllSteamIdsFromAccount,
   getListingsForCurrentAccount,
   getListingsCountFromAccount,
-  getListingsColumnsNames,
   getAllListings,
   getAllListingsCount,
   getImgIdsFromCurrentSnapshot,
+  getListingsColumnsMetadata,
 };
