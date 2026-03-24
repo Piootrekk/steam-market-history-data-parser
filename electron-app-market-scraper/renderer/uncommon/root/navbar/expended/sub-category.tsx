@@ -1,6 +1,6 @@
+import ArrowIcon from "@renderer/common/components/primitives/arrow-icon";
 import Button from "@renderer/common/components/primitives/button";
 import { useLocalStoredValue } from "@renderer/common/hooks/local-storage.hook";
-import { ChevronDown, ChevronUp } from "lucide-react";
 
 type SideBarSubCategoryExpendedProps = {
   children: React.ReactNode;
@@ -30,11 +30,7 @@ const SideBarSubCategoryExpended = ({
           <Icon className="h-5 w-5 shrink-0" />
           <span className="truncate">{name}</span>
         </div>
-        {isOpen.isSubCollapsed ? (
-          <ChevronUp className="ml-auto h-4 w-4 shrink-0" />
-        ) : (
-          <ChevronDown className="ml-auto h-4 w-4 shrink-0" />
-        )}
+        <ArrowIcon direction="down" isTriggerRotate={isOpen.isSubCollapsed} />
       </Button>
       {isOpen.isSubCollapsed && (
         <div className="mt-1 ml-2 space-y-0.5 border-sidebar-border border-l-2 pl-4">

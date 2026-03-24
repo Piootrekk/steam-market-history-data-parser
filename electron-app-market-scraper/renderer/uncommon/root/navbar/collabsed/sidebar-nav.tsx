@@ -1,5 +1,5 @@
 import { NavButton } from "@renderer/common/components/primitives/navlink";
-import ToolTip from "@renderer/common/components/primitives/tooltip";
+import ToolTip from "@renderer/common/components/primitives/tooltip-hover";
 import type { NavRoutes } from "@renderer/routes";
 import { Users2 } from "lucide-react";
 import SideBarSubCategoryCollabsed from "./sub-category";

@@ -36,7 +36,7 @@ const TableFooter = ({ className, ...others }: TableFooterProps) => (
 );
 
 const TableRow = ({ className, ...others }: TableRowProps) => (
-  <tr className={cn("border-b transition-colors", className)} {...others} />
+  <tr className={cn("border-b", className)} {...others} />
 );
 
 const TableHeaderRow = ({ className, ...others }: TableHeaderRowProps) => (
