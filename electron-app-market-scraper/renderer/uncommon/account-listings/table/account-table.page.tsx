@@ -1,10 +1,8 @@
 import ExternalLinks from "@renderer/common/components/composites/table/external-links";
-import DataTable, {
-  type Column,
-} from "@renderer/common/components/composites/table/table";
-
+import type { Column } from "@renderer/common/components/composites/table/table";
 import { TableListingsPage } from "@renderer/common/components/composites/table-listings-page";
 import SmartImg from "@renderer/common/components/primitives/smart-img/smart-img";
+import { useSteamIdFromParam } from "../steamid.hook";
 import { type Listings, useAccountTableInvoices } from "./accout-table.loader";
 
 const ListingsColumns: Column<Listings>[] = [
@@ -53,12 +51,18 @@ const ListingsColumns: Column<Listings>[] = [
 ];
 
 const AccountTablePage = () => {
+  const steamId = useSteamIdFromParam();
+
   const { listings, listingsCount } = useAccountTableInvoices();
 
   return (
-    <TableListingsPage listingsCount={listingsCount}>
-      <DataTable columns={ListingsColumns} data={listings} />
-    </TableListingsPage>
+    <TableListingsPage
+      listingsCount={listingsCount}
+      columns={ListingsColumns}
+      data={listings}
+      title={`Listings for ${steamId}.`}
+      description={"Manage and filter your listings for this account."}
+    />
   );
 };
 

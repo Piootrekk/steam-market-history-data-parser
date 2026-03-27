@@ -1,13 +1,13 @@
 import { CardContent } from "@renderer/common/components/primitives/card";
 
-const QueryListingsEmpty = () => {
+const TableEmpty = () => {
   return (
     <CardContent>
-      <p className="text-muted-foreground">
-        There are no offers to display for your current query.
+      <p className="mt-2 text-muted-foreground">
+        There are no listings to display for your current query.
       </p>
     </CardContent>
   );
 };
 
-export default QueryListingsEmpty;
+export default TableEmpty;

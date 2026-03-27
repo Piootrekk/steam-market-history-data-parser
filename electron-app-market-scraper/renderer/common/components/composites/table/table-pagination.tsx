@@ -1,6 +1,6 @@
+import { LinkButton } from "@renderer/common/components/primitives/navlink";
 import { cn } from "@renderer/common/utils/merge-styles";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { LinkButton } from "../../../../common/components/primitives/navlink";
 
 type PaginationRightProps = {
   page: number;
@@ -51,14 +51,14 @@ const ChevronLeftPagination = ({ page, to }: PaginationLeftProps) => {
   const isDisabled = page <= 0;
 
   return (
-    <LinkButton disabled={isDisabled} variant="outline" to={to} size="icon">
+    <LinkButton disabled={isDisabled} variant="ghost" to={to} size="icon">
       <ChevronLeft />
     </LinkButton>
   );
 };
 
 const PagePagination = ({ page, to, isCurrentPage }: CurrentPageProps) => (
-  <LinkButton to={to} variant={isCurrentPage ? "default" : "outline"}>
+  <LinkButton to={to} variant={isCurrentPage ? "default" : "ghost"}>
     {page}
   </LinkButton>
 );
@@ -71,7 +71,7 @@ const ChevronRightPagination = ({
   const isDisabled = page > maxPage;
 
   return (
-    <LinkButton disabled={isDisabled} to={to} size="icon" variant="outline">
+    <LinkButton disabled={isDisabled} to={to} size="icon" variant="ghost">
       <ChevronRight />
     </LinkButton>
   );

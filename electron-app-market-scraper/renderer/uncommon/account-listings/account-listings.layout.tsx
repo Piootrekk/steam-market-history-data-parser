@@ -35,7 +35,6 @@ const AccountListingsLayout = () => {
       />
 
       <TabNav subtabs={subtabs} />
-
       <Outlet />
     </>
   );

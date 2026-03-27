@@ -7,9 +7,9 @@ import {
   Summary,
 } from "@renderer/common/components/composites/table/table-pagination";
 import { TABLE_PARAMS } from "@renderer/routes";
+import { useSearchParams } from "react-router-dom";
 
 type PaginationProps = {
-  urlSearchParams: URLSearchParams;
   totalCount: number;
 };
 
@@ -43,10 +43,8 @@ const getPathParams = (
   return params.toString();
 };
 
-const TablePagination = ({
-  urlSearchParams: params,
-  totalCount,
-}: PaginationProps) => {
+const TablePagination = ({ totalCount }: PaginationProps) => {
+  const [params] = useSearchParams();
   const { startParam, limit } = getParamsFromURLSearchParams(params);
   if (totalCount <= limit) return null;
   const totalPages = getPageCount(totalCount, limit);

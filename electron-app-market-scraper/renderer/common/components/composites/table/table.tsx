@@ -1,4 +1,4 @@
-import QueryListingsEmpty from "@renderer/common/components/composites/table/table-empty";
+import TableEmpty from "@renderer/common/components/composites/table/table-empty";
 import {
   Table,
   TableBody,
@@ -6,11 +6,13 @@ import {
   TableHeader,
   TableHeaderRow,
   TableRow,
-} from "./table-elements";
+} from "../../primitives/table-elements";
 
 type Column<T> = {
   key: keyof T;
   header: string;
+  defaultVisible?: boolean;
+  sortable?: boolean;
   render: (item: T) => React.ReactNode;
 };
 
@@ -25,7 +27,7 @@ const DataTable = <T extends Record<string, unknown>>({
   columns,
   data,
 }: DataTableProps<T>) => {
-  if (data.length === 0) return <QueryListingsEmpty />;
+  if (data.length === 0) return <TableEmpty />;
   return (
     <Table>
       <TableHeader>

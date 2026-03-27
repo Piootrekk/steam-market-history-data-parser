@@ -12,14 +12,14 @@ import Button from "./button";
 
 type Align = "left" | "right";
 
-type DropDownContextType = {
+type DropDownContext = {
   open: boolean;
   toggle: () => void;
   close: () => void;
   align: Align;
 };
 
-const DropDownContext = createContext<DropDownContextType | null>(null);
+const DropDownContext = createContext<DropDownContext | null>(null);
 
 const useDropDown = () => {
   const ctx = use(DropDownContext);
@@ -90,7 +90,6 @@ const Trigger = ({ children, className }: TriggerProps) => {
           "h-3.5 w-3.5 transition-transform duration-100",
           open && "rotate-180",
         )}
-        strokeWidth={2}
         aria-hidden="true"
       />
     </Button>
@@ -108,16 +107,18 @@ const OpenList = ({ children, className }: OpenListProps) => {
   if (!open) return null;
 
   return (
-    <div
-      className={cn(
-        "scroll-area absolute z-50 mt-2 max-h-80 overflow-y-auto rounded-lg border border-border bg-popover py-2 shadow-elevated",
-        align === "right" ? "right-0" : "left-0",
-        "min-w-50",
-        className,
-      )}
-    >
-      {children}
-    </div>
+    <fieldset>
+      <div
+        className={cn(
+          "scroll-area absolute z-50 mt-2 max-h-80 overflow-y-auto rounded-lg border border-border bg-popover py-2 shadow-elevated",
+          align === "right" ? "right-0" : "left-0",
+          "min-w-50",
+          className,
+        )}
+      >
+        {children}
+      </div>
+    </fieldset>
   );
 };
 

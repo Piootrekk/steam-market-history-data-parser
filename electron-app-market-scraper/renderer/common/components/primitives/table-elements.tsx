@@ -1,4 +1,4 @@
-import { cn } from "../../../utils/merge-styles";
+import { cn } from "../../utils/merge-styles";
 
 type TableProps = React.ComponentProps<"table">;
 type TableHeaderProps = React.ComponentProps<"thead">;
