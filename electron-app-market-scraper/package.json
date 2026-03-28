@@ -12,8 +12,8 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "biome check --write",
-    "ts:check": "npx tsc --noEmit --extendedDiagnostics",
-    "tsgo:check": "npx tsgo --noEmit --extendedDiagnostics",
+    "ts:check": "tsc --noEmit --extendedDiagnostics",
+    "tsgo:check": "tsgo --noEmit --extendedDiagnostics",
     "db:generate": "drizzle-kit generate --config electron/core/db/drizzle.config.ts",
     "db:push": "drizzle-kit push --config electron/core/db/drizzle.config.ts",
     "db:migrate": "drizzle-kit migrate --config electron/core/db/drizzle.config.ts",
@@ -36,7 +36,7 @@
     "@libsql/client": "^0.17.0",
     "clsx": "^2.1.1",
     "drizzle-orm": "^0.45.1",
-    "lucide-react": "^0.575.0",
+    "lucide-react": "^1.7.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "react-router-dom": "^7.13.0",
@@ -48,21 +48,19 @@
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@typescript/native-preview": "^7.0.0-dev.20260220.1",
-    "@vitejs/plugin-react": "^5.1.4",
+    "@vitejs/plugin-react": "^6.0.1",
     "drizzle-kit": "^0.31.9",
-    "electron": "^40.6.0",
-    "electron-builder": "^26.8.1",
+    "electron": "^41.1.0",
+    "electron-builder": "^26.8.2",
     "tailwindcss": "^4.2.0",
     "tsx": "^4.21.0",
-    "typescript": "^5.9.3",
-    "vite": "^7.3.1",
-    "vite-plugin-electron": "^0.29.0",
-    "vite-plugin-static-copy": "^3.2.0",
-    "vite-tsconfig-paths": "^6.1.1"
+    "typescript": "^6.0.2",
+    "vite": "^8.0.3",
+    "vite-plugin-electron": "^0.29.1"
   },
   "overrides": {
     "esbuild": "^0.27.3",
     "esm-loader": "tsx@^4.21.0"
   },
-  "packageManager": "npm@11.6.2"
+  "packageManager": "npm@10.33.0"
 }

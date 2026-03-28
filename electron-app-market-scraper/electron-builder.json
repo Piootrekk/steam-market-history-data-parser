@@ -1,9 +1,10 @@
 {
+  "$schema": "https://raw.githubusercontent.com/electron-userland/electron-builder/master/packages/app-builder-lib/scheme.json",
   "appId": "com.piootreek.marketscraper",
   "productName": "Steam market scraper",
   "files": ["dist/**/*", "dist-electron/**/*", "assets/**"],
   "asar": true,
-  "directories": { "buildResources": "assets", "output": "release-portable" },
+  "directories": { "buildResources": "assets", "output": "release2" },
   "win": {
     "icon": "assets/test.png",
     "target": [

@@ -18,7 +18,7 @@ const appImagesHandler = async (request: Request): Promise<Response> => {
       await fs.access(filePath, fs.constants.F_OK);
       const data = await fs.readFile(filePath);
 
-      return new Response(data, {
+      return new Response(new Uint8Array(data), {
         headers: {
           "Content-Type": getMimeType(ext),
           "Cache-Control": "public, max-age=31536000",

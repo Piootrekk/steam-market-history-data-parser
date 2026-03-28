@@ -1,17 +1,21 @@
 import path from "node:path";
 import type { PluginOption } from "vite";
 import electron from "vite-plugin-electron/simple";
-import tsconfigPaths from "vite-tsconfig-paths";
 
 const electronPlugin = () =>
   electron({
     main: {
       entry: "electron/main.ts",
       vite: {
-        plugins: [tsconfigPaths()],
+        resolve: {
+          tsconfigPaths: true,
+        },
         build: {
-          minify: "esbuild",
-          rollupOptions: {
+          minify: "oxc",
+          rolldownOptions: {
+            output: {
+              codeSplitting: false,
+            },
             external: ["@libsql/client", "drizzle-orm-sqlite", "drizzle-orm"],
           },
         },
@@ -21,7 +25,7 @@ const electronPlugin = () =>
       input: path.join(__dirname, "electron/preload.ts"),
       vite: {
         build: {
-          minify: "esbuild",
+          minify: "oxc",
         },
       },
     },

@@ -11,7 +11,7 @@ import { InputContainer } from "@renderer/common/components/primitives/input";
 import { Link } from "@renderer/common/components/primitives/navlink";
 import { ScrollArea } from "@renderer/common/components/primitives/scroll-area";
 import { AlertCircle } from "lucide-react";
-import { isRouteErrorResponse, useRouteError } from "react-router";
+import { isRouteErrorResponse, useRouteError } from "react-router-dom";
 
 type ErrorBoundy = {
   status: number;

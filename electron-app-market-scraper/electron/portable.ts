@@ -36,6 +36,7 @@ const logFile = createWriteStream(
 );
 
 const logPortable = (...args: unknown[]) => {
+  if (!isPortable) return;
   const msg = `[${new Date().toISOString()}] ${args.join(" ")}\n`;
   logFile.write(msg);
 };
