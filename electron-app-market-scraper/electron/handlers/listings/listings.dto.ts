@@ -69,6 +69,11 @@ const listingsAllDto = (
       newAssetId: repo.newAssetId,
       oldAssetId: repo.oldAssetId,
       iconHashStorage: repo.iconHashStorage,
+      urlPageMarket: repo.urlPageMarket,
+      urlPageWorkshop: repo.urlPageWorkshop,
+      urlPageInspect: repo.urlPageInspect,
+      urlPageWiki: repo.urlPageWiki,
+      itemType: repo.itemType,
     };
   });
   return responseDto;

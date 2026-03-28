@@ -5,6 +5,7 @@ const ExternalLink = ({ ...props }: ExternalLinkProps) => {
     <a
       {...props}
       className="cursor-pointer underline focus:text-ring focus-visible:outline-none"
+      target="_blank"
     />
   );
 };

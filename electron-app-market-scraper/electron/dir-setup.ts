@@ -1,9 +1,7 @@
-import fs from "node:fs";
+import { mkdir } from "node:fs/promises";
 
-const ensureDirExists = (path: string) => {
-  if (!fs.existsSync(path)) {
-    fs.mkdirSync(path, { recursive: true });
-  }
+const ensureDirExists = async (path: string): Promise<void> => {
+  await mkdir(path, { recursive: true });
 };
 
 export { ensureDirExists };

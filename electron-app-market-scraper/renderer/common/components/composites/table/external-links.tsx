@@ -15,23 +15,13 @@ const ExternalLinks = ({
 }: ExternalLinksPops) => {
   return (
     <div className="flex flex-row space-x-1">
-      <ExternalLink href={urlPageMarket} target="_blank">
-        Market
-      </ExternalLink>
+      <ExternalLink href={urlPageMarket}>Market</ExternalLink>
       {urlPageInspect && (
-        <ExternalLink href={urlPageInspect} target="_blank">
-          Inspect{" "}
-        </ExternalLink>
+        <ExternalLink href={urlPageInspect}>Inspect </ExternalLink>
       )}
-      {urlPageWiki && (
-        <ExternalLink href={urlPageWiki} target="_blank">
-          Wiki
-        </ExternalLink>
-      )}
+      {urlPageWiki && <ExternalLink href={urlPageWiki}>Wiki</ExternalLink>}
       {urlPageWorkshop && (
-        <ExternalLink href={urlPageWorkshop} target="_blank">
-          Workshop
-        </ExternalLink>
+        <ExternalLink href={urlPageWorkshop}>Workshop</ExternalLink>
       )}
     </div>
   );

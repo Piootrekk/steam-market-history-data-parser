@@ -1,6 +1,6 @@
 import { userAllService } from "./user-all.service";
 
-const userAllController = () => {
-  return userAllService();
+const userAllController = async () => {
+  return await userAllService();
 };
 export { userAllController };

@@ -115,7 +115,9 @@ const ToolTip = ({
         className,
       )}
     >
-      {message}
+      <span className="block max-w-37.5 overflow-hidden text-ellipsis whitespace-nowrap text-left [direction:rtl]">
+        {message}
+      </span>
 
       <span className={caretWrapperClasses[side]}>
         <span

@@ -1,3 +1,4 @@
+import { createWriteStream } from "node:fs";
 import path from "node:path";
 import { app } from "electron";
 
@@ -22,11 +23,21 @@ const getPortablePath = () => {
 };
 
 const getOperationalPath = () => {
-  if (!isPortable) throw new Error("Invalid config for not portable build.");
+  if (!isPortable()) throw new Error("Invalid config for not portable build.");
   const operationalFolderName = "data";
   const portablePath = getPortablePath();
   const operationalPath = path.join(portablePath, operationalFolderName);
   return operationalPath;
 };
 
-export { isPortable, getPortablePath, getOperationalPath };
+const logFile = createWriteStream(
+  path.join(process.env.PORTABLE_EXECUTABLE_DIR ?? ".", "app.log"),
+  { flags: "a" },
+);
+
+const logPortable = (...args: unknown[]) => {
+  const msg = `[${new Date().toISOString()}] ${args.join(" ")}\n`;
+  logFile.write(msg);
+};
+
+export { isPortable, getPortablePath, getOperationalPath, logPortable };

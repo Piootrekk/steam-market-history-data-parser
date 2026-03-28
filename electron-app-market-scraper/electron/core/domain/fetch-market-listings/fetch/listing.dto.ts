@@ -17,7 +17,7 @@ const transformDto = (response: MergeResponse) => {
       purchaseId: resp.purchaseid,
       eventType: resp.event_type,
       eventAction: getTransformedEvent(resp.event_type),
-      timeEvent: resp.time_event,
+      timeEvent: new Date(resp.time_event * 1000),
       steamidActor: resp.steamid_actor,
       appId: resp.appid,
       game: getGameFromAppId(resp.appid),

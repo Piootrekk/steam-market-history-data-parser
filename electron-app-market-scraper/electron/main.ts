@@ -10,6 +10,7 @@ import {
 } from "./env";
 import { registerAllHandlers } from "./handlers";
 import { ipcMainAdapter } from "./ipc-adapter/ipc.main.adapter";
+import { logPortable } from "./portable";
 import { registerAllProtocols } from "./protocols";
 
 const createWindow = () => {
@@ -64,15 +65,26 @@ app.on("activate", () => {
 
 app.whenReady().then(async () => {
   try {
+    await ensureDirExists(IMAGE_STORAGE_PATH);
     await connectDb();
     registerAllProtocols();
     registerAllHandlers();
-    ensureDirExists(IMAGE_STORAGE_PATH);
     createWindow();
   } catch (err) {
+    logPortable("Uncaught exception:", err);
     console.error("App launching error: ", err);
     app.quit();
   }
+});
+
+process.on("uncaughtException", (err) => {
+  logPortable("Uncaught exception:", err);
+  console.error("Uncaught exception:", err);
+});
+
+process.on("unhandledRejection", (reason) => {
+  logPortable("Uncaught exception:", reason);
+  console.error("Unhandled rejection:", reason);
 });
 
 const initConnectionCheck = (window: BrowserWindow) => {

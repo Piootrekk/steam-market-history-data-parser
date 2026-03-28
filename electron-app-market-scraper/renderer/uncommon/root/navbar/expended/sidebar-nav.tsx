@@ -32,10 +32,12 @@ const CurrentSideBar = ({ path, Icon, label }: CurrentSideBarProps) => {
     <NavButton
       to={path}
       key={label}
-      className={"h-10 w-full justify-start gap-3"}
+      className={"flex h-10 w-full justify-start gap-3"}
     >
       <Icon className="h-5 w-5 shrink-0" />
-      <span className="truncate">{label}</span>
+      <span className="min-w-0 flex-1 overflow-hidden text-ellipsis whitespace-nowrap text-left [direction:rtl]">
+        {label}
+      </span>
     </NavButton>
   );
 };

@@ -13,25 +13,13 @@ const accountTable = sqliteTable("accounts", {
 
 const snapshotsTable = sqliteTable("snapshots", {
   id: integer("id").primaryKey({ autoIncrement: true }),
-  createdAt: integer("time_event")
+  createdAt: integer("time_event", { mode: "timestamp" })
     .notNull()
     .default(sql`(strftime('%s', 'now'))`),
-  totalCount: integer("total_count", { mode: "timestamp" }).notNull(),
+  totalCount: integer("total_count").notNull(),
   accountId: integer("account_id")
     .notNull()
     .references(() => accountTable.id, { onDelete: "cascade" }),
-});
-
-const logsTable = sqliteTable("logs_snapshot", {
-  id: integer("id").primaryKey({ autoIncrement: true }),
-  createdAt: integer("time_event")
-    .notNull()
-    .default(sql`(strftime('%s', 'now'))`),
-  status: text("status").notNull(),
-  message: text("message").notNull(),
-  snapshotId: integer("snapshot_id")
-    .notNull()
-    .references(() => snapshotsTable.id, { onDelete: "cascade" }),
 });
 
 const listingsTable = sqliteTable("listings", {
@@ -71,13 +59,6 @@ const accountRelations = relations(accountTable, ({ many }) => ({
   snapshots: many(snapshotsTable),
 }));
 
-const logsRelations = relations(logsTable, ({ one }) => ({
-  snapshot: one(snapshotsTable, {
-    fields: [logsTable.snapshotId],
-    references: [snapshotsTable.id],
-  }),
-}));
-
 const snapshotsRelations = relations(snapshotsTable, ({ many, one }) => ({
   listings: many(listingsTable),
   account: one(accountTable, {
@@ -96,10 +77,8 @@ const listingsRelations = relations(listingsTable, ({ one }) => ({
 export {
   listingsTable,
   snapshotsTable,
-  logsTable,
   accountTable,
   snapshotsRelations,
   listingsRelations,
   accountRelations,
-  logsRelations,
 };
